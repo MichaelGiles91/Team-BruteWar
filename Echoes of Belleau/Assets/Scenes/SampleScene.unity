@@ -1087,11 +1087,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37ce8cf83c3c064eab413094157ce01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::dynamicCrosshair
-  restingSize: 75
-  maxSize: 250
-  speed: 2
-  jumpSizeBoost: 20
-  jumpHoldTime: 0.15
+  restingSize: 100
+  maxSize: 400
+  speed: 1
+  jumpSizeBoost: 300
+  jumpHoldTime: 0.35
 --- !u!1 &1884313544
 GameObject:
   m_ObjectHideFlags: 0
