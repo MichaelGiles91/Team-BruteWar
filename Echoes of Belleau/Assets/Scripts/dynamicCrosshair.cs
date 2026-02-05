@@ -5,7 +5,8 @@ public class dynamicCrosshair : MonoBehaviour
     private RectTransform reticle;
 
     [SerializeField] float restingSize = 100;
-    [SerializeField] float maxSize = 400;
+    [SerializeField] float walkMaxSize = 300;
+    [SerializeField] float sprintMaxSize = 400;
     [SerializeField] float speed = 1;
 
     [Header("Jump Expansion")]
@@ -30,9 +31,18 @@ public class dynamicCrosshair : MonoBehaviour
         }
         jumpBoostTimer -= Time.deltaTime;
 
-        float targetSize = isMoving ? maxSize : restingSize;
+        float targetSize = restingSize;
 
-        
+        if (isSprinting)
+        {
+            targetSize = sprintMaxSize;
+        }
+        else if (isMoving)
+        {
+            targetSize = walkMaxSize;
+        }
+
+
         if (jumpBoostTimer > 0f)
             targetSize += jumpSizeBoost;
 
@@ -40,6 +50,7 @@ public class dynamicCrosshair : MonoBehaviour
 
         reticle.sizeDelta = new Vector2(currentSize, currentSize);
     }
+
 
     bool isMoving
     {
@@ -50,6 +61,14 @@ public class dynamicCrosshair : MonoBehaviour
                 Input.GetAxis("Vertical") != 0 ||
                 Input.GetAxis("Mouse X") != 0 ||
                 Input.GetAxis("Mouse Y") != 0;
+        }
+    }
+
+    bool isSprinting
+    {
+        get
+        {
+            return Input.GetKey(KeyCode.LeftShift) && isMoving;
         }
     }
 }

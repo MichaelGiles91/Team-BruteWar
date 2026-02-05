@@ -1088,7 +1088,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::dynamicCrosshair
   restingSize: 100
-  maxSize: 400
+  walkMaxSize: 300
+  sprintMaxSize: 400
   speed: 1
   jumpSizeBoost: 300
   jumpHoldTime: 0.35
