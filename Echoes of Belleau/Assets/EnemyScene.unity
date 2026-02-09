@@ -724,7 +724,7 @@ MonoBehaviour:
   baseEnemyMax: 5
   mediumEnemyMax: 5
   bossEnemyMax: 1
-  spawnTime: 1
+  spawnTime: 3
   spawnRange: 5
 --- !u!4 &2037081897
 Transform:

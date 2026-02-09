@@ -176,7 +176,7 @@ MonoBehaviour:
   agent: {fileID: 2801483025813812757}
   HP: 60
   faceTargetSpeed: 2
-  bullet: {fileID: 6571920716250768047, guid: 82422ad3b5065ee4d8ce47e3354f35bf, type: 3}
+  bullet: {fileID: 6571920716250768047, guid: 4c606672ee2b120449e93c051f10068a, type: 3}
   shootRate: 0.5
   shootPOS: {fileID: 5098311358057822752}
 --- !u!195 &2801483025813812757
