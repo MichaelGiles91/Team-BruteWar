@@ -2,8 +2,9 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
 using UnityEngine;
+using System.Collections;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int JumpSpeed;
     [SerializeField] int JumpMax;
     [SerializeField] int gravity;
+    [SerializeField] int Stamina;
 
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     int jumpCount;
     int HPOrig;
+    int StaminaOrig;
+
     float shootTimer;
 
     Vector3 moveDir;
@@ -29,7 +33,9 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        HPOrig = HP;
+        StaminaOrig = Stamina;
+        updatePlayerUI();
     }
 
     // Update is called once per frame
@@ -98,5 +104,38 @@ public class PlayerController : MonoBehaviour
                 dmg.takeDamage(shootDamage);
             }
         }
+    }
+
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+        updatePlayerUI();
+        StartCoroutine(flashScreen());
+
+        if (HP <= 0)
+        {
+            gamemanager.instance.youLose();
+        }
+    }
+
+    public void useStamina(int amount)
+    {
+        Stamina -= amount;
+        updatePlayerUI();
+    }
+
+    IEnumerator flashScreen()
+    {
+        gamemanager.instance.playerDamageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gamemanager.instance.playerDamageFlash.SetActive(false);
+    }
+
+    public void updatePlayerUI()
+    {
+        float damageTaken = HPOrig - HP;
+        gamemanager.instance.playerHPBar.fillAmount = damageTaken / HPOrig;
+
+        gamemanager.instance.playerStaminaBar.fillAmount = Stamina / StaminaOrig;
     }
 }
