@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int JumpSpeed;
     [SerializeField] int JumpMax;
     [SerializeField] int gravity;
+    [SerializeField] int Stamina;
 
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     int jumpCount;
     int HPOrig;
+    int StaminaOrig;
+
     float shootTimer;
 
     Vector3 moveDir;
@@ -31,9 +34,8 @@ public class PlayerController : MonoBehaviour, IDamage
     void Start()
     {
         HPOrig = HP;
+        StaminaOrig = Stamina;
         updatePlayerUI();
-
-
     }
 
     // Update is called once per frame
@@ -124,11 +126,12 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void updatePlayerUI()
     {
-        if (gameManager.instance.playerHPBar != null)
-        {
-            gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
-        }
+        float damageTaken = HPOrig - HP;
+        gamemanager.instance.playerHPBar.fillAmount = damageTaken / HPOrig;
+
+        gamemanager.instance.playerStaminaBar.fillAmount = Stamina / StaminaOrig;
     }
+
     public void RespawnReset()
     {
         HP = HPOrig;
@@ -137,5 +140,11 @@ public class PlayerController : MonoBehaviour, IDamage
         // clear any falling momentum state
         playerVel = Vector3.zero;
         jumpCount = 0;
+    }
+
+    public void useStamina(int amount)
+    {
+        Stamina -= amount;
+        updatePlayerUI();
     }
 }

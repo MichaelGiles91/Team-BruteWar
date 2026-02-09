@@ -16,7 +16,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text gameGoalCountText;
     
     public Image playerHPBar;
-    public GameObject PlayerDamageFlash;
+    public GameObject playerDamageFlash;
+    public Image playerStaminaBar;
 
     public GameObject player;
     public PlayerController playerScript;
@@ -60,7 +61,23 @@ public class gameManager : MonoBehaviour
                 stateUnpause();
             }
         }
+
+        if (Input.GetButtonDown("Map"))
+        {
+            if (menuActive == null)
+            {
+                statePause();
+                menuActive = map;
+                menuActive.SetActive(true);
+            }
+            else if (menuActive == map)
+            {
+                stateUnpause();
+            }
+
+        }
     }
+
     public void statePause()
     {
         isPaused = true;
@@ -68,6 +85,7 @@ public class gameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+
     public void stateUnpause()
     {
         isPaused = false;
@@ -78,6 +96,7 @@ public class gameManager : MonoBehaviour
         menuActive = null;
 
     }
+
     public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
@@ -90,6 +109,7 @@ public class gameManager : MonoBehaviour
 
         }
     }
+
     public void youLose()
     {
         statePause();
