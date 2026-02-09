@@ -2,8 +2,9 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
 using UnityEngine;
+using System.Collections;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -29,6 +30,9 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        HPOrig = HP;
+        updatePlayerUI();
+
 
     }
 
@@ -98,5 +102,37 @@ public class PlayerController : MonoBehaviour
                 dmg.takeDamage(shootDamage);
             }
         }
+    }
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+        updatePlayerUI();
+        StartCoroutine(flashScreen());
+
+        if (HP <= 0)
+        {
+            gameManager.instance.youLose();
+        }
+    }
+
+    IEnumerator flashScreen()
+    {
+        gameManager.instance.PlayerDamageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.PlayerDamageFlash.SetActive(false);
+    }
+
+    public void updatePlayerUI()
+    {
+        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+    }
+    public void RespawnReset()
+    {
+        HP = HPOrig;
+        updatePlayerUI();
+
+        // clear any falling momentum state
+        playerVel = Vector3.zero;
+        jumpCount = 0;
     }
 }
