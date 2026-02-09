@@ -12,8 +12,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject checkpointNotification;
     [SerializeField] TMP_Text gameGoalCountText;
-    [SerializeField] TMP_Text checkpointNotificationText;
+    
     public Image playerHPBar;
     public GameObject PlayerDamageFlash;
 
@@ -126,10 +127,9 @@ public class gameManager : MonoBehaviour
     }
     IEnumerator showCheckpointNotification()
     {
-        checkpointNotificationText.gameObject.SetActive(true);
-        checkpointNotificationText.text = "CheckPoint Reached!";
-        yield return new WaitForSeconds(2f);
-        checkpointNotificationText.gameObject.SetActive(false);
+       checkpointNotification.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        checkpointNotification.SetActive(false);
 
     }
 }

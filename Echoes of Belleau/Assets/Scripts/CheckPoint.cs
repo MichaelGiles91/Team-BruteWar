@@ -9,6 +9,8 @@ using UnityEngine;
    
       void OnTriggerEnter(Collider other)
       {
+        Debug.Log("Trigger hit by:" + other.name + " tag:" + other.tag);
+
           if (isActivated)
               return;
   
