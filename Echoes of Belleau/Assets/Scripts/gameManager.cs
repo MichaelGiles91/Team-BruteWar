@@ -105,24 +105,27 @@ public class gameManager : MonoBehaviour
     }
     public void Respawn()
     {
-        // hide lose UI
+       
         if (menuLose != null) menuLose.SetActive(false);
 
-        // unpause the game
+        
         stateUnpause();
 
-        // if no checkpoint yet, fall back to restart for now
+        
         if (!hasCheckpoint)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            return; // or SceneManager.LoadScene(...) if that's what you do
+            return; 
            
         }
 
-        // move player
+        
+        CharacterController cc = player.GetComponent<CharacterController>();
+        cc.enabled = false;
         player.transform.SetPositionAndRotation(checkpointPos, checkpointRot);
+        cc.enabled = true;
 
-        // reset player state
+        
         playerScript.RespawnReset();
     }
     IEnumerator showCheckpointNotification()
