@@ -119,17 +119,17 @@ public class PlayerController : MonoBehaviour, IDamage
 
     IEnumerator flashScreen()
     {
-        gameManager.instance.PlayerDamageFlash.SetActive(true);
+        gameManager.instance.playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        gameManager.instance.PlayerDamageFlash.SetActive(false);
+        gameManager.instance.playerDamageFlash.SetActive(false);
     }
 
     public void updatePlayerUI()
     {
         float damageTaken = HPOrig - HP;
-        gamemanager.instance.playerHPBar.fillAmount = damageTaken / HPOrig;
+        gameManager.instance.playerHPBar.fillAmount = damageTaken / HPOrig;
 
-        gamemanager.instance.playerStaminaBar.fillAmount = Stamina / StaminaOrig;
+        gameManager.instance.playerStaminaBar.fillAmount = Stamina / StaminaOrig;
     }
 
     public void RespawnReset()
