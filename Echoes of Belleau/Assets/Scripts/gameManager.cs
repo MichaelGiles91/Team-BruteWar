@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
     public Image playerHPBar;
     public GameObject playerDamageFlash;
     public Image playerStaminaBar;
+    public GameObject map;
 
     public GameObject player;
     public PlayerController playerScript;
