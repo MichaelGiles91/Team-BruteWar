@@ -1,31 +1,54 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField] float interactDistance = 3.0f;
+    [SerializeField] float interactDistance = 3f;
     [SerializeField] LayerMask interactLayer;
     [SerializeField] Camera playerCamera;
 
-    // Update is called once per frame
+    [SerializeField] TMP_Text interactPrompt;
+
+    IInteractable currentInteractable;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !gameManager.instance.isPaused)
+        if (gameManager.instance.isPaused)
         {
-            TryInteract();
+            HidePrompt();
+            return;
+        }
+
+        CheckForInteractable();
+
+        if (currentInteractable != null && Input.GetKeyDown(KeyCode.E))
+        {
+            currentInteractable.Interact();
         }
     }
 
-    void TryInteract()
+    void CheckForInteractable()
     {
-        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        currentInteractable = null;
 
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactLayer))
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-            if (interactable != null)
-            {
-                interactable.Interact();
-            }
+            currentInteractable = hit.collider.GetComponent<IInteractable>();
         }
+
+        ShowPrompt(currentInteractable != null);
+    }
+
+    void ShowPrompt(bool show)
+    {
+        if (interactPrompt != null)
+            interactPrompt.gameObject.SetActive(show);
+    }
+
+    void HidePrompt()
+    {
+        if (interactPrompt != null)
+            interactPrompt.gameObject.SetActive(false);
     }
 }
