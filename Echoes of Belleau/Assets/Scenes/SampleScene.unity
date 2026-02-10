@@ -9311,7 +9311,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 5794bc3b9b6bd2049b76325b7a34c35c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9355,6 +9355,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666b0a99bf23f4a41b495cfae6aea13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RadioInteractable
+  radioRenderer: {fileID: 340705828}
+  normalMat: {fileID: 2100000, guid: 5794bc3b9b6bd2049b76325b7a34c35c, type: 2}
+  highlightMat: {fileID: 2100000, guid: 258648a435ef55047bb7c4d725d7ed33, type: 2}
 --- !u!4 &340705831
 Transform:
   m_ObjectHideFlags: 0
