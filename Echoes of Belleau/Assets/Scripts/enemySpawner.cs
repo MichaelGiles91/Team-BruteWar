@@ -26,7 +26,7 @@ public class enemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemiesRoutine()); // Start the coroutine to spawn enemies at regular intervals
     }
 
-
+     
     private IEnumerator SpawnEnemiesRoutine()
     {
         while (true) // loop to keep spawning
