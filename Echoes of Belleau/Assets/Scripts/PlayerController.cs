@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour, IDamage
         HPOrig = HP;
 
         StaminaOrig = Stamina;
-        updatePlayerUI();
+        UpdatePlayerUI();
     }
 
     // Update is called once per frame
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour, IDamage
         gameManager.instance.playerDamageFlash.SetActive(false);
     }
 
-    public void updatePlayerUI()
+    public void UpdatePlayerUI()
     {
         float damageTaken = HPOrig - HP;
         gameManager.instance.playerHPBar.fillAmount = damageTaken / HPOrig;
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void RespawnReset()
     {
         HP = HPOrig;
-        updatePlayerUI();
+        UpdatePlayerUI();
 
         // clear any falling momentum state
         playerVel = Vector3.zero;
@@ -145,13 +145,9 @@ public class PlayerController : MonoBehaviour, IDamage
     public void useStamina(int amount)
     {
         Stamina -= amount;
-        updatePlayerUI();
-        yield return new WaitForSeconds(0.1f); // Always make sure this is a float
+        UpdatePlayerUI();
+      
         gameManager.instance.playerDamageFlash.SetActive(false);
     }
 
-    public void UpdatePlayerUI()
-    {
-        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig; // casted one int into a float
-    }
 }

@@ -109,19 +109,19 @@ public class gameManager : MonoBehaviour
     {
         gameGoalCount += amount;
         gameGoalCountText.text = gameGoalCount.ToString("F0");
-        if(gameGoalCount <= 0)
+        if (gameGoalCount <= 0)
         {
             statePause();
             menuActive = menuWin;
             menuActive.SetActive(true);
 
-       
+        }
     }
 
     public void UpdateGameGoal(int amount)
     {
         gameGoalCount += amount; // Update the game goal count by adding the specified amount
-        gameGoalCountText.text = gameGoalCount.ToString("F0"); // Update the game goal count text to display the current count as an integer
+        
 
         if (gameGoalCount <= 0)
         {
