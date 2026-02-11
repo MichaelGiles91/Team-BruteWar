@@ -14,17 +14,24 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
-    [SerializeField] int Stamina;
-    [SerializeField] GameObject bullet;
-    [SerializeField] Transform shootPos;
-
+    
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
     [SerializeField] float shootRate;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform shootPos;
+
+
+    [SerializeField] float stamina;
+    [SerializeField] float staminaDrainRate;
+    [SerializeField] float staminaRegenRate;
+    [SerializeField] float staminaJumpDrain;
 
     int jumpCount;
     int HPOrig;
-    int StaminaOrig;
+    float staminaOrig;
+    int speedOrig;
+    bool sprintDisable = false;
 
     float shootTimer;
 
@@ -36,7 +43,8 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         HPOrig = HP;
 
-        StaminaOrig = Stamina;
+        staminaOrig = stamina;
+        speedOrig = speed;
         UpdatePlayerUI();
     }
 
@@ -73,23 +81,42 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax && stamina > staminaJumpDrain)
         {
+
+            stamina -= staminaJumpDrain;
             playerVel.y = jumpSpeed;
             jumpCount++;
+        } else if (stamina <= staminaJumpDrain)
+        {
+            // Add some sort of feedback for not being able to jump, like a sound effect or a UI element
         }
     }
 
     void sprint()
     {
-        if (Input.GetButtonDown("Sprint"))
+        
+        if (Input.GetButton("Sprint") && stamina > 0 && !sprintDisable)
         {
-            speed *= sprintMod;
+            stamina -= staminaDrainRate * Time.deltaTime;
+            speed = speedOrig * sprintMod;
+
         }
-        else if (Input.GetButtonUp("Sprint"))
+        else if (stamina <= 0)
         {
-            speed /= sprintMod;
+            speed = speedOrig;
+            sprintDisable = true;
+            outOfStamina();
+            stamina = 1f;
+        } else if (stamina < staminaOrig)
+        {
+            speed = speedOrig;
+            stamina += staminaRegenRate * Time.deltaTime;
+        } else if (stamina >= staminaOrig)
+        {
+                sprintDisable = false;
         }
+            gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
     }
 
     void shoot()
@@ -133,7 +160,7 @@ public class PlayerController : MonoBehaviour, IDamage
         float damageTaken = HPOrig - HP;
         gameManager.instance.playerHPBar.fillAmount = damageTaken / HPOrig;
 
-        gameManager.instance.playerStaminaBar.fillAmount = Stamina / StaminaOrig;
+        gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
     }
 
     public void RespawnReset()
@@ -146,12 +173,9 @@ public class PlayerController : MonoBehaviour, IDamage
         jumpCount = 0;
     }
 
-    public void useStamina(int amount)
+    IEnumerator outOfStamina()
     {
-        Stamina -= amount;
-        UpdatePlayerUI();
-      
-        gameManager.instance.playerDamageFlash.SetActive(false);
+        yield return new WaitForSeconds(1f);
     }
 
 }
