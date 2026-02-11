@@ -1,3 +1,4 @@
+
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
+
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
@@ -16,15 +18,19 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text gameGoalCountText;
     
     public Image playerHPBar;
-    public GameObject PlayerDamageFlash;
+    public GameObject playerDamageFlash;
+    public Image playerStaminaBar;
+    public GameObject map;
 
     public GameObject player;
     public PlayerController playerScript;
+    
     public bool isPaused;
 
     float timeScaleOrig;
 
     int gameGoalCount;
+
 
     Vector3 checkpointPos;
     Quaternion checkpointRot;
@@ -50,39 +56,60 @@ public class gameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+
             if(menuActive == null)
+    
             {
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
+
             }else if(menuActive == menuPause)
             {
                 stateUnpause();
             }
         }
+
+        if (Input.GetButtonDown("Map"))
+        {
+            if (menuActive == null)
+            {
+                statePause();
+                menuActive = map;
+                menuActive.SetActive(true);
+            }
+            else if (menuActive == map)
+            {
+                stateUnpause();
+            }
+
+        }
     }
     public void statePause()
     {
         isPaused = true;
-        Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+
+        Time.timeScale = 0; // Set the time scale to 0 to pause the game
+        Cursor.visible = true; // Make the cursor visible when the game is paused
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor when the game is paused
     }
+
     public void stateUnpause()
     {
         isPaused = false;
-        Time.timeScale = timeScaleOrig;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        menuActive.SetActive(false);
-        menuActive = null;
+        Time.timeScale = timeScaleOrig; // Reset the time scale to its original value to unpause the game
+        Cursor.visible = false; // Hide the cursor when the game is unpaused
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor when the game is unpaused
+        menuActive.SetActive(false); // Deactivate the active menu
+        menuActive = null; // Set the active menu to null
 
     }
+
     public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
         gameGoalCountText.text = gameGoalCount.ToString("F0");
-        if(gameGoalCount <= 0)
+        if (gameGoalCount <= 0)
         {
             statePause();
             menuActive = menuWin;
@@ -90,6 +117,21 @@ public class gameManager : MonoBehaviour
 
         }
     }
+
+    public void UpdateGameGoal(int amount)
+    {
+        gameGoalCount += amount; // Update the game goal count by adding the specified amount
+        
+
+        if (gameGoalCount <= 0)
+        {
+           
+            statePause();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
+    }
+
     public void youLose()
     {
         statePause();
@@ -136,3 +178,4 @@ public class gameManager : MonoBehaviour
 
     }
 }
+

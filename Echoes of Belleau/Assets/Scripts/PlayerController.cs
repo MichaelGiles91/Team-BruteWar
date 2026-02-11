@@ -1,20 +1,22 @@
-using JetBrains.Annotations;
-using Unity.VisualScripting;
-using UnityEngine.Rendering;
 using UnityEngine;
 using System.Collections;
 
+
 public class PlayerController : MonoBehaviour, IDamage
+
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
 
     [SerializeField] int HP;
-    [SerializeField] int Speed;
-    [SerializeField] int SprintMod;
-    [SerializeField] int JumpSpeed;
-    [SerializeField] int JumpMax;
+    [SerializeField] int speed;
+    [SerializeField] int sprintMod;
+    [SerializeField] int jumpSpeed;
+    [SerializeField] int jumpMax;
     [SerializeField] int gravity;
+    [SerializeField] int Stamina;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform shootPos;
 
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
@@ -22,6 +24,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     int jumpCount;
     int HPOrig;
+    int StaminaOrig;
+
     float shootTimer;
 
     Vector3 moveDir;
@@ -31,9 +35,9 @@ public class PlayerController : MonoBehaviour, IDamage
     void Start()
     {
         HPOrig = HP;
-        updatePlayerUI();
 
-
+        StaminaOrig = Stamina;
+        UpdatePlayerUI();
     }
 
     // Update is called once per frame
@@ -41,61 +45,62 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         movement();
         sprint();
-
     }
 
     void movement()
     {
         shootTimer += Time.deltaTime;
 
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
+
         if (controller.isGrounded)
         {
-            jumpCount = 0;
             playerVel = Vector3.zero;
+            jumpCount = 0;
         }
-        moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDir * Speed * Time.deltaTime);
 
-        Jump();
+        moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+        controller.Move(moveDir * speed * Time.deltaTime);
+
+        jump();
         controller.Move(playerVel * Time.deltaTime);
 
         playerVel.y -= gravity * Time.deltaTime;
 
         if (Input.GetButton("Fire1") && shootTimer >= shootRate)
-        {
             shoot();
-        }
-
     }
-    void Jump()
+
+    void jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < JumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
-            playerVel.y = JumpSpeed;
+            playerVel.y = jumpSpeed;
             jumpCount++;
         }
     }
+
     void sprint()
     {
-        if (Input.GetButtonDown("sprint"))
+        if (Input.GetButtonDown("Sprint"))
         {
-            Speed *= SprintMod;
+            speed *= sprintMod;
         }
-        else if (Input.GetButtonUp("sprint"))
+        else if (Input.GetButtonUp("Sprint"))
         {
-            Speed /= SprintMod;
+            speed /= sprintMod;
         }
     }
+
     void shoot()
     {
         shootTimer = 0;
+        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
 
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
-
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             if (dmg != null)
             {
@@ -106,7 +111,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-        updatePlayerUI();
+        UpdatePlayerUI();
+
         StartCoroutine(flashScreen());
 
         if (HP <= 0)
@@ -117,25 +123,35 @@ public class PlayerController : MonoBehaviour, IDamage
 
     IEnumerator flashScreen()
     {
-        gameManager.instance.PlayerDamageFlash.SetActive(true);
+        gameManager.instance.playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        gameManager.instance.PlayerDamageFlash.SetActive(false);
+        gameManager.instance.playerDamageFlash.SetActive(false);
     }
 
-    public void updatePlayerUI()
+    public void UpdatePlayerUI()
     {
-        if (gameManager.instance.playerHPBar != null)
-        {
-            gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
-        }
+        float damageTaken = HPOrig - HP;
+        gameManager.instance.playerHPBar.fillAmount = damageTaken / HPOrig;
+
+        gameManager.instance.playerStaminaBar.fillAmount = Stamina / StaminaOrig;
     }
+
     public void RespawnReset()
     {
         HP = HPOrig;
-        updatePlayerUI();
+        UpdatePlayerUI();
 
         // clear any falling momentum state
         playerVel = Vector3.zero;
         jumpCount = 0;
     }
+
+    public void useStamina(int amount)
+    {
+        Stamina -= amount;
+        UpdatePlayerUI();
+      
+        gameManager.instance.playerDamageFlash.SetActive(false);
+    }
+
 }
