@@ -16,13 +16,18 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int gravity;
     [SerializeField] int Stamina;
 
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDist;
+    [Header("---Combat Stats---")]
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform shootPos;
     [SerializeField] float shootRate;
+    [SerializeField] int ammoCount;
 
     int jumpCount;
     int HPOrig;
     int StaminaOrig;
+    int ammoCountOrig;
+    public int AmmoCount => ammoCount;
+
 
     float shootTimer;
 
@@ -33,8 +38,9 @@ public class PlayerController : MonoBehaviour, IDamage
     void Start()
     {
         HPOrig = HP;
-
         StaminaOrig = Stamina;
+        ammoCountOrig = ammoCount;
+        gameManager.instance.updateAmmoAmount(ammoCount);
         UpdatePlayerUI();
     }
 
@@ -48,8 +54,6 @@ public class PlayerController : MonoBehaviour, IDamage
     void movement()
     {
         shootTimer += Time.deltaTime;
-
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
         if (controller.isGrounded)
         {
@@ -93,16 +97,13 @@ public class PlayerController : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
+        if (ammoCount > 0)
         {
-            Debug.Log(hit.collider.name);
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null)
-            {
-                dmg.takeDamage(shootDamage);
-            }
+            Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+            ammoCount--;
+            gameManager.instance.updateAmmoAmount(ammoCount);
         }
+
     }
     public void takeDamage(int amount)
     {
@@ -146,7 +147,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         Stamina -= amount;
         UpdatePlayerUI();
-      
+
         gameManager.instance.playerDamageFlash.SetActive(false);
     }
 

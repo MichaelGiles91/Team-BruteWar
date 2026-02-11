@@ -16,7 +16,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject checkpointNotification;
     [SerializeField] TMP_Text gameGoalCountText;
-    
+    [SerializeField] TMP_Text ammoAmountText;
+
     public Image playerHPBar;
     public GameObject playerDamageFlash;
     public Image playerStaminaBar;
@@ -30,6 +31,10 @@ public class gameManager : MonoBehaviour
     float timeScaleOrig;
 
     int gameGoalCount;
+
+    public PlayerController ammoAmount;
+
+
 
 
     Vector3 checkpointPos;
@@ -47,8 +52,10 @@ public class gameManager : MonoBehaviour
         
         timeScaleOrig = Time.timeScale;
 
+        
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        
     }
 
     // Update is called once per frame
@@ -118,20 +125,6 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    public void UpdateGameGoal(int amount)
-    {
-        gameGoalCount += amount; // Update the game goal count by adding the specified amount
-        
-
-        if (gameGoalCount <= 0)
-        {
-           
-            statePause();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
-        }
-    }
-
     public void youLose()
     {
         statePause();
@@ -176,6 +169,11 @@ public class gameManager : MonoBehaviour
         yield return new WaitForSeconds(10f);
         checkpointNotification.SetActive(false);
 
+    }
+
+    public void updateAmmoAmount(int currentAmmo)
+    {
+        ammoAmountText.text = currentAmmo.ToString();
     }
 }
 
