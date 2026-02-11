@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
     [SerializeField] int Stamina;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform shootPos;
 
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
@@ -93,6 +95,8 @@ public class PlayerController : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
+        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
