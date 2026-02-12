@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         movement();
         sprint();
+        reload();
     }
 
     void movement()
@@ -142,6 +143,15 @@ public class PlayerController : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             gameManager.instance.youLose();
+        }
+    }
+
+    void reload()
+    {
+        if(Input.GetButtonDown("Reload") && ammoCount < ammoCountOrig)
+        {
+            ammoCount = ammoCountOrig;
+            gameManager.instance.updateAmmoAmount(ammoCount);
         }
     }
 

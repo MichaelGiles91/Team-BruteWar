@@ -14488,6 +14488,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1329903051468028005, guid: d4052e2057720fa47a0621b2863165bf, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1565461905}
     - target: {fileID: 2975677668314471946, guid: d4052e2057720fa47a0621b2863165bf, type: 3}
       propertyPath: m_Name
       value: UI
@@ -36165,6 +36169,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21a4ab70c5115a64ca11ed67eb20fa90, type: 3}
+--- !u!4 &1565461905 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4669117919886677326, guid: 7392c6dc5fffcff4a8787e0c9b65c7a8, type: 3}
+  m_PrefabInstance: {fileID: 1167132870}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1568316411
 PrefabInstance:
   m_ObjectHideFlags: 0
