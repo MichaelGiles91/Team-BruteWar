@@ -88,7 +88,7 @@ public class enemyAi : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            gameManager.instance.UpdateGameGoal(-1); // part of win condition
+            gameManager.instance.updateGameGoal(-1); // part of win condition
             Destroy(gameObject);
         }
         else

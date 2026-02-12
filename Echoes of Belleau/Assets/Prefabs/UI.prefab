@@ -627,7 +627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20
+  m_text: 00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2807,6 +2807,7 @@ MonoBehaviour:
   menuLose: {fileID: 6765610114119903333}
   checkpointNotification: {fileID: 6104236070669641581}
   gameGoalCountText: {fileID: 3964508112628562967}
+  ammoAmountText: {fileID: 7136325743799877409}
   playerHPBar: {fileID: 2979439417584564760}
   playerDamageFlash: {fileID: 7210542357663326667}
   playerStaminaBar: {fileID: 415342297275001207}
@@ -2814,6 +2815,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerScript: {fileID: 0}
   isPaused: 0
+  ammoAmount: {fileID: 0}
 --- !u!1 &3553099138902594036
 GameObject:
   m_ObjectHideFlags: 0
