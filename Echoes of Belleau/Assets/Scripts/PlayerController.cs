@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
-    [SerializeField] int Stamina;
 
     [Header("---Combat Stats---")]
     [SerializeField] GameObject bullet;
@@ -24,31 +23,40 @@ public class PlayerController : MonoBehaviour, IDamage
     int ammoCountOrig;
     public int AmmoCount => ammoCount;
 
-
+    [Header("---Stamina Stats---")]
     [SerializeField] float stamina;
     [SerializeField] float staminaDrainRate;
     [SerializeField] float staminaRegenRate;
     [SerializeField] float staminaJumpDrain;
 
+    [Header("---Stamina Bar Shake---")]
+    [SerializeField] float shakeAmount;
+    [SerializeField] float shakeDuration;
+
     int jumpCount;
     int HPOrig;
+
     float staminaOrig;
     int speedOrig;
     bool sprintDisable = false;
+    bool isShaking = false;
 
     float shootTimer;
 
     Vector3 moveDir;
     Vector3 playerVel;
+    Vector3 StamBarOrigPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HPOrig = HP;
         staminaOrig = stamina;
+        StamBarOrigPos = gameManager.instance.playerStaminaBar.rectTransform.anchoredPosition;
         speedOrig = speed;
         ammoCountOrig = ammoCount;
         gameManager.instance.updateAmmoAmount(ammoCount);
+
         UpdatePlayerUI();
     }
 
@@ -84,42 +92,63 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax && stamina > staminaJumpDrain)
+        if (Input.GetButtonDown("Jump"))
         {
-
-            stamina -= staminaJumpDrain;
-            playerVel.y = jumpSpeed;
-            jumpCount++;
-        } else if (stamina <= staminaJumpDrain)
-        {
-            // Add some sort of feedback for not being able to jump, like a sound effect or a UI element
+            if (jumpCount < jumpMax && stamina > staminaJumpDrain)
+            {
+                stamina -= staminaJumpDrain;
+                playerVel.y = jumpSpeed;
+                jumpCount++;
+            }
+            else if (stamina <= staminaJumpDrain)
+            {
+                StartCoroutine(shakeStaminaBar());
+            }
         }
     }
 
     void sprint()
     {
-        
-        if (Input.GetButton("Sprint") && stamina > 0 && !sprintDisable)
-        {
-            stamina -= staminaDrainRate * Time.deltaTime;
-            speed = speedOrig * sprintMod;
 
+        if (Input.GetButton("Sprint"))
+        {
+            if (!sprintDisable && stamina > 0f)
+            {
+                stamina -= staminaDrainRate * Time.deltaTime;
+                speed = speedOrig * sprintMod;
+            }
+            else
+            {
+                speed = speedOrig;
+                if (stamina < staminaOrig)
+                    stamina += staminaRegenRate * Time.deltaTime;
+                if (!isShaking)
+                    StartCoroutine(shakeStaminaBar());
+
+
+            }
         }
-        else if (stamina <= 0)
+        else
         {
             speed = speedOrig;
-            sprintDisable = true;
-            outOfStamina();
-            stamina = 1f;
-        } else if (stamina < staminaOrig)
-        {
-            speed = speedOrig;
-            stamina += staminaRegenRate * Time.deltaTime;
-        } else if (stamina >= staminaOrig)
-        {
+
+            if (stamina < staminaOrig)
+                stamina += staminaRegenRate * Time.deltaTime;
+
+            if (stamina >= staminaOrig)
                 sprintDisable = false;
         }
-            gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
+
+        if (stamina <= 0f)
+        {
+            sprintDisable = true;
+            stamina = 0f;
+        }
+        if (sprintDisable && !isShaking)
+        {
+            StartCoroutine(shakeStaminaBar());
+        }
+        gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
     }
 
     void shoot()
@@ -133,6 +162,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
     }
+
     public void takeDamage(int amount)
     {
         HP -= amount;
@@ -148,7 +178,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void reload()
     {
-        if(Input.GetButtonDown("Reload") && ammoCount < ammoCountOrig)
+        if (Input.GetButtonDown("Reload") && ammoCount < ammoCountOrig)
         {
             ammoCount = ammoCountOrig;
             gameManager.instance.updateAmmoAmount(ammoCount);
@@ -180,9 +210,18 @@ public class PlayerController : MonoBehaviour, IDamage
         jumpCount = 0;
     }
 
-    IEnumerator outOfStamina()
+    IEnumerator shakeStaminaBar()
     {
-        yield return new WaitForSeconds(1f);
+        float elapsed = 0f;
+        while (elapsed < shakeDuration)
+        {
+            float x = Random.Range(-1f, 1f) * shakeAmount;
+            float y = Random.Range(-1f, 1f) * shakeAmount;
+            gameManager.instance.playerStaminaBar.rectTransform.anchoredPosition = new Vector3(StamBarOrigPos.x + x, StamBarOrigPos.y + y, StamBarOrigPos.z);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        gameManager.instance.playerStaminaBar.rectTransform.anchoredPosition = StamBarOrigPos;
     }
 
 }
