@@ -99,7 +99,7 @@ public class DefenseManager : MonoBehaviour
         //Buffer so gameManager win screen doesnt trigget between waves
         //enemies call updateGameGoal(+1) on spawn and UpdateGameGoal(-1) on death
         // this keeps the count high so it never hits 0 until we want it to
-        gameManager.instance.UpdateGameGoal(9999);
+        gameManager.instance.updateGameGoal(9999);
 
         StartCoroutine(runWaves());
 
@@ -187,7 +187,7 @@ public class DefenseManager : MonoBehaviour
         }
             // remove buffer 
             // this triggeres the win screen through game manager
-            gameManager.instance.UpdateGameGoal(-9999);
+            gameManager.instance.updateGameGoal(-9999);
         
     }
     IEnumerator showNotification()
