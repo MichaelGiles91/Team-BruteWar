@@ -44,6 +44,11 @@ public class DefenseManager : MonoBehaviour
     int currentWave;
     float timer;
     List<GameObject> activeEnemies = new List<GameObject>();
+    public static DefenseManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Update is called once per frame
 
@@ -85,7 +90,7 @@ public class DefenseManager : MonoBehaviour
             startDefense();
         }
     }
-    void startDefense()
+    public void startDefense()
     {
         defenseActive = true;
         timer = defenseTime;

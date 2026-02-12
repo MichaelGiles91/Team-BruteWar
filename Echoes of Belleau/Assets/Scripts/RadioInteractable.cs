@@ -3,14 +3,17 @@ using UnityEngine;
 public class RadioInteractable : MonoBehaviour, IInteractable, IHighlightable
 {
     [SerializeField] Renderer radioRenderer;
-    [SerializeField] Material normalMat;
-    [SerializeField] Material highlightMat;
+    [SerializeField] Material normalMaterial;
+    [SerializeField] Material highlightMaterial;
 
     bool used;
 
     void Awake()
     {
-        radioRenderer.material = normalMat;
+        if (radioRenderer == null)
+            radioRenderer = GetComponentInChildren<Renderer>();
+
+        radioRenderer.sharedMaterial = normalMaterial;
     }
 
     public void Interact()
@@ -21,14 +24,15 @@ public class RadioInteractable : MonoBehaviour, IInteractable, IHighlightable
         Highlight(false);
         GetComponent<Collider>().enabled = false;
 
-        Debug.Log("Radio activated");
-        //defenceManager.instance.StartTowerDefense();
+        Debug.Log("Reinforcements enroute, hold the line until they arrive");
+
+        DefenseManager.instance.startDefense();
     }
 
     public void Highlight(bool enable)
     {
         if (used) return;
 
-        radioRenderer.material = enable ? highlightMat : normalMat;
+        radioRenderer.sharedMaterial = enable ? highlightMaterial : normalMaterial;
     }
 }
