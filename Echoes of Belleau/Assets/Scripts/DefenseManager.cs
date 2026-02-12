@@ -187,7 +187,7 @@ public class DefenseManager : MonoBehaviour
         }
             // remove buffer 
             // this triggeres the win screen through game manager
-            gameManager.instance.updateGameGoal(-9999);
+            gameManager.instance.updateGameGoal(-99999);
         
     }
     IEnumerator showNotification()
