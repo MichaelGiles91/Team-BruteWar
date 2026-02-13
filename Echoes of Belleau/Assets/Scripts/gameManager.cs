@@ -4,19 +4,32 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
+using Image = UnityEngine.UI.Image;
 
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
-
+    [Header ("---Game Screens---")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [Header("---UI Elements---")]
     [SerializeField] GameObject checkpointNotification;
     [SerializeField] TMP_Text gameGoalCountText;
+    [SerializeField] GameObject objEnemyCounter;
+    [SerializeField] TMP_Text objEnemyText;
     [SerializeField] TMP_Text ammoAmountText;
+    [SerializeField] RawImage compassImage;
+    [SerializeField] GameObject objective;
+    [SerializeField] TMP_Text objectiveHeaderText;
+    [SerializeField] TMP_Text objectiveText;
+    [SerializeField] float objectiveHideDelay = 3f;
+
+    Coroutine hideObjectiveRoutine;
+
 
     public Image playerHPBar;
     public GameObject playerDamageFlash;
@@ -30,6 +43,7 @@ public class gameManager : MonoBehaviour
 
     float timeScaleOrig;
 
+    int objEnemy;
     int gameGoalCount;
 
     public PlayerController ammoAmount;
@@ -70,6 +84,7 @@ public class gameManager : MonoBehaviour
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
+                objective.SetActive(true);
 
             }else if(menuActive == menuPause)
             {
@@ -108,6 +123,7 @@ public class gameManager : MonoBehaviour
         Cursor.visible = false; // Hide the cursor when the game is unpaused
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor when the game is unpaused
         menuActive.SetActive(false); // Deactivate the active menu
+        objective.SetActive(false);
         menuActive = null; // Set the active menu to null
 
     }
@@ -115,13 +131,25 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
-        gameGoalCountText.text = gameGoalCount.ToString();
+        gameGoalCountText.text = gameGoalCount.ToString("F0");
+
         if (gameGoalCount <= 0)
         {
+            //you won!!
             statePause();
             menuActive = menuWin;
             menuActive.SetActive(true);
+        }
+    }
 
+    public void updateObjEnemyCounter(int amount)
+    {
+        objEnemyCounter.SetActive(true);
+        objEnemy = amount;
+        objEnemyText.text = objEnemy.ToString();
+        if(amount == 0)
+        {
+            objEnemyCounter.SetActive(false);
         }
     }
 
@@ -174,6 +202,39 @@ public class gameManager : MonoBehaviour
     public void updateAmmoAmount(int currentAmmo)
     {
         ammoAmountText.text = currentAmmo.ToString();
+    }
+
+    public void updateCompass(float yRotation)
+    {
+        compassImage.uvRect = new Rect(yRotation / 360f, 0f, 1f, 1f);
+    }
+
+    public void updateObjectiveText(string text, string headerText)
+    {
+        objective.SetActive(true);
+
+        if(objectiveHeaderText != null)
+        {
+            objectiveHeaderText.text = headerText;
+        }
+
+        if (objectiveText != null)
+        {
+            objectiveText.text = text;
+        }
+
+        if (hideObjectiveRoutine != null)
+            StopCoroutine(hideObjectiveRoutine);
+
+        hideObjectiveRoutine = StartCoroutine(HideObjectiveAfterDelay());
+
+    }
+
+    IEnumerator HideObjectiveAfterDelay()
+    {
+        yield return new WaitForSeconds(objectiveHideDelay);
+        objective.SetActive(false);
+        hideObjectiveRoutine = null;
     }
 }
 

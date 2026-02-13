@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour, IDamage
         movement();
         sprint();
         reload();
+        gameManager.instance.updateCompass(transform.eulerAngles.y);
     }
 
     void movement()

@@ -1,6 +1,8 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyAIwRoam : MonoBehaviour, IDamage
 {
@@ -29,12 +31,13 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
     Vector3 playerDir;
     Vector3 startingPos;
 
+    public event Action<EnemyAIwRoam> OnDied;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         colorOrg = model.material.color;
-        gameManager.instance.updateGameGoal(1);
         stoppingDistOrig = agent.stoppingDistance;
         startingPos = transform.position;
     }
@@ -151,14 +154,19 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
         agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (HP <= 0)
-        {
-            gameManager.instance.updateGameGoal(-1);
-            Destroy(gameObject);
+        { 
+            Die();
         }
         else
         {
             StartCoroutine(flashRed());
         }
+    }
+
+    void Die()
+    {
+        OnDied?.Invoke(this);
+        Destroy(gameObject);
     }
 
     IEnumerator flashRed()
