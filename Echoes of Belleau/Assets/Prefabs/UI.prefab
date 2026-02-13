@@ -1392,6 +1392,39 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1961022792252151482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4550020683372416903}
+  m_Layer: 0
+  m_Name: Compass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4550020683372416903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961022792252151482}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6139481553344790002}
+  - {fileID: 1795887904885733953}
+  m_Father: {fileID: 3315294779345868139}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2004451091969343665
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,11 +2769,11 @@ RectTransform:
   - {fileID: 731562181975192488}
   - {fileID: 7165355436891370316}
   - {fileID: 44200327855501169}
-  - {fileID: 6139481553344790002}
   - {fileID: 395334992836684230}
   - {fileID: 4791669254020000951}
   - {fileID: 2797838130205253508}
   - {fileID: 55476151916415559}
+  - {fileID: 4550020683372416903}
   - {fileID: 6865623512572953254}
   - {fileID: 7962598170566709776}
   - {fileID: 8230635906062997086}
@@ -4866,11 +4899,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6139481553344790002}
+  m_Father: {fileID: 4550020683372416903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 12}
+  m_AnchoredPosition: {x: -12.5, y: 540}
   m_SizeDelta: {x: 650, y: 55}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1395885037394094239
@@ -6225,7 +6258,7 @@ GameObject:
   - component: {fileID: 3711620042944412460}
   - component: {fileID: 3185585412359215742}
   m_Layer: 5
-  m_Name: Compass
+  m_Name: Compass Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6238,18 +6271,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7892383634365932286}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1795887904885733953}
-  m_Father: {fileID: 3315294779345868139}
+  m_Children: []
+  m_Father: {fileID: 4550020683372416903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -12}
-  m_SizeDelta: {x: 600, y: 30}
+  m_AnchoredPosition: {x: -12.5, y: 531}
+  m_SizeDelta: {x: 635, y: 35}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3711620042944412460
 CanvasRenderer:
@@ -6279,7 +6311,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: ed526b28f99248e44964c7f432bc58a3, type: 3}
+  m_Texture: {fileID: 2800000, guid: 1a5bde9001efa7448902a20162a8ba4a, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
