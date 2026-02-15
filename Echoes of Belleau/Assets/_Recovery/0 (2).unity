@@ -6150,9 +6150,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 175774094}
     - target: {fileID: 4458100797514902062, guid: d4052e2057720fa47a0621b2863165bf, type: 3}
+      propertyPath: compassImage
+      value: 
+      objectReference: {fileID: 1826565191}
+    - target: {fileID: 4458100797514902062, guid: d4052e2057720fa47a0621b2863165bf, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 175774095}
+    - target: {fileID: 4458100797514902062, guid: d4052e2057720fa47a0621b2863165bf, type: 3}
+      propertyPath: ammoAmountText
+      value: 
+      objectReference: {fileID: 1439667855}
     - target: {fileID: 4458100797514902062, guid: d4052e2057720fa47a0621b2863165bf, type: 3}
       propertyPath: playerStaminaBar
       value: 
@@ -7043,6 +7051,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b17dc1dd6f36003438f8e7d7ba6c0938, type: 3}
   m_PrefabInstance: {fileID: 1436700493}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1439667855 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7136325743799877409, guid: d4052e2057720fa47a0621b2863165bf, type: 3}
+  m_PrefabInstance: {fileID: 1257912838}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1462733981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9354,6 +9373,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e64657bcc8e0c94591f7e0a23976fe9, type: 3}
+--- !u!114 &1826565191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3185585412359215742, guid: d4052e2057720fa47a0621b2863165bf, type: 3}
+  m_PrefabInstance: {fileID: 1257912838}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
 --- !u!1 &1846894983
 GameObject:
   m_ObjectHideFlags: 0

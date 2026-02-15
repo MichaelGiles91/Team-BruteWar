@@ -44,12 +44,17 @@ public class DefenseManager : MonoBehaviour
     int currentWave;
     float timer;
     List<GameObject> activeEnemies = new List<GameObject>();
+    public static DefenseManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Update is called once per frame
 
     void Start()
-    {   
-        if(waveText != null)
+    {
+        if (waveText != null)
         {
             waveText.text = "";
         }
@@ -65,13 +70,13 @@ public class DefenseManager : MonoBehaviour
             timer -= Time.deltaTime;
             activeEnemies.RemoveAll(e => e == null);
 
-            if(timerText != null)
+            if (timerText != null)
             {
                 int minutes = Mathf.FloorToInt(timer / 60f);
                 int seconds = Mathf.FloorToInt(timer % 60f);
                 timerText.text = string.Format("{0}:{1:00}", minutes, seconds);
             }
-            if(timer <= 0)
+            if (timer <= 0)
             {
                 defenseWon();
             }
@@ -80,12 +85,12 @@ public class DefenseManager : MonoBehaviour
     //when the player walks into the trigger collider, defense begins
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") && !defenseActive && !defenseComplete)
+        if (other.CompareTag("Player") && !defenseActive && !defenseComplete)
         {
             startDefense();
         }
     }
-    void startDefense()
+    public void startDefense()
     {
         defenseActive = true;
         timer = defenseTime;
@@ -94,11 +99,11 @@ public class DefenseManager : MonoBehaviour
         //Buffer so gameManager win screen doesnt trigget between waves
         //enemies call updateGameGoal(+1) on spawn and UpdateGameGoal(-1) on death
         // this keeps the count high so it never hits 0 until we want it to
-        gameManager.instance.UpdateGameGoal(9999);
+        gameManager.instance.updateGameGoal(9999);
 
         StartCoroutine(runWaves());
 
-        if(DefenseNotification != null)
+        if (DefenseNotification != null)
         {
             StartCoroutine(showNotification());
         }
@@ -106,11 +111,11 @@ public class DefenseManager : MonoBehaviour
 
     IEnumerator runWaves()
     {
-        for(int i = 0;i< waves.Length;i++)
+        for (int i = 0; i < waves.Length; i++)
         {
             currentWave = i + 1;
 
-            if (waveText != null) 
+            if (waveText != null)
             {
                 waveText.text = "Wave " + currentWave + " / " + waves.Length;
             }
@@ -120,26 +125,26 @@ public class DefenseManager : MonoBehaviour
             yield return new WaitUntil(() => activeEnemies.Count == 0);
 
 
-        //pause between waves unless this wave is dead
-            if(i < waves.Length - 1)
+            //pause between waves unless this wave is dead
+            if (i < waves.Length - 1)
             {
-                if(waveText != null)
+                if (waveText != null)
                 {
                     waveText.text = "Next Wave Incoming...";
 
-                   
+
                 }
                 yield return new WaitForSeconds(timeBetweenWaves);
             }
-           
+
         }
-       
+
     }
 
     IEnumerator SpawnWaves(wave wave)
     {
         // spawn base enemies one at a time
-        for(int i = 0; i< wave.baseEnemyCount; i++)
+        for (int i = 0; i < wave.baseEnemyCount; i++)
         {
             spawnEnemy(enemyPrefabBase);
             yield return new WaitForSeconds(wave.timeBetweenSpawns);
@@ -180,10 +185,10 @@ public class DefenseManager : MonoBehaviour
         {
             waveText.text = "Defense Complete!";
         }
-            // remove buffer 
-            // this triggeres the win screen through game manager
-            gameManager.instance.UpdateGameGoal(-9999);
-        
+        // remove buffer 
+        // this triggeres the win screen through game manager
+        gameManager.instance.updateGameGoal(-99999);
+
     }
     IEnumerator showNotification()
     {
