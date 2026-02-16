@@ -1,10 +1,9 @@
-
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 using Image = UnityEngine.UI.Image;
 
 public class gameManager : MonoBehaviour
@@ -16,13 +15,23 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    public bool isPaused;
     [Header("---UI Elements---")]
     [SerializeField] GameObject checkpointNotification;
     [SerializeField] TMP_Text gameGoalCountText;
+    public PlayerController ammoAmount;
+    [SerializeField] TMP_Text ammoAmountText;
+    public Image playerHPBar;
+    public GameObject playerDamageFlash;
+    public Image playerStaminaBar;
+    public GameObject map;
+    [Header("---Compass Items---")]
+    [SerializeField] RawImage compassImage;
+    [SerializeField] GameObject iconPrefab;
+    [SerializeField] bool autoActivateFirstMarker = true;
+    [Header("---Objective Items---")]
     [SerializeField] GameObject objEnemyCounter;
     [SerializeField] TMP_Text objEnemyText;
-    [SerializeField] TMP_Text ammoAmountText;
-    [SerializeField] RawImage compassImage;
     [SerializeField] GameObject objective;
     [SerializeField] TMP_Text objectiveHeaderText;
     [SerializeField] TMP_Text objectiveText;
@@ -30,25 +39,21 @@ public class gameManager : MonoBehaviour
 
     Coroutine hideObjectiveRoutine;
 
-
-    public Image playerHPBar;
-    public GameObject playerDamageFlash;
-    public Image playerStaminaBar;
-    public GameObject map;
-
     public GameObject player;
     public PlayerController playerScript;
     
-    public bool isPaused;
-
     float timeScaleOrig;
 
     int objEnemy;
     int gameGoalCount;
 
-    public PlayerController ammoAmount;
 
+    List<ObjMarker> objMarkers = new List<ObjMarker>();
 
+    float compassUnit;
+
+    int currentObjectiveIndex = 0;
+    bool hasActivatedFirstMarker = false;
 
 
     Vector3 checkpointPos;
@@ -69,7 +74,13 @@ public class gameManager : MonoBehaviour
         
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        
+        compassUnit = compassImage.rectTransform.rect.width / 360f;
+
+        ObjMarker[] markers = GameObject.FindObjectsByType<ObjMarker>(FindObjectsInactive.Include,FindObjectsSortMode.None);
+
+        foreach (var m in markers)
+            RegisterObjectiveMarker(m);
+
     }
 
     // Update is called once per frame
@@ -207,6 +218,91 @@ public class gameManager : MonoBehaviour
     public void updateCompass(float yRotation)
     {
         compassImage.uvRect = new Rect(yRotation / 360f, 0f, 1f, 1f);
+
+        float halfWidth = compassImage.rectTransform.rect.width * 0.5f;
+
+        foreach (ObjMarker marker in objMarkers)
+        {
+            if (marker == null || !marker.isActive) continue;
+            if (marker.image == null) continue;
+
+            Vector2 pos = GetPosOnCompass(marker);
+
+            float iconHalf = marker.image.rectTransform.rect.width * 0.5f;
+            pos.x = Mathf.Clamp(pos.x, -halfWidth + iconHalf, halfWidth - iconHalf);
+
+            marker.image.rectTransform.anchoredPosition = pos;
+        }
+    }
+
+    public void addObjMarker (ObjMarker marker)
+    {
+        GameObject newMarker = Instantiate(iconPrefab, compassImage.transform);
+        marker.image = newMarker.GetComponent<Image>();
+        marker.image.sprite = marker.icon;
+
+        marker.image.gameObject.SetActive(false);
+
+    }
+
+    Vector2 GetPosOnCompass (ObjMarker marker)
+    {
+        Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.z);
+        Vector2 playerFwd = new Vector2(player.transform.forward.x, player.transform.forward.z);
+
+        float angle = Vector2.SignedAngle(marker.position - playerPos, playerFwd);
+
+        return new Vector2(compassUnit * angle , 0f);
+    }
+
+    public void RegisterObjectiveMarker(ObjMarker marker)
+    {
+        if (marker == null) return;
+
+        if (!objMarkers.Contains(marker))
+        {
+            objMarkers.Add(marker);
+            addObjMarker(marker);
+        }
+
+        objMarkers.Sort((a, b) => a.objectiveOrder.CompareTo(b.objectiveOrder));
+
+        marker.SetActive(false);
+
+        if (autoActivateFirstMarker && !hasActivatedFirstMarker && objMarkers.Count > 0)
+        {
+            currentObjectiveIndex = 0;
+            objMarkers[0].SetActive(true);
+            hasActivatedFirstMarker = true;
+        }
+    }
+
+    public void UnregisterObjectiveMarker(ObjMarker marker)
+    {
+        if (marker == null) return;
+
+        marker.SetActive(false);
+
+        objMarkers.Remove(marker);
+
+    }
+
+    public void CompleteCurrentObjectiveAndAdvance()
+    {
+
+        if (objMarkers.Count > 0 &&
+            currentObjectiveIndex >= 0 &&
+            currentObjectiveIndex < objMarkers.Count)
+        {
+            objMarkers[currentObjectiveIndex].SetActive(false);
+        }
+
+        currentObjectiveIndex++;
+
+        if (objMarkers.Count > 0 && currentObjectiveIndex < objMarkers.Count)
+        {
+            objMarkers[currentObjectiveIndex].SetActive(true);
+        }
     }
 
     public void updateObjectiveText(string text, string headerText)

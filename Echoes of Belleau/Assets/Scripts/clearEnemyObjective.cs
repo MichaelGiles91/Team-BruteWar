@@ -12,6 +12,7 @@ public class AreaObjective : MonoBehaviour
     [SerializeField] string nextObjectiveHeader = "Next Objective";
     [SerializeField] string nextObjectiveText = "Proceed to the church.";
     [SerializeField] float nextObjectiveDelay = 2f;
+    [SerializeField] GameObject nextObjective;
 
     [Header("Enemy Filtering")]
     [SerializeField] LayerMask enemyLayer;
@@ -72,9 +73,12 @@ public class AreaObjective : MonoBehaviour
         complete = true;
 
         if (gameManager.instance != null)
+        {
             gameManager.instance.updateObjectiveText("Area cleared.", "Objective Complete!");
+            gameManager.instance.CompleteCurrentObjectiveAndAdvance();
+        }
 
-        StartCoroutine(ShowNextObjectiveAfterDelay());
+            StartCoroutine(ShowNextObjectiveAfterDelay());
 
     }
 
