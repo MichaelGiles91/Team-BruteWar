@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     float shootTimer;
 
+    public Animator animator;
+
     Vector3 moveDir;
     Vector3 playerVel;
     Vector3 StamBarOrigPos;
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour, IDamage
         speedOrig = speed;
         ammoCountOrig = ammoCount;
         gameManager.instance.updateAmmoAmount(ammoCount);
+        animator = GetComponent<Animator>();
 
         UpdatePlayerUI();
     }
@@ -65,7 +68,6 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         movement();
         sprint();
-        reload();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
     }
 
@@ -87,8 +89,39 @@ public class PlayerController : MonoBehaviour, IDamage
 
         playerVel.y -= gravity * Time.deltaTime;
 
+        reload();
+
+        updateAnimations();
+
         if (Input.GetButton("Fire1") && shootTimer >= shootRate)
             shoot();
+            
+    }
+
+    void updateAnimations()
+    {
+        float vertical = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+
+        bool isWalkingFwd = vertical > 0.1f && speed <= speedOrig && controller.isGrounded;
+        bool isWalkingBck = vertical < -0.1f && speed <= speedOrig && controller.isGrounded;
+        bool isWalkingRight = horizontal > 0.1f && speed <= speedOrig && controller.isGrounded;
+        bool isWalkingLeft = horizontal < -0.1f && speed <= speedOrig && controller.isGrounded;
+
+        bool isRunningFwd = vertical > 0.1f && speed > speedOrig && controller.isGrounded;
+        bool isRunningBck = vertical < -0.1f && speed > speedOrig && controller.isGrounded;
+        bool isRunningRight = horizontal > 0.1f && speed > speedOrig && controller.isGrounded;
+        bool isRunningLeft = horizontal < -0.1f && speed > speedOrig && controller.isGrounded;
+
+        animator.SetBool("isWalkingFwd", isWalkingFwd);
+        animator.SetBool("isWalkingBck", isWalkingBck);
+        animator.SetBool("isWalkingLeft", isWalkingLeft);
+        animator.SetBool("isWalkingRight", isWalkingRight);
+
+        animator.SetBool("isRunningFwd", isRunningFwd);
+        animator.SetBool("isRunningBck", isRunningBck);
+        animator.SetBool("isRunningLeft", isRunningLeft);
+        animator.SetBool("isRunningRight", isRunningRight);
     }
 
     void jump()
@@ -100,6 +133,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 stamina -= staminaJumpDrain;
                 playerVel.y = jumpSpeed;
                 jumpCount++;
+                animator.SetTrigger("Jump");
             }
             else if (stamina <= staminaJumpDrain)
             {
@@ -160,6 +194,7 @@ public class PlayerController : MonoBehaviour, IDamage
             Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
             ammoCount--;
             gameManager.instance.updateAmmoAmount(ammoCount);
+            animator.SetTrigger("Fire");
         }
 
     }

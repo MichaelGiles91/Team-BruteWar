@@ -74,6 +74,7 @@ public class gameManager : MonoBehaviour
         
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        ammoAmount = player.GetComponent<PlayerController>();
         compassUnit = compassImage.rectTransform.rect.width / 360f;
 
         ObjMarker[] markers = GameObject.FindObjectsByType<ObjMarker>(FindObjectsInactive.Include,FindObjectsSortMode.None);
