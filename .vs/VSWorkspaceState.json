@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Echoes of Belleau",
+    "\\Echoes of Belleau\\Assets",
+    "\\Echoes of Belleau\\Assets\\Scripts"
   ],
-  "SelectedNode": "\\Echoes of Belleau.slnx",
+  "SelectedNode": "\\Echoes of Belleau",
   "PreviewInSolutionExplorer": false
 }
