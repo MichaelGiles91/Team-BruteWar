@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9084271781512353664}
   - component: {fileID: 2799098501385725242}
   - component: {fileID: 5333821996132929039}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: radio (event_trigger)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
