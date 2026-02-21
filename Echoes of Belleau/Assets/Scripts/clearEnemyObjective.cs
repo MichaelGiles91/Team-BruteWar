@@ -6,12 +6,13 @@ using UnityEngine;
 public class AreaObjective : MonoBehaviour
 {
     [Header("Objective UI")]
-    [SerializeField] string headerText = "Objective";
-    [TextArea][SerializeField] string objectiveText = "Defeat all enemies in this area.";
+    [SerializeField] string headerText;
+    [TextArea][SerializeField] string objectiveText;
     [Header("Next Objective UI")]
-    [SerializeField] string nextObjectiveHeader = "Next Objective";
-    [SerializeField] string nextObjectiveText = "Proceed to the church.";
-    [SerializeField] float nextObjectiveDelay = 2f;
+    [SerializeField] string nextObjectiveHeader;
+    [SerializeField] string nextObjectiveText;
+    [SerializeField] float nextObjectiveDelay;
+    [SerializeField] GameObject nextObjective;
 
     [Header("Enemy Filtering")]
     [SerializeField] LayerMask enemyLayer;
@@ -72,9 +73,12 @@ public class AreaObjective : MonoBehaviour
         complete = true;
 
         if (gameManager.instance != null)
+        {
             gameManager.instance.updateObjectiveText("Area cleared.", "Objective Complete!");
+            gameManager.instance.CompleteCurrentObjectiveAndAdvance();
+        }
 
-        StartCoroutine(ShowNextObjectiveAfterDelay());
+            StartCoroutine(ShowNextObjectiveAfterDelay());
 
     }
 
