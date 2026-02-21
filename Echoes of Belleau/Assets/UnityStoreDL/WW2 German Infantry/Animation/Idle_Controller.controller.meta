@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a7440406fca272343a06a93a291fd8db
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307855
+  packageName: WW2 German Infantry
+  packageVersion: 1.0
+  assetPath: Assets/WW2 German Infantry/Animation/Idle_Controller.controller
+  uploadId: 723494
