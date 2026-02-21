@@ -28,7 +28,7 @@ public class gameManager : MonoBehaviour
     [Header("---Compass Items---")]
     [SerializeField] RawImage compassImage;
     [SerializeField] GameObject iconPrefab;
-    [SerializeField] bool autoActivateFirstMarker = true;
+    [SerializeField] bool autoActivateFirstMarker;
     [Header("---Objective Items---")]
     [SerializeField] GameObject objEnemyCounter;
     [SerializeField] TMP_Text objEnemyText;

@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour, IDamage
         speedOrig = speed;
         ammoCountOrig = ammoCount;
         gameManager.instance.updateAmmoAmount(ammoCount);
-        animator = GetComponent<Animator>();
 
         UpdatePlayerUI();
     }
@@ -133,7 +132,6 @@ public class PlayerController : MonoBehaviour, IDamage
                 stamina -= staminaJumpDrain;
                 playerVel.y = jumpSpeed;
                 jumpCount++;
-                animator.SetTrigger("Jump");
             }
             else if (stamina <= staminaJumpDrain)
             {

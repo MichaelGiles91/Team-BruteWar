@@ -5707,7 +5707,7 @@ MonoBehaviour:
   restingSize: 100
   walkMaxSize: 300
   sprintMaxSize: 400
-  speed: 1
+  speed: 0.5
   jumpSizeBoost: 300
   jumpHoldTime: 0.35
 --- !u!222 &8870052480708314816
