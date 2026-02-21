@@ -1,8 +1,9 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IPickup
 
 {
     [SerializeField] CharacterController controller;
@@ -18,15 +19,22 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
 
+    [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
     [SerializeField] float shootRate;
 
+    [SerializeField] GameObject gunModel;
+
+    [SerializeField] AudioSource aud;
     int jumpCount;
     int HPOrig;
     int StaminaOrig;
 
+    int gunListPos;
     float shootTimer;
+    GameObject currentGunInstance;
+    Transform activeMuzzle;
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -45,6 +53,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         movement();
         sprint();
+        selectGun();
     }
 
     void movement()
@@ -95,17 +104,40 @@ public class PlayerController : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
-        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+
+        if (gunList.Count > 0 && gunList[gunListPos].shootSound.Length > 0)
+        {
+            AudioClip clip = gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)];
+            aud.PlayOneShot(clip, gunList[gunListPos].shootSoundVol);
+        }
 
         RaycastHit hit;
+        Vector3 targetPoint;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
-            Debug.Log(hit.collider.name);
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null)
+            targetPoint = hit.point;
+            if (!hit.collider.isTrigger)
             {
-                dmg.takeDamage(shootDamage);
+                IDamage dmg = hit.collider.GetComponent<IDamage>();
+                if (dmg != null)
+                    dmg.takeDamage(shootDamage);
             }
+        }
+        else
+        {
+            targetPoint = Camera.main.transform.position + Camera.main.transform.forward * shootDist;
+        }
+
+        GameObject bulletToFire = gunList.Count > 0 && gunList[gunListPos].bulletPrefab != null
+            ? gunList[gunListPos].bulletPrefab : bullet;
+        Transform spawnPoint = activeMuzzle != null ? activeMuzzle : shootPos;
+        Vector3 aimDir = (targetPoint - spawnPoint.position).normalized;
+        GameObject newBullet = Instantiate(bulletToFire, spawnPoint.position, Quaternion.LookRotation(aimDir));
+        if (gunList.Count > 0)
+        {
+            damage bulletDmg = newBullet.GetComponent<damage>();
+            if (bulletDmg != null)
+                bulletDmg.SetHitEffect(gunList[gunListPos].hitEffect);
         }
     }
     public void takeDamage(int amount)
@@ -153,5 +185,52 @@ public class PlayerController : MonoBehaviour, IDamage
       
         gameManager.instance.playerDamageFlash.SetActive(false);
     }
+    public void ShowGun(bool state)
+    {
+        if (currentGunInstance != null)
+            currentGunInstance.SetActive(state);
+    }
 
+    public void getGunStats(gunStats gun)
+    {
+        gunList.Add(gun);
+        gunListPos = gunList.Count - 1;
+        changeGun();
+    }
+
+    void changeGun()
+    {
+        shootDamage = gunList[gunListPos].shootDamage;
+        shootDist = gunList[gunListPos].shootDist;
+        shootRate = gunList[gunListPos].shootRate;
+
+        if (currentGunInstance != null)
+            Destroy(currentGunInstance);
+
+        currentGunInstance = Instantiate(gunList[gunListPos].gunModel, gunModel.transform);
+        currentGunInstance.transform.localPosition = Vector3.zero;
+        currentGunInstance.transform.localRotation = Quaternion.identity;
+
+        Transform muzzle = currentGunInstance.transform.Find("Muzzle");
+        activeMuzzle = muzzle != null ? muzzle : shootPos;
+    }
+
+    void selectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+            Debug.Log($"Scroll input | gunListPos: {gunListPos} | gunList.Count: {gunList.Count}");
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+        {
+            gunListPos++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+        {
+            gunListPos--;
+            changeGun();
+        }
+    }
 }
+
+

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b518873e1e4a19488640a2516ea53df, type: 3}
+  m_Name: Gun(Rifle)
+  m_EditorClassIdentifier: Assembly-CSharp::gunStats
+  gunModel: {fileID: 1173155406573634, guid: b0d20c7f91335cb42998d74bcbeda882, type: 3}
+  bulletPrefab: {fileID: 2530107586607571168, guid: 4cd10fcc6467f2946b7cd336230df179, type: 3}
+  shootDamage: 1
+  shootDist: 25
+  shootRate: 1
+  ammoCur: 5
+  ammoMax: 5
+  hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
+  shootSound:
+  - {fileID: 8300000, guid: 0638fc7e7cec1ba458894dff1928f9f8, type: 3}
+  shootSoundVol: 0.507
