@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - player
+  - Player
   - Water
   - UI
   - player bullet
@@ -16,7 +16,6 @@ TagManager:
   - enemy bullet
   - Interactable
   - Fps Arms
-  - 
   - 
   - 
   - 

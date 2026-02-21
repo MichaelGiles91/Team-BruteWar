@@ -50,7 +50,7 @@ MonoBehaviour:
   type: 0
   rd: {fileID: 657869930822578047}
   damageAmount: 1
-  damageRate: 0
+  damageRate: 1
   speed: 25
   destroyTime: 1
   hitEffect: {fileID: 0}
