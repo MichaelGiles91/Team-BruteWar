@@ -16,6 +16,11 @@ public class damage : MonoBehaviour
 
     bool isDamaging;
 
+    public void SetHitEffect(ParticleSystem effect)
+    {
+        hitEffect = effect;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
