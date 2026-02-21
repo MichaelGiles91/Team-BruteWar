@@ -16,6 +16,11 @@ public class damage : MonoBehaviour
 
     bool isDamaging;
 
+    public void SetHitEffect(ParticleSystem effect)
+    {
+        hitEffect = effect;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,10 +35,8 @@ public class damage : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger)
-        {
-            return;
-        }
+        if (other.isTrigger) return;
+        if (other.CompareTag("Player")) return;
 
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null && type != damageType.DOT)
