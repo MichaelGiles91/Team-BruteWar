@@ -5,6 +5,7 @@ using UnityEngine;
 public class gunStats : ScriptableObject
 {
     public GameObject gunModel;
+    public AnimatorOverrideController overrideController;
     public GameObject bulletPrefab;
 
     [Range(1,10)]public int shootDamage;

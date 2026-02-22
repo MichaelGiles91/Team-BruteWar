@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Gun(LMG) 1
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
   gunModel: {fileID: 1780520443796910, guid: 7915123eda00e574e84f619dbcb8bf68, type: 3}
+  overrideController: {fileID: 22100000, guid: 105c04c56d6fc94499937cd8e6d25007, type: 2}
   bulletPrefab: {fileID: 2530107586607571168, guid: 4cd10fcc6467f2946b7cd336230df179, type: 3}
   shootDamage: 1
   shootDist: 15

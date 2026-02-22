@@ -17,9 +17,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] int gravity;
 
     [Header("---Combat Stats---")]
-    [SerializeField] GameObject bullet;
-    [SerializeField] Transform shootPos;
-
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
@@ -38,7 +35,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] float shakeAmount;
     [SerializeField] float shakeDuration;
 
-    [SerializeField] GameObject gunModel;
+    [SerializeField] Transform weaponGripTarget;
+    [SerializeField] LeftHandIKBinder leftHandIKBinder;
+    [SerializeField] UnityEngine.Animations.Rigging.RigBuilder rigBuilder;
 
     [SerializeField] AudioSource aud;
     int jumpCount;
@@ -198,17 +197,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
-        shootTimer = 0;
-        if (ammoCount > 0)
-        {
-            Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
-            ammoCount--;
-            gameManager.instance.updateAmmoAmount(ammoCount);
-            animator.SetTrigger("Fire");
-        }
 
+        shootTimer = 0f;
+        ammoCount--;
+        gameManager.instance.updateAmmoAmount(ammoCount);
 
-        if (gunList.Count > 0 && gunList[gunListPos].shootSound.Length > 0)
+        animator.SetTrigger("Fire");
+
+        if (gunList[gunListPos].shootSound != null && gunList[gunListPos].shootSound.Length > 0)
         {
             AudioClip clip = gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)];
             aud.PlayOneShot(clip, gunList[gunListPos].shootSoundVol);
@@ -216,9 +212,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         RaycastHit hit;
         Vector3 targetPoint;
+
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             targetPoint = hit.point;
+
             if (!hit.collider.isTrigger)
             {
                 IDamage dmg = hit.collider.GetComponent<IDamage>();
@@ -231,17 +229,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             targetPoint = Camera.main.transform.position + Camera.main.transform.forward * shootDist;
         }
 
-        GameObject bulletToFire = gunList.Count > 0 && gunList[gunListPos].bulletPrefab != null
-            ? gunList[gunListPos].bulletPrefab : bullet;
-        Transform spawnPoint = activeMuzzle != null ? activeMuzzle : shootPos;
-        Vector3 aimDir = (targetPoint - spawnPoint.position).normalized;
-        GameObject newBullet = Instantiate(bulletToFire, spawnPoint.position, Quaternion.LookRotation(aimDir));
-        if (gunList.Count > 0)
-        {
-            damage bulletDmg = newBullet.GetComponent<damage>();
-            if (bulletDmg != null)
-                bulletDmg.SetHitEffect(gunList[gunListPos].hitEffect);
-        }
+        GameObject bulletToFire = gunList[gunListPos].bulletPrefab;
+
+        Vector3 aimDir = (targetPoint - activeMuzzle.position).normalized;
+        GameObject newBullet = Instantiate(bulletToFire, activeMuzzle.position, Quaternion.LookRotation(aimDir));
+
+        damage bulletDmg = newBullet.GetComponent<damage>();
+        if (bulletDmg != null)
+            bulletDmg.SetHitEffect(gunList[gunListPos].hitEffect);
     }
 
     public void takeDamage(int amount)
@@ -326,12 +321,64 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         if (currentGunInstance != null)
             Destroy(currentGunInstance);
 
-        currentGunInstance = Instantiate(gunList[gunListPos].gunModel, gunModel.transform);
-        currentGunInstance.transform.localPosition = Vector3.zero;
-        currentGunInstance.transform.localRotation = Quaternion.identity;
+        currentGunInstance = Instantiate(gunList[gunListPos].gunModel);
+
+        int fpsLayer = LayerMask.NameToLayer("FPSArms");
+        if (fpsLayer >= 0)
+            SetLayerRecursively(currentGunInstance, fpsLayer);
+
+        Transform rightHandGrip = currentGunInstance.transform.Find("RightHandGrip");
+        if (rightHandGrip == null)
+        {
+            Debug.LogError($"{currentGunInstance.name} missing RightHandGrip. Cannot equip.");
+            Destroy(currentGunInstance);
+            return;
+        }
+        else
+        {
+            if (weaponGripTarget == null)
+            {
+                Debug.LogError("weaponGripTarget is not assigned on PlayerController.");
+                Destroy(currentGunInstance);
+                return;
+            }
+
+            AlignWeaponToGrip(currentGunInstance.transform, rightHandGrip, weaponGripTarget);
+
+
+            currentGunInstance.transform.SetParent(weaponGripTarget, true);
+        }
+
 
         Transform muzzle = currentGunInstance.transform.Find("Muzzle");
-        activeMuzzle = muzzle != null ? muzzle : shootPos;
+        if (muzzle == null)
+        {
+            Debug.LogError($"{currentGunInstance.name} missing Muzzle. Shooting will not work.");
+            activeMuzzle = null;
+        }
+        else
+        {
+            activeMuzzle = muzzle;
+        }
+
+        if (leftHandIKBinder != null)
+        {
+            leftHandIKBinder.BindToWeapon(currentGunInstance);
+        }
+
+        if (gunList[gunListPos].overrideController != null)
+        {
+            animator.runtimeAnimatorController = gunList[gunListPos].overrideController;
+        }
+
+        StartCoroutine(RebuildRigNextFrame());
+    }
+
+    static void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+            SetLayerRecursively(child.gameObject, layer);
     }
 
     void selectGun()
@@ -348,6 +395,24 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         {
             gunListPos--;
             changeGun();
+        }
+    }
+
+    static void AlignWeaponToGrip(Transform weaponRoot, Transform weaponGripAnchor, Transform gripTarget)
+    {
+        Quaternion desiredWeaponRotation = gripTarget.rotation * Quaternion.Inverse(weaponGripAnchor.localRotation);
+
+        Vector3 desiredWeaponPosition = gripTarget.position - (desiredWeaponRotation * weaponGripAnchor.localPosition);
+
+        weaponRoot.SetPositionAndRotation(desiredWeaponPosition, desiredWeaponRotation);
+    }
+
+    IEnumerator RebuildRigNextFrame()
+    {
+        yield return null;
+        if (rigBuilder != null)
+        {
+            rigBuilder.Build();
         }
     }
 }
