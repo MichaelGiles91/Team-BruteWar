@@ -2385,13 +2385,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9159537069380098256, guid: a7dbdd508737b0d49b444c4263d812f1, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 1920771801}
+      addedObject: {fileID: 1920771799}
     - targetCorrespondingSourceObject: {fileID: 9159537069380098256, guid: a7dbdd508737b0d49b444c4263d812f1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1920771798}
-    - targetCorrespondingSourceObject: {fileID: 9159537069380098256, guid: a7dbdd508737b0d49b444c4263d812f1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1920771797}
   m_SourcePrefab: {fileID: 100100000, guid: a7dbdd508737b0d49b444c4263d812f1, type: 3}
 --- !u!4 &401551443 stripped
 Transform:
@@ -11344,23 +11341,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9159537069380098256, guid: a7dbdd508737b0d49b444c4263d812f1, type: 3}
   m_PrefabInstance: {fileID: 399998883}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1920771794 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 9159537069378160144, guid: a7dbdd508737b0d49b444c4263d812f1, type: 3}
-  m_PrefabInstance: {fileID: 399998883}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1920771797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920771793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dd5a63d1bba12741b72a8b85ebc74be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RadioInteractable
 --- !u!65 &1920771798
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11382,7 +11362,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45060176, y: 0.26641878, z: 0.18692598}
   m_Center: {x: 0, y: 0.13320939, z: 0.00601444}
---- !u!114 &1920771801
+--- !u!114 &1920771799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11391,12 +11371,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920771793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 666b0a99bf23f4a41b495cfae6aea13a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6335fb9c3a741734b9f071abf5e055ab, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RadioInteractable
-  radioRenderer: {fileID: 1920771794}
-  normalMaterial: {fileID: 2100000, guid: 46bc24982d204eb4b85b3832fbc2a27c, type: 2}
-  highlightMaterial: {fileID: 2100000, guid: 258648a435ef55047bb7c4d725d7ed33, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::radio
+  model: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1001 &1921849842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13497,7 +13476,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   interactDistance: 3
   interactLayer:
-    serializedVersion: 2
     m_Bits: 1
   playerCamera: {fileID: 5881681671533473581}
   interactPrompt: {fileID: 0}
