@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class gunPickup : MonoBehaviour
+public class healthPickup : MonoBehaviour
 {
-    [SerializeField] gunStats gun;
+    [SerializeField] int amount = 1;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -10,8 +10,7 @@ public class gunPickup : MonoBehaviour
 
         if (pik != null)
         {
-            gun.ammoCur = gun.ammoMax;
-            pik.getGunStats(gun);
+            pik.getMedkit(amount);
             Destroy(gameObject);
         }
     }

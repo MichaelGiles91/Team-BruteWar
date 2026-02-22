@@ -22,6 +22,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject objEnemyCounter;
     [SerializeField] TMP_Text objEnemyText;
     [SerializeField] TMP_Text ammoAmountText;
+    [SerializeField] TMP_Text medkitAmountText;
     [SerializeField] RawImage compassImage;
     [SerializeField] GameObject objective;
     [SerializeField] TMP_Text objectiveHeaderText;
@@ -29,7 +30,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] float objectiveHideDelay = 3f;
 
     Coroutine hideObjectiveRoutine;
-
 
     public Image playerHPBar;
     public GameObject playerDamageFlash;
@@ -47,9 +47,7 @@ public class gameManager : MonoBehaviour
     int gameGoalCount;
 
     public PlayerController ammoAmount;
-
-
-
+    public PlayerController medkitAmount;
 
     Vector3 checkpointPos;
     Quaternion checkpointRot;
@@ -204,6 +202,11 @@ public class gameManager : MonoBehaviour
         ammoAmountText.text = currentAmmo.ToString();
     }
 
+    public void updateMedkitAmount(int currentMedkit)
+    {
+        medkitAmountText.text = currentMedkit.ToString();
+    }
+
     public void updateCompass(float yRotation)
     {
         compassImage.uvRect = new Rect(yRotation / 360f, 0f, 1f, 1f);
@@ -237,4 +240,3 @@ public class gameManager : MonoBehaviour
         hideObjectiveRoutine = null;
     }
 }
-
