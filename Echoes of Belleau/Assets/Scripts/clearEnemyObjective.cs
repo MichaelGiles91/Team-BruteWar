@@ -58,7 +58,10 @@ public class AreaObjective : MonoBehaviour
         active = true;
 
         if (gameManager.instance != null)
+        {
             gameManager.instance.updateObjectiveText(objectiveText, headerText);
+            gameManager.instance.SetActiveObjectiveZone(box);
+        }
 
         TrackAllEnemiesInside();
 
@@ -76,6 +79,7 @@ public class AreaObjective : MonoBehaviour
         {
             gameManager.instance.updateObjectiveText("Area cleared.", "Objective Complete!");
             gameManager.instance.CompleteCurrentObjectiveAndAdvance();
+            gameManager.instance.SetActiveObjectiveZone(null);
         }
 
             StartCoroutine(ShowNextObjectiveAfterDelay());
