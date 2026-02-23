@@ -12,6 +12,7 @@ public class gunStats : ScriptableObject
     [Range(15, 1000)] public int shootDist;
     [Range(0.1f, 2f)] public float shootRate;
 
+    public int magSize = 30;
     public int ammoCur;
     [Range(5, 50)] public int ammoMax;
 

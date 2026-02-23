@@ -3117,12 +3117,13 @@ MonoBehaviour:
   isPaused: 0
   checkpointNotification: {fileID: 6104236070669641581}
   gameGoalCountText: {fileID: 1573033786213642856}
-  ammoAmount: {fileID: 0}
-  ammoAmountText: {fileID: 7136325743799877409}
   playerHPBar: {fileID: 2979439417584564760}
   playerDamageFlash: {fileID: 7210542357663326667}
   playerStaminaBar: {fileID: 415342297275001207}
   map: {fileID: 2344317778830684224}
+  ammoAmount: {fileID: 0}
+  ammoAmountText: {fileID: 7136325743799877409}
+  ammoMaxText: {fileID: 2855470245987797840}
   compassImage: {fileID: 3185585412359215742}
   iconPrefab: {fileID: 4342145697360508368, guid: 5444093ab0cb3864a9acf0d84fe4858a, type: 3}
   autoActivateFirstMarker: 1
