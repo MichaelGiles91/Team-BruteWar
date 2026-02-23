@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5184145453556087958}
   - component: {fileID: 6519429239607573483}
   m_Layer: 7
-  m_Name: Enemy-base roam
+  m_Name: Enemy-Boss roam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -62.98, y: 1, z: 439.99}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.3548, z: 1.3062}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2989503108170775067}
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::enemyAI
   model: {fileID: 1373253870051274320}
   agent: {fileID: 3573361805005594233}
-  HP: 15
+  HP: 100
   faceTargetSpeed: 4
   FOV: 45
   roamDist: 10
@@ -116,7 +116,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c46872863ef2a6f4dae33529a93304e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -299,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 8111005630319980159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.18, z: 0.83}
+  m_LocalPosition: {x: 0, y: 0.18, z: 1.186}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

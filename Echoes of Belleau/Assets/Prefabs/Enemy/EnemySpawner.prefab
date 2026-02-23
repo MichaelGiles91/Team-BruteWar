@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110c9c7a17a749a4db2b9f004d171d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemySpawner
-  enemyPrefabBase: {fileID: 6421296465982426291, guid: d4c1b723bde0cd74885985194c965e81, type: 3}
+  enemyPrefabBase: {fileID: 5250135555691015416, guid: 6c0b7b5f595d2f644a0381ea599f8dca, type: 3}
   enemyPrefabMedium: {fileID: 2017871361233746970, guid: e8d24300c88ed0341b0a727920e37ab4, type: 3}
-  enemyPrefabBoss: {fileID: 6497705403024487098, guid: fbf55241bc383b74d81730441bee23c1, type: 3}
+  enemyPrefabBoss: {fileID: 5250135555691015416, guid: 05810e9879891e545ac53101f8f6eea0, type: 3}
   baseEnemyMax: 5
   mediumEnemyMax: 5
   bossEnemyMax: 1
