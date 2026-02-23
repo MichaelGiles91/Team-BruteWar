@@ -5353,17 +5353,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b17dc1dd6f36003438f8e7d7ba6c0938, type: 3}
   m_PrefabInstance: {fileID: 1243002240}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1015867523 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 360908607607524095, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
-  m_PrefabInstance: {fileID: 1606640217}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!4 &1016697640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6746075286750442706, guid: 5e6efa62fd16da8428db38f54d38af6f, type: 3}
@@ -9462,25 +9451,76 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3964508112628562967, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3964508112628562967, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3964508112628562967, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3964508112628562967, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4458100797514902062, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5413965321329622705}
     - target: {fileID: 4458100797514902062, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
       propertyPath: ammoAmount
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5484530387945477922}
+    - target: {fileID: 4458100797514902062, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: medkitAmount
+      value: 
+      objectReference: {fileID: 5484530387945477922}
     - target: {fileID: 4458100797514902062, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
       propertyPath: playerScript
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5484530387945477922}
     - target: {fileID: 4458100797514902062, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
       propertyPath: medkitAmountText
       value: 
-      objectReference: {fileID: 1015867523}
+      objectReference: {fileID: 360908606772652198}
+    - target: {fileID: 6204109286306415073, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6865623512572953254, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251090311069125150, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251090311069125150, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251090311069125150, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251090311069125150, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
+    - target: {fileID: 7860712654767473745, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 8966914452888898417, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7036163550731805989, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
@@ -13133,6 +13173,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b17dc1dd6f36003438f8e7d7ba6c0938, type: 3}
   m_PrefabInstance: {fileID: 1921849842}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &360908606772652198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 360908607607524095, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+  m_PrefabInstance: {fileID: 1606640217}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &1503469806408889553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13290,6 +13341,7 @@ MonoBehaviour:
   gunModel: {fileID: 1954877673}
   ammoCount: 35
   medkitCount: 0
+  medkitHealAmount: 25
   stamina: 100
   staminaDrainRate: 10
   staminaRegenRate: 20
