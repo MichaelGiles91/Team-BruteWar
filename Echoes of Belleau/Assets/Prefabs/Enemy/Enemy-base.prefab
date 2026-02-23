@@ -40,12 +40,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5880129801213666581}
-  - component: {fileID: 6022337136374350434}
   - component: {fileID: 4716128323418548047}
   - component: {fileID: 6252669687709914843}
   - component: {fileID: 2885280818560120527}
   - component: {fileID: 7076586739696271158}
   - component: {fileID: 378027427158653911}
+  - component: {fileID: -8896899138888223869}
   m_Layer: 7
   m_Name: Enemy-base
   m_TagString: Untagged
@@ -70,25 +70,6 @@ Transform:
   - {fileID: 6694007833923130688}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6022337136374350434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6421296465982426291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36740a69fd3e9bb4991d29efe5bbcb02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::enemyAi
-  model: {fileID: 2885280818560120527}
-  agent: {fileID: 4716128323418548047}
-  HP: 15
-  faceTargetSpeed: 4
-  bullet: {fileID: 6571920716250768047, guid: 82422ad3b5065ee4d8ce47e3354f35bf, type: 3}
-  shootRate: 1
-  shootPOS: {fileID: 6694007833923130688}
 --- !u!195 &4716128323418548047
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -212,6 +193,28 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8896899138888223869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421296465982426291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34259daa761c1254da2d9a9d340fae9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAIwRoam
+  model: {fileID: 2885280818560120527}
+  agent: {fileID: 4716128323418548047}
+  HP: 10
+  faceTargetSpeed: 4
+  FOV: 45
+  roamDist: 5
+  roamPauseTime: 1
+  bullet: {fileID: 6571920716250768047, guid: 82422ad3b5065ee4d8ce47e3354f35bf, type: 3}
+  shootRate: 0.5
+  shootPos: {fileID: 6694007833923130688}
 --- !u!1 &7344179296439741420
 GameObject:
   m_ObjectHideFlags: 0

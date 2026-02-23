@@ -55,10 +55,10 @@ MonoBehaviour:
   agent: {fileID: 3573361805005594233}
   HP: 15
   faceTargetSpeed: 4
-  FOV: 45
+  FOV: 120
   roamDist: 10
   roamPauseTime: 5
-  bullet: {fileID: 2530107586607571168, guid: 4cd10fcc6467f2946b7cd336230df179, type: 3}
+  bullet: {fileID: 6358852641723730384, guid: ecdb4da60df48b04eacf35b263dce792, type: 3}
   shootRate: 1
   shootPos: {fileID: 7763297756475306703}
 --- !u!195 &3573361805005594233
