@@ -10,7 +10,7 @@ public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
-    [Header ("---Game Screens---")]
+    [Header("---Game Screens---")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
@@ -33,6 +33,7 @@ public class gameManager : MonoBehaviour
     [Header("---Objective Items---")]
     [SerializeField] GameObject objEnemyCounter;
     [SerializeField] TMP_Text objEnemyText;
+    [SerializeField] TMP_Text medkitAmountText;
     [SerializeField] GameObject objective;
     [SerializeField] TMP_Text objectiveHeaderText;
     [SerializeField] TMP_Text objectiveText;
@@ -41,13 +42,13 @@ public class gameManager : MonoBehaviour
     Coroutine hideObjectiveRoutine;
 
     public GameObject player;
+
     public PlayerController playerScript;
-    
+
     float timeScaleOrig;
 
     int objEnemy;
     int gameGoalCount;
-
 
     List<ObjMarker> objMarkers = new List<ObjMarker>();
 
@@ -56,6 +57,7 @@ public class gameManager : MonoBehaviour
     int currentObjectiveIndex = 0;
     bool hasActivatedFirstMarker = false;
 
+    public PlayerController medkitAmount;
 
     Vector3 checkpointPos;
     Quaternion checkpointRot;
@@ -69,17 +71,17 @@ public class gameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
         timeScaleOrig = Time.timeScale;
 
-        
+
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         ammoAmount = player.GetComponent<PlayerController>();
         compassUnit = compassImage.rectTransform.rect.width / 360f;
         //mapUI.SetObjective(currentObjectiveTransform);
 
-        ObjMarker[] markers = GameObject.FindObjectsByType<ObjMarker>(FindObjectsInactive.Include,FindObjectsSortMode.None);
+        ObjMarker[] markers = GameObject.FindObjectsByType<ObjMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         foreach (var m in markers)
             RegisterObjectiveMarker(m);
@@ -99,15 +101,16 @@ public class gameManager : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
 
-            if(menuActive == null)
-    
+            if (menuActive == null)
+
             {
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
                 objective.SetActive(true);
 
-            }else if(menuActive == menuPause)
+            }
+            else if (menuActive == menuPause)
             {
                 stateUnpause();
             }
@@ -123,6 +126,7 @@ public class gameManager : MonoBehaviour
             }
             else if (menuActive == map)
             {
+
                 stateUnpause();
             }
         }
@@ -167,7 +171,7 @@ public class gameManager : MonoBehaviour
         objEnemyCounter.SetActive(true);
         objEnemy = amount;
         objEnemyText.text = objEnemy.ToString();
-        if(amount == 0)
+        if (amount == 0)
         {
             objEnemyCounter.SetActive(false);
         }
@@ -188,32 +192,32 @@ public class gameManager : MonoBehaviour
     }
     public void Respawn()
     {
-       
+
         if (menuLose != null) menuLose.SetActive(false);
 
-        
+
         stateUnpause();
 
-        
+
         if (!hasCheckpoint)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            return; 
-           
+            return;
+
         }
 
-        
+
         CharacterController cc = player.GetComponent<CharacterController>();
         cc.enabled = false;
         player.transform.SetPositionAndRotation(checkpointPos, checkpointRot);
         cc.enabled = true;
 
-        
+
         playerScript.RespawnReset();
     }
     IEnumerator showCheckpointNotification()
     {
-       checkpointNotification.SetActive(true);
+        checkpointNotification.SetActive(true);
         yield return new WaitForSeconds(10f);
         checkpointNotification.SetActive(false);
 
@@ -222,6 +226,11 @@ public class gameManager : MonoBehaviour
     public void updateAmmoAmount(int currentAmmo)
     {
         ammoAmountText.text = currentAmmo.ToString();
+    }
+
+    public void updateMedkitAmount(int currentMedkit)
+    {
+        medkitAmountText.text = currentMedkit.ToString();
     }
 
     public void updateCompass(float yRotation)
@@ -245,7 +254,7 @@ public class gameManager : MonoBehaviour
         Debug.Log($"Markers: {objMarkers.Count}, Active: {objMarkers.FindAll(m => m != null && m.isActive).Count}");
     }
 
-    public void addObjMarker (ObjMarker marker)
+    public void addObjMarker(ObjMarker marker)
     {
         GameObject newMarker = Instantiate(iconPrefab, compassImage.transform);
         marker.image = newMarker.GetComponent<Image>();
@@ -255,14 +264,14 @@ public class gameManager : MonoBehaviour
 
     }
 
-    Vector2 GetPosOnCompass (ObjMarker marker)
+    Vector2 GetPosOnCompass(ObjMarker marker)
     {
         Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.z);
         Vector2 playerFwd = new Vector2(player.transform.forward.x, player.transform.forward.z);
 
         float angle = Vector2.SignedAngle(marker.position - playerPos, playerFwd);
 
-        return new Vector2(compassUnit * angle , 0f);
+        return new Vector2(compassUnit * angle, 0f);
     }
 
     public void RegisterObjectiveMarker(ObjMarker marker)
@@ -324,7 +333,7 @@ public class gameManager : MonoBehaviour
     {
         objective.SetActive(true);
 
-        if(objectiveHeaderText != null)
+        if (objectiveHeaderText != null)
         {
             objectiveHeaderText.text = headerText;
         }
@@ -345,7 +354,6 @@ public class gameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(objectiveHideDelay);
         objective.SetActive(false);
-        hideObjectiveRoutine = null;
     }
 
     public void RefreshMapObjective()
@@ -368,4 +376,3 @@ public class gameManager : MonoBehaviour
             mapUI.SetActiveZone(zone);
     }
 }
-

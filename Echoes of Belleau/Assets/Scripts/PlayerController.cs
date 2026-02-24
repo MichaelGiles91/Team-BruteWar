@@ -22,8 +22,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] int shootDist;
     [SerializeField] float shootRate;
     [SerializeField] int ammoCount;
+    [SerializeField] int medkitCount;
+    [SerializeField] int medkitHealAmount = 25;
     int ammoCountOrig;
+    int medkitCountOrig;
     public int AmmoCount => ammoCount;
+    public int MedkitCount => medkitCount;
 
     [Header("---Stamina Stats---")]
     [SerializeField] float stamina;
@@ -68,6 +72,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         speedOrig = speed;
         ammoCountOrig = ammoCount;
         gameManager.instance.updateAmmoAmount(ammoCount);
+        medkitCountOrig = medkitCount;
+        gameManager.instance.updateMedkitAmount(medkitCount);
 
         UpdatePlayerUI();
     }
@@ -78,6 +84,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         movement();
         sprint();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
+        if (Input.GetButtonDown("UseMedkit"))
+        {
+            UseMedkit();
+        }
         selectGun();
     }
 
@@ -105,7 +115,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         if (Input.GetButton("Fire1") && shootTimer >= shootRate)
             shoot();
-            
+
     }
 
     void updateAnimations()
@@ -305,6 +315,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             currentGunInstance.SetActive(state);
     }
 
+    public void getMedkit(int amount)
+    {
+        medkitCount += amount;
+        gameManager.instance.updateMedkitAmount(medkitCount);
+    }
+
     public void getGunStats(gunStats gun)
     {
         gunList.Add(gun);
@@ -415,5 +431,22 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             rigBuilder.Build();
         }
     }
-}
 
+
+    void UseMedkit()
+    {
+        if (medkitCount <= 0)
+            return;
+
+        if (HP >= HPOrig)
+            return;
+
+        medkitCount--;
+
+        HP += medkitHealAmount;
+        HP = Mathf.Clamp(HP, 0, HPOrig);
+
+        gameManager.instance.updateMedkitAmount(medkitCount);
+        UpdatePlayerUI();
+    }
+}

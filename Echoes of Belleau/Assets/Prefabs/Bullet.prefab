@@ -52,7 +52,7 @@ MonoBehaviour:
   damageAmount: 1
   damageRate: 1
   speed: 25
-  destroyTime: 1
+  destroyTime: 3
   hitEffect: {fileID: 0}
 --- !u!135 &515481928404115243
 SphereCollider:
