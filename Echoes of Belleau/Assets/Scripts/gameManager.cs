@@ -24,7 +24,8 @@ public class gameManager : MonoBehaviour
     public Image playerHPBar;
     public GameObject playerDamageFlash;
     public Image playerStaminaBar;
-    public GameObject map;
+    [SerializeField] GameObject map;
+    [SerializeField] FullscreenMapUI mapUI;
     [Header("---Compass Items---")]
     [SerializeField] RawImage compassImage;
     [SerializeField] GameObject iconPrefab;
@@ -76,12 +77,20 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         ammoAmount = player.GetComponent<PlayerController>();
         compassUnit = compassImage.rectTransform.rect.width / 360f;
+        //mapUI.SetObjective(currentObjectiveTransform);
 
         ObjMarker[] markers = GameObject.FindObjectsByType<ObjMarker>(FindObjectsInactive.Include,FindObjectsSortMode.None);
 
         foreach (var m in markers)
             RegisterObjectiveMarker(m);
 
+        if (objMarkers.Count > 0)
+        {
+            currentObjectiveIndex = Mathf.Clamp(currentObjectiveIndex, 0, objMarkers.Count - 1);
+            objMarkers[currentObjectiveIndex].SetActive(true);
+        }
+
+        RefreshMapObjective();
     }
 
     // Update is called once per frame
@@ -116,7 +125,6 @@ public class gameManager : MonoBehaviour
             {
                 stateUnpause();
             }
-
         }
     }
     public void statePause()
@@ -234,6 +242,7 @@ public class gameManager : MonoBehaviour
 
             marker.image.rectTransform.anchoredPosition = pos;
         }
+        Debug.Log($"Markers: {objMarkers.Count}, Active: {objMarkers.FindAll(m => m != null && m.isActive).Count}");
     }
 
     public void addObjMarker (ObjMarker marker)
@@ -268,12 +277,16 @@ public class gameManager : MonoBehaviour
 
         objMarkers.Sort((a, b) => a.objectiveOrder.CompareTo(b.objectiveOrder));
 
-        marker.SetActive(false);
+        for (int i = 0; i < objMarkers.Count; i++)
+            objMarkers[i].SetActive(i == currentObjectiveIndex);
+
+        RefreshMapObjective();
 
         if (autoActivateFirstMarker && !hasActivatedFirstMarker && objMarkers.Count > 0)
         {
             currentObjectiveIndex = 0;
             objMarkers[0].SetActive(true);
+            RefreshMapObjective();
             hasActivatedFirstMarker = true;
         }
     }
@@ -290,7 +303,6 @@ public class gameManager : MonoBehaviour
 
     public void CompleteCurrentObjectiveAndAdvance()
     {
-
         if (objMarkers.Count > 0 &&
             currentObjectiveIndex >= 0 &&
             currentObjectiveIndex < objMarkers.Count)
@@ -304,6 +316,8 @@ public class gameManager : MonoBehaviour
         {
             objMarkers[currentObjectiveIndex].SetActive(true);
         }
+
+        RefreshMapObjective();
     }
 
     public void updateObjectiveText(string text, string headerText)
@@ -332,6 +346,26 @@ public class gameManager : MonoBehaviour
         yield return new WaitForSeconds(objectiveHideDelay);
         objective.SetActive(false);
         hideObjectiveRoutine = null;
+    }
+
+    public void RefreshMapObjective()
+    {
+        if (mapUI == null) return;
+
+        if (objMarkers.Count > 0 && currentObjectiveIndex >= 0 && currentObjectiveIndex < objMarkers.Count)
+        {
+            mapUI.SetObjectivePin(objMarkers[currentObjectiveIndex].transform);
+        }
+        else
+        {
+            mapUI.SetObjectivePin(null);
+        }
+    }
+
+    public void SetActiveObjectiveZone(Collider zone)
+    {
+        if (mapUI != null)
+            mapUI.SetActiveZone(zone);
     }
 }
 

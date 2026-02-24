@@ -748,7 +748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b812fbcad3af05440b53dc1de6ebe2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cameraController
-  sens: 300
+  sens: 200
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
@@ -1667,7 +1667,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.05
-  far clip plane: 1000
+  far clip plane: 250
   field of view: 80
   orthographic: 0
   orthographic size: 5
@@ -2992,7 +2992,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 10
+  far clip plane: 50
   field of view: 70
   orthographic: 0
   orthographic size: 5
