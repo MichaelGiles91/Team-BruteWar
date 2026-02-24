@@ -26,6 +26,7 @@ public class gameManager : MonoBehaviour
     public Image playerStaminaBar;
     [SerializeField] GameObject map;
     [SerializeField] FullscreenMapUI mapUI;
+    [SerializeField] GameObject mapStuff;
     [Header("---Compass Items---")]
     [SerializeField] RawImage compassImage;
     [SerializeField] GameObject iconPrefab;
@@ -78,8 +79,10 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         ammoAmount = player.GetComponent<PlayerController>();
+        medkitAmount = player.GetComponent<PlayerController>();
+        mapStuff = GameObject.FindWithTag("Map Stuff");
+        mapStuff.SetActive(false);
         compassUnit = compassImage.rectTransform.rect.width / 360f;
-        //mapUI.SetObjective(currentObjectiveTransform);
 
         ObjMarker[] markers = GameObject.FindObjectsByType<ObjMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
@@ -121,12 +124,13 @@ public class gameManager : MonoBehaviour
             if (menuActive == null)
             {
                 statePause();
+                mapStuff.SetActive(true);
                 menuActive = map;
                 menuActive.SetActive(true);
             }
             else if (menuActive == map)
             {
-
+                mapStuff.SetActive(false);
                 stateUnpause();
             }
         }
@@ -251,7 +255,6 @@ public class gameManager : MonoBehaviour
 
             marker.image.rectTransform.anchoredPosition = pos;
         }
-        Debug.Log($"Markers: {objMarkers.Count}, Active: {objMarkers.FindAll(m => m != null && m.isActive).Count}");
     }
 
     public void addObjMarker(ObjMarker marker)

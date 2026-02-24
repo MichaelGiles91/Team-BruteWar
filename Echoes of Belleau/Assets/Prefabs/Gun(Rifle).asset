@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b518873e1e4a19488640a2516ea53df, type: 3}
   m_Name: Gun(Rifle)
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
-  gunModel: {fileID: 1173155406573634, guid: b0d20c7f91335cb42998d74bcbeda882, type: 3}
+  gunModel: {fileID: 9013223114664411401, guid: 52aede99e1802bc4189ba411d3695c66, type: 3}
   overrideController: {fileID: 22100000, guid: 105c04c56d6fc94499937cd8e6d25007, type: 2}
   bulletPrefab: {fileID: 2530107586607571168, guid: 4cd10fcc6467f2946b7cd336230df179, type: 3}
   shootDamage: 1

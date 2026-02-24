@@ -2512,9 +2512,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8994491910353994925}
   - component: {fileID: 6097986526888204363}
-  - component: {fileID: 7360891992704149249}
+  - component: {fileID: 7378915965934929096}
   - component: {fileID: 5792054026421223540}
   - component: {fileID: 1869593869715654860}
+  - component: {fileID: 318728969390558331}
   m_Layer: 3
   m_Name: Player wFpsArms
   m_TagString: Player
@@ -2567,6 +2568,8 @@ MonoBehaviour:
   shootDist: 0
   shootRate: 0.5
   ammoCount: 35
+  medkitCount: 0
+  medkitHealAmount: 25
   stamina: 100
   staminaDrainRate: 10
   staminaRegenRate: 20
@@ -2578,7 +2581,7 @@ MonoBehaviour:
   rigBuilder: {fileID: 9121955426812216187}
   aud: {fileID: 1869593869715654860}
   animator: {fileID: 8199963273603075290}
---- !u!114 &7360891992704149249
+--- !u!114 &7378915965934929096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2587,13 +2590,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8263746862360927993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e34f994826aefc47a568516e2a506dc, type: 3}
+  m_Script: {fileID: 11500000, guid: eb3447f4b938cf246b7637a3571878cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   interactDistance: 3
   interactLayer:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 512
   playerCamera: {fileID: 6016543296467833976}
   interactPrompt: {fileID: 0}
 --- !u!143 &5792054026421223540
@@ -2718,6 +2721,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &318728969390558331
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263746862360927993}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8319991581204790952
 GameObject:
   m_ObjectHideFlags: 0
