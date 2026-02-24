@@ -84,6 +84,12 @@ public class gameManager : MonoBehaviour
         foreach (var m in markers)
             RegisterObjectiveMarker(m);
 
+        if (objMarkers.Count > 0)
+        {
+            currentObjectiveIndex = Mathf.Clamp(currentObjectiveIndex, 0, objMarkers.Count - 1);
+            objMarkers[currentObjectiveIndex].SetActive(true);
+        }
+
         RefreshMapObjective();
     }
 
@@ -236,6 +242,7 @@ public class gameManager : MonoBehaviour
 
             marker.image.rectTransform.anchoredPosition = pos;
         }
+        Debug.Log($"Markers: {objMarkers.Count}, Active: {objMarkers.FindAll(m => m != null && m.isActive).Count}");
     }
 
     public void addObjMarker (ObjMarker marker)
@@ -270,7 +277,10 @@ public class gameManager : MonoBehaviour
 
         objMarkers.Sort((a, b) => a.objectiveOrder.CompareTo(b.objectiveOrder));
 
-        marker.SetActive(false);
+        for (int i = 0; i < objMarkers.Count; i++)
+            objMarkers[i].SetActive(i == currentObjectiveIndex);
+
+        RefreshMapObjective();
 
         if (autoActivateFirstMarker && !hasActivatedFirstMarker && objMarkers.Count > 0)
         {
@@ -293,7 +303,6 @@ public class gameManager : MonoBehaviour
 
     public void CompleteCurrentObjectiveAndAdvance()
     {
-
         if (objMarkers.Count > 0 &&
             currentObjectiveIndex >= 0 &&
             currentObjectiveIndex < objMarkers.Count)
@@ -307,10 +316,8 @@ public class gameManager : MonoBehaviour
         {
             objMarkers[currentObjectiveIndex].SetActive(true);
         }
-        else
-        {
-            RefreshMapObjective();
-        }
+
+        RefreshMapObjective();
     }
 
     public void updateObjectiveText(string text, string headerText)
