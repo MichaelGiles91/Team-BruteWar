@@ -28,10 +28,6 @@ public class DefenseManager : MonoBehaviour
     [Header("--- Spawn Points ---")]
     [SerializeField] Transform[] spawnPoints;
 
-    [Header("--- UI ---")]
-    [SerializeField] TMP_Text waveText;
-    [SerializeField] GameObject defenseNotification;
-
     bool defenseActive;
     bool defenseComplete;
     int currentWave;
@@ -54,8 +50,7 @@ public class DefenseManager : MonoBehaviour
 
     void Start()
     {
-        if (waveText != null)
-            waveText.text = "";
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -72,9 +67,6 @@ public class DefenseManager : MonoBehaviour
         currentWave = 0;
 
         StartCoroutine(RunWaves());
-
-        if (defenseNotification != null)
-            StartCoroutine(ShowNotification());
     }
 
     IEnumerator RunWaves()
@@ -85,8 +77,7 @@ public class DefenseManager : MonoBehaviour
         {
             currentWave = i + 1;
 
-            if (waveText != null)
-                waveText.text = "Wave " + currentWave + " / " + waves.Length;
+            gameManager.instance.updateObjectiveText($"Wave {currentWave} / {waves.Length}", "Enemy Reinforcements!");
 
             yield return StartCoroutine(SpawnWave(waves[i]));
 
@@ -101,8 +92,7 @@ public class DefenseManager : MonoBehaviour
 
             if (i < waves.Length - 1)
             {
-                if (waveText != null)
-                    waveText.text = "Next Wave Incoming...";
+                gameManager.instance.updateObjectiveText("", "Next Wave Incoming");
 
                 yield return new WaitForSeconds(timeBetweenWaves);
             }
@@ -177,18 +167,8 @@ public class DefenseManager : MonoBehaviour
         defenseActive = false;
         defenseComplete = true;
 
-        if (waveText != null)
-            waveText.text = "Defense Complete!";
-
         if (gameManager.instance != null)
             gameManager.instance.youWin();
-    }
-
-    IEnumerator ShowNotification()
-    {
-        defenseNotification.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        defenseNotification.SetActive(false);
     }
 
     void OnDestroy()
