@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4300752543132280361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4992549215936516802}
+  - component: {fileID: 3052994637241360830}
+  - component: {fileID: 8682182992575420833}
+  m_Layer: 0
+  m_Name: DefenseZoneObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4992549215936516802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300752543132280361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3639591616498101209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3052994637241360830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300752543132280361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa806c6d9d0d914f8abf27b0dbc5432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefenseObjectiveZone
+  headerText: 
+  objectiveText: 
+  nextObjectiveHeader: 
+  nextObjectiveText: 
+  nextObjectiveDelay: 1
+--- !u!65 &8682182992575420833
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300752543132280361}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 100, y: 20, z: 50}
+  m_Center: {x: -35, y: 8, z: 0}
+--- !u!1 &4480024973228731564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3639591616498101209}
+  - component: {fileID: 7773151754008822157}
+  m_Layer: 0
+  m_Name: Defense Zone
+  m_TagString: Defense Manager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3639591616498101209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4480024973228731564}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 684.4677, y: 1.74237, z: 690.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4992549215936516802}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7773151754008822157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4480024973228731564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517c52f84533b5545a6d09c585abb8ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefenseManager
+  defenseTime: 300
+  objectiveObject: {fileID: 0}
+  waves:
+  - waveName: 
+    baseEnemyCount: 3
+    mediumEnemyCount: 1
+    bossEnemyCount: 1
+    timeBetweenSpawns: 0.5
+  - waveName: 
+    baseEnemyCount: 3
+    mediumEnemyCount: 4
+    bossEnemyCount: 2
+    timeBetweenSpawns: 0.5
+  - waveName: 
+    baseEnemyCount: 4
+    mediumEnemyCount: 4
+    bossEnemyCount: 2
+    timeBetweenSpawns: 0.5
+  timeBetweenWaves: 5
+  spawnRange: 10
+  enemyPrefabBase: {fileID: 5250135555691015416, guid: 6c0b7b5f595d2f644a0381ea599f8dca, type: 3}
+  enemyPrefabMedium: {fileID: 2017871361233746970, guid: 1237d1f64570abd4989aaf08a1d848af, type: 3}
+  enemyPrefabBoss: {fileID: 5250135555691015416, guid: 05810e9879891e545ac53101f8f6eea0, type: 3}
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  waveText: {fileID: 0}
+  timerText: {fileID: 0}
+  DefenseNotification: {fileID: 0}

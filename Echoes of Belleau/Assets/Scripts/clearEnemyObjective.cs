@@ -63,8 +63,8 @@ public class AreaObjective : MonoBehaviour
             gameManager.instance.SetActiveObjectiveZone(box);
         }
 
-        TrackAllEnemiesInside();
 
+        TrackAllEnemiesInside();
         UpdateObjectiveUI();
 
         if (trackedEnemies.Count == 0)
