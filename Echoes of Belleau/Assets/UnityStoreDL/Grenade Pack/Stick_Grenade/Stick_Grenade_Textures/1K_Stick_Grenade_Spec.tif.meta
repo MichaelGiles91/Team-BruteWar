@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: d4d0cbaec290da242ae386d642b53a2d
+AssetOrigin:
+  serializedVersion: 1
+  productId: 1847
+  packageName: Grenade Explosive Pack
+  packageVersion: 1.1
+  assetPath: Assets/Grenade Pack/Stick_Grenade/Stick_Grenade_Textures/1K_Stick_Grenade_Spec.tif
+  uploadId: 25478
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -115,10 +122,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 1847
-  packageName: Grenade Explosive Pack
-  packageVersion: 1.1
-  assetPath: Assets/Grenade Pack/Stick_Grenade/Stick_Grenade_Textures/1K_Stick_Grenade_Spec.tif
-  uploadId: 25478

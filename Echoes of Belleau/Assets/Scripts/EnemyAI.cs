@@ -125,7 +125,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     void roam()
     {
         roamTimer = 0;
-        agent.stoppingDistance = 0;
+        agent.stoppingDistance = 2;
 
         Vector3 ranPos = Random.insideUnitSphere * roamDist;
         ranPos += startingPos;
@@ -159,7 +159,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             }
         }
 
-        agent.stoppingDistance = 0;
+        agent.stoppingDistance = 2;
         return false;
     }
 
@@ -182,7 +182,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInTrigger = false;
-            agent.stoppingDistance = 0;
+            agent.stoppingDistance = 2;
         }
     }
 
