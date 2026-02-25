@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     int speedOrig;
     bool sprintDisable = false;
     bool isShaking = false;
+    bool isSprinting;
     RectTransform stamShakeRect;
 
     int gunListPos;
@@ -63,6 +64,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     Transform activeMuzzle;
 
     public Animator animator;
+    ParticleSystem activeMuzzleFlash;
+    Light muzzleLight;
+    Coroutine muzzleLightRoutine;
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -124,7 +128,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         updateAnimations();
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && shootTimer >= shootRate && !isSprinting)
             shoot();
 
     }
@@ -174,11 +178,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void sprint()
     {
+        isSprinting = false;
 
         if (Input.GetButton("Sprint"))
         {
             if (!sprintDisable && stamina > 0f)
             {
+                isSprinting = true;
                 stamina -= staminaDrainRate * Time.deltaTime;
                 speed = speedOrig * sprintMod;
             }
@@ -205,6 +211,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         if (stamina <= 0f)
         {
+            isSprinting = false;
             sprintDisable = true;
             stamina = 0f;
         }
@@ -226,6 +233,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         animator.SetTrigger("Fire");
 
+        if (activeMuzzleFlash != null)
+        {
+            activeMuzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            activeMuzzleFlash.Play(true);
+            if (muzzleLight != null)
+            {
+                if (muzzleLightRoutine != null)
+                    StopCoroutine(muzzleLightRoutine);
+
+                muzzleLightRoutine = StartCoroutine(FlashMuzzleLight());
+            }
+        }
+
         if (gunList[gunListPos].shootSound != null && gunList[gunListPos].shootSound.Length > 0)
         {
             AudioClip clip = gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)];
@@ -235,7 +255,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         RaycastHit hit;
         Vector3 targetPoint;
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer, QueryTriggerInteraction.Ignore))
         {
             targetPoint = hit.point;
 
@@ -406,6 +426,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         currentGunInstance = Instantiate(gunList[gunListPos].gunModel);
 
+        foreach (Collider col in currentGunInstance.GetComponentsInChildren<Collider>())
+        {
+            col.enabled = false;
+        }
+
         int fpsLayer = LayerMask.NameToLayer("FPSArms");
         if (fpsLayer >= 0)
             SetLayerRecursively(currentGunInstance, fpsLayer);
@@ -442,6 +467,26 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         else
         {
             activeMuzzle = muzzle;
+        }
+
+        activeMuzzleFlash = null;
+
+        ParticleSystem flashPrefab = gunList[gunListPos].muzzleFlash;
+        if (flashPrefab != null && activeMuzzle != null)
+        {
+            activeMuzzleFlash = Instantiate(flashPrefab, activeMuzzle);
+            activeMuzzleFlash.transform.localPosition = Vector3.zero;
+            activeMuzzleFlash.transform.localRotation = Quaternion.identity;
+            activeMuzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+            muzzleLight = null;
+
+            if (activeMuzzleFlash != null)
+            {
+                muzzleLight = activeMuzzleFlash.GetComponentInChildren<Light>(true);
+                if (muzzleLight != null)
+                    muzzleLight.enabled = false;
+            }
         }
 
         if (leftHandIKBinder != null)
@@ -517,5 +562,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         gameManager.instance.updateMedkitAmount(medkitCount);
         UpdatePlayerUI();
+    }
+
+    IEnumerator FlashMuzzleLight()
+    {
+        muzzleLight.enabled = true;
+        muzzleLight.intensity = Random.Range(5f, 8f);
+
+        yield return new WaitForSeconds(0.05f);
+
+        muzzleLight.enabled = false;
     }
 }

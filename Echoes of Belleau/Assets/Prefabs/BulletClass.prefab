@@ -51,8 +51,8 @@ MonoBehaviour:
   rd: {fileID: 1043577880710073630}
   damageAmount: 10
   damageRate: 1
-  speed: 50
-  destroyTime: 5
+  speed: 150
+  destroyTime: 3
   hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
 --- !u!96 &2917113606003614327
 TrailRenderer:
@@ -103,7 +103,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Time: 0.06
+  m_Time: 0.001
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -160,7 +160,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.2
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
