@@ -22,13 +22,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] int shootDist;
     [SerializeField] float shootRate;
     [SerializeField] int ammoCount;
+    [SerializeField] int ammoMax;
+    int ammoCountOrig;
+
     [SerializeField] int medkitCount;
     [SerializeField] int medkitHealAmount = 25;
-    int ammoCountOrig;
     int medkitCountOrig;
     public int AmmoCount => ammoCount;
     public int MedkitCount => medkitCount;
 
+
+    
     [Header("---Stamina Stats---")]
     [SerializeField] float stamina;
     [SerializeField] float staminaDrainRate;
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     int speedOrig;
     bool sprintDisable = false;
     bool isShaking = false;
+    RectTransform stamShakeRect;
 
     int gunListPos;
     float shootTimer;
@@ -71,9 +76,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         StamBarOrigPos = gameManager.instance.playerStaminaBar.rectTransform.anchoredPosition;
         speedOrig = speed;
         ammoCountOrig = ammoCount;
-        gameManager.instance.updateAmmoAmount(ammoCount);
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
         medkitCountOrig = medkitCount;
         gameManager.instance.updateMedkitAmount(medkitCount);
+        
+        //stamina bar setup
+        RectTransform fillRect = gameManager.instance.playerStaminaBar.rectTransform;
+        stamShakeRect = fillRect.parent as RectTransform;
+        if (stamShakeRect == null) stamShakeRect = fillRect;
+        StamBarOrigPos = stamShakeRect.localPosition;
 
         UpdatePlayerUI();
     }
@@ -156,7 +167,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             }
             else if (stamina <= staminaJumpDrain)
             {
-                StartCoroutine(shakeStaminaBar());
+                TryShakeStaminaBar();
             }
         }
     }
@@ -175,11 +186,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             {
                 speed = speedOrig;
                 if (stamina < staminaOrig)
+                {
                     stamina += staminaRegenRate * Time.deltaTime;
-                if (!isShaking)
-                    StartCoroutine(shakeStaminaBar());
-
-
+                    TryShakeStaminaBar();
+                }
             }
         }
         else
@@ -198,19 +208,21 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             sprintDisable = true;
             stamina = 0f;
         }
-        if (sprintDisable && !isShaking)
+        if (sprintDisable)
         {
-            StartCoroutine(shakeStaminaBar());
+            TryShakeStaminaBar();
         }
         gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
     }
 
     void shoot()
     {
+        if (ammoCount <= 0) return;
 
         shootTimer = 0f;
         ammoCount--;
-        gameManager.instance.updateAmmoAmount(ammoCount);
+        SaveAmmoToGunStats();
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
 
         animator.SetTrigger("Fire");
 
@@ -264,11 +276,23 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void reload()
     {
-        if (Input.GetButtonDown("Reload") && ammoCount < ammoCountOrig)
-        {
-            ammoCount = ammoCountOrig;
-            gameManager.instance.updateAmmoAmount(ammoCount);
-        }
+        if (!Input.GetButtonDown("Reload")) return;
+
+        int magSize = ammoCountOrig;
+        if (ammoCount >= magSize) return;
+        if (ammoMax <= 0) return;
+
+        int need = magSize - ammoCount;
+        int load = Mathf.Min(need, ammoMax);
+
+        ammoCount += load;
+        ammoMax -= load;
+
+        SaveAmmoToGunStats();
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
+
+        //add feedback for trying to reload with no reserve ammo -Austin
+        //add feedback that changes the counter number color for low ammo -Austin
     }
 
     IEnumerator flashScreen()
@@ -296,19 +320,32 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         jumpCount = 0;
     }
 
+    void TryShakeStaminaBar()
+    {
+        if (!isShaking)
+            StartCoroutine(shakeStaminaBar());
+    }
+
     IEnumerator shakeStaminaBar()
     {
+        isShaking = true;
+
         float elapsed = 0f;
         while (elapsed < shakeDuration)
         {
             float x = Random.Range(-1f, 1f) * shakeAmount;
             float y = Random.Range(-1f, 1f) * shakeAmount;
-            gameManager.instance.playerStaminaBar.rectTransform.anchoredPosition = new Vector3(StamBarOrigPos.x + x, StamBarOrigPos.y + y, StamBarOrigPos.z);
-            elapsed += Time.deltaTime;
+
+            stamShakeRect.localPosition = StamBarOrigPos + new Vector3(x, y, 0f);
+
+            elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
-        gameManager.instance.playerStaminaBar.rectTransform.anchoredPosition = StamBarOrigPos;
+
+        stamShakeRect.localPosition = StamBarOrigPos;
+        isShaking = false;
     }
+
     public void ShowGun(bool state)
     {
         if (currentGunInstance != null)
@@ -323,9 +360,34 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     public void getGunStats(gunStats gun)
     {
-        gunList.Add(gun);
+        gunStats instance = Instantiate(gun); // clone at runtime
+        gunList.Add(instance);
+
         gunListPos = gunList.Count - 1;
         changeGun();
+    }
+
+    void SaveAmmoToGunStats()
+    {
+        if (gunList == null || gunList.Count == 0) return;
+        gunList[gunListPos].ammoCur = ammoCount;
+        gunList[gunListPos].ammoMax = ammoMax;
+    }
+
+    public void PickedUpAmmo()
+    {
+        if (gunList == null || gunList.Count == 0) return;
+
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            if (gunList[i] == null) continue;
+
+            gunList[i].ammoMax += gunList[i].pickupSize;
+            gunList[i].ammoMax = Mathf.Min(gunList[i].ammoMax, gunList[i].ammoMaxOrig);
+        }
+
+        ammoMax = gunList[gunListPos].ammoMax;
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
     }
 
     void changeGun()
@@ -333,6 +395,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         shootDamage = gunList[gunListPos].shootDamage;
         shootDist = gunList[gunListPos].shootDist;
         shootRate = gunList[gunListPos].shootRate;
+        ammoCount = gunList[gunListPos].ammoCur;
+        ammoMax = gunList[gunListPos].ammoMax;
+        ammoCountOrig = gunList[gunListPos].magSize;
+
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
 
         if (currentGunInstance != null)
             Destroy(currentGunInstance);
@@ -404,11 +471,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
         {
+            SaveAmmoToGunStats();
             gunListPos++;
             changeGun();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
         {
+            SaveAmmoToGunStats();
             gunListPos--;
             changeGun();
         }

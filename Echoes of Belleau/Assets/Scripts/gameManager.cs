@@ -19,14 +19,18 @@ public class gameManager : MonoBehaviour
     [Header("---UI Elements---")]
     [SerializeField] GameObject checkpointNotification;
     [SerializeField] TMP_Text gameGoalCountText;
-    public PlayerController ammoAmount;
-    [SerializeField] TMP_Text ammoAmountText;
+    
     public Image playerHPBar;
     public GameObject playerDamageFlash;
     public Image playerStaminaBar;
     [SerializeField] GameObject map;
     [SerializeField] FullscreenMapUI mapUI;
     [SerializeField] GameObject mapStuff;
+    
+    [Header("---Weapon/Ammo---")]
+    public PlayerController ammoAmount;
+    [SerializeField] TMP_Text ammoAmountText;
+    [SerializeField] TMP_Text ammoMaxText;
     [Header("---Compass Items---")]
     [SerializeField] RawImage compassImage;
     [SerializeField] GameObject iconPrefab;
@@ -227,9 +231,10 @@ public class gameManager : MonoBehaviour
 
     }
 
-    public void updateAmmoAmount(int currentAmmo)
+    public void updateAmmoAmount(int currentAmmo, int maxAmmo)
     {
         ammoAmountText.text = currentAmmo.ToString();
+        ammoMaxText.text = maxAmmo.ToString();
     }
 
     public void updateMedkitAmount(int currentMedkit)
