@@ -3049,17 +3049,20 @@ MonoBehaviour:
   playerStaminaBar: {fileID: 415342297275001207}
   map: {fileID: 5661855648794740626}
   mapUI: {fileID: 5965898779019666184}
+  mapStuff: {fileID: 0}
   compassImage: {fileID: 3185585412359215742}
   iconPrefab: {fileID: 4342145697360508368, guid: 5444093ab0cb3864a9acf0d84fe4858a, type: 3}
   autoActivateFirstMarker: 1
   objEnemyCounter: {fileID: 7646401196147026322}
   objEnemyText: {fileID: 3432174927307625972}
+  medkitAmountText: {fileID: 360908607607524095}
   objective: {fileID: 4817360546320260813}
   objectiveHeaderText: {fileID: 7251090311069125150}
   objectiveText: {fileID: 3964508112628562967}
   objectiveHideDelay: 5
   player: {fileID: 0}
   playerScript: {fileID: 0}
+  medkitAmount: {fileID: 0}
 --- !u!1 &3553099138902594036
 GameObject:
   m_ObjectHideFlags: 0
