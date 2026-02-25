@@ -2569,6 +2569,7 @@ MonoBehaviour:
   shootDist: 0
   shootRate: 0.5
   ammoCount: 35
+  ammoMax: 0
   medkitCount: 0
   medkitHealAmount: 25
   stamina: 100

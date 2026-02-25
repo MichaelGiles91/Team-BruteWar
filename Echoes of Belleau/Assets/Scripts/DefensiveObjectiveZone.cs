@@ -25,6 +25,8 @@ public class DefenseObjectiveZone : MonoBehaviour
         box.isTrigger = true;
 
         defense = GetComponentInParent<DefenseManager>();
+        if (defense == null)
+            Debug.LogError("No DefenseManager found in parent.");
     }
 
     void OnTriggerEnter(Collider other)
@@ -32,21 +34,20 @@ public class DefenseObjectiveZone : MonoBehaviour
         if (active || complete) return;
         if (!other.CompareTag("Player")) return;
 
+        if (defense == null) return;
+
         active = true;
+
+        defense.OnDefenseStateChanged += RefreshUI;
 
         if (gameManager.instance != null)
         {
             gameManager.instance.updateObjectiveText(objectiveText, headerText);
             gameManager.instance.SetActiveObjectiveZone(box);
+
+            gameManager.instance.updateObjEnemyCounter(defense.AliveEnemyCount);
         }
 
-        if (defense == null)
-        {
-            Debug.LogError("[DefenseObjectiveZone] No DefenseManager found in parent.");
-            return;
-        }
-
-        defense.OnDefenseStateChanged += RefreshUI;
         RefreshUI();
     }
 
@@ -63,6 +64,7 @@ public class DefenseObjectiveZone : MonoBehaviour
 
     void CompleteObjective()
     {
+        if (complete) return;
         complete = true;
 
         if (defense != null)
@@ -73,6 +75,7 @@ public class DefenseObjectiveZone : MonoBehaviour
             gameManager.instance.updateObjectiveText("Defense cleared.", "Objective Complete!");
             gameManager.instance.CompleteCurrentObjectiveAndAdvance();
             gameManager.instance.SetActiveObjectiveZone(null);
+            gameManager.instance.updateObjEnemyCounter(0);
         }
 
         StartCoroutine(ShowNextObjectiveAfterDelay());
@@ -86,7 +89,7 @@ public class DefenseObjectiveZone : MonoBehaviour
             gameManager.instance.updateObjectiveText(nextObjectiveText, nextObjectiveHeader);
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         if (defense != null)
             defense.OnDefenseStateChanged -= RefreshUI;

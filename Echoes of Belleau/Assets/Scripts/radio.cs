@@ -14,7 +14,7 @@ public class Radio : MonoBehaviour
         if (Input.GetButtonDown("Interact") && playerInTrigger && !used)
         {
             used = true;
-            DefenseManager.instance.startDefense();
+            DefenseManager.instance.StartDefense();
             button.SetActive(false);
         }
     }

@@ -18,7 +18,6 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
     [Header("---UI Elements---")]
     [SerializeField] GameObject checkpointNotification;
-    [SerializeField] TMP_Text gameGoalCountText;
     
     public Image playerHPBar;
     public GameObject playerDamageFlash;
@@ -53,7 +52,6 @@ public class gameManager : MonoBehaviour
     float timeScaleOrig;
 
     int objEnemy;
-    int gameGoalCount;
 
     List<ObjMarker> objMarkers = new List<ObjMarker>();
 
@@ -160,18 +158,12 @@ public class gameManager : MonoBehaviour
 
     }
 
-    public void updateGameGoal(int amount)
+    public void youWin()
     {
-        gameGoalCount += amount;
-        gameGoalCountText.text = gameGoalCount.ToString("F0");
-
-        if (gameGoalCount <= 0)
-        {
             //you won!!
             statePause();
             menuActive = menuWin;
             menuActive.SetActive(true);
-        }
     }
 
     public void updateObjEnemyCounter(int amount)

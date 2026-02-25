@@ -40,10 +40,8 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
     void Start()
     {
         colorOrg = model.material.color;
-        //gamemanager.instance.updateGameGoal(1);
         stoppingDistOrig = agent.stoppingDistance;
         startingPos = transform.position;
-        gameManager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame
@@ -160,7 +158,6 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            gameManager.instance.updateGameGoal(-1);
             Die();
         }
         else
