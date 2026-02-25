@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f2d6424db5900244bb2d27c6a7955fcb
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 316665
+  packageName: 'House Forge: Modular House Building Kit (Modular Houses, Medieval
+    Houses, House)'
+  packageVersion: 1.0
+  assetPath: Assets/HIVEMIND/HouseForge_01/HDRP (Default)/Art/Shaders/S_BlendMaterial.shadergraph
+  uploadId: 747663

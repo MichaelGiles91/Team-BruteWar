@@ -146,6 +146,21 @@ public class gameManager : MonoBehaviour
         }
     }
 
+        if (Input.GetButtonDown("Map"))
+        {
+            if (menuActive == null)
+            {
+                statePause();
+                menuActive = map;
+                menuActive.SetActive(true);
+            }
+            else if (menuActive == map)
+            {
+                stateUnpause();
+            }
+
+        }
+    }
     public void statePause()
     {
         isPaused = true;
@@ -224,6 +239,7 @@ public class gameManager : MonoBehaviour
 
         playerScript.RespawnReset();
     }
+
     IEnumerator showCheckpointNotification()
     {
         checkpointNotification.SetActive(true);

@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 4669117919886677326}
   - component: {fileID: 5484530387510908364}
   - component: {fileID: 7156461397556251000}
-  - component: {fileID: 6222328207897534162}
   m_Layer: 0
   m_Name: Player (Shoots Bullets)
   m_TagString: Player
@@ -93,7 +92,7 @@ MonoBehaviour:
   bullet: {fileID: 3459716498689475912, guid: eb9bb197c5d09b14391a430f6e673818, type: 3}
   shootPos: {fileID: 8961678447126138539}
   shootRate: 0.5
-  ammoCount: 35
+  ammoCount: 5
   stamina: 100
   staminaDrainRate: 10
   staminaRegenRate: 20
@@ -123,24 +122,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6222328207897534162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5413965320893086815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e34f994826aefc47a568516e2a506dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
-  interactDistance: 3
-  interactLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  playerCamera: {fileID: 5881681671229713859}
-  interactPrompt: {fileID: 0}
 --- !u!1 &5885983983603075827
 GameObject:
   m_ObjectHideFlags: 0

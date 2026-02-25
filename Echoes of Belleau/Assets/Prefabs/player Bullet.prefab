@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3459716498689475912}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -215.29752, y: -0.7055183, z: 468.1269}
+  m_LocalPosition: {x: -210.34898, y: 0.01, z: 468.1269}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::damage
   type: 0
   rd: {fileID: 624907673652314445}
-  damageAmount: 10
+  damageAmount: 1
   damageRate: 0
   speed: 100
   destroyTime: 3
@@ -124,7 +124,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Time: 20
+  m_Time: 5
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -133,8 +133,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.014990538
+        time: 0.015874598
+        value: 0.054999083
         inSlope: 0
         outSlope: 0
         tangentMode: 0
