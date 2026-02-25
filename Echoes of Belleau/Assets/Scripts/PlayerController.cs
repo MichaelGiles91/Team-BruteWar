@@ -354,6 +354,22 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gunList[gunListPos].ammoMax = ammoMax;
     }
 
+    public void PickedUpAmmo()
+    {
+        if (gunList == null || gunList.Count == 0) return;
+
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            if (gunList[i] == null) continue;
+
+            gunList[i].ammoMax += gunList[i].pickupSize;
+            gunList[i].ammoMax = Mathf.Min(gunList[i].ammoMax, gunList[i].ammoMaxOrig);
+        }
+
+        ammoMax = gunList[gunListPos].ammoMax;
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
+    }
+
     void changeGun()
     {
         shootDamage = gunList[gunListPos].shootDamage;

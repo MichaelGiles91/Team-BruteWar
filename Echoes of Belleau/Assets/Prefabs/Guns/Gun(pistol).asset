@@ -17,10 +17,12 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2530107586607571168, guid: 4cd10fcc6467f2946b7cd336230df179, type: 3}
   shootDamage: 1
   shootDist: 15
-  shootRate: 1
-  magSize: 50
-  ammoCur: 50
+  shootRate: 0.5
+  magSize: 10
+  pickupSize: 5
+  ammoCur: 10
   ammoMax: 50
+  ammoMaxOrig: 50
   hitEffect: {fileID: 970440554703164915, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
   shootSound:
   - {fileID: 8300000, guid: 0638fc7e7cec1ba458894dff1928f9f8, type: 3}

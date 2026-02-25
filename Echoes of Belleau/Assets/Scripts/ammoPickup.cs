@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class ammoPickup : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (player == null) return;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        player.PickedUpAmmo();
+
+        Destroy(gameObject);
     }
 }
