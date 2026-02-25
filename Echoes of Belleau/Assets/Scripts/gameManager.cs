@@ -30,6 +30,7 @@ public class gameManager : MonoBehaviour
     public PlayerController ammoAmount;
     [SerializeField] TMP_Text ammoAmountText;
     [SerializeField] TMP_Text ammoMaxText;
+    [SerializeField] Image currentWeaponIcon;
     [Header("---Compass Items---")]
     [SerializeField] RawImage compassImage;
     [SerializeField] GameObject iconPrefab;
@@ -61,6 +62,8 @@ public class gameManager : MonoBehaviour
     bool hasActivatedFirstMarker = false;
 
     public PlayerController medkitAmount;
+
+    bool fogOrig;
 
     Vector3 checkpointPos;
     Quaternion checkpointRot;
@@ -125,6 +128,9 @@ public class gameManager : MonoBehaviour
         {
             if (menuActive == null)
             {
+                fogOrig = RenderSettings.fog;
+                RenderSettings.fog = false;
+
                 statePause();
                 mapStuff.SetActive(true);
                 menuActive = map;
@@ -132,11 +138,14 @@ public class gameManager : MonoBehaviour
             }
             else if (menuActive == map)
             {
+                RenderSettings.fog = fogOrig;
+
                 mapStuff.SetActive(false);
                 stateUnpause();
             }
         }
     }
+
     public void statePause()
     {
         isPaused = true;
@@ -374,5 +383,13 @@ public class gameManager : MonoBehaviour
     {
         if (mapUI != null)
             mapUI.SetActiveZone(zone);
+    }
+
+    public void UpdateWeaponIcon(Sprite icon)
+    {
+        if (currentWeaponIcon == null) return;
+
+        currentWeaponIcon.enabled = (icon != null);
+        currentWeaponIcon.sprite = icon;
     }
 }

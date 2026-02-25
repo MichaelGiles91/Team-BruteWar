@@ -401,7 +401,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366016208377793339}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 60596e95bcac32041b16e3efbb53073d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3050,6 +3050,7 @@ MonoBehaviour:
   ammoAmount: {fileID: 0}
   ammoAmountText: {fileID: 7136325743799877409}
   ammoMaxText: {fileID: 2855470245987797840}
+  currentWeaponIcon: {fileID: 5033581739836794268}
   compassImage: {fileID: 3185585412359215742}
   iconPrefab: {fileID: 4342145697360508368, guid: 5444093ab0cb3864a9acf0d84fe4858a, type: 3}
   autoActivateFirstMarker: 1

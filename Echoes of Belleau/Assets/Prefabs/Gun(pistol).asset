@@ -15,6 +15,7 @@ MonoBehaviour:
   gunModel: {fileID: 8378120403437938218, guid: 52ba878484862ed4ab02b843613de727, type: 3}
   overrideController: {fileID: 22100000, guid: bbeeec2ab8944ef49a6b6febdafa30e1, type: 2}
   bulletPrefab: {fileID: 2530107586607571168, guid: 4cd10fcc6467f2946b7cd336230df179, type: 3}
+  weaponIcon: {fileID: 21300000, guid: 0585dfa735a5c6e4b8af2b05c0739164, type: 3}
   shootDamage: 1
   shootDist: 15
   shootRate: 1

@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -66.478226, y: 1.26, z: 449.04562}
-  m_LocalScale: {x: 1.0279394, y: 1, z: 0.67784226}
+  m_LocalScale: {x: 1.6068, y: 1, z: 3.1924}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4296152140293472199}
@@ -47,15 +47,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaObjective
   headerText: Current Objective
-  objectiveText: Defeat General Kraig and his hencemen
+  objectiveText: Defeat all enemies on Wallace Street.
   nextObjectiveHeader: 
-  nextObjectiveText: 
+  nextObjectiveText: Head East to General Kriag's Tower!
   nextObjectiveDelay: 3.5
   nextObjective: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  defenseManager: {fileID: 0}
 --- !u!65 &7117128963317555668
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,7 +74,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 100, y: 20, z: 100}
+  m_Size: {x: 80, y: 20, z: 100}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6342300897600186100
 PrefabInstance:
@@ -91,19 +90,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2654001924610141633, guid: 649bcc51f591d7f44b7988d61f864f63, type: 3}
       propertyPath: objectiveOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7177223281158674739, guid: 649bcc51f591d7f44b7988d61f864f63, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.29
+      value: -19.71
       objectReference: {fileID: 0}
     - target: {fileID: 7177223281158674739, guid: 649bcc51f591d7f44b7988d61f864f63, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7177223281158674739, guid: 649bcc51f591d7f44b7988d61f864f63, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.69
+      value: 8.62
       objectReference: {fileID: 0}
     - target: {fileID: 7177223281158674739, guid: 649bcc51f591d7f44b7988d61f864f63, type: 3}
       propertyPath: m_LocalRotation.w

@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -227.97823, y: 1.26, z: 454.29562}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.9307, y: 1, z: 2.8867}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2611822071533573652}
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaObjective
   headerText: Current Objective
-  objectiveText: Defeat all enemies in this area.
+  objectiveText: Defeat all enemies on Mason Street
   nextObjectiveHeader: Next Objective
-  nextObjectiveText: Proceed East Down the Road
+  nextObjectiveText: Proceed East to Wallace Street
   nextObjectiveDelay: 3.5
   nextObjective: {fileID: 0}
   enemyLayer:
@@ -86,15 +86,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5688530489713755582, guid: c242e99481e12e7479e0cff6af30f556, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.57
+      value: 8.97
       objectReference: {fileID: 0}
     - target: {fileID: 5688530489713755582, guid: c242e99481e12e7479e0cff6af30f556, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5688530489713755582, guid: c242e99481e12e7479e0cff6af30f556, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.59
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 5688530489713755582, guid: c242e99481e12e7479e0cff6af30f556, type: 3}
       propertyPath: m_LocalRotation.w

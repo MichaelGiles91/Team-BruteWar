@@ -7,6 +7,7 @@ public class gunStats : ScriptableObject
     public GameObject gunModel;
     public AnimatorOverrideController overrideController;
     public GameObject bulletPrefab;
+    public Sprite weaponIcon;
 
     [Range(1,10)]public int shootDamage;
     [Range(15, 1000)] public int shootDist;

@@ -83,7 +83,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
         medkitCountOrig = medkitCount;
         gameManager.instance.updateMedkitAmount(medkitCount);
-        
+        gameManager.instance.UpdateWeaponIcon(null);
+
         //stamina bar setup
         RectTransform fillRect = gameManager.instance.playerStaminaBar.rectTransform;
         stamShakeRect = fillRect.parent as RectTransform;
@@ -498,6 +499,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         {
             animator.runtimeAnimatorController = gunList[gunListPos].overrideController;
         }
+
+        if (gameManager.instance != null)
+            gameManager.instance.UpdateWeaponIcon(gunList[gunListPos].weaponIcon);
 
         StartCoroutine(RebuildRigNextFrame());
     }
