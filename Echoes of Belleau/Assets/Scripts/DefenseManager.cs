@@ -45,6 +45,12 @@ public class DefenseManager : MonoBehaviour
     float timer;
     List<GameObject> activeEnemies = new List<GameObject>();
     public static DefenseManager instance;
+
+    public System.Action OnDefenseStateChanged;
+
+    bool finalWaveSpawned;
+    public bool FinalWaveSpawned => finalWaveSpawned;
+
     private void Awake()
     {
         instance = this;
@@ -111,34 +117,35 @@ public class DefenseManager : MonoBehaviour
 
     IEnumerator runWaves()
     {
-        for(int i = 0;i< waves.Length;i++)
+        finalWaveSpawned = false;
+
+        for (int i = 0; i < waves.Length; i++)
         {
             currentWave = i + 1;
 
-            if (waveText != null) 
-            {
+            if (waveText != null)
                 waveText.text = "Wave " + currentWave + " / " + waves.Length;
-            }
+
             yield return StartCoroutine(SpawnWaves(waves[i]));
 
-            //spawn all enemies for this wave
-            yield return new WaitUntil(() => activeEnemies.Count == 0);
-
-
-        //pause between waves unless this wave is dead
-            if(i < waves.Length - 1)
+            if (i == waves.Length - 1)
             {
-                if(waveText != null)
-                {
-                    waveText.text = "Next Wave Incoming...";
+                finalWaveSpawned = true;
+                OnDefenseStateChanged?.Invoke();
+            }
 
-                   
-                }
+            yield return new WaitUntil(() => AliveEnemyCount == 0);
+            OnDefenseStateChanged?.Invoke();
+
+            if (i < waves.Length - 1)
+            {
+                if (waveText != null)
+                    waveText.text = "Next Wave Incoming...";
                 yield return new WaitForSeconds(timeBetweenWaves);
             }
-           
         }
-       
+
+        DefenseWavesComplete();
     }
 
     IEnumerator SpawnWaves(wave wave)
@@ -172,6 +179,8 @@ public class DefenseManager : MonoBehaviour
         GameObject enemy = Instantiate(prefab, spawnPOS, point.rotation);
         activeEnemies.Add(enemy);
 
+        OnDefenseStateChanged?.Invoke();
+
     }
     void defenseWon()
     {
@@ -195,5 +204,25 @@ public class DefenseManager : MonoBehaviour
         DefenseNotification.SetActive(true);
         yield return new WaitForSeconds(3f);
         DefenseNotification.SetActive(false);
+    }
+    void DefenseWavesComplete()
+    {
+        defenseActive = false;
+        defenseComplete = true;
+
+        if (waveText != null)
+            waveText.text = "Defense Complete!";
+
+        if (gameManager.instance != null)
+            gameManager.instance.updateGameGoal(-99999);
+    }
+
+    public int AliveEnemyCount
+    {
+        get
+        {
+            activeEnemies.RemoveAll(e => e == null);
+            return activeEnemies.Count;
+        }
     }
 }
