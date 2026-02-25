@@ -18,8 +18,11 @@ MonoBehaviour:
   shootDamage: 1
   shootDist: 25
   shootRate: 0.5
+  magSize: 30
+  pickupSize: 10
   ammoCur: 50
   ammoMax: 50
+  ammoMaxOrig: 50
   hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
   shootSound:
   - {fileID: 8300000, guid: 0638fc7e7cec1ba458894dff1928f9f8, type: 3}
