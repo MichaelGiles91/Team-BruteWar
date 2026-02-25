@@ -17,7 +17,11 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+    [SerializeField] int gunRotateSpeed;
     [SerializeField] Transform shootPos;
+    [SerializeField] Transform gunPivot;
+
+    public event Action<EnemyAIwRoam> OnDied;
 
     Color colorOrg;
 
@@ -31,16 +35,14 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
     Vector3 playerDir;
     Vector3 startingPos;
 
-    public event Action<EnemyAIwRoam> OnDied;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         colorOrg = model.material.color;
+        //gamemanager.instance.updateGameGoal(1);
         stoppingDistOrig = agent.stoppingDistance;
         startingPos = transform.position;
-        gameManager.instance.updateGameGoal(1); // part of win condition
     }
 
     // Update is called once per frame
@@ -84,7 +86,6 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
         NavMeshHit hit;
         NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
         agent.SetDestination(hit.position);
-
     }
 
     bool canSeePlayer()
@@ -109,6 +110,8 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
                 {
                     shoot();
                 }
+
+                gunRotate();
 
                 agent.stoppingDistance = stoppingDistOrig;
                 return true;
@@ -145,7 +148,7 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        Instantiate(bullet, shootPos.position, gunPivot.rotation);
 
     }
 
@@ -156,19 +159,13 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            gameManager.instance.updateGameGoal(-1); // part of win condition
-            Die();
+            gameManager.instance.updateGameGoal(-1);
+            Destroy(gameObject);
         }
         else
         {
             StartCoroutine(flashRed());
         }
-    }
-
-    void Die()
-    {
-        OnDied?.Invoke(this);
-        Destroy(gameObject);
     }
 
     IEnumerator flashRed()
@@ -177,5 +174,17 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrg;
     }
+
+    void gunRotate()
+    {
+        Quaternion rot = Quaternion.LookRotation(playerDir);
+        gunPivot.rotation = Quaternion.Lerp(gunPivot.rotation, rot, Time.deltaTime * gunRotateSpeed);
+    }
+    void Die()
+    {
+        OnDied?.Invoke(this);
+        Destroy(gameObject);
+    }
+
 
 }
