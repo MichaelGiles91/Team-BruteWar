@@ -19,6 +19,8 @@ public class damage : MonoBehaviour
     [SerializeField] LayerMask explosionMask = ~0;
     [SerializeField] ParticleSystem explosionEffect;
 
+    [SerializeField] AudioClip aud;
+
     bool isDamaging;
     bool armed;
     bool fuseStarted;
@@ -84,8 +86,13 @@ public class damage : MonoBehaviour
 
     void Explode()
     {
+        AudioSource.PlayClipAtPoint(aud, transform.position);
+
         if (explosionEffect != null)
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        {
+           ParticleSystem explosion =  Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            Destroy(explosion.gameObject, explosion.main.duration);
+        }
 
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius, explosionMask);
 

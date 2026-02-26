@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1419688690609842699}
   - component: {fileID: 4007186481249543701}
   - component: {fileID: 5807471192243621755}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stick_Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,8 +57,9 @@ MonoBehaviour:
   explosionRadius: 4
   explosionMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 4294967295
   explosionEffect: {fileID: 19816518, guid: f015702b92b604b44aa41566f0fe3305, type: 3}
+  aud: {fileID: 8300000, guid: c401d00c96b512e488d2e3bf5d111509, type: 3}
 --- !u!54 &5807471192243621755
 Rigidbody:
   m_ObjectHideFlags: 0

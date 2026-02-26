@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1618919191140969448}
   - component: {fileID: 2049998496038170895}
   - component: {fileID: 8673468656973342530}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,8 +115,9 @@ MonoBehaviour:
   explosionRadius: 4
   explosionMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 4294967295
   explosionEffect: {fileID: 19800000, guid: 02dfeae7971cb0046b4f58ad02fd3062, type: 3}
+  aud: {fileID: 8300000, guid: d4aee29185389894b9cc0d8873904a49, type: 3}
 --- !u!54 &8673468656973342530
 Rigidbody:
   m_ObjectHideFlags: 0
