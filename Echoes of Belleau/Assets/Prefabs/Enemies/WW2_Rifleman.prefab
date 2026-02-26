@@ -4241,6 +4241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7256619079845566100}
   - component: {fileID: 3960819636545078017}
+  - component: {fileID: -8137770866993095583}
   - component: {fileID: 2186515244029232558}
   - component: {fileID: 3128037726546164378}
   - component: {fileID: 6938654410384265086}
@@ -4293,6 +4294,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-8137770866993095583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5854517721091553916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34259daa761c1254da2d9a9d340fae9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAIwRoam
+  model: {fileID: 6938654410384265086}
+  agent: {fileID: 3128037726546164378}
+  HP: 0
+  faceTargetSpeed: 0
+  FOV: 0
+  roamDist: 0
+  roamPauseTime: 0
+  bullet: {fileID: 6358852641723730384, guid: ecdb4da60df48b04eacf35b263dce792, type: 3}
+  shootRate: 0
+  gunRotateSpeed: 0
+  shootPos: {fileID: 0}
+  gunPivot: {fileID: 0}
+  grenadePrefab: {fileID: 0}
+  grenadeCooldown: 6
+  grenadeThrowForce: 12
+  grenadeUpForce: 4
+  grenadeThrowDistance: 10
+  grenadeThrowChance: 0.3
+  reactionTime: 0.25
+  accuracyDegrees: 2.5
+  movingAccuracyPenalty: 2
+  magSize: 6
+  reloadTime: 1.6
+  hurtRepositionDistance: 6
+  hurtRepositionChance: 0.6
+  investigateRadius: 2
 --- !u!114 &2186515244029232558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4329,6 +4368,10 @@ MonoBehaviour:
   hurtRepositionDistance: 6
   hurtRepositionChance: 0.6
   investigateRadius: 2
+  gunPivot: {fileID: 0}
+  spine: {fileID: 0}
+  player: {fileID: 0}
+  turnSpeed: 5
 --- !u!195 &3128037726546164378
 NavMeshAgent:
   m_ObjectHideFlags: 0
