@@ -41,6 +41,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] float hurtRepositionChance = 0.6f;
 
     [SerializeField] float investigateRadius = 2.0f;
+    [SerializeField] Transform gunPivot;
+
+    [SerializeField] Transform spine;
+    [SerializeField] Transform player;
+    [SerializeField] float turnSpeed = 5f;
+
 
     Vector3 lastKnownPlayerPos;
     bool hasLastKnown;
@@ -73,6 +79,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         startingPos = transform.position;
         currentAmmo = magSize;
         grenadeTimer = grenadeCooldown; 
+        player = gameManager.instance.player.transform;
     }
 
     // Update is called once per frame
@@ -108,11 +115,11 @@ public class EnemyAI : MonoBehaviour, IDamage
                 }
             }
 
-            else
+            /*else
             {
                 isReacting = false;
                 checkRoam(); // If the player is in the trigger but not visible, check if we should roam
-            }
+            }*/
         }
         else
         {
@@ -121,6 +128,18 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 
+   void LateUpdate()
+    {
+        if (!player) return;
+        
+        Vector3 direction = player.position - spine.position;
+        direction.y = 0f;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        spine.rotation = Quaternion.Slerp(
+            spine.rotation, targetRotation, Time.deltaTime * turnSpeed);
+    }
     void checkRoam()
     {
         if (agent.remainingDistance < 0.01f && roamTimer >= roamPauseTime)
