@@ -184,22 +184,29 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         bool currentlySprinting = false;
 
-        if (Input.GetButton("Sprint"))
-        {
-            if (!sprintDisable && stamina > 0f)
-            {
-                currentlySprinting = true;
-                stamina -= staminaDrainRate * Time.deltaTime;
-                speed = speedOrig * sprintMod;
-            }
-            else
-            {
-                speed = speedOrig;
-            }
+        bool sprintHeld = Input.GetButton("Sprint");
+
+        if (sprintHeld && !sprintDisable && stamina > 0f)
+        { 
+            currentlySprinting = true;
+            stamina -= staminaDrainRate * Time.deltaTime;
+            speed = speedOrig * sprintMod;
         }
         else
         {
+            currentlySprinting = false;
             speed = speedOrig;
+
+            if (stamina < staminaOrig)
+            {
+                stamina += staminaRegenRate * Time.deltaTime;
+            }
+
+            if (stamina >= staminaOrig)
+            {
+                stamina = staminaOrig;
+                sprintDisable = false;
+            }
         }
 
         if (wasSprinting && !currentlySprinting)
@@ -215,26 +222,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         if (stamina <= 0f)
         {
+            stamina = 0f;
             isSprinting = false;
             sprintDisable = true;
-            stamina = 0f;
-        }
-        if (sprintDisable)
-        {
             TryShakeStaminaBar();
         }
-        gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
 
-        if (stamina <= 0f)
-        {
-            isSprinting = false;
-            sprintDisable = true;
-            stamina = 0f;
-        }
         if (sprintDisable)
-        {
             TryShakeStaminaBar();
-        }
+
         gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
     }
 
