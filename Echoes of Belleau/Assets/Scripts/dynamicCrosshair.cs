@@ -4,14 +4,14 @@ public class dynamicCrosshair : MonoBehaviour
 {
     private RectTransform reticle;
 
-    [SerializeField] float restingSize = 100;
-    [SerializeField] float walkMaxSize = 300;
-    [SerializeField] float sprintMaxSize = 400;
-    [SerializeField] float speed = 1;
+    [SerializeField] float restingSize;
+    [SerializeField] float walkMaxSize;
+    [SerializeField] float sprintMaxSize;
+    [SerializeField] float speed;
 
     [Header("Jump Expansion")]
-    [SerializeField] float jumpSizeBoost = 300f;
-    [SerializeField] float jumpHoldTime = 0.35f;
+    [SerializeField] float jumpSizeBoost;
+    [SerializeField] float jumpHoldTime;
 
     private float currentSize;
     private float jumpBoostTimer;

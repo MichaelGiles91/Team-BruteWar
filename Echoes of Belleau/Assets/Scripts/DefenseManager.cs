@@ -15,14 +15,8 @@ public class wave
 
 public class DefenseManager : MonoBehaviour
 {
-
-
-    [Header("--- Defense Settings ---")]
-    [SerializeField] float defenseTime = 300f;  //Defense Duration
-    [SerializeField] GameObject objectiveObject;  // for radio prop later.
-
     [Header("--- Waves ---")]
-    [SerializeField] wave[] waves; // configure each wave in the inspector
+    [SerializeField] wave[] waves;
     [SerializeField] float timeBetweenWaves = 5f;
     [SerializeField] float spawnRange = 10f;
 
@@ -34,166 +28,158 @@ public class DefenseManager : MonoBehaviour
     [Header("--- Spawn Points ---")]
     [SerializeField] Transform[] spawnPoints;
 
-    [Header("--- UI --")]
-    [SerializeField] TMP_Text waveText;
-    [SerializeField] TMP_Text timerText;
-    [SerializeField] GameObject DefenseNotification;
-
     bool defenseActive;
     bool defenseComplete;
     int currentWave;
-    float timer;
-    List<GameObject> activeEnemies = new List<GameObject>();
+
+    HashSet<EnemyAI> trackedEnemies = new HashSet<EnemyAI>();
+
+    public System.Action OnDefenseStateChanged;
+
+    bool finalWaveSpawned;
+    public bool FinalWaveSpawned => finalWaveSpawned;
+
+    public int AliveEnemyCount => trackedEnemies.Count;
+
     public static DefenseManager instance;
-    private void Awake()
+
+    void Awake()
     {
         instance = this;
     }
 
-    // Update is called once per frame
-
     void Start()
-    {   
-        if(waveText != null)
-        {
-            waveText.text = "";
-        }
-        if (timerText != null)
-        {
-            timerText.text = "";
-        }
-    }
-    void Update()
     {
-        if (defenseActive)
-        {
-            timer -= Time.deltaTime;
-            activeEnemies.RemoveAll(e => e == null);
-
-            if(timerText != null)
-            {
-                int minutes = Mathf.FloorToInt(timer / 60f);
-                int seconds = Mathf.FloorToInt(timer % 60f);
-                timerText.text = string.Format("{0}:{1:00}", minutes, seconds);
-            }
-            if(timer <= 0)
-            {
-                defenseWon();
-            }
-        }
+        
     }
-    //when the player walks into the trigger collider, defense begins
+
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") && !defenseActive && !defenseComplete)
+        if (other.CompareTag("Player") && !defenseActive && !defenseComplete)
         {
-            startDefense();
+            StartDefense();
         }
     }
-    public void startDefense()
+
+    public void StartDefense()
     {
         defenseActive = true;
-        timer = defenseTime;
         currentWave = 0;
 
-        //Buffer so gameManager win screen doesnt trigget between waves
-        //enemies call updateGameGoal(+1) on spawn and UpdateGameGoal(-1) on death
-        // this keeps the count high so it never hits 0 until we want it to
-        gameManager.instance.updateGameGoal(9999);
-
-        StartCoroutine(runWaves());
-
-        if(DefenseNotification != null)
-        {
-            StartCoroutine(showNotification());
-        }
+        StartCoroutine(RunWaves());
     }
 
-    IEnumerator runWaves()
+    IEnumerator RunWaves()
     {
-        for(int i = 0;i< waves.Length;i++)
+        finalWaveSpawned = false;
+
+        for (int i = 0; i < waves.Length; i++)
         {
             currentWave = i + 1;
 
-            if (waveText != null) 
+            gameManager.instance.updateObjectiveText($"Wave {currentWave} / {waves.Length}", "Enemy Reinforcements!");
+
+            yield return StartCoroutine(SpawnWave(waves[i]));
+
+            if (i == waves.Length - 1)
             {
-                waveText.text = "Wave " + currentWave + " / " + waves.Length;
+                finalWaveSpawned = true;
+                OnDefenseStateChanged?.Invoke();
             }
-            yield return StartCoroutine(SpawnWaves(waves[i]));
 
-            //spawn all enemies for this wave
-            yield return new WaitUntil(() => activeEnemies.Count == 0);
+            yield return new WaitUntil(() => AliveEnemyCount == 0);
+            OnDefenseStateChanged?.Invoke();
 
-
-        //pause between waves unless this wave is dead
-            if(i < waves.Length - 1)
+            if (i < waves.Length - 1)
             {
-                if(waveText != null)
-                {
-                    waveText.text = "Next Wave Incoming...";
+                gameManager.instance.updateObjectiveText("", "Next Wave Incoming");
 
-                   
-                }
                 yield return new WaitForSeconds(timeBetweenWaves);
             }
-           
         }
-       
+
+        DefenseWavesComplete();
     }
 
-    IEnumerator SpawnWaves(wave wave)
+    IEnumerator SpawnWave(wave w)
     {
-        // spawn base enemies one at a time
-        for(int i = 0; i< wave.baseEnemyCount; i++)
+        for (int i = 0; i < w.baseEnemyCount; i++)
         {
-            spawnEnemy(enemyPrefabBase);
-            yield return new WaitForSeconds(wave.timeBetweenSpawns);
+            SpawnEnemy(enemyPrefabBase);
+            yield return new WaitForSeconds(w.timeBetweenSpawns);
         }
-        for (int i = 0; i < wave.mediumEnemyCount; i++)
+
+        for (int i = 0; i < w.mediumEnemyCount; i++)
         {
-            spawnEnemy(enemyPrefabMedium);
-            yield return new WaitForSeconds(wave.timeBetweenSpawns);
+            SpawnEnemy(enemyPrefabMedium);
+            yield return new WaitForSeconds(w.timeBetweenSpawns);
         }
-        for (int i = 0; i < wave.bossEnemyCount; i++)
+
+        for (int i = 0; i < w.bossEnemyCount; i++)
         {
-            spawnEnemy(enemyPrefabBoss);
-            yield return new WaitForSeconds(wave.timeBetweenSpawns);
+            SpawnEnemy(enemyPrefabBoss);
+            yield return new WaitForSeconds(w.timeBetweenSpawns);
         }
     }
-    void spawnEnemy(GameObject prefab)
+
+    void SpawnEnemy(GameObject prefab)
     {
-        //pick a random spawn point from the array
+        if (prefab == null || spawnPoints.Length == 0)
+        {
+            Debug.LogWarning("[DefenseManager] Missing prefab or spawn points.");
+            return;
+        }
+
         Transform point = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
+        Vector3 spawnPOS = point.position + new Vector3(
+            Random.Range(-spawnRange, spawnRange),
+            0f,
+            Random.Range(-spawnRange, spawnRange)
+        );
 
-        // add random offset to enemies so they dont stack on each other
-        Vector3 spawnPOS = point.position + new Vector3(Random.Range(-spawnRange, spawnRange), 0f, Random.Range(-spawnRange, spawnRange));
+        GameObject go = Instantiate(prefab, spawnPOS, point.rotation);
 
-        GameObject enemy = Instantiate(prefab, spawnPOS, point.rotation);
-        activeEnemies.Add(enemy);
 
+        EnemyAI enemy = go.GetComponentInParent<EnemyAI>();
+        if (enemy == null)
+            enemy = go.GetComponent<EnemyAI>();
+
+        if (enemy != null && trackedEnemies.Add(enemy))
+        {
+            enemy.OnDied += HandleEnemyDied;
+        } 
+
+        OnDefenseStateChanged?.Invoke();
     }
-    void defenseWon()
+
+    void HandleEnemyDied(EnemyAI deadEnemy)
+    {
+        if (deadEnemy == null) return;
+
+        deadEnemy.OnDied -= HandleEnemyDied;
+        trackedEnemies.Remove(deadEnemy);
+
+        OnDefenseStateChanged?.Invoke();
+    }
+
+    void DefenseWavesComplete()
     {
         defenseActive = false;
         defenseComplete = true;
 
-
-        StopAllCoroutines();
-
-        if (waveText != null)
-        {
-            waveText.text = "Defense Complete!";
-        }
-            // remove buffer 
-            // this triggeres the win screen through game manager
-            gameManager.instance.updateGameGoal(-99999);
-        
+        if (gameManager.instance != null)
+            gameManager.instance.youWin();
     }
-    IEnumerator showNotification()
+
+    void OnDestroy()
     {
-        DefenseNotification.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        DefenseNotification.SetActive(false);
+        foreach (var e in trackedEnemies)
+        {
+            if (e != null)
+                e.OnDied -= HandleEnemyDied;
+        }
+
+        trackedEnemies.Clear();
     }
 }

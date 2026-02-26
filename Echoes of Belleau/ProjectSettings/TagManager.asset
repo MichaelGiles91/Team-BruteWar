@@ -3,19 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Map Stuff
+  - Defense Manager
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - player
+  - Player
   - Water
   - UI
   - player bullet
   - enemy
   - enemy bullet
-  - 
-  - 
+  - Interactable
+  - Fps Arms
   - 
   - 
   - 

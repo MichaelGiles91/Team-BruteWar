@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e00f1786af65f774b88fe6b12c3dae30
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307855
+  packageName: WW2 German Infantry
+  packageVersion: 1.0
+  assetPath: Assets/WW2 German Infantry/Animation/Idle.anim
+  uploadId: 723494
