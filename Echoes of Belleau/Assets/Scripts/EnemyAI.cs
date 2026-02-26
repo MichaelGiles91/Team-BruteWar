@@ -1,6 +1,8 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
@@ -38,6 +40,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] float hurtRepositionDistance = 6f;
     [SerializeField] float hurtRepositionChance = 0.6f;
 
+    [SerializeField] float investigateRadius = 2.0f;
+
+    Vector3 lastKnownPlayerPos;
+    bool hasLastKnown;
+
     Color colorOrg;
 
     float shootTimer;
@@ -55,13 +62,13 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     Vector3 playerDir;
     Vector3 startingPos;
+    public event Action<EnemyAI> OnDied;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         colorOrg = model.material.color;
-        gameManager.instance.updateGameGoal(1);
         stoppingDistOrig = agent.stoppingDistance;
         startingPos = transform.position;
         currentAmmo = magSize;
@@ -125,7 +132,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     void roam()
     {
         roamTimer = 0;
-        agent.stoppingDistance = 2;
+        agent.stoppingDistance = 0;
 
         Vector3 ranPos = Random.insideUnitSphere * roamDist;
         ranPos += startingPos;
@@ -149,17 +156,21 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             if (angleToPlayer <= FOV && hit.collider.CompareTag("Player"))
             {
-                agent.SetDestination(gameManager.instance.player.transform.position);
+                lastKnownPlayerPos = gameManager.instance.player.transform.position;
+                hasLastKnown = true;
+
+
+                agent.stoppingDistance = stoppingDistOrig;
+                agent.SetDestination(lastKnownPlayerPos);
 
                 if (agent.remainingDistance < agent.stoppingDistance)
                     faceTarget();
 
-                agent.stoppingDistance = stoppingDistOrig;
                 return true;
             }
         }
 
-        agent.stoppingDistance = 2;
+        agent.stoppingDistance = 0;
         return false;
     }
 
@@ -182,8 +193,32 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInTrigger = false;
-            agent.stoppingDistance = 2;
+            agent.stoppingDistance = 0;
+
+            if (hasLastKnown)
+            {
+                Vector3 investigatePoint = GetOffsetPointOnNavmesh(lastKnownPlayerPos, investigateRadius);
+                agent.SetDestination(investigatePoint);
+            }
         }
+    }
+
+    Vector3 GetOffsetPointOnNavmesh(Vector3 center, float radius)
+    {
+
+        for (int i = 0; i < 6; i++)
+        {
+            Vector2 r = Random.insideUnitCircle * radius;
+            Vector3 candidate = center + new Vector3(r.x, 0f, r.y);
+
+            if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, radius, NavMesh.AllAreas))
+                return hit.position;
+        }
+
+        if (NavMesh.SamplePosition(center, out NavMeshHit centerHit, radius, NavMesh.AllAreas))
+            return centerHit.position;
+
+        return center;
     }
 
     void shoot()
@@ -294,7 +329,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
 
 
-    Vector2 ApplySpread(Vector3 direction, float degrees)
+    Vector3 ApplySpread(Vector3 direction, float degrees)
     {
         float radians = degrees * Mathf.Deg2Rad;
         Vector2 rand = Random.insideUnitCircle * Mathf.Tan(radians);
@@ -325,7 +360,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
         else
         {
@@ -354,4 +389,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         model.material.color = colorOrg;
     }
 
+    void Die()
+    {
+        OnDied?.Invoke(this);
+        Destroy(gameObject);
+    }
 }

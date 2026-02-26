@@ -4310,7 +4310,7 @@ MonoBehaviour:
   HP: 15
   faceTargetSpeed: 4
   FOV: 120
-  roamDist: 45
+  roamDist: 13
   roamPauseTime: 1
   grenadePrefab: {fileID: 1666315176239542691, guid: f0f03f0d8e0f94e4a94b8115fdebe1d8, type: 3}
   grenadeCooldown: 6
@@ -4318,7 +4318,7 @@ MonoBehaviour:
   grenadeUpForce: 4
   grenadeThrowDistance: 10
   grenadeThrowChance: 1
-  bullet: {fileID: 6571920716250768047, guid: 82422ad3b5065ee4d8ce47e3354f35bf, type: 3}
+  bullet: {fileID: 6358852641723730384, guid: ecdb4da60df48b04eacf35b263dce792, type: 3}
   shootRate: 1
   shootPos: {fileID: 5042425013271791865}
   reactionTime: 0.25
@@ -4328,6 +4328,7 @@ MonoBehaviour:
   reloadTime: 1.6
   hurtRepositionDistance: 6
   hurtRepositionChance: 0.6
+  investigateRadius: 2
 --- !u!195 &3128037726546164378
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4342,7 +4343,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1

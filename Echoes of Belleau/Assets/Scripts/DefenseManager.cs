@@ -32,7 +32,7 @@ public class DefenseManager : MonoBehaviour
     bool defenseComplete;
     int currentWave;
 
-    HashSet<EnemyAIwRoam> trackedEnemies = new HashSet<EnemyAIwRoam>();
+    HashSet<EnemyAI> trackedEnemies = new HashSet<EnemyAI>();
 
     public System.Action OnDefenseStateChanged;
 
@@ -140,9 +140,10 @@ public class DefenseManager : MonoBehaviour
 
         GameObject go = Instantiate(prefab, spawnPOS, point.rotation);
 
-        EnemyAIwRoam enemy = go.GetComponentInParent<EnemyAIwRoam>();
+
+        EnemyAI enemy = go.GetComponentInParent<EnemyAI>();
         if (enemy == null)
-            enemy = go.GetComponent<EnemyAIwRoam>();
+            enemy = go.GetComponent<EnemyAI>();
 
         if (enemy != null && trackedEnemies.Add(enemy))
         {
@@ -152,7 +153,7 @@ public class DefenseManager : MonoBehaviour
         OnDefenseStateChanged?.Invoke();
     }
 
-    void HandleEnemyDied(EnemyAIwRoam deadEnemy)
+    void HandleEnemyDied(EnemyAI deadEnemy)
     {
         if (deadEnemy == null) return;
 

@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2917113606003614327}
   - component: {fileID: 1043577880710073630}
   - component: {fileID: 2029170924413621800}
-  m_Layer: 6
-  m_Name: BulletClass
+  m_Layer: 8
+  m_Name: EnemyBulletClass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,9 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   type: 0
   rd: {fileID: 1043577880710073630}
-  damageAmount: 100
+  damageAmount: 10
   damageRate: 1
-  speed: 150
+  speed: 100
   destroyTime: 3
   hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
   fuseTime: 2.5

@@ -144,22 +144,7 @@ public class gameManager : MonoBehaviour
                 stateUnpause();
             }
         }
-    }
-
-        if (Input.GetButtonDown("Map"))
-        {
-            if (menuActive == null)
-            {
-                statePause();
-                menuActive = map;
-                menuActive.SetActive(true);
-            }
-            else if (menuActive == map)
-            {
-                stateUnpause();
-            }
-
-        }
+    
     }
     public void statePause()
     {

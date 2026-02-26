@@ -22,7 +22,7 @@ public class AreaObjective : MonoBehaviour
     bool active;
     bool complete;
 
-    HashSet<EnemyAIwRoam> trackedEnemies = new HashSet<EnemyAIwRoam>();
+    HashSet<EnemyAI> trackedEnemies = new HashSet<EnemyAI>();
 
     void Awake()
     {
@@ -45,7 +45,7 @@ public class AreaObjective : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        EnemyAIwRoam enemy = other.GetComponentInParent<EnemyAIwRoam>();
+        EnemyAI enemy = other.GetComponentInParent<EnemyAI>();
         if (enemy != null && trackedEnemies.Remove(enemy))
         {
             enemy.OnDied -= HandleEnemyDied;
@@ -107,10 +107,11 @@ public class AreaObjective : MonoBehaviour
 
     void TryTrackEnemy(Collider col)
     {
+        if (col.isTrigger) return;
 
         if ((enemyLayer.value & (1 << col.gameObject.layer)) == 0) return;
 
-        EnemyAIwRoam enemy = col.GetComponentInParent<EnemyAIwRoam>();
+        EnemyAI enemy = col.GetComponentInParent<EnemyAI>();
         if (enemy == null) return;
 
         if (trackedEnemies.Add(enemy))
@@ -120,7 +121,7 @@ public class AreaObjective : MonoBehaviour
         }
     }
 
-    void HandleEnemyDied(EnemyAIwRoam deadEnemy)
+    void HandleEnemyDied(EnemyAI deadEnemy)
     {
         deadEnemy.OnDied -= HandleEnemyDied;
         trackedEnemies.Remove(deadEnemy);

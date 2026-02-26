@@ -49,11 +49,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   type: 0
   rd: {fileID: 5120107308887036419}
-  damageAmount: 1
+  damageAmount: 5
   damageRate: 1
   speed: 50
   destroyTime: 5
   hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
+  fuseTime: 2.5
+  explosionRadius: 4
+  explosionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  explosionEffect: {fileID: 0}
 --- !u!96 &2841956943283092524
 TrailRenderer:
   serializedVersion: 4
