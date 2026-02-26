@@ -13,6 +13,7 @@ public class AreaObjective : MonoBehaviour
     [SerializeField] string nextObjectiveText;
     [SerializeField] float nextObjectiveDelay;
     [SerializeField] GameObject nextObjective;
+    [SerializeField] GameObject invisWall;
 
     [Header("Enemy Filtering")]
     [SerializeField] LayerMask enemyLayer;
@@ -22,7 +23,7 @@ public class AreaObjective : MonoBehaviour
     bool active;
     bool complete;
 
-    HashSet<EnemyAI> trackedEnemies = new HashSet<EnemyAI>();
+    HashSet<EnemyAIwRoam> trackedEnemies = new HashSet<EnemyAIwRoam>();
 
     void Awake()
     {
@@ -45,7 +46,7 @@ public class AreaObjective : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        EnemyAI enemy = other.GetComponentInParent<EnemyAI>();
+        EnemyAIwRoam enemy = other.GetComponentInParent<EnemyAIwRoam>();
         if (enemy != null && trackedEnemies.Remove(enemy))
         {
             enemy.OnDied -= HandleEnemyDied;
@@ -80,15 +81,16 @@ public class AreaObjective : MonoBehaviour
             gameManager.instance.updateObjectiveText("Area cleared.", "Objective Complete!");
             gameManager.instance.CompleteCurrentObjectiveAndAdvance();
             gameManager.instance.SetActiveObjectiveZone(null);
+            invisWall.SetActive(false);
         }
 
-            StartCoroutine(ShowNextObjectiveAfterDelay());
+        StartCoroutine(ShowNextObjectiveAfterDelay());
 
     }
 
     void UpdateObjectiveUI()
     {
-        
+
         if (gameManager.instance != null)
             gameManager.instance.updateObjEnemyCounter(trackedEnemies.Count);
 
@@ -111,7 +113,7 @@ public class AreaObjective : MonoBehaviour
 
         if ((enemyLayer.value & (1 << col.gameObject.layer)) == 0) return;
 
-        EnemyAI enemy = col.GetComponentInParent<EnemyAI>();
+        EnemyAIwRoam enemy = col.GetComponentInParent<EnemyAIwRoam>();
         if (enemy == null) return;
 
         if (trackedEnemies.Add(enemy))
@@ -121,7 +123,7 @@ public class AreaObjective : MonoBehaviour
         }
     }
 
-    void HandleEnemyDied(EnemyAI deadEnemy)
+    void HandleEnemyDied(EnemyAIwRoam deadEnemy)
     {
         deadEnemy.OnDied -= HandleEnemyDied;
         trackedEnemies.Remove(deadEnemy);

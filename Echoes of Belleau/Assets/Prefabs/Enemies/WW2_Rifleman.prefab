@@ -4307,17 +4307,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAIwRoam
   model: {fileID: 6938654410384265086}
   agent: {fileID: 3128037726546164378}
-  HP: 0
-  faceTargetSpeed: 0
-  FOV: 0
-  roamDist: 0
-  roamPauseTime: 0
+  HP: 15
+  faceTargetSpeed: 4
+  FOV: 120
+  roamDist: 15
+  roamPauseTime: 1
   bullet: {fileID: 6358852641723730384, guid: ecdb4da60df48b04eacf35b263dce792, type: 3}
-  shootRate: 0
-  gunRotateSpeed: 0
-  shootPos: {fileID: 0}
-  gunPivot: {fileID: 0}
-  grenadePrefab: {fileID: 0}
+  shootRate: 1
+  gunRotateSpeed: 10
+  shootPos: {fileID: 5042425013271791865}
+  gunPivot: {fileID: 1669129540749852791}
+  grenadePrefab: {fileID: 1666315176239542691, guid: f0f03f0d8e0f94e4a94b8115fdebe1d8, type: 3}
   grenadeCooldown: 6
   grenadeThrowForce: 12
   grenadeUpForce: 4

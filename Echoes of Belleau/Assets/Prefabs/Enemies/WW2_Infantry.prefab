@@ -4478,12 +4478,12 @@ MonoBehaviour:
   FOV: 120
   roamDist: 13
   roamPauseTime: 1
-  bullet: {fileID: 0}
-  shootRate: 0
-  gunRotateSpeed: 0
-  shootPos: {fileID: 0}
-  gunPivot: {fileID: 0}
-  grenadePrefab: {fileID: 0}
+  bullet: {fileID: 6358852641723730384, guid: ecdb4da60df48b04eacf35b263dce792, type: 3}
+  shootRate: 1
+  gunRotateSpeed: 10
+  shootPos: {fileID: 1400442564097764909}
+  gunPivot: {fileID: 6446091243725681927}
+  grenadePrefab: {fileID: 5185952119946069216, guid: b0bce9f9982871c46bfa728214024649, type: 3}
   grenadeCooldown: 6
   grenadeThrowForce: 12
   grenadeUpForce: 4

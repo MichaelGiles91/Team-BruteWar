@@ -56,12 +56,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     bool sprintDisable = false;
     bool isShaking = false;
     bool isSprinting;
+    bool wasSprinting;
     RectTransform stamShakeRect;
 
     int gunListPos;
     float shootTimer;
     GameObject currentGunInstance;
     Transform activeMuzzle;
+    bool canShoot = true;
+    Coroutine sprintShootDelayRoutine;
 
     public Animator animator;
     ParticleSystem activeMuzzleFlash;
@@ -179,36 +182,48 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void sprint()
     {
-        isSprinting = false;
+        bool currentlySprinting = false;
 
         if (Input.GetButton("Sprint"))
         {
             if (!sprintDisable && stamina > 0f)
             {
-                isSprinting = true;
+                currentlySprinting = true;
                 stamina -= staminaDrainRate * Time.deltaTime;
                 speed = speedOrig * sprintMod;
             }
             else
             {
                 speed = speedOrig;
-                if (stamina < staminaOrig)
-                {
-                    stamina += staminaRegenRate * Time.deltaTime;
-                    TryShakeStaminaBar();
-                }
             }
         }
         else
         {
             speed = speedOrig;
-
-            if (stamina < staminaOrig)
-                stamina += staminaRegenRate * Time.deltaTime;
-
-            if (stamina >= staminaOrig)
-                sprintDisable = false;
         }
+
+        if (wasSprinting && !currentlySprinting)
+        {
+            if (sprintShootDelayRoutine != null)
+                StopCoroutine(sprintShootDelayRoutine);
+
+            sprintShootDelayRoutine = StartCoroutine(SprintShootDelay());
+        }
+
+        wasSprinting = currentlySprinting;
+        isSprinting = currentlySprinting;
+
+        if (stamina <= 0f)
+        {
+            isSprinting = false;
+            sprintDisable = true;
+            stamina = 0f;
+        }
+        if (sprintDisable)
+        {
+            TryShakeStaminaBar();
+        }
+        gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
 
         if (stamina <= 0f)
         {
@@ -225,6 +240,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
+        if (!canShoot) return;
         if (ammoCount <= 0) return;
 
         shootTimer = 0f;
@@ -576,5 +592,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         yield return new WaitForSeconds(0.05f);
 
         muzzleLight.enabled = false;
+    }
+
+    IEnumerator SprintShootDelay()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(0.6f);
+        canShoot = true;
     }
 }

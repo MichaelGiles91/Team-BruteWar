@@ -5518,11 +5518,11 @@ MonoBehaviour:
   roamDist: 6
   roamPauseTime: 1
   bullet: {fileID: 6358852641723730384, guid: ecdb4da60df48b04eacf35b263dce792, type: 3}
-  shootRate: 0
-  gunRotateSpeed: 0
-  shootPos: {fileID: 0}
-  gunPivot: {fileID: 0}
-  grenadePrefab: {fileID: 0}
+  shootRate: 1
+  gunRotateSpeed: 10
+  shootPos: {fileID: 6766384844233555201}
+  gunPivot: {fileID: 425092716201857700}
+  grenadePrefab: {fileID: 958630158421029500, guid: c96768473cfd876488651988ea349dc3, type: 3}
   grenadeCooldown: 6
   grenadeThrowForce: 12
   grenadeUpForce: 4
