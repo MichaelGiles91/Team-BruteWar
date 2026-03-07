@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &205443187695317644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3667816904794918357}
+  m_Layer: 10
+  m_Name: hipPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3667816904794918357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205443187695317644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1923413059554943347}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &302731562998763777
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +669,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7086371429708819582}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2489833578611798753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7925279906074150726}
+  m_Layer: 10
+  m_Name: ADSHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7925279906074150726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2489833578611798753}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1923413059554943347}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2563180449013829384
 GameObject:
@@ -2151,6 +2213,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5842840014056060621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6933024587945227902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3943156293332904692}
+  m_Layer: 10
+  m_Name: ADSPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3943156293332904692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6933024587945227902}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1923413059554943347}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7214695800472567532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2306,7 +2399,10 @@ Transform:
   m_LocalPosition: {x: -0.022, y: 0.03, z: -0.003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7925279906074150726}
+  - {fileID: 3667816904794918357}
+  - {fileID: 3943156293332904692}
   m_Father: {fileID: 8122186003367029040}
   m_LocalEulerAnglesHint: {x: -79.981, y: -17.125, z: 117.483}
 --- !u!1 &7596667175087247708
@@ -2517,6 +2613,7 @@ GameObject:
   - component: {fileID: 5792054026421223540}
   - component: {fileID: 1869593869715654860}
   - component: {fileID: 318728969390558331}
+  - component: {fileID: 2581240038471916623}
   m_Layer: 3
   m_Name: Player wFpsArms
   m_TagString: Player
@@ -2578,7 +2675,7 @@ MonoBehaviour:
   staminaJumpDrain: 25
   shakeAmount: 0
   shakeDuration: 0
-  weaponGripTarget: {fileID: 1923413059554943347}
+  weaponGripTarget: {fileID: 7925279906074150726}
   leftHandIKBinder: {fileID: 8769305006064299264}
   rigBuilder: {fileID: 9121955426812216187}
   aud: {fileID: 1869593869715654860}
@@ -2744,6 +2841,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2581240038471916623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263746862360927993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89fa2b76f0eccf342b16cf0284c01813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ADS
+  weaponRoot: {fileID: 7925279906074150726}
+  hipPosition: {fileID: 0}
+  adsPosition: {fileID: 0}
+  playerCamera: {fileID: 6016543296467833976}
+  normalFov: 60
+  adsFOV: 40
+  isADS: 0
+  ADSspeed: 8
 --- !u!1 &8319991581204790952
 GameObject:
   m_ObjectHideFlags: 0
