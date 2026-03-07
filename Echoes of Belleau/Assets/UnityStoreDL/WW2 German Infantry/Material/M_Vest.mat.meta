@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0f7001dcce3c45c44b170addb65787fd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307855
+  packageName: WW2 German Infantry
+  packageVersion: 1.0
+  assetPath: Assets/WW2 German Infantry/Material/M_Vest.mat
+  uploadId: 723494

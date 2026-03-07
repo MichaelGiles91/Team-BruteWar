@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1a4077c9c7a86884ea562df132fd7e5d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307855
+  packageName: WW2 German Infantry
+  packageVersion: 1.0
+  assetPath: Assets/WW2 German Infantry/Material/M_Vest_Button.mat
+  uploadId: 723494

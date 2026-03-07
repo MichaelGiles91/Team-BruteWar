@@ -6,12 +6,13 @@ using UnityEngine;
 public class AreaObjective : MonoBehaviour
 {
     [Header("Objective UI")]
-    [SerializeField] string headerText = "Objective";
-    [TextArea][SerializeField] string objectiveText = "Defeat all enemies in this area.";
+    [SerializeField] string headerText;
+    [TextArea][SerializeField] string objectiveText;
     [Header("Next Objective UI")]
-    [SerializeField] string nextObjectiveHeader = "Next Objective";
-    [SerializeField] string nextObjectiveText = "Proceed to the church.";
-    [SerializeField] float nextObjectiveDelay = 2f;
+    [SerializeField] string nextObjectiveHeader;
+    [SerializeField] string nextObjectiveText;
+    [SerializeField] float nextObjectiveDelay;
+    [SerializeField] GameObject nextObjective;
 
     [Header("Enemy Filtering")]
     [SerializeField] LayerMask enemyLayer;
@@ -21,7 +22,7 @@ public class AreaObjective : MonoBehaviour
     bool active;
     bool complete;
 
-    HashSet<EnemyAIwRoam> trackedEnemies = new HashSet<EnemyAIwRoam>();
+    HashSet<EnemyAI> trackedEnemies = new HashSet<EnemyAI>();
 
     void Awake()
     {
@@ -44,7 +45,7 @@ public class AreaObjective : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        EnemyAIwRoam enemy = other.GetComponentInParent<EnemyAIwRoam>();
+        EnemyAI enemy = other.GetComponentInParent<EnemyAI>();
         if (enemy != null && trackedEnemies.Remove(enemy))
         {
             enemy.OnDied -= HandleEnemyDied;
@@ -57,10 +58,13 @@ public class AreaObjective : MonoBehaviour
         active = true;
 
         if (gameManager.instance != null)
+        {
             gameManager.instance.updateObjectiveText(objectiveText, headerText);
+            gameManager.instance.SetActiveObjectiveZone(box);
+        }
+
 
         TrackAllEnemiesInside();
-
         UpdateObjectiveUI();
 
         if (trackedEnemies.Count == 0)
@@ -72,9 +76,13 @@ public class AreaObjective : MonoBehaviour
         complete = true;
 
         if (gameManager.instance != null)
+        {
             gameManager.instance.updateObjectiveText("Area cleared.", "Objective Complete!");
+            gameManager.instance.CompleteCurrentObjectiveAndAdvance();
+            gameManager.instance.SetActiveObjectiveZone(null);
+        }
 
-        StartCoroutine(ShowNextObjectiveAfterDelay());
+            StartCoroutine(ShowNextObjectiveAfterDelay());
 
     }
 
@@ -99,10 +107,11 @@ public class AreaObjective : MonoBehaviour
 
     void TryTrackEnemy(Collider col)
     {
+        if (col.isTrigger) return;
 
         if ((enemyLayer.value & (1 << col.gameObject.layer)) == 0) return;
 
-        EnemyAIwRoam enemy = col.GetComponentInParent<EnemyAIwRoam>();
+        EnemyAI enemy = col.GetComponentInParent<EnemyAI>();
         if (enemy == null) return;
 
         if (trackedEnemies.Add(enemy))
@@ -112,7 +121,7 @@ public class AreaObjective : MonoBehaviour
         }
     }
 
-    void HandleEnemyDied(EnemyAIwRoam deadEnemy)
+    void HandleEnemyDied(EnemyAI deadEnemy)
     {
         deadEnemy.OnDied -= HandleEnemyDied;
         trackedEnemies.Remove(deadEnemy);

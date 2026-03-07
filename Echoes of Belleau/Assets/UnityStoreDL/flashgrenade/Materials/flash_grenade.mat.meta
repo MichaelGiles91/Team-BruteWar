@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 764f6a7ca0d025a4dbebe71cb654d91b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355982
+  packageName: Flash Grenade
+  packageVersion: 1.0
+  assetPath: Assets/flashgrenade/Materials/flash_grenade.mat
+  uploadId: 848320

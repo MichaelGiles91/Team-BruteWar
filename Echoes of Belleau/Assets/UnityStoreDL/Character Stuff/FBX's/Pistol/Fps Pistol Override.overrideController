@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Fps Pistol Override
+  m_Controller: {fileID: 9100000, guid: 2b89a43a2f83b2d4f90df74db09f9cbb, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 8142bb3caead9d5449d3af34f6829f3d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 11095fe85cbbaa247990632165a53a16, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fa126b99490e28f4da65350e09c1ac47, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6fa453323bcb4db46803a23b74a1152c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 60089792917ab724894e26c2fd7cf8e1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 97fc9dd9ff4622a46b4a1defa9314d6f, type: 2}

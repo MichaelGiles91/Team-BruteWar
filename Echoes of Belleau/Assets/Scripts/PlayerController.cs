@@ -15,36 +15,82 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
-    [SerializeField] int Stamina;
-    [SerializeField] GameObject bullet;
-    [SerializeField] Transform shootPos;
 
+    [Header("---Combat Stats---")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
     [SerializeField] float shootRate;
+    [SerializeField] int ammoCount;
+    [SerializeField] int ammoMax;
+    int ammoCountOrig;
 
-    [SerializeField] GameObject gunModel;
+    [SerializeField] int medkitCount;
+    [SerializeField] int medkitHealAmount = 25;
+    int medkitCountOrig;
+    public int AmmoCount => ammoCount;
+    public int MedkitCount => medkitCount;
+
+
+    
+    [Header("---Stamina Stats---")]
+    [SerializeField] float stamina;
+    [SerializeField] float staminaDrainRate;
+    [SerializeField] float staminaRegenRate;
+    [SerializeField] float staminaJumpDrain;
+
+    [Header("---Stamina Bar Shake---")]
+    [SerializeField] float shakeAmount;
+    [SerializeField] float shakeDuration;
+
+    [SerializeField] Transform weaponGripTarget;
+    [SerializeField] LeftHandIKBinder leftHandIKBinder;
+    [SerializeField] UnityEngine.Animations.Rigging.RigBuilder rigBuilder;
 
     [SerializeField] AudioSource aud;
     int jumpCount;
     int HPOrig;
-    int StaminaOrig;
+
+    float staminaOrig;
+    int speedOrig;
+    bool sprintDisable = false;
+    bool isShaking = false;
+    bool isSprinting;
+    RectTransform stamShakeRect;
 
     int gunListPos;
     float shootTimer;
     GameObject currentGunInstance;
     Transform activeMuzzle;
 
+    public Animator animator;
+    ParticleSystem activeMuzzleFlash;
+    Light muzzleLight;
+    Coroutine muzzleLightRoutine;
+
     Vector3 moveDir;
     Vector3 playerVel;
+    Vector3 StamBarOrigPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HPOrig = HP;
+        staminaOrig = stamina;
+        StamBarOrigPos = gameManager.instance.playerStaminaBar.rectTransform.anchoredPosition;
+        speedOrig = speed;
+        ammoCountOrig = ammoCount;
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
+        medkitCountOrig = medkitCount;
+        gameManager.instance.updateMedkitAmount(medkitCount);
+        gameManager.instance.UpdateWeaponIcon(null);
 
-        StaminaOrig = Stamina;
+        //stamina bar setup
+        RectTransform fillRect = gameManager.instance.playerStaminaBar.rectTransform;
+        stamShakeRect = fillRect.parent as RectTransform;
+        if (stamShakeRect == null) stamShakeRect = fillRect;
+        StamBarOrigPos = stamShakeRect.localPosition;
+
         UpdatePlayerUI();
     }
 
@@ -53,14 +99,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         movement();
         sprint();
+        gameManager.instance.updateCompass(transform.eulerAngles.y);
+        if (Input.GetButtonDown("UseMedkit"))
+        {
+            UseMedkit();
+        }
         selectGun();
     }
 
     void movement()
     {
         shootTimer += Time.deltaTime;
-
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
         if (controller.isGrounded)
         {
@@ -76,36 +125,129 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
+        reload();
+
+        updateAnimations();
+
+        if (Input.GetButton("Fire1") && shootTimer >= shootRate && !isSprinting)
             shoot();
+
+    }
+
+    void updateAnimations()
+    {
+        float vertical = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+
+        bool isWalkingFwd = vertical > 0.1f && speed <= speedOrig && controller.isGrounded;
+        bool isWalkingBck = vertical < -0.1f && speed <= speedOrig && controller.isGrounded;
+        bool isWalkingRight = horizontal > 0.1f && speed <= speedOrig && controller.isGrounded;
+        bool isWalkingLeft = horizontal < -0.1f && speed <= speedOrig && controller.isGrounded;
+
+        bool isRunningFwd = vertical > 0.1f && speed > speedOrig && controller.isGrounded;
+        bool isRunningBck = vertical < -0.1f && speed > speedOrig && controller.isGrounded;
+        bool isRunningRight = horizontal > 0.1f && speed > speedOrig && controller.isGrounded;
+        bool isRunningLeft = horizontal < -0.1f && speed > speedOrig && controller.isGrounded;
+
+        animator.SetBool("isWalkingFwd", isWalkingFwd);
+        animator.SetBool("isWalkingBck", isWalkingBck);
+        animator.SetBool("isWalkingLeft", isWalkingLeft);
+        animator.SetBool("isWalkingRight", isWalkingRight);
+
+        animator.SetBool("isRunningFwd", isRunningFwd);
+        animator.SetBool("isRunningBck", isRunningBck);
+        animator.SetBool("isRunningLeft", isRunningLeft);
+        animator.SetBool("isRunningRight", isRunningRight);
     }
 
     void jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump"))
         {
-            playerVel.y = jumpSpeed;
-            jumpCount++;
+            if (jumpCount < jumpMax && stamina > staminaJumpDrain)
+            {
+                stamina -= staminaJumpDrain;
+                playerVel.y = jumpSpeed;
+                jumpCount++;
+            }
+            else if (stamina <= staminaJumpDrain)
+            {
+                TryShakeStaminaBar();
+            }
         }
     }
 
     void sprint()
     {
-        if (Input.GetButtonDown("Sprint"))
+        isSprinting = false;
+
+        if (Input.GetButton("Sprint"))
         {
-            speed *= sprintMod;
+            if (!sprintDisable && stamina > 0f)
+            {
+                isSprinting = true;
+                stamina -= staminaDrainRate * Time.deltaTime;
+                speed = speedOrig * sprintMod;
+            }
+            else
+            {
+                speed = speedOrig;
+                if (stamina < staminaOrig)
+                {
+                    stamina += staminaRegenRate * Time.deltaTime;
+                    TryShakeStaminaBar();
+                }
+            }
         }
-        else if (Input.GetButtonUp("Sprint"))
+        else
         {
-            speed /= sprintMod;
+            speed = speedOrig;
+
+            if (stamina < staminaOrig)
+                stamina += staminaRegenRate * Time.deltaTime;
+
+            if (stamina >= staminaOrig)
+                sprintDisable = false;
         }
+
+        if (stamina <= 0f)
+        {
+            isSprinting = false;
+            sprintDisable = true;
+            stamina = 0f;
+        }
+        if (sprintDisable)
+        {
+            TryShakeStaminaBar();
+        }
+        gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
     }
 
     void shoot()
     {
-        shootTimer = 0;
+        if (ammoCount <= 0) return;
 
-        if (gunList.Count > 0 && gunList[gunListPos].shootSound.Length > 0)
+        shootTimer = 0f;
+        ammoCount--;
+        SaveAmmoToGunStats();
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
+
+        animator.SetTrigger("Fire");
+
+        if (activeMuzzleFlash != null)
+        {
+            activeMuzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            activeMuzzleFlash.Play(true);
+            if (muzzleLight != null)
+            {
+                if (muzzleLightRoutine != null)
+                    StopCoroutine(muzzleLightRoutine);
+
+                muzzleLightRoutine = StartCoroutine(FlashMuzzleLight());
+            }
+        }
+
+        if (gunList[gunListPos].shootSound != null && gunList[gunListPos].shootSound.Length > 0)
         {
             AudioClip clip = gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)];
             aud.PlayOneShot(clip, gunList[gunListPos].shootSoundVol);
@@ -113,9 +255,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         RaycastHit hit;
         Vector3 targetPoint;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer, QueryTriggerInteraction.Ignore))
         {
             targetPoint = hit.point;
+
             if (!hit.collider.isTrigger)
             {
                 IDamage dmg = hit.collider.GetComponent<IDamage>();
@@ -128,18 +272,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             targetPoint = Camera.main.transform.position + Camera.main.transform.forward * shootDist;
         }
 
-        GameObject bulletToFire = gunList.Count > 0 && gunList[gunListPos].bulletPrefab != null
-            ? gunList[gunListPos].bulletPrefab : bullet;
-        Transform spawnPoint = activeMuzzle != null ? activeMuzzle : shootPos;
-        Vector3 aimDir = (targetPoint - spawnPoint.position).normalized;
-        GameObject newBullet = Instantiate(bulletToFire, spawnPoint.position, Quaternion.LookRotation(aimDir));
-        if (gunList.Count > 0)
-        {
-            damage bulletDmg = newBullet.GetComponent<damage>();
-            if (bulletDmg != null)
-                bulletDmg.SetHitEffect(gunList[gunListPos].hitEffect);
-        }
+        GameObject bulletToFire = gunList[gunListPos].bulletPrefab;
+
+        Vector3 aimDir = (targetPoint - activeMuzzle.position).normalized;
+        GameObject newBullet = Instantiate(bulletToFire, activeMuzzle.position, Quaternion.LookRotation(aimDir));
+
+        damage bulletDmg = newBullet.GetComponent<damage>();
+        if (bulletDmg != null)
+            bulletDmg.SetHitEffect(gunList[gunListPos].hitEffect);
     }
+
     public void takeDamage(int amount)
     {
         HP -= amount;
@@ -151,6 +293,27 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         {
             gameManager.instance.youLose();
         }
+    }
+
+    void reload()
+    {
+        if (!Input.GetButtonDown("Reload")) return;
+
+        int magSize = ammoCountOrig;
+        if (ammoCount >= magSize) return;
+        if (ammoMax <= 0) return;
+
+        int need = magSize - ammoCount;
+        int load = Mathf.Min(need, ammoMax);
+
+        ammoCount += load;
+        ammoMax -= load;
+
+        SaveAmmoToGunStats();
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
+
+        //add feedback for trying to reload with no reserve ammo -Austin
+        //add feedback that changes the counter number color for low ammo -Austin
     }
 
     IEnumerator flashScreen()
@@ -165,7 +328,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         float damageTaken = HPOrig - HP;
         gameManager.instance.playerHPBar.fillAmount = damageTaken / HPOrig;
 
-        gameManager.instance.playerStaminaBar.fillAmount = Stamina / StaminaOrig;
+        gameManager.instance.playerStaminaBar.fillAmount = stamina / staminaOrig;
     }
 
     public void RespawnReset()
@@ -178,24 +341,74 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         jumpCount = 0;
     }
 
-    public void useStamina(int amount)
+    void TryShakeStaminaBar()
     {
-        Stamina -= amount;
-        UpdatePlayerUI();
-      
-        gameManager.instance.playerDamageFlash.SetActive(false);
+        if (!isShaking)
+            StartCoroutine(shakeStaminaBar());
     }
+
+    IEnumerator shakeStaminaBar()
+    {
+        isShaking = true;
+
+        float elapsed = 0f;
+        while (elapsed < shakeDuration)
+        {
+            float x = Random.Range(-1f, 1f) * shakeAmount;
+            float y = Random.Range(-1f, 1f) * shakeAmount;
+
+            stamShakeRect.localPosition = StamBarOrigPos + new Vector3(x, y, 0f);
+
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        stamShakeRect.localPosition = StamBarOrigPos;
+        isShaking = false;
+    }
+
     public void ShowGun(bool state)
     {
         if (currentGunInstance != null)
             currentGunInstance.SetActive(state);
     }
 
+    public void getMedkit(int amount)
+    {
+        medkitCount += amount;
+        gameManager.instance.updateMedkitAmount(medkitCount);
+    }
+
     public void getGunStats(gunStats gun)
     {
-        gunList.Add(gun);
+        gunStats instance = Instantiate(gun); // clone at runtime
+        gunList.Add(instance);
+
         gunListPos = gunList.Count - 1;
         changeGun();
+    }
+
+    void SaveAmmoToGunStats()
+    {
+        if (gunList == null || gunList.Count == 0) return;
+        gunList[gunListPos].ammoCur = ammoCount;
+        gunList[gunListPos].ammoMax = ammoMax;
+    }
+
+    public void PickedUpAmmo()
+    {
+        if (gunList == null || gunList.Count == 0) return;
+
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            if (gunList[i] == null) continue;
+
+            gunList[i].ammoMax += gunList[i].pickupSize;
+            gunList[i].ammoMax = Mathf.Min(gunList[i].ammoMax, gunList[i].ammoMaxOrig);
+        }
+
+        ammoMax = gunList[gunListPos].ammoMax;
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
     }
 
     void changeGun()
@@ -203,16 +416,101 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         shootDamage = gunList[gunListPos].shootDamage;
         shootDist = gunList[gunListPos].shootDist;
         shootRate = gunList[gunListPos].shootRate;
+        ammoCount = gunList[gunListPos].ammoCur;
+        ammoMax = gunList[gunListPos].ammoMax;
+        ammoCountOrig = gunList[gunListPos].magSize;
+
+        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
 
         if (currentGunInstance != null)
             Destroy(currentGunInstance);
 
-        currentGunInstance = Instantiate(gunList[gunListPos].gunModel, gunModel.transform);
-        currentGunInstance.transform.localPosition = Vector3.zero;
-        currentGunInstance.transform.localRotation = Quaternion.identity;
+        currentGunInstance = Instantiate(gunList[gunListPos].gunModel);
+
+        foreach (Collider col in currentGunInstance.GetComponentsInChildren<Collider>())
+        {
+            col.enabled = false;
+        }
+
+        int fpsLayer = LayerMask.NameToLayer("FPSArms");
+        if (fpsLayer >= 0)
+            SetLayerRecursively(currentGunInstance, fpsLayer);
+
+        Transform rightHandGrip = currentGunInstance.transform.Find("RightHandGrip");
+        if (rightHandGrip == null)
+        {
+            Debug.LogError($"{currentGunInstance.name} missing RightHandGrip. Cannot equip.");
+            Destroy(currentGunInstance);
+            return;
+        }
+        else
+        {
+            if (weaponGripTarget == null)
+            {
+                Debug.LogError("weaponGripTarget is not assigned on PlayerController.");
+                Destroy(currentGunInstance);
+                return;
+            }
+
+            AlignWeaponToGrip(currentGunInstance.transform, rightHandGrip, weaponGripTarget);
+
+
+            currentGunInstance.transform.SetParent(weaponGripTarget, true);
+        }
+
 
         Transform muzzle = currentGunInstance.transform.Find("Muzzle");
-        activeMuzzle = muzzle != null ? muzzle : shootPos;
+        if (muzzle == null)
+        {
+            Debug.LogError($"{currentGunInstance.name} missing Muzzle. Shooting will not work.");
+            activeMuzzle = null;
+        }
+        else
+        {
+            activeMuzzle = muzzle;
+        }
+
+        activeMuzzleFlash = null;
+
+        ParticleSystem flashPrefab = gunList[gunListPos].muzzleFlash;
+        if (flashPrefab != null && activeMuzzle != null)
+        {
+            activeMuzzleFlash = Instantiate(flashPrefab, activeMuzzle);
+            activeMuzzleFlash.transform.localPosition = Vector3.zero;
+            activeMuzzleFlash.transform.localRotation = Quaternion.identity;
+            activeMuzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+            muzzleLight = null;
+
+            if (activeMuzzleFlash != null)
+            {
+                muzzleLight = activeMuzzleFlash.GetComponentInChildren<Light>(true);
+                if (muzzleLight != null)
+                    muzzleLight.enabled = false;
+            }
+        }
+
+        if (leftHandIKBinder != null)
+        {
+            leftHandIKBinder.BindToWeapon(currentGunInstance);
+        }
+
+        if (gunList[gunListPos].overrideController != null)
+        {
+            animator.runtimeAnimatorController = gunList[gunListPos].overrideController;
+        }
+
+        if (gameManager.instance != null)
+            gameManager.instance.UpdateWeaponIcon(gunList[gunListPos].weaponIcon);
+
+        StartCoroutine(RebuildRigNextFrame());
+    }
+
+    static void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+            SetLayerRecursively(child.gameObject, layer);
     }
 
     void selectGun()
@@ -222,15 +520,61 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
         {
+            SaveAmmoToGunStats();
             gunListPos++;
             changeGun();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
         {
+            SaveAmmoToGunStats();
             gunListPos--;
             changeGun();
         }
     }
+
+    static void AlignWeaponToGrip(Transform weaponRoot, Transform weaponGripAnchor, Transform gripTarget)
+    {
+        Quaternion desiredWeaponRotation = gripTarget.rotation * Quaternion.Inverse(weaponGripAnchor.localRotation);
+
+        Vector3 desiredWeaponPosition = gripTarget.position - (desiredWeaponRotation * weaponGripAnchor.localPosition);
+
+        weaponRoot.SetPositionAndRotation(desiredWeaponPosition, desiredWeaponRotation);
+    }
+
+    IEnumerator RebuildRigNextFrame()
+    {
+        yield return null;
+        if (rigBuilder != null)
+        {
+            rigBuilder.Build();
+        }
+    }
+
+
+    void UseMedkit()
+    {
+        if (medkitCount <= 0)
+            return;
+
+        if (HP >= HPOrig)
+            return;
+
+        medkitCount--;
+
+        HP += medkitHealAmount;
+        HP = Mathf.Clamp(HP, 0, HPOrig);
+
+        gameManager.instance.updateMedkitAmount(medkitCount);
+        UpdatePlayerUI();
+    }
+
+    IEnumerator FlashMuzzleLight()
+    {
+        muzzleLight.enabled = true;
+        muzzleLight.intensity = Random.Range(5f, 8f);
+
+        yield return new WaitForSeconds(0.05f);
+
+        muzzleLight.enabled = false;
+    }
 }
-
-
