@@ -396,7 +396,7 @@ public class gameManager : MonoBehaviour
         currentWeaponIcon.enabled = (icon != null);
         currentWeaponIcon.sprite = icon;
     }
-    public void updateDevilDogBar(int currentPoints, int maxPoints)
+    public void updateDevilDogBar(float currentPoints, float maxPoints)
     {
         if(devilDogBarFill != null)
         {

@@ -589,4 +589,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         muzzleLight.enabled = false;
     }
+    public void GetDogTag()
+    {
+        if(devilDogMode != null)
+        {
+            devilDogMode.AddDogTagPoints();
+        }
+    }
 }

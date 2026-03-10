@@ -410,6 +410,11 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void Die()
     {
+        DevilDogMode devilDog = FindFirstObjectByType<DevilDogMode>();
+        if (devilDog != null)
+        {
+            devilDog.AddKillPoints();
+        }
         OnDied?.Invoke(this);
         Destroy(gameObject);
     }
