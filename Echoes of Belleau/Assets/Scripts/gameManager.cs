@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,9 +23,11 @@ public class gameManager : MonoBehaviour
     public Image playerHPBar;
     public GameObject playerDamageFlash;
     public Image playerStaminaBar;
+    public Image devilDogBarFill;
     [SerializeField] GameObject map;
     [SerializeField] FullscreenMapUI mapUI;
     [SerializeField] GameObject mapStuff;
+    
     
     [Header("---Weapon/Ammo---")]
     public PlayerController ammoAmount;
@@ -392,5 +395,12 @@ public class gameManager : MonoBehaviour
 
         currentWeaponIcon.enabled = (icon != null);
         currentWeaponIcon.sprite = icon;
+    }
+    public void updateDevilDogBar(int currentPoints, int maxPoints)
+    {
+        if(devilDogBarFill != null)
+        {
+            devilDogBarFill.fillAmount = (float)currentPoints / maxPoints;
+        }
     }
 }

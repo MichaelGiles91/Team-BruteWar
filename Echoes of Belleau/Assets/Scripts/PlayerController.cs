@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public int AmmoCount => ammoCount;
     public int MedkitCount => medkitCount;
 
-
+    [Header("---Devil Dog Mode")]
+    [SerializeField] DevilDogMode devilDogMode;
     
     [Header("---Stamina Stats---")]
     [SerializeField] float stamina;
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         StamBarOrigPos = gameManager.instance.playerStaminaBar.rectTransform.anchoredPosition;
         speedOrig = speed;
         ammoCountOrig = ammoCount;
+        devilDogMode = GetComponent<DevilDogMode>();
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
         medkitCountOrig = medkitCount;
         gameManager.instance.updateMedkitAmount(medkitCount);
@@ -225,13 +227,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
-        if (ammoCount <= 0) return;
+        if (ammoCount <= 0 && (devilDogMode == null || !devilDogMode.isActive)) { return; }
 
         shootTimer = 0f;
-        ammoCount--;
-        SaveAmmoToGunStats();
-        gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
-
+        if (devilDogMode == null || !devilDogMode.isActive)
+        {
+            ammoCount--;
+            SaveAmmoToGunStats();
+            gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
+        }
         animator.SetTrigger("Fire");
 
         if (activeMuzzleFlash != null)
@@ -284,15 +288,23 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     public void takeDamage(int amount)
     {
+
+        if (devilDogMode != null && devilDogMode.isActive)
+        {
+            return;
+        }
+
         HP -= amount;
         UpdatePlayerUI();
 
         StartCoroutine(flashScreen());
 
+        
         if (HP <= 0)
         {
             gameManager.instance.youLose();
         }
+
     }
 
     void reload()
