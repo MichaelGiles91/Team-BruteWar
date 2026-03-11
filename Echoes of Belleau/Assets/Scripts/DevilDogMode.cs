@@ -25,10 +25,6 @@ public class DevilDogMode : MonoBehaviour
     {
         HandleInput();
         updateDogTimer();
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            AddPoints(5);
-        }
     }
     void HandleInput()
     {
