@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/BruteWarSplash scene.unity
+    guid: d7419a9aaab2fb248af656abd1e621e0
+  - enabled: 1
+    path: Assets/HomeMenuScene.unity
+    guid: b46c508407ef30145b3b71251316344c
+  - enabled: 1
+    path: Assets/introScene.unity
+    guid: 1624b554923b45d45a967c519fa973ef
+  - enabled: 1
+    path: Assets/Scenes/Scene1.unity
+    guid: b9d733cd763dfcd45833cd7082e59b79
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
