@@ -27,8 +27,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject map;
     [SerializeField] FullscreenMapUI mapUI;
     [SerializeField] GameObject mapStuff;
-    
-    
+    public ScreenFader fader;
+
     [Header("---Weapon/Ammo---")]
     public PlayerController ammoAmount;
     [SerializeField] TMP_Text ammoAmountText;
@@ -104,6 +104,9 @@ public class gameManager : MonoBehaviour
         }
 
         RefreshMapObjective();
+
+        if (fader != null)
+            StartCoroutine(FadeInScene());
     }
 
     // Update is called once per frame
@@ -396,6 +399,13 @@ public class gameManager : MonoBehaviour
         currentWeaponIcon.enabled = (icon != null);
         currentWeaponIcon.sprite = icon;
     }
+
+    IEnumerator FadeInScene()
+    {
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(fader.FadeIn());
+    }
+    
     public void updateDevilDogBar(float currentPoints, float maxPoints)
     {
         if(devilDogBarFill != null)
