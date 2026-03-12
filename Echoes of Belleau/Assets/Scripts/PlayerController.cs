@@ -596,4 +596,35 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             devilDogMode.AddDogTagPoints();
         }
     }
+    public int GetHP()
+    {
+        return HP;
+    }
+    public void SetHP(int HPPoints)
+    {
+        HP = HPPoints;
+        UpdatePlayerUI();
+    }
+    public void SetAmmo(int AmmoValue)
+    {
+        ammoCount = AmmoValue;
+        gameManager.instance.updateAmmoAmount(ammoCount,ammoMax);
+    }
+    public void SetMedkits(int Medkits)
+    {
+        medkitCount = Medkits;
+        gameManager.instance.updateMedkitAmount(medkitCount);
+    }
+    public float GetDevilDogPoints()
+    {
+        return devilDogMode.GetCurrentPoints();
+    }
+    public void SetDevilDogPoints(float dogpoints)
+    {
+        devilDogMode.SetCurrentPoints(dogpoints);
+    }
+    public int GetAmmoMax()
+    {
+        return ammoMax;
+    }
 }

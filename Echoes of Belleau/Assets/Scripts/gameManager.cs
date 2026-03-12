@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
@@ -71,6 +72,10 @@ public class gameManager : MonoBehaviour
     Vector3 checkpointPos;
     Quaternion checkpointRot;
     bool hasCheckpoint;
+    int checkPointHP;
+    int checkPointAmmo;
+    int checkPointMedkits;
+    float checkPointDevilDog;
 
     private void Awake()
     {
@@ -197,9 +202,16 @@ public class gameManager : MonoBehaviour
     }
     public void SetCheckpoint(Transform t)
     {
+       
         checkpointPos = t.position;
         checkpointRot = t.rotation;
         hasCheckpoint = true;
+
+        checkPointHP = playerScript.GetHP();
+        checkPointAmmo = playerScript.AmmoCount;
+        checkPointMedkits = playerScript.MedkitCount;
+        checkPointDevilDog = playerScript.GetDevilDogPoints();
+
         StartCoroutine(showCheckpointNotification());
     }
     public void Respawn()
@@ -226,6 +238,14 @@ public class gameManager : MonoBehaviour
 
 
         playerScript.RespawnReset();
+
+        playerScript.SetHP(checkPointHP);
+        playerScript.SetAmmo(checkPointAmmo);
+        playerScript.SetMedkits(checkPointMedkits);
+        playerScript.SetDevilDogPoints(checkPointDevilDog);
+
+        
+
     }
 
     IEnumerator showCheckpointNotification()

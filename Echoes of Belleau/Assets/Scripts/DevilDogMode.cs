@@ -96,4 +96,19 @@ public class DevilDogMode : MonoBehaviour
     {
         AddPoints(dogTagPoints);
     }
+    public float GetCurrentPoints()
+    {
+        return currentPoints;
+    }
+    public void SetCurrentPoints(float value)
+    {
+        currentPoints = Mathf.Clamp(value,0f,maxPoints);
+
+        if(currentPoints <= 0f)
+        {
+            DogActive = false;
+            currentTimer = 0f;
+        }
+        updateDevilDogUI();
+    }
 }
