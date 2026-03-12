@@ -10,26 +10,12 @@ public class LeftHandIKBinder : MonoBehaviour
 
     public void BindToWeapon(GameObject weaponInstance)
     {
-        if (!leftArmIK)
-        {
-            Debug.LogError("LeftHandIKBinder: TwoBoneIKConstraint not assigned.");
-            return;
-        }
-
-        if (!weaponInstance)
-        {
-            leftArmIK.weight = 0f;
-            Debug.LogError("LeftHandIKBinder: weaponInstance is null.");
-            return;
-        }
-
-        Transform target = FindDeepChild(weaponInstance.transform, TargetName);
-        Transform hint = FindDeepChild(weaponInstance.transform, HintName);
+        Transform target = FindDeepChild(weaponInstance.transform, "LeftHandIK");
+        Transform hint = FindDeepChild(weaponInstance.transform, "LeftElbowHint");
 
         if (!target || !hint)
         {
             leftArmIK.weight = 0f;
-            Debug.LogError($"LeftHandIKBinder: Weapon '{weaponInstance.name}' must contain BOTH '{TargetName}' and '{HintName}' transforms.");
             return;
         }
 
