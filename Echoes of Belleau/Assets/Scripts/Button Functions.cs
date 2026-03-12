@@ -6,7 +6,7 @@ public class ButtonFunctions : MonoBehaviour
    
     public void playGame()
     {
-        SceneManager.LoadScene("introScene");
+        SceneManager.LoadScene("Intro Scene");
     }
     public void resume()
     {
