@@ -413,4 +413,16 @@ public class gameManager : MonoBehaviour
             devilDogBarFill.fillAmount = (float)currentPoints / maxPoints;
         }
     }
+
+    public void LoadSceneWithFade(string sceneName)
+    {
+        StartCoroutine(FadeAndLoad(sceneName));
+    }
+
+    IEnumerator FadeAndLoad(string sceneName)
+    {
+        yield return StartCoroutine(fader.FadeOut());
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
 }
