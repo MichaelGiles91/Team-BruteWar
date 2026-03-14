@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 7559693377560103137}
   - component: {fileID: 6154184100313475482}
   m_Layer: 0
-  m_Name: Pineapple_Grenade
+  m_Name: Player Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
