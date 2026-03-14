@@ -49,9 +49,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] UnityEngine.Animations.Rigging.RigBuilder rigBuilder;
 
     [SerializeField] AudioSource aud;
+
     int jumpCount;
     int HPOrig;
-
     float staminaOrig;
     int speedOrig;
     bool sprintDisable = false;
@@ -72,11 +72,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     Light muzzleLight;
     Coroutine muzzleLightRoutine;
 
+    float moveSlowMult = 1f;
+    bool isSlow = false;
+    public bool IsMoving => controller.velocity.magnitude > 0.1f;
+
     Vector3 moveDir;
     Vector3 playerVel;
     Vector3 StamBarOrigPos;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // FUNCTIONDS
     void Start()
     {
         HPOrig = HP;
@@ -90,7 +94,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gameManager.instance.updateMedkitAmount(medkitCount);
         gameManager.instance.UpdateWeaponIcon(null);
 
-        //stamina bar setup
+        
         RectTransform fillRect = gameManager.instance.playerStaminaBar.rectTransform;
         stamShakeRect = fillRect.parent as RectTransform;
         if (stamShakeRect == null) stamShakeRect = fillRect;
@@ -99,7 +103,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         UpdatePlayerUI();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         movement();
@@ -123,7 +127,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
 
         moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDir * speed * Time.deltaTime);
+        controller.Move(moveDir * (speed * moveSlowMult) * Time.deltaTime);
 
         jump();
         controller.Move(playerVel * Time.deltaTime);
@@ -143,16 +147,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         float vertical = Input.GetAxisRaw("Vertical");
         float horizontal = Input.GetAxisRaw("Horizontal");
+        float currentMoveSpeed = speed * moveSlowMult;
 
-        bool isWalkingFwd = vertical > 0.1f && speed <= speedOrig && controller.isGrounded;
-        bool isWalkingBck = vertical < -0.1f && speed <= speedOrig && controller.isGrounded;
-        bool isWalkingRight = horizontal > 0.1f && speed <= speedOrig && controller.isGrounded;
-        bool isWalkingLeft = horizontal < -0.1f && speed <= speedOrig && controller.isGrounded;
+        bool isWalkingFwd = vertical > 0.1f && currentMoveSpeed <= speedOrig && controller.isGrounded;
+        bool isWalkingBck = vertical < -0.1f && currentMoveSpeed <= speedOrig && controller.isGrounded;
+        bool isWalkingRight = horizontal > 0.1f && currentMoveSpeed <= speedOrig && controller.isGrounded;
+        bool isWalkingLeft = horizontal < -0.1f && currentMoveSpeed <= speedOrig && controller.isGrounded;
 
-        bool isRunningFwd = vertical > 0.1f && speed > speedOrig && controller.isGrounded;
-        bool isRunningBck = vertical < -0.1f && speed > speedOrig && controller.isGrounded;
-        bool isRunningRight = horizontal > 0.1f && speed > speedOrig && controller.isGrounded;
-        bool isRunningLeft = horizontal < -0.1f && speed > speedOrig && controller.isGrounded;
+        bool isRunningFwd = vertical > 0.1f && currentMoveSpeed > speedOrig && controller.isGrounded;
+        bool isRunningBck = vertical < -0.1f && currentMoveSpeed > speedOrig && controller.isGrounded;
+        bool isRunningRight = horizontal > 0.1f && currentMoveSpeed > speedOrig && controller.isGrounded;
+        bool isRunningLeft = horizontal < -0.1f && currentMoveSpeed > speedOrig && controller.isGrounded;
 
         animator.SetBool("isWalkingFwd", isWalkingFwd);
         animator.SetBool("isWalkingBck", isWalkingBck);
@@ -614,4 +619,18 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         yield return new WaitForSeconds(0.6f);
         canShoot = true;
     }
+
+    public void SetMoveSlow(float multiplier)
+    {
+        moveSlowMult = multiplier;
+        isSlow = true;
+    }
+
+    public void ResetMoveSlow()
+    {
+        moveSlowMult = 1f;
+        isSlow = false;
+    }
+
+
 }

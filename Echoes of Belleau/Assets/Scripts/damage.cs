@@ -6,18 +6,24 @@ public class damage : MonoBehaviour
     enum damageType { bullet, stationary, DOT, explosive }
 
     [SerializeField] damageType type;
-    [SerializeField] Rigidbody rd;
-
     [SerializeField] int damageAmount;
     [SerializeField] float damageRate;
+
+    [Header("Bullet")]
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
     [SerializeField] ParticleSystem hitEffect;
+    [SerializeField] Rigidbody rd;
 
+    [Header("Explosion")]
     [SerializeField] float fuseTime = 2.5f;
     [SerializeField] float explosionRadius = 4f;
     [SerializeField] LayerMask explosionMask = ~0;
     [SerializeField] ParticleSystem explosionEffect;
+
+    [Header("DOT")]
+    [SerializeField] bool onlyDamageWhileMoving = false;
+    [SerializeField] float slowMult = 0.5f;
 
     bool isDamaging;
     bool armed;
@@ -27,8 +33,6 @@ public class damage : MonoBehaviour
     {
         hitEffect = effect;
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (type == damageType.bullet)
@@ -72,6 +76,14 @@ public class damage : MonoBehaviour
 
             return;
         }
+        if (type == damageType.DOT)
+        {
+            PlayerController pc = other.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.SetMoveSlow(slowMult);
+            }
+        }
 
     }
     public void Arm()
@@ -112,6 +124,15 @@ public class damage : MonoBehaviour
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null && type == damageType.DOT && !isDamaging)
         {
+            if (onlyDamageWhileMoving)
+            {
+                PlayerController pc = other.GetComponent<PlayerController>();
+                if (pc == null || !pc.IsMoving)
+                {
+                    return;
+                }
+            }
+
             StartCoroutine(damageOther(dmg));
         }
     }
@@ -123,4 +144,19 @@ public class damage : MonoBehaviour
         yield return new WaitForSeconds(damageRate);
         isDamaging = false;
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.isTrigger) return;
+
+        if (type == damageType.DOT)
+        {
+            PlayerController pc = other.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.ResetMoveSlow();
+            }
+        }
+    }
+
 }
