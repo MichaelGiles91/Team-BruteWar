@@ -4287,6 +4287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7793788720881996478}
+  - component: {fileID: 4223099697321261781}
   - component: {fileID: 2401083145229106221}
   - component: {fileID: 1103212212901023004}
   - component: {fileID: 3338367633868697055}
@@ -4318,6 +4319,20 @@ Transform:
   - {fileID: 2798448324791273580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &4223099697321261781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5251616932490312323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c49cb224271594c81a3f45f4a0e9d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageableEnemy
+  maxHealth: 100
+  currentHealth: 100
 --- !u!114 &2401083145229106221
 MonoBehaviour:
   m_ObjectHideFlags: 0

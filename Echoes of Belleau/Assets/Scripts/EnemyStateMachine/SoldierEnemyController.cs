@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SoldierEnemyController : MonoBehaviour
+public class SoldierEnemyController : MonoBehaviour, IDamage
 {
     [Header("Movement")]
     public float patrolSpeed = 2f;
@@ -39,6 +39,11 @@ public class SoldierEnemyController : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpeed = 25f;
 
+    [Header("Health")]
+    public float maxHealth = 100f;
+    public float currentHealth = 100f;
+    public bool destroyOnDeath = true;
+
     private SoldierStateMachine stateMachine;
     private NavMeshAgent agent;
 
@@ -64,6 +69,7 @@ public class SoldierEnemyController : MonoBehaviour
 
     private void Start()
     {
+        currentHealth = maxHealth;
         stateMachine.Initialize(IdleState);
     }
 
@@ -258,4 +264,71 @@ public class SoldierEnemyController : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(center, patrolRadius);
     }
+
+    public bool NeedsHealing()
+    {
+        return currentHealth < maxHealth && currentHealth > 0f;
+    }
+
+    public bool IsDead()
+    {
+        return currentHealth <= 0f;
+    }
+
+    public void TakeDamage(float amount)
+    {
+        if (IsDead()) return;
+
+        currentHealth -= amount;
+        currentHealth = Mathf.Max(currentHealth, 0f);
+
+        Debug.Log(name + " took damage. Current Health: " + currentHealth);
+
+        if (currentHealth <= 0f)
+        {
+            Die();
+        }
+    }
+
+    public void Heal(float amount)
+    {
+        if (IsDead()) return;
+
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+
+        Debug.Log(name + " was healed. Current Health: " + currentHealth);
+    }
+
+    private void Die()
+    {
+        Debug.Log(name + " died.");
+
+        StopMoving();
+
+        if (CurrentCover != null)
+        {
+            CurrentCover.isOccupied = false;
+            CurrentCover = null;
+        }
+
+        enabled = false;
+
+        if (agent != null)
+        {
+            agent.isStopped = true;
+            agent.enabled = false;
+        }
+
+        if (destroyOnDeath)
+        {
+            Destroy(gameObject, 2f);
+        }
+    }
+
+    public void takeDamage(int amount)
+    {
+        TakeDamage(amount);
+    }
+
 }
