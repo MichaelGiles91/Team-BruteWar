@@ -10,6 +10,7 @@ public class ButtonFunctions : MonoBehaviour
     }
     public void resume()
     {
+        MusicManager.instance.PlayMusic(MusicType.Calm, 0);
         gameManager.instance.stateUnpause();
     }
 

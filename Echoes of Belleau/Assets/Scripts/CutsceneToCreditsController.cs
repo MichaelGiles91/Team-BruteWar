@@ -12,11 +12,20 @@ public class CutsceneToCreditsController : MonoBehaviour
     [Header("--- Scene Flow ---")]
     [SerializeField] string creditsSceneName;
     [SerializeField] float fadeBeforeEnd;
-
+    bool isSkipping = false;
     void Start()
     {
         StartCoroutine(PlaySequence());
     }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Cancel") && !isSkipping)
+        {
+            StartCoroutine(SkipCutscene());
+        }
+    }
+
 
     IEnumerator PlaySequence()
     {
@@ -42,5 +51,20 @@ public class CutsceneToCreditsController : MonoBehaviour
         // Load credits scene
         if (!string.IsNullOrEmpty(creditsSceneName))
             SceneManager.LoadScene(creditsSceneName);
+    }
+
+    IEnumerator SkipCutscene()
+    {
+        isSkipping = true;
+
+        // Stop timeline immediately
+        if (cutscene != null)
+            cutscene.Stop();
+
+        // Fade out quickly
+        if (fader != null)
+            yield return StartCoroutine(fader.FadeOut());
+
+        SceneManager.LoadScene(creditsSceneName);
     }
 }

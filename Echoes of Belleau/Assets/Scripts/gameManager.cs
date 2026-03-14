@@ -83,6 +83,8 @@ public class gameManager : MonoBehaviour
 
         timeScaleOrig = Time.timeScale;
 
+        MusicManager.instance.PlayMusic(MusicType.Calm, 0);
+
 
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
@@ -118,6 +120,7 @@ public class gameManager : MonoBehaviour
             if (menuActive == null)
 
             {
+                MusicManager.instance.PlayMusic(MusicType.Menu, 0);
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
@@ -126,6 +129,7 @@ public class gameManager : MonoBehaviour
             }
             else if (menuActive == menuPause)
             {
+                MusicManager.instance.PlayMusic(MusicType.Calm, 0);
                 stateUnpause();
             }
         }
