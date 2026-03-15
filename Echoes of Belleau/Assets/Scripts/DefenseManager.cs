@@ -169,7 +169,7 @@ public class DefenseManager : MonoBehaviour
         defenseComplete = true;
 
         if (gameManager.instance != null)
-            gameManager.instance.LoadSceneWithFade("Cutscene_02");
+            gameManager.instance.LoadSceneWithFade("Level 2");
     }
 
     void OnDestroy()

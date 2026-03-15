@@ -24814,7 +24814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneToCreditsController
   cutscene: {fileID: 1174974061}
   fader: {fileID: 1545336310}
-  creditsSceneName: 
+  creditsSceneName: HomeMenuScene
   fadeBeforeEnd: 3
 --- !u!4 &1028116510
 Transform:
