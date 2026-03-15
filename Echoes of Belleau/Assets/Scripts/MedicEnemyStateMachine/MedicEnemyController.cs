@@ -111,7 +111,7 @@ public class MedicEnemyController : MonoBehaviour, IDamage
     {
         CurrentCover = null;
 
-        CoverPoint[] allCover = GameObject.FindObjectsOfType<CoverPoint>();
+        CoverPoint[] allCover = FindObjectsByType<CoverPoint>(FindObjectsSortMode.None);
         float bestScore = float.MaxValue;
 
         foreach (CoverPoint cover in allCover)

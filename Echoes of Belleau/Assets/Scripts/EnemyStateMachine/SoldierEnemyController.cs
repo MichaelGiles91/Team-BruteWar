@@ -195,7 +195,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     {
         CurrentCover = null;
 
-        CoverPoint[] allCover = GameObject.FindObjectsOfType<CoverPoint>();
+        CoverPoint[] allCover = GameObject.FindObjectsByType<CoverPoint>(FindObjectsSortMode.None);
 
         float bestScore = float.MaxValue;
 
