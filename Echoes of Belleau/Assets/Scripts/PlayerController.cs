@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 
 public class PlayerController : MonoBehaviour, IDamage, IPickup
@@ -44,6 +46,24 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] float shakeAmount;
     [SerializeField] float shakeDuration;
 
+    [Header("---Stress Stats---")]
+    [SerializeField] float stress;
+    [SerializeField] float maxStress = 100f;
+    [SerializeField] float stressRecoveryDelay = 3f;
+    [SerializeField] float stressRecoveryRate = 12f;
+
+    [SerializeField] float damageStressAmount = 20f;
+    [SerializeField] float suppressionStressAmount = 12f;
+    [SerializeField] float explosionStressAmount = 25f;
+
+    [Header("---Stress Effects---")]
+    [SerializeField] float maxSpreadStressPenalty = 0.15f;
+    [SerializeField] float maxMoveAimPenalty = 0.1f;
+    [SerializeField] Volume stressVolume;
+
+    float stressSafeTimer;
+    public float StressPercent => stress / maxStress;
+
     [SerializeField] Transform weaponGripTarget;
     [SerializeField] LeftHandIKBinder leftHandIKBinder;
     [SerializeField] UnityEngine.Animations.Rigging.RigBuilder rigBuilder;
@@ -72,6 +92,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     Light muzzleLight;
     Coroutine muzzleLightRoutine;
 
+    Vignette stressVignette;
+    ChromaticAberration stressChromatic;
+    FilmGrain stressFilmGrain;
+    DepthOfField stressDepthOfField;
+    LensDistortion stressLensDistortion;
+
     float moveSlowMult = 1f;
     bool isSlow = false;
     public bool IsMoving => controller.velocity.magnitude > 0.1f;
@@ -94,7 +120,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gameManager.instance.updateMedkitAmount(medkitCount);
         gameManager.instance.UpdateWeaponIcon(null);
 
-        
+        stress = 0f;
+        stressSafeTimer = 0f;
+        if (stressVolume != null && stressVolume.profile != null)
+        {
+            stressVolume.profile.TryGet(out stressVignette);
+            stressVolume.profile.TryGet(out stressChromatic);
+            stressVolume.profile.TryGet(out stressFilmGrain);
+            stressVolume.profile.TryGet(out stressDepthOfField);
+            stressVolume.profile.TryGet(out stressLensDistortion);
+        }
+
         RectTransform fillRect = gameManager.instance.playerStaminaBar.rectTransform;
         stamShakeRect = fillRect.parent as RectTransform;
         if (stamShakeRect == null) stamShakeRect = fillRect;
@@ -108,6 +144,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         movement();
         sprint();
+        UpdateStress();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
         if (Input.GetButtonDown("UseMedkit"))
         {
@@ -295,6 +332,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         GameObject bulletToFire = gunList[gunListPos].bulletPrefab;
 
         Vector3 aimDir = (targetPoint - activeMuzzle.position).normalized;
+
+        float currentStressPenalty = maxSpreadStressPenalty * StressPercent;
+
+        aimDir.x += Random.Range(-currentStressPenalty, currentStressPenalty);
+        aimDir.y += Random.Range(-currentStressPenalty, currentStressPenalty);
+        aimDir.z += Random.Range(-currentStressPenalty, currentStressPenalty);
+        aimDir.Normalize();
+
         GameObject newBullet = Instantiate(bulletToFire, activeMuzzle.position, Quaternion.LookRotation(aimDir));
 
         damage bulletDmg = newBullet.GetComponent<damage>();
@@ -311,6 +356,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
 
         HP -= amount;
+        AddStress(damageStressAmount);
         UpdatePlayerUI();
 
         StartCoroutine(flashScreen());
@@ -362,6 +408,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void RespawnReset()
     {
         HP = HPOrig;
+        stress = 0f;
+        stressSafeTimer = 0f;
         UpdatePlayerUI();
 
         // clear any falling momentum state
@@ -632,5 +680,73 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         isSlow = false;
     }
 
+    void UpdateStress()
+    {
+        if (stressSafeTimer > 0f)
+        {
+            stressSafeTimer -= Time.deltaTime;
+        }
+        else if (stress > 0f)
+        {
+            stress -= stressRecoveryRate * Time.deltaTime;
+            stress = Mathf.Clamp(stress, 0f, maxStress);
+        }
 
+        UpdateStressEffects();
+    }
+
+    public void AddStress(float amount)
+    {
+        stress += amount;
+        stress = Mathf.Clamp(stress, 0f, maxStress);
+        stressSafeTimer = stressRecoveryDelay;
+    }
+
+    public void AddSuppressionStress()
+    {
+        AddStress(suppressionStressAmount);
+    }
+
+    public void AddExplosionStress()
+    {
+        AddStress(explosionStressAmount);
+    }
+
+    void UpdateStressEffects()
+    {
+        float t = StressPercent;
+
+       
+        float strongT = t * t;
+
+        if (stressVignette != null)
+        {
+            stressVignette.intensity.value = Mathf.Lerp(0.12f, 0.5f, strongT);
+            stressVignette.smoothness.value = Mathf.Lerp(0.2f, 0.75f, strongT);
+        }
+
+        if (stressChromatic != null)
+        {
+            stressChromatic.intensity.value = Mathf.Lerp(0f, 0.65f, strongT);
+        }
+
+        if (stressFilmGrain != null)
+        {
+            stressFilmGrain.intensity.value = Mathf.Lerp(0f, 0.5f, strongT);
+        }
+
+        if (stressLensDistortion != null)
+        {
+            stressLensDistortion.intensity.value = Mathf.Lerp(0f, -0.28f, strongT);
+            stressLensDistortion.scale.value = Mathf.Lerp(1f, 0.92f, strongT);
+        }
+
+        if (stressDepthOfField != null)
+        {
+            stressDepthOfField.mode.value = DepthOfFieldMode.Gaussian;
+            stressDepthOfField.gaussianStart.value = Mathf.Lerp(12f, 3f, strongT);
+            stressDepthOfField.gaussianEnd.value = Mathf.Lerp(40f, 8f, strongT);
+            stressDepthOfField.gaussianMaxRadius.value = Mathf.Lerp(0.3f, 1.6f, strongT);
+        }
+    }
 }

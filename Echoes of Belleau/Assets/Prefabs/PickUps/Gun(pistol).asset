@@ -17,8 +17,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2530107586607571168, guid: 0989bcc370815b847a0ad0b6e11d8b70, type: 3}
   weaponIcon: {fileID: 21300000, guid: 0585dfa735a5c6e4b8af2b05c0739164, type: 3}
   shootDamage: 1
-  shootDist: 15
-  shootRate: 1
+  shootDist: 185
+  shootRate: 0.1
   magSize: 14
   pickupSize: 14
   ammoCur: 14
