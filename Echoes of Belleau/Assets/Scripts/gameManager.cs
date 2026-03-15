@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     [Header("---Game Screens---")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     public bool isPaused;
@@ -401,5 +402,25 @@ public class gameManager : MonoBehaviour
 
         currentWeaponIcon.enabled = (icon != null);
         currentWeaponIcon.sprite = icon;
+    }
+
+    public void settingsMenu()
+    {
+        //menuActive = null;
+        menuSettings.SetActive(true);
+        menuActive = menuSettings;
+        if (Input.GetButtonDown("Cancel"))
+        {
+            //menuActive = null;
+            menuSettings.SetActive(false);
+            menuActive = menuPause;
+        }
+    }
+
+    internal void Back()
+    {
+        //menuActive = null;
+        menuSettings.SetActive(false);
+        menuActive = menuPause;
     }
 }
