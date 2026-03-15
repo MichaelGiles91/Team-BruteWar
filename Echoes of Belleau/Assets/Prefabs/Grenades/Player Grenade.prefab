@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 345912170053391888}
   - component: {fileID: 3947894883890836968}
   - component: {fileID: 549485987240462506}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,9 +99,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3706848284605420742}
-  - component: {fileID: 7559693377560103137}
   - component: {fileID: 6154184100313475482}
-  m_Layer: 0
+  - component: {fileID: 1345237472080872643}
+  - component: {fileID: 7559693377560103137}
+  m_Layer: 6
   m_Name: Player Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958630158421029500}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -57.7, y: 1.9839, z: 458.37}
   m_LocalScale: {x: 0.040471498, y: 0.024012243, z: 0.03271301}
   m_ConstrainProportionsScale: 0
@@ -126,6 +127,52 @@ Transform:
   - {fileID: 2749937070449484229}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6154184100313475482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958630158421029500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5087e807026604b9d06e8ffe548223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::damage
+  type: 3
+  rd: {fileID: 7559693377560103137}
+  damageAmount: 12
+  damageRate: 2
+  speed: 2
+  destroyTime: 2
+  hitEffect: {fileID: 0}
+  fuseTime: 2.5
+  explosionRadius: 4
+  explosionMask:
+    serializedVersion: 2
+    m_Bits: 128
+  explosionEffect: {fileID: 19800008, guid: d6a69ab869fa0154389da769608a22c5, type: 3}
+--- !u!135 &1345237472080872643
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958630158421029500}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.6
+  m_Center: {x: 0, y: -1, z: 0}
 --- !u!54 &7559693377560103137
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -152,32 +199,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &6154184100313475482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 958630158421029500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b5087e807026604b9d06e8ffe548223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::damage
-  type: 3
-  rd: {fileID: 7559693377560103137}
-  damageAmount: 12
-  damageRate: 2
-  speed: 2
-  destroyTime: 2
-  hitEffect: {fileID: 0}
-  fuseTime: 2.5
-  explosionRadius: 4
-  explosionMask:
-    serializedVersion: 2
-    m_Bits: 8
-  explosionEffect: {fileID: 19800008, guid: d6a69ab869fa0154389da769608a22c5, type: 3}
+  m_CollisionDetection: 2
 --- !u!1 &2173218560743702816
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +211,7 @@ GameObject:
   - component: {fileID: 6447373308069879569}
   - component: {fileID: 7579933232851728922}
   - component: {fileID: 7060887946741413012}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +301,7 @@ GameObject:
   - component: {fileID: 2749937070449484229}
   - component: {fileID: 1706715412029498446}
   - component: {fileID: 78835014050386472}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pineapple
   m_TagString: Untagged
   m_Icon: {fileID: 0}

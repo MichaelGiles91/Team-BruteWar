@@ -81,9 +81,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] float grenadeCooldown = 6f;
     [SerializeField] float grenadeThrowForce = 12f;
     [SerializeField] float grenadeUpForce = 4f;
-    [SerializeField] float grenadeThrowDistance = 10f;
-    [SerializeField, Range(0f, 1f)] float grenadeThrowChance = 0.3f;
+    [SerializeField] Transform grenadePos;
     float grenadeTimer;
+    GameObject heldGrenade;
 
     public Animator animator;
     ParticleSystem activeMuzzleFlash;
@@ -126,8 +126,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         sprint();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
         grenadeTimer += Time.deltaTime;
-        if (Input.GetButtonDown("Throw Grenade"))
+        if (Input.GetButtonDown("ThrowGrenade"))
         {
+            HoldGrenade();
             UseGrenade();
         }
         if (Input.GetButtonDown("UseMedkit"))
@@ -596,12 +597,64 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
     }
 
+    void HoldGrenade()
+    {
+        heldGrenade = Instantiate(grenadePrefab, grenadePos.position, grenadePos.rotation);
+        heldGrenade.transform.SetParent(grenadePos);
+        heldGrenade.transform.localPosition = Vector3.zero; // Ensure the grenade is positioned correctly relative to the shootPos
+        heldGrenade.transform.localRotation = Quaternion.identity; // Ensure the grenade has no local rotation relative to the shootPos
+
+
+        Rigidbody rb = heldGrenade.GetComponent<Rigidbody>();
+        if ((rb != null))
+        {
+            rb.isKinematic = true; // Make the grenade not affected by physics while held
+            rb.useGravity = false; // Disable gravity while held
+        }
+
+        Collider col = heldGrenade.GetComponent<Collider>();
+        if (col != null) col.enabled = false; // Disable the collider while held to prevent collisions with the enemy
+    }
+
     void UseGrenade()
     {
         if (grenadeCount <= 0)
             return;
 
         grenadeCount--;
+
+        if (heldGrenade == null)
+        {
+            return;
+        }
+
+        heldGrenade.transform.SetParent(null);
+
+        Rigidbody rb = heldGrenade.GetComponent<Rigidbody>();
+        Collider col = heldGrenade.GetComponent<Collider>();
+
+        if (col != null) col.enabled = true;
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            Vector3 aimpoint = Camera.main.transform.position + Camera.main.transform.forward;
+            Vector3 throwDir = (aimpoint - grenadePos.position).normalized;
+
+            damage dmg = heldGrenade.GetComponent<damage>();
+            if (dmg != null)
+            {
+                dmg.Arm();
+            }
+
+            Vector3 force = (throwDir * grenadeThrowForce) + (Vector3.up * grenadeUpForce);
+            rb.AddForce(force, ForceMode.VelocityChange);
+        }
+        heldGrenade = null;
 
         gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
         UpdatePlayerUI();

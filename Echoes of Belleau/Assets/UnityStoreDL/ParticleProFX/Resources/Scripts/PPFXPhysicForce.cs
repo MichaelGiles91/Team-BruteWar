@@ -17,9 +17,9 @@ public class PPFXPhysicForce : MonoBehaviour {
 	public float delay = 0.2f;
 	
 	Collider[] colliders;
-	
-	
-	void Start () 
+    private object _rb;
+
+    void Start () 
 	{
 		colliders = Physics.OverlapSphere(this.transform.position, radius);
 		
@@ -32,11 +32,16 @@ public class PPFXPhysicForce : MonoBehaviour {
 		
 		for(int i = 0; i < colliders.Length; i ++)
 		{
-			var _rb = colliders[i].GetComponent<Rigidbody>();
-			
-			if(_rb != null)
+			if (colliders[i] != null)
 			{
-				colliders[i].GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, radius, new Vector3(Random.Range(-3, 3),Random.Range(-3, 3),Random.Range(-3, 3)),ForceMode.Impulse);
+				var _rb = colliders[i].GetComponent<Rigidbody>();
+			} else {
+				var _rb = colliders[i] = null;
+			}
+
+			if (_rb != null)
+			{
+				colliders[i].GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, radius, new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), Random.Range(-3, 3)), ForceMode.Impulse);
 			}
 		}
 		
