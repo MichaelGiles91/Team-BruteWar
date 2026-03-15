@@ -3,9 +3,31 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
+
+[System.Serializable]
+public class PlayerCheckpointData
+{
+    public Vector3 position;
+    public Quaternion rotation;
+    public int hp;
+    public int ammo;
+    public int medkits;
+    public float devilDogPoints;
+}
+
+[System.Serializable]
+public class EnemyCheckpointData
+{
+    public SingleEnemySpawner spawnPoint;
+    public Vector3 position;
+    public Quaternion rotation;
+    public int hp;
+    public bool isAlive;
+}
 
 public class gameManager : MonoBehaviour
 {
@@ -68,9 +90,10 @@ public class gameManager : MonoBehaviour
 
     bool fogOrig;
 
-    Vector3 checkpointPos;
-    Quaternion checkpointRot;
     bool hasCheckpoint;
+
+    PlayerCheckpointData playerCheckpointData = new PlayerCheckpointData();
+    List<EnemyCheckpointData> enemyCheckpointData = new List<EnemyCheckpointData>();
 
     private void Awake()
     {
@@ -200,35 +223,28 @@ public class gameManager : MonoBehaviour
     }
     public void SetCheckpoint(Transform t)
     {
-        checkpointPos = t.position;
-        checkpointRot = t.rotation;
         hasCheckpoint = true;
+
+        SavePlayerCheckpointData();
+        SaveEnemyCheckpointData();
+
         StartCoroutine(showCheckpointNotification());
     }
     public void Respawn()
     {
-
-        if (menuLose != null) menuLose.SetActive(false);
-
+        if (menuLose != null)
+            menuLose.SetActive(false);
 
         stateUnpause();
-
 
         if (!hasCheckpoint)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             return;
-
         }
 
-
-        CharacterController cc = player.GetComponent<CharacterController>();
-        cc.enabled = false;
-        player.transform.SetPositionAndRotation(checkpointPos, checkpointRot);
-        cc.enabled = true;
-
-
-        playerScript.RespawnReset();
+        RestorePlayerCheckpointData();
+        RestoreEnemyCheckpointData();
     }
 
     IEnumerator showCheckpointNotification()
@@ -411,6 +427,104 @@ public class gameManager : MonoBehaviour
         if(devilDogBarFill != null)
         {
             devilDogBarFill.fillAmount = (float)currentPoints / maxPoints;
+        }
+    }
+
+    void SavePlayerCheckpointData()
+    {
+        playerCheckpointData.position = player.transform.position;
+        playerCheckpointData.rotation = player.transform.rotation;
+        playerCheckpointData.hp = playerScript.GetHP();
+        playerCheckpointData.ammo = playerScript.AmmoCount;
+        playerCheckpointData.medkits = playerScript.MedkitCount;
+        playerCheckpointData.devilDogPoints = playerScript.GetDevilDogPoints();
+    }
+
+    void SaveEnemyCheckpointData()
+    {
+        enemyCheckpointData.Clear();
+
+        SingleEnemySpawner[] spawnPoints = FindObjectsByType<SingleEnemySpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        foreach (SingleEnemySpawner spawnPoint in spawnPoints)
+        {
+            if (spawnPoint == null) continue;
+
+            EnemyCheckpointData data = new EnemyCheckpointData();
+            data.spawnPoint = spawnPoint;
+
+            EnemyAI enemy = spawnPoint.GetCurrentEnemy();
+
+            if (enemy != null)
+            {
+                data.position = enemy.transform.position;
+                data.rotation = enemy.transform.rotation;
+                data.hp = enemy.GetHP();
+                data.isAlive = enemy.IsAlive();
+            }
+            else
+            {
+                data.position = spawnPoint.transform.position;
+                data.rotation = spawnPoint.transform.rotation;
+                data.hp = 0;
+                data.isAlive = false;
+            }
+
+            enemyCheckpointData.Add(data);
+        }
+    }
+
+    void RestorePlayerCheckpointData()
+    {
+        CharacterController cc = player.GetComponent<CharacterController>();
+        if (cc != null)
+            cc.enabled = false;
+
+        player.transform.SetPositionAndRotation(playerCheckpointData.position, playerCheckpointData.rotation);
+
+        if (cc != null)
+            cc.enabled = true;
+
+        playerScript.RespawnReset();
+
+        playerScript.SetHP(playerCheckpointData.hp);
+        playerScript.SetAmmo(playerCheckpointData.ammo);
+        playerScript.SetMedkits(playerCheckpointData.medkits);
+        playerScript.SetDevilDogPoints(playerCheckpointData.devilDogPoints);
+    }
+
+    void RestoreEnemyCheckpointData()
+    {
+        foreach (EnemyCheckpointData data in enemyCheckpointData)
+        {
+            if (data.spawnPoint == null)
+                continue;
+
+            EnemyAI enemy = data.spawnPoint.GetCurrentEnemy();
+
+            if (data.isAlive)
+            {
+                if (enemy == null)
+                    enemy = data.spawnPoint.SpawnEnemy();
+
+                if (enemy != null)
+                {
+                    enemy.RestoreCheckpointState(
+                        data.position,
+                        data.rotation,
+                        data.hp,
+                        true
+                    );
+                }
+            }
+            else
+            {
+                if (enemy != null)
+                {
+                    Destroy(enemy.gameObject);
+                    data.spawnPoint.ClearEnemyReference();
+                }
+            }
         }
     }
 }
