@@ -17,7 +17,7 @@ public class IntroController : MonoBehaviour
     {
         yield return null;
 
-        MusicManager.instance.PlayMusic(MusicType.Cutscene, 0);
+        MusicManager.instance.PlayMusic(MusicType.Cutscene, 0, .75f);
 
         // Fade into cutscene
         yield return StartCoroutine(fader.FadeIn());

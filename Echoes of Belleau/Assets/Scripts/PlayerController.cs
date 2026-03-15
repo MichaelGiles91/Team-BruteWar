@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     float shootTimer;
     GameObject currentGunInstance;
     Transform activeMuzzle;
-    bool canShoot = true;
+    public bool canShoot = true;
     Coroutine sprintShootDelayRoutine;
 
     public Animator animator;
