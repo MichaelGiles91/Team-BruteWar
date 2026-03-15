@@ -68,6 +68,8 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     Vector3 playerDir;
     Vector3 startingPos;
+    SingleEnemySpawner spawnPoint;
+    bool isDead;
     public event Action<EnemyAI> OnDied;
 
 
@@ -130,15 +132,16 @@ public class EnemyAI : MonoBehaviour, IDamage
 
    void LateUpdate()
     {
-        if (!player) return;
-        
+        if (!player || spine == null) return;
+
         Vector3 direction = player.position - spine.position;
         direction.y = 0f;
 
+        if (direction.sqrMagnitude < 0.001f) return;
+
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-        spine.rotation = Quaternion.Slerp(
-            spine.rotation, targetRotation, Time.deltaTime * turnSpeed);
+        spine.rotation = Quaternion.Slerp(spine.rotation, targetRotation, Time.deltaTime * turnSpeed);
     }
     void checkRoam()
     {
@@ -410,12 +413,79 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void Die()
     {
+        isDead = true;
+
         DevilDogMode devilDog = FindFirstObjectByType<DevilDogMode>();
         if (devilDog != null)
         {
             devilDog.AddKillPoints();
         }
+
         OnDied?.Invoke(this);
+
+        if (spawnPoint != null)
+            spawnPoint.ClearEnemyReference();
+
         Destroy(gameObject);
+    }
+
+    public void SetSpawnPoint(SingleEnemySpawner point)
+    {
+        spawnPoint = point;
+    }
+
+    public int GetHP()
+    {
+        return HP;
+    }
+
+    public bool IsAlive()
+    {
+        return !isDead;
+    }
+
+    public void SetHP(int value)
+    {
+        HP = value;
+    }
+
+    public void RestoreCheckpointState(Vector3 pos, Quaternion rot, int hp, bool alive)
+    {
+        gameObject.SetActive(true);
+
+        isDead = !alive;
+
+        if (agent != null)
+            agent.enabled = false;
+
+        transform.SetPositionAndRotation(pos, rot);
+
+        if (agent != null)
+            agent.enabled = true;
+
+        HP = hp;
+
+        // Reset enemy runtime state so it doesn't resume old behavior weirdly
+        shootTimer = 0f;
+        roamTimer = 0f;
+        reactionTimer = 0f;
+        grenadeTimer = grenadeCooldown;
+
+        currentAmmo = magSize;
+        reloading = false;
+        isReacting = false;
+        playerInTrigger = false;
+        hasLastKnown = false;
+        heldGrenade = null;
+
+        agent.stoppingDistance = stoppingDistOrig;
+        agent.ResetPath();
+
+        model.material.color = colorOrg;
+
+        if (!alive)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
