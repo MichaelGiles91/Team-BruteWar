@@ -12,9 +12,12 @@ public class IntroController : MonoBehaviour
     public ScreenFader fader;
     public string gameplayScene;
 
+    bool isSkipping = false;
     IEnumerator Start()
     {
         yield return null;
+
+        MusicManager.instance.PlayMusic(MusicType.Cutscene, 0, .75f);
 
         // Fade into cutscene
         yield return StartCoroutine(fader.FadeIn());
@@ -47,6 +50,29 @@ public class IntroController : MonoBehaviour
 
         // Fade out before gameplay
         yield return StartCoroutine(fader.FadeOut());
+
+        SceneManager.LoadScene(gameplayScene);
+    }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Cancel") && !isSkipping)
+        {
+            StartCoroutine(SkipCutscene());
+        }
+    }
+
+    IEnumerator SkipCutscene()
+    {
+        isSkipping = true;
+
+        // Stop timeline immediately
+        if (cutscene != null)
+            cutscene.Stop();
+
+        // Fade out quickly
+        if (fader != null)
+            yield return StartCoroutine(fader.FadeOut());
 
         SceneManager.LoadScene(gameplayScene);
     }

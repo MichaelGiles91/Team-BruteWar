@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     float shootTimer;
     GameObject currentGunInstance;
     Transform activeMuzzle;
-    bool canShoot = true;
+    public bool canShoot = true;
     Coroutine sprintShootDelayRoutine;
 
     public Animator animator;
@@ -75,6 +75,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     Vector3 moveDir;
     Vector3 playerVel;
     Vector3 StamBarOrigPos;
+
+    List<GameObject> gunInstances = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -89,6 +91,35 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         medkitCountOrig = medkitCount;
         gameManager.instance.updateMedkitAmount(medkitCount);
         gameManager.instance.UpdateWeaponIcon(null);
+
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            GameObject instance = Instantiate(gunList[i].gunModel);
+
+            Transform rightHandGrip = instance.transform.Find("RightHandGrip");
+
+            if (rightHandGrip == null)
+            {
+                Debug.LogError($"{instance.name} missing RightHandGrip.");
+                Destroy(instance);
+                gunList.RemoveAt(i);
+                i--;
+                continue;
+            }
+
+            AlignWeaponToGrip(instance.transform, rightHandGrip, weaponGripTarget);
+            instance.transform.SetParent(weaponGripTarget, true);
+            instance.SetActive(false);
+
+            gunInstances.Add(instance);
+        }
+
+        gunListPos = 0;
+
+        if (gunInstances.Count > 0)
+        {
+            changeGun();
+        }
 
         //stamina bar setup
         RectTransform fillRect = gameManager.instance.playerStaminaBar.rectTransform;
@@ -134,7 +165,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         updateAnimations();
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate && !isSprinting)
+        if (Input.GetButton("Fire1") && shootTimer >= shootRate && !isSprinting && canShoot)
             shoot();
 
     }
@@ -404,8 +435,25 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     public void getGunStats(gunStats gun)
     {
-        gunStats instance = Instantiate(gun); // clone at runtime
-        gunList.Add(instance);
+        gunStats newGunStats = Instantiate(gun);
+        gunList.Add(newGunStats);
+
+        GameObject instance = Instantiate(newGunStats.gunModel);
+
+        Transform rightHandGrip = instance.transform.Find("RightHandGrip");
+        if (rightHandGrip == null)
+        {
+            Debug.LogError($"{instance.name} missing RightHandGrip.");
+            Destroy(instance);
+            gunList.RemoveAt(gunList.Count - 1);
+            return;
+        }
+
+        AlignWeaponToGrip(instance.transform, rightHandGrip, weaponGripTarget);
+        instance.transform.SetParent(weaponGripTarget, true);
+        instance.SetActive(false);
+
+        gunInstances.Add(instance);
 
         gunListPos = gunList.Count - 1;
         changeGun();
@@ -436,6 +484,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void changeGun()
     {
+        if (gunList.Count == 0 || gunInstances.Count == 0)
+        {
+            Debug.LogError("No guns available to equip.");
+            currentGunInstance = null;
+            return;
+        }
+
+        if (gunListPos < 0 || gunListPos >= gunList.Count || gunListPos >= gunInstances.Count)
+        {
+            Debug.LogError($"Gun index out of range. gunListPos={gunListPos}, gunList.Count={gunList.Count}, gunInstances.Count={gunInstances.Count}");
+            return;
+        }
+
         shootDamage = gunList[gunListPos].shootDamage;
         shootDist = gunList[gunListPos].shootDist;
         shootRate = gunList[gunListPos].shootRate;
@@ -445,10 +506,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
 
-        if (currentGunInstance != null)
-            Destroy(currentGunInstance);
+        foreach (var gun in gunInstances)
+            gun.SetActive(false);
 
-        currentGunInstance = Instantiate(gunList[gunListPos].gunModel);
+        currentGunInstance = gunInstances[gunListPos];
+        currentGunInstance.SetActive(true);
 
         foreach (Collider col in currentGunInstance.GetComponentsInChildren<Collider>())
         {
@@ -458,29 +520,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         int fpsLayer = LayerMask.NameToLayer("FPSArms");
         if (fpsLayer >= 0)
             SetLayerRecursively(currentGunInstance, fpsLayer);
-
-        Transform rightHandGrip = currentGunInstance.transform.Find("RightHandGrip");
-        if (rightHandGrip == null)
-        {
-            Debug.LogError($"{currentGunInstance.name} missing RightHandGrip. Cannot equip.");
-            Destroy(currentGunInstance);
-            return;
-        }
-        else
-        {
-            if (weaponGripTarget == null)
-            {
-                Debug.LogError("weaponGripTarget is not assigned on PlayerController.");
-                Destroy(currentGunInstance);
-                return;
-            }
-
-            AlignWeaponToGrip(currentGunInstance.transform, rightHandGrip, weaponGripTarget);
-
-
-            currentGunInstance.transform.SetParent(weaponGripTarget, true);
-        }
-
 
         Transform muzzle = currentGunInstance.transform.Find("Muzzle");
         if (muzzle == null)
@@ -539,7 +578,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     void selectGun()
     {
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
-            Debug.Log($"Scroll input | gunListPos: {gunListPos} | gunList.Count: {gunList.Count}");
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
         {

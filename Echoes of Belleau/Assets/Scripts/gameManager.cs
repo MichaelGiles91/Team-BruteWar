@@ -106,6 +106,8 @@ public class gameManager : MonoBehaviour
 
         timeScaleOrig = Time.timeScale;
 
+        MusicManager.instance.PlayMusic(MusicType.Calm, 0);
+
 
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
@@ -141,6 +143,7 @@ public class gameManager : MonoBehaviour
             if (menuActive == null)
 
             {
+                MusicManager.instance.PlayMusic(MusicType.Menu, 0, 1f);
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
@@ -149,6 +152,7 @@ public class gameManager : MonoBehaviour
             }
             else if (menuActive == menuPause)
             {
+                MusicManager.instance.PlayMusic(MusicType.Calm, 0, 1f);
                 stateUnpause();
             }
         }
@@ -178,6 +182,7 @@ public class gameManager : MonoBehaviour
     public void statePause()
     {
         isPaused = true;
+        playerScript.canShoot = false;
 
         Time.timeScale = 0; // Set the time scale to 0 to pause the game
         Cursor.visible = true; // Make the cursor visible when the game is paused
@@ -187,6 +192,7 @@ public class gameManager : MonoBehaviour
     public void stateUnpause()
     {
         isPaused = false;
+        playerScript.canShoot = true;
         Time.timeScale = timeScaleOrig; // Reset the time scale to its original value to unpause the game
         Cursor.visible = false; // Hide the cursor when the game is unpaused
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor when the game is unpaused
@@ -526,5 +532,17 @@ public class gameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void LoadSceneWithFade(string sceneName)
+    {
+        StartCoroutine(FadeAndLoad(sceneName));
+    }
+
+    IEnumerator FadeAndLoad(string sceneName)
+    {
+        yield return StartCoroutine(fader.FadeOut());
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 }
