@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b3ac9098db029b543983cc30d84c4649
+timeCreated: 1490621095
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86645
+  packageName: World War 1 Mark V Tank
+  packageVersion: 1.2
+  assetPath: Assets/MarkVtank/Read Me.txt
+  uploadId: 190688

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dc8ab80cfa0a70e489bfa70b2fc9ae67
+timeCreated: 1500309612
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86645
+  packageName: World War 1 Mark V Tank
+  packageVersion: 1.2
+  assetPath: Assets/MarkVtank/Prefab/Demo.prefab
+  uploadId: 190688
