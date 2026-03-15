@@ -27,10 +27,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] int ammoMax;
     int ammoCountOrig;
 
+    [SerializeField] int grenadeCount;
+    [SerializeField] int grenadeMax;
+    int grenadeCountOrig;
+
     [SerializeField] int medkitCount;
     [SerializeField] int medkitHealAmount = 25;
     int medkitCountOrig;
+
     public int AmmoCount => ammoCount;
+    public int GrenadeCount => grenadeMax;
     public int MedkitCount => medkitCount;
 
     [Header("---Devil Dog Mode")]
@@ -87,6 +93,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public bool canShoot = true;
     Coroutine sprintShootDelayRoutine;
 
+    public GameObject knife;
+    [SerializeField] KnifeDamage GetKnifeDamage;
+    bool canMelee = true;
+
+    [Header("Grenade")]
+    [SerializeField] GameObject grenadePrefab;
+    [SerializeField] float grenadeCooldown = 6f;
+    [SerializeField] float grenadeThrowForce = 12f;
+    [SerializeField] float grenadeUpForce = 4f;
+    [SerializeField] Transform grenadePos;
+    float grenadeTimer;
+    GameObject heldGrenade;
+
     public Animator animator;
     ParticleSystem activeMuzzleFlash;
     Light muzzleLight;
@@ -118,6 +137,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         ammoCountOrig = ammoCount;
         devilDogMode = GetComponent<DevilDogMode>();
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
+        grenadeCountOrig = grenadeCount;
+        grenadeTimer = grenadeCooldown;
+        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
         medkitCountOrig = medkitCount;
         gameManager.instance.updateMedkitAmount(medkitCount);
         gameManager.instance.UpdateWeaponIcon(null);
@@ -178,6 +200,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         sprint();
         UpdateStress();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
+        grenadeTimer += Time.deltaTime;
+        if (Input.GetButtonDown("ThrowGrenade"))
+        {
+            HoldGrenade();
+            UseGrenade();
+        }
         if (Input.GetButtonDown("UseMedkit"))
         {
             UseMedkit();
@@ -209,6 +237,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         if (Input.GetButton("Fire1") && shootTimer >= shootRate && !isSprinting && canShoot)
             shoot();
+        Melee();
 
     }
 
@@ -263,7 +292,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         bool sprintHeld = Input.GetButton("Sprint");
 
         if (sprintHeld && !sprintDisable && stamina > 0f)
-        { 
+        {
             currentlySprinting = true;
             stamina -= staminaDrainRate * Time.deltaTime;
             speed = speedOrig * sprintMod;
@@ -481,6 +510,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             currentGunInstance.SetActive(state);
     }
 
+    public void getGrenade(int amount)
+    {
+        grenadeCount += amount;
+        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+    }
+
     public void getMedkit(int amount)
     {
         medkitCount += amount;
@@ -665,6 +700,68 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
     }
 
+    void HoldGrenade()
+    {
+        heldGrenade = Instantiate(grenadePrefab, grenadePos.position, grenadePos.rotation);
+        heldGrenade.transform.SetParent(grenadePos);
+        heldGrenade.transform.localPosition = Vector3.zero; // Ensure the grenade is positioned correctly relative to the shootPos
+        heldGrenade.transform.localRotation = Quaternion.identity; // Ensure the grenade has no local rotation relative to the shootPos
+
+
+        Rigidbody rb = heldGrenade.GetComponent<Rigidbody>();
+        if ((rb != null))
+        {
+            rb.isKinematic = true; // Make the grenade not affected by physics while held
+            rb.useGravity = false; // Disable gravity while held
+        }
+
+        Collider col = heldGrenade.GetComponent<Collider>();
+        if (col != null) col.enabled = false; // Disable the collider while held to prevent collisions with the enemy
+    }
+
+    void UseGrenade()
+    {
+        if (grenadeCount <= 0)
+            return;
+
+        grenadeCount--;
+
+        if (heldGrenade == null)
+        {
+            return;
+        }
+
+        heldGrenade.transform.SetParent(null);
+
+        Rigidbody rb = heldGrenade.GetComponent<Rigidbody>();
+        Collider col = heldGrenade.GetComponent<Collider>();
+
+        if (col != null) col.enabled = true;
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            Vector3 aimpoint = Camera.main.transform.position + Camera.main.transform.forward;
+            Vector3 throwDir = (aimpoint - grenadePos.position).normalized;
+
+            damage dmg = heldGrenade.GetComponent<damage>();
+            if (dmg != null)
+            {
+                dmg.Arm();
+            }
+
+            Vector3 force = (throwDir * grenadeThrowForce) + (Vector3.up * grenadeUpForce);
+            rb.AddForce(force, ForceMode.VelocityChange);
+        }
+        heldGrenade = null;
+
+        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        UpdatePlayerUI();
+    }
 
     void UseMedkit()
     {
@@ -706,6 +803,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         yield return new WaitForSeconds(0.6f);
         canShoot = true;
     }
+
     public int GetHP()
     {
         return HP;
@@ -818,5 +916,38 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             stressDepthOfField.gaussianEnd.value = Mathf.Lerp(40f, 8f, strongT);
             stressDepthOfField.gaussianMaxRadius.value = Mathf.Lerp(0.3f, 1.6f, strongT);
         }
+    }
+
+    void Melee()
+    {
+        if (Input.GetButtonDown("Melee") && canMelee)
+        {
+            StartCoroutine(MeleeDelay());
+            knife.SetActive(true);
+            animator.SetTrigger("Melee");
+            GetKnifeDamage.DoKnifeHit();
+            StartCoroutine(gunHide());
+            StartCoroutine(knifeHideDelay());
+        }
+    }
+
+    IEnumerator knifeHideDelay()
+    {
+        yield return new WaitForSeconds(.3f);
+        knife.SetActive(false);
+    }
+
+    IEnumerator MeleeDelay()
+    {
+        canMelee = false;
+        yield return new WaitForSeconds(0.6f);
+        canMelee = true;
+    }
+
+    IEnumerator gunHide()
+    {
+        currentGunInstance.SetActive(false);
+        yield return new WaitForSeconds(.3f);
+        currentGunInstance.SetActive(true);
     }
 }

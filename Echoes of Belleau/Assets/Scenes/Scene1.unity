@@ -13762,21 +13762,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3609447118841018089, guid: 3cfc4b22305dcb24eb0fbeccf212d190, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -6.89
-      objectReference: {fileID: 0}
     - target: {fileID: 6521602316508536380, guid: 3cfc4b22305dcb24eb0fbeccf212d190, type: 3}
       propertyPath: m_Name
       value: CheckPoints
-      objectReference: {fileID: 0}
-    - target: {fileID: 7281289893957536097, guid: 3cfc4b22305dcb24eb0fbeccf212d190, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -8.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687692328576160968, guid: 3cfc4b22305dcb24eb0fbeccf212d190, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -7.71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13902,7 +13890,7 @@ PrefabInstance:
       objectReference: {fileID: 99035797}
     - target: {fileID: 9007802494418619968, guid: 6d38c77443b2a4f4481b2e390a8c4d8e, type: 3}
       propertyPath: m_VersionIndex
-      value: 9733
+      value: 9739
       objectReference: {fileID: 0}
     - target: {fileID: 9171571869265097040, guid: 6d38c77443b2a4f4481b2e390a8c4d8e, type: 3}
       propertyPath: m_Name

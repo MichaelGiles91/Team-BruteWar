@@ -36,6 +36,7 @@ public class gameManager : MonoBehaviour
     [Header("---Game Screens---")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     public bool isPaused;
@@ -63,6 +64,7 @@ public class gameManager : MonoBehaviour
     [Header("---Objective Items---")]
     [SerializeField] GameObject objEnemyCounter;
     [SerializeField] TMP_Text objEnemyText;
+    [SerializeField] TMP_Text grenadeAmountText;
     [SerializeField] TMP_Text medkitAmountText;
     [SerializeField] GameObject objective;
     [SerializeField] TMP_Text objectiveHeaderText;
@@ -85,6 +87,8 @@ public class gameManager : MonoBehaviour
 
     int currentObjectiveIndex = 0;
     bool hasActivatedFirstMarker = false;
+
+    public PlayerController grenadeAmount;
 
     public PlayerController medkitAmount;
 
@@ -112,6 +116,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         ammoAmount = player.GetComponent<PlayerController>();
+        grenadeAmount = player.GetComponent<PlayerController>();
         medkitAmount = player.GetComponent<PlayerController>();
         mapStuff = GameObject.FindWithTag("Map Stuff");
         mapStuff.SetActive(false);
@@ -265,6 +270,11 @@ public class gameManager : MonoBehaviour
     {
         ammoAmountText.text = currentAmmo.ToString();
         ammoMaxText.text = maxAmmo.ToString();
+    }
+
+    public void updateGrenadeAmount(int currentGrenade, int maxGrenade)
+    {
+        grenadeAmountText.text = currentGrenade.ToString();
     }
 
     public void updateMedkitAmount(int currentMedkit)
@@ -544,5 +554,25 @@ public class gameManager : MonoBehaviour
         yield return StartCoroutine(fader.FadeOut());
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
+    public void settingsMenu()
+    {
+        //menuActive = null;
+        menuSettings.SetActive(true);
+        menuActive = menuSettings;
+        if (Input.GetButtonDown("Cancel"))
+        {
+            //menuActive = null;
+            menuSettings.SetActive(false);
+            menuActive = menuPause;
+        }
+    }
+
+    internal void Back()
+    {
+        //menuActive = null;
+        menuSettings.SetActive(false);
+        menuActive = menuPause;
     }
 }

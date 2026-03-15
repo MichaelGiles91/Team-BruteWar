@@ -19,6 +19,20 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateUnpause();
     }
+    public void respawn()
+    {
+        gameManager.instance.Respawn();
+    }
+
+    public void settings()
+    {
+        gameManager.instance.settingsMenu();
+    }
+
+    public void back()
+    {
+        gameManager.instance.Back();
+    }
 
     public void quit()
     {
@@ -28,9 +42,5 @@ public class ButtonFunctions : MonoBehaviour
 #else 
     Application.Quit();
 #endif
-    }
-    public void respawn()
-    {
-        gameManager.instance.Respawn();
     }
 }
