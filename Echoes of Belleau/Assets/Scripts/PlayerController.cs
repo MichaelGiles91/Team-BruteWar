@@ -124,24 +124,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         for (int i = 0; i < gunList.Count; i++)
         {
-            GameObject instance = Instantiate(gunList[i].gunModel);
-
-            Transform rightHandGrip = instance.transform.Find("RightHandGrip");
-
-            if (rightHandGrip == null)
+            if (CreateGunInstance(gunList[i], out GameObject instance))
             {
-                Debug.LogError($"{instance.name} missing RightHandGrip.");
-                Destroy(instance);
+                gunInstances.Add(instance);
+            }
+            else
+            {
                 gunList.RemoveAt(i);
                 i--;
-                continue;
             }
-
-            AlignWeaponToGrip(instance.transform, rightHandGrip, weaponGripTarget);
-            instance.transform.SetParent(weaponGripTarget, true);
-            instance.SetActive(false);
-
-            gunInstances.Add(instance);
         }
 
         gunListPos = 0;
@@ -492,20 +483,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gunStats newGunStats = Instantiate(gun);
         gunList.Add(newGunStats);
 
-        GameObject instance = Instantiate(newGunStats.gunModel);
-
-        Transform rightHandGrip = instance.transform.Find("RightHandGrip");
-        if (rightHandGrip == null)
+        if (!CreateGunInstance(newGunStats, out GameObject instance))
         {
-            Debug.LogError($"{instance.name} missing RightHandGrip.");
-            Destroy(instance);
             gunList.RemoveAt(gunList.Count - 1);
             return;
         }
-
-        AlignWeaponToGrip(instance.transform, rightHandGrip, weaponGripTarget);
-        instance.transform.SetParent(weaponGripTarget, true);
-        instance.SetActive(false);
 
         gunInstances.Add(instance);
 
@@ -736,6 +718,120 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public int GetAmmoMax()
     {
         return ammoMax;
+    }
+
+    bool CreateGunInstance(gunStats gun, out GameObject instance)
+    {
+        instance = Instantiate(gun.gunModel);
+
+        Transform rightHandGrip = instance.transform.Find("RightHandGrip");
+        if (rightHandGrip == null)
+        {
+            Debug.LogError($"{instance.name} missing RightHandGrip.");
+            Destroy(instance);
+            instance = null;
+            return false;
+        }
+
+        AlignWeaponToGrip(instance.transform, rightHandGrip, weaponGripTarget);
+        instance.transform.SetParent(weaponGripTarget, true);
+        instance.SetActive(false);
+
+        return true;
+    }
+
+    public void RestoreWeaponsWithoutReinstantiating(List<WeaponCheckpointData> savedWeapons, int savedGunIndex)
+    {
+        if (savedWeapons == null)
+            return;
+
+        SaveAmmoToGunStats();
+
+        // Hide all current weapon instances first
+        foreach (GameObject gunObj in gunInstances)
+        {
+            if (gunObj != null)
+                gunObj.SetActive(false);
+        }
+
+        List<gunStats> restoredGunList = new List<gunStats>();
+        List<GameObject> restoredInstances = new List<GameObject>();
+
+        for (int i = 0; i < savedWeapons.Count; i++)
+        {
+            WeaponCheckpointData saved = savedWeapons[i];
+            if (saved == null || saved.gunRef == null)
+                continue;
+
+            int existingIndex = FindGunIndexByReference(saved.gunRef);
+
+            if (existingIndex != -1)
+            {
+                gunStats existingGun = gunList[existingIndex];
+                GameObject existingInstance = gunInstances[existingIndex];
+
+                existingGun.ammoCur = saved.ammoCur;
+                existingGun.ammoMax = saved.ammoMax;
+
+                restoredGunList.Add(existingGun);
+                restoredInstances.Add(existingInstance);
+            }
+        }
+
+        gunList = restoredGunList;
+        gunInstances = restoredInstances;
+
+        if (gunList.Count == 0 || gunInstances.Count == 0)
+        {
+            gunListPos = 0;
+            currentGunInstance = null;
+            activeMuzzle = null;
+            activeMuzzleFlash = null;
+            muzzleLight = null;
+            gameManager.instance.UpdateWeaponIcon(null);
+            gameManager.instance.updateAmmoAmount(0, 0);
+            return;
+        }
+
+        gunListPos = Mathf.Clamp(savedGunIndex, 0, gunList.Count - 1);
+        changeGun();
+    }
+
+    int FindGunIndexByReference(gunStats targetGun)
+    {
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            if (gunList[i] == targetGun)
+                return i;
+        }
+
+        return -1;
+    }
+
+    public List<WeaponCheckpointData> GetWeaponCheckpointData()
+    {
+        SaveAmmoToGunStats();
+
+        List<WeaponCheckpointData> data = new List<WeaponCheckpointData>();
+
+        foreach (gunStats gun in gunList)
+        {
+            if (gun == null) continue;
+
+            WeaponCheckpointData entry = new WeaponCheckpointData();
+            entry.gunRef = gun;
+            entry.ammoCur = gun.ammoCur;
+            entry.ammoMax = gun.ammoMax;
+
+            data.Add(entry);
+        }
+
+        return data;
+    }
+
+    public int GetSelectedGunIndex()
+    {
+        return gunListPos;
     }
 
     public void SetMoveSlow(float multiplier)

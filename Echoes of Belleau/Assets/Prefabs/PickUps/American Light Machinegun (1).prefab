@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 5439967007678120509}
   - component: {fileID: 6477617732726512268}
   - component: {fileID: 3676892122772710288}
+  - component: {fileID: -396637673093118872}
   m_Layer: 10
   m_Name: American Light Machinegun (1)
   m_TagString: Untagged
@@ -200,6 +201,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPickups
   gun: {fileID: 11400000, guid: 5d7358881fd092144ac93fbbe193c9e8, type: 2}
+--- !u!114 &-396637673093118872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2748506045018734754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c453df2d83c5d3e4691949a46d6047e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckpointPickup
+  rootObject: {fileID: 0}
 --- !u!1 &4653062984197619853
 GameObject:
   m_ObjectHideFlags: 0

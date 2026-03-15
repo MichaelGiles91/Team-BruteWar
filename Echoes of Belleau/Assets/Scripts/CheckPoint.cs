@@ -16,7 +16,7 @@ using UnityEngine;
           if (other.CompareTag("Player"))
           {
               isActivated = true;
-               gameManager.instance.SetCheckpoint(transform);
+               gameManager.instance.SetCheckpoint();
   
              if (checkpointRenderer != null)
                   checkpointRenderer.material.color = activatedColor;

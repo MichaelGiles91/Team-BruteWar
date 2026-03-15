@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 2204120198153037650}
   - component: {fileID: 5643170620794276397}
   - component: {fileID: 5313374931451416139}
+  - component: {fileID: -2719130592052373928}
   m_Layer: 0
   m_Name: Ammo Pickup
   m_TagString: Untagged
@@ -179,3 +180,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be1ff0c1d3480341b9a4e716e9680f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ammoPickup
+--- !u!114 &-2719130592052373928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8933739321814725250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c453df2d83c5d3e4691949a46d6047e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckpointPickup
+  rootObject: {fileID: 0}

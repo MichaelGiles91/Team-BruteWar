@@ -11,7 +11,7 @@ public class healthPickup : MonoBehaviour
         if (pik != null)
         {
             pik.getMedkit(amount);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

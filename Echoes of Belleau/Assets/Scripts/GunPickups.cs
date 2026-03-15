@@ -13,7 +13,7 @@ public class GunPickups : MonoBehaviour
         {
             gun.ammoCur = gun.magSize;
             pik.getGunStats(gun);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
 
         }
     }
