@@ -1780,7 +1780,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.05
-  far clip plane: 250
+  far clip plane: 50
   field of view: 80
   orthographic: 0
   orthographic size: 5
@@ -2828,8 +2828,8 @@ MonoBehaviour:
   shootRate: 0.5
   ammoCount: 35
   ammoMax: 0
-  grenadeCount: 100
-  grenadeMax: 300
+  grenadeCount: 1
+  grenadeMax: 3
   medkitCount: 0
   medkitHealAmount: 50
   devilDogMode: {fileID: 0}
@@ -2847,16 +2847,18 @@ MonoBehaviour:
   suppressionStressAmount: 12
   explosionStressAmount: 25
   maxSpreadStressPenalty: 0.15
-  maxMoveAimPenalty: 0.1
   stressVolume: {fileID: 6069346689395878634}
   weaponGripTarget: {fileID: 1923413059554943347}
   leftHandIKBinder: {fileID: 8769305006064299264}
   rigBuilder: {fileID: 9121955426812216187}
   aud: {fileID: 1869593869715654860}
+  walkStepInterval: 0.45
+  runStepInterval: 0.3
+  footstepResetGrace: 0.12
   canShoot: 1
   knife: {fileID: 7890672864714921905}
   GetKnifeDamage: {fileID: 8619254073232536756}
-  grenadePrefab: {fileID: 0}
+  grenadePrefab: {fileID: 958630158421029500, guid: 1a618acaf3ce7b0449481ad186cb451f, type: 3}
   grenadeCooldown: 3
   grenadeThrowForce: 6
   grenadeUpForce: 2
@@ -2914,7 +2916,7 @@ AudioSource:
   m_GameObject: {fileID: 8263746862360927993}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4120354837305821247, guid: f270d0a7d146d0b49af163c09adc95ab, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -3315,7 +3317,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 50
+  far clip plane: 25
   field of view: 70
   orthographic: 0
   orthographic size: 5

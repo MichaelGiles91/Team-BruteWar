@@ -4380,7 +4380,7 @@ MonoBehaviour:
   autoActivateFirstMarker: 1
   objEnemyCounter: {fileID: 5825557171531637151}
   objEnemyText: {fileID: 1513036109009864113}
-  grenadeAmountText: {fileID: 0}
+  grenadeAmountText: {fileID: 342363344446314680}
   medkitAmountText: {fileID: 1441781723349009801}
   objective: {fileID: 3396233002942287690}
   objectiveHeaderText: {fileID: 6186548617455082782}
@@ -5628,7 +5628,7 @@ GameObject:
   - component: {fileID: 3505596955313437184}
   - component: {fileID: 8070018041125485492}
   m_Layer: 5
-  m_Name: MedKit
+  m_Name: Grenade Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7066,7 +7066,7 @@ GameObject:
   - component: {fileID: 6127505459192811098}
   - component: {fileID: 342363344446314680}
   m_Layer: 5
-  m_Name: Medkit Amount
+  m_Name: Grenade Amount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

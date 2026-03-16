@@ -14364,18 +14364,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1869593869715654860, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 4120354837305821247, guid: f270d0a7d146d0b49af163c09adc95ab, type: 2}
-    - target: {fileID: 2646739285410312660, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
-      propertyPath: far clip plane
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6016543296467833976, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
-      propertyPath: far clip plane
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 7378915965934929096, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
       propertyPath: interactPrompt
       value: 
@@ -14808,18 +14796,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SFXManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4685319303511574601, guid: a53ce20ded39a3c4a990244192330d79, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 4120354837305821247, guid: f270d0a7d146d0b49af163c09adc95ab, type: 2}
-    - target: {fileID: 5668718685617762691, guid: a53ce20ded39a3c4a990244192330d79, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 4120354837305821247, guid: f270d0a7d146d0b49af163c09adc95ab, type: 2}
-    - target: {fileID: 7724749307077971829, guid: a53ce20ded39a3c4a990244192330d79, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 4120354837305821247, guid: f270d0a7d146d0b49af163c09adc95ab, type: 2}
     - target: {fileID: 8273508603052017118, guid: a53ce20ded39a3c4a990244192330d79, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -14938,10 +14914,6 @@ PrefabInstance:
       propertyPath: mapMin
       value: 
       objectReference: {fileID: 398537679}
-    - target: {fileID: 5820269216989881562, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7207331868415215842, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
       propertyPath: m_Pivot.x
       value: 0
