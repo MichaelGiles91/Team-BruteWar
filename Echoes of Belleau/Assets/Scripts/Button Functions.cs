@@ -6,7 +6,7 @@ public class ButtonFunctions : MonoBehaviour
    
     public void playGame()
     {
-        SceneManager.LoadScene("Intro Scene");
+        MainMenuController.instance.StartGame();
     }
     public void resume()
     {
@@ -44,6 +44,11 @@ public class ButtonFunctions : MonoBehaviour
     public void backMainMenu()
     {
         MainMenuSettings.instance.Back();
+    }
+
+    public void credits()
+    {
+        SceneManager.LoadScene("Credits");
     }
 
     public void quit()
