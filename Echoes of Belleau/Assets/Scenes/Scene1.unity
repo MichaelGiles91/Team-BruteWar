@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.18867922, g: 0.18778922, b: 0.18778922, a: 1}
+  m_FogColor: {r: 0.10196079, g: 0.13333334, b: 0.19215688, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.039
+  m_FogDensity: 0.086
   m_LinearFogStart: 0
   m_LinearFogEnd: 35
   m_AmbientSkyColor: {r: 0.1470273, g: 0.19120172, b: 0.3515327, a: 1}
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.12941177, g: 0.13333334, b: 0.14117648, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: d80d09034dfa5124c9bfe3c7741c9f04, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 8be96a95cc0bd5245bfcb88ee8767c4b, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -14368,6 +14368,14 @@ PrefabInstance:
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 4120354837305821247, guid: f270d0a7d146d0b49af163c09adc95ab, type: 2}
+    - target: {fileID: 2646739285410312660, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: far clip plane
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016543296467833976, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: far clip plane
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7378915965934929096, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
       propertyPath: interactPrompt
       value: 
@@ -14930,6 +14938,10 @@ PrefabInstance:
       propertyPath: mapMin
       value: 
       objectReference: {fileID: 398537679}
+    - target: {fileID: 5820269216989881562, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7207331868415215842, guid: 51005bfbd402aad47b6c74e5b3126201, type: 3}
       propertyPath: m_Pivot.x
       value: 0
