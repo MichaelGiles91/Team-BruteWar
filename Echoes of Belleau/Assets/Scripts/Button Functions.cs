@@ -19,8 +19,10 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateUnpause();
     }
+
     public void respawn()
     {
+        MusicManager.instance.PlayMusic(MusicType.Calm, 0, .5f);
         gameManager.instance.Respawn();
     }
 
@@ -34,6 +36,16 @@ public class ButtonFunctions : MonoBehaviour
         gameManager.instance.Back();
     }
 
+    public void settingsMainMenu()
+    {
+        MainMenuSettings.instance.settingsMenu();
+    }
+
+    public void backMainMenu()
+    {
+        MainMenuSettings.instance.Back();
+    }
+
     public void quit()
     {
 #if UNITY_EDITOR
@@ -42,10 +54,5 @@ public class ButtonFunctions : MonoBehaviour
 #else 
     Application.Quit();
 #endif
-    }
-    public void respawn()
-    {
-        MusicManager.instance.PlayMusic(MusicType.Calm, 0, .5f);
-        gameManager.instance.Respawn();
     }
 }

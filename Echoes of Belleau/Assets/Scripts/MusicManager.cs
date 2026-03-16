@@ -156,7 +156,7 @@ public class MusicManager : MonoBehaviour
         if (!activeSource.isPlaying && !inactiveSource.isPlaying)
         {
             activeSource.clip = selectedClip;
-            activeSource.volume = 0f; ////////////////////////////////////////////
+            activeSource.volume = 1f;
             activeSource.loop = group.loop;
             activeSource.Play();
 
@@ -202,13 +202,40 @@ public class MusicManager : MonoBehaviour
         isTransitioning = true;
         endFadeTriggered = false;
 
-        inactiveSource.Stop();
-        inactiveSource.clip = newClip;
-        inactiveSource.loop = shouldLoop;
-        inactiveSource.volume = 0f;
-        inactiveSource.Play();
+        // Figure out which source is currently dominant
+        if (sourceA.isPlaying || sourceB.isPlaying)
+        {
+            if (sourceA.volume >= sourceB.volume)
+            {
+                activeSource = sourceA;
+                inactiveSource = sourceB;
+            }
+            else
+            {
+                activeSource = sourceB;
+                inactiveSource = sourceA;
+            }
+        }
+
+        // If inactive source already has the requested clip, keep it.
+        // Otherwise replace it.
+        if (inactiveSource.clip != newClip)
+        {
+            inactiveSource.Stop();
+            inactiveSource.clip = newClip;
+            inactiveSource.loop = shouldLoop;
+            inactiveSource.volume = 0f;
+            inactiveSource.Play();
+        }
+        else if (!inactiveSource.isPlaying)
+        {
+            inactiveSource.loop = shouldLoop;
+            inactiveSource.Play();
+        }
 
         float startActiveVolume = activeSource.isPlaying ? activeSource.volume : 0f;
+        float startInactiveVolume = inactiveSource.volume;
+
         float timer = 0f;
 
         while (timer < fadeDuration)
@@ -219,7 +246,7 @@ public class MusicManager : MonoBehaviour
             if (activeSource.isPlaying)
                 activeSource.volume = Mathf.Lerp(startActiveVolume, 0f, t);
 
-            inactiveSource.volume = Mathf.Lerp(0f, 0f, t);///////////////////////////////////////////////////////////////////////
+            inactiveSource.volume = Mathf.Lerp(startInactiveVolume, 1f, t);
 
             yield return null;
         }
@@ -230,7 +257,7 @@ public class MusicManager : MonoBehaviour
             activeSource.Stop();
         }
 
-        inactiveSource.volume = 0f;////////////////////////////////////////////////////////////////////
+        inactiveSource.volume = 1f;
 
         AudioSource temp = activeSource;
         activeSource = inactiveSource;

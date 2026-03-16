@@ -165,7 +165,7 @@ public class gameManager : MonoBehaviour
             if (menuActive == null)
 
             {
-                MusicManager.instance.PlayMusic(MusicType.Menu, 0, 1f);
+                MusicManager.instance.PlayMusic(MusicType.Menu, 0, .5f);
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
@@ -174,7 +174,7 @@ public class gameManager : MonoBehaviour
             }
             else if (menuActive == menuPause)
             {
-                MusicManager.instance.PlayMusic(MusicType.Calm, 0, 1f);
+                MusicManager.instance.PlayMusic(MusicType.Calm, 0, .5f);
                 stateUnpause();
             }
         }
