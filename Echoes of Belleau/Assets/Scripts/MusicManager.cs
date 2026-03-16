@@ -156,7 +156,7 @@ public class MusicManager : MonoBehaviour
         if (!activeSource.isPlaying && !inactiveSource.isPlaying)
         {
             activeSource.clip = selectedClip;
-            activeSource.volume = 1f;
+            activeSource.volume = 0f; ////////////////////////////////////////////
             activeSource.loop = group.loop;
             activeSource.Play();
 
@@ -219,7 +219,7 @@ public class MusicManager : MonoBehaviour
             if (activeSource.isPlaying)
                 activeSource.volume = Mathf.Lerp(startActiveVolume, 0f, t);
 
-            inactiveSource.volume = Mathf.Lerp(0f, 1f, t);
+            inactiveSource.volume = Mathf.Lerp(0f, 0f, t);///////////////////////////////////////////////////////////////////////
 
             yield return null;
         }
@@ -230,7 +230,7 @@ public class MusicManager : MonoBehaviour
             activeSource.Stop();
         }
 
-        inactiveSource.volume = 1f;
+        inactiveSource.volume = 0f;////////////////////////////////////////////////////////////////////
 
         AudioSource temp = activeSource;
         activeSource = inactiveSource;
