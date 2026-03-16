@@ -4,20 +4,20 @@ public class SingleEnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject enemyPrefab;
 
-    EnemyAI currentEnemy;
+    EnemyAIwRoam currentEnemy;
 
     void Start()
     {
         SpawnEnemy();
     }
 
-    public EnemyAI SpawnEnemy()
+    public EnemyAIwRoam SpawnEnemy()
     {
         if (currentEnemy != null)
             return currentEnemy;
 
         GameObject spawnedEnemy = Instantiate(enemyPrefab, transform.position, transform.rotation);
-        currentEnemy = spawnedEnemy.GetComponent<EnemyAI>();
+        currentEnemy = spawnedEnemy.GetComponent<EnemyAIwRoam>();
 
         if (currentEnemy != null)
             currentEnemy.SetSpawnPoint(this);
@@ -25,7 +25,7 @@ public class SingleEnemySpawner : MonoBehaviour
         return currentEnemy;
     }
 
-    public EnemyAI GetCurrentEnemy()
+    public EnemyAIwRoam GetCurrentEnemy()
     {
         return currentEnemy;
     }

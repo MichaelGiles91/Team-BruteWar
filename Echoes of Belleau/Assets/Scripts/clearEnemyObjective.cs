@@ -144,5 +144,23 @@ public class AreaObjective : MonoBehaviour
             gameManager.instance.updateObjectiveText(nextObjectiveText, nextObjectiveHeader);
     }
 
+    public void RefreshTrackedEnemies()
+    {
+        foreach (EnemyAIwRoam enemy in trackedEnemies)
+        {
+            if (enemy != null)
+                enemy.OnDied -= HandleEnemyDied;
+        }
 
+        trackedEnemies.Clear();
+
+        if (!active || complete)
+            return;
+
+        TrackAllEnemiesInside();
+        UpdateObjectiveUI();
+
+        if (trackedEnemies.Count == 0)
+            CompleteObjective();
+    }
 }

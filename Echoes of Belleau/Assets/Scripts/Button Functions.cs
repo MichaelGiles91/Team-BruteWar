@@ -43,4 +43,9 @@ public class ButtonFunctions : MonoBehaviour
     Application.Quit();
 #endif
     }
+    public void respawn()
+    {
+        MusicManager.instance.PlayMusic(MusicType.Calm, 0, .5f);
+        gameManager.instance.Respawn();
+    }
 }

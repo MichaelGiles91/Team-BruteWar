@@ -14,9 +14,23 @@ public class PlayerCheckpointData
     public Vector3 position;
     public Quaternion rotation;
     public int hp;
-    public int ammo;
     public int medkits;
     public float devilDogPoints;
+}
+
+[System.Serializable]
+public class WeaponCheckpointData
+{
+    public gunStats gunRef;
+    public int ammoCur;
+    public int ammoMax;
+}
+
+[System.Serializable]
+public class PickupCheckpointData
+{
+    public CheckpointPickup pickup;
+    public bool isActive;
 }
 
 [System.Serializable]
@@ -98,6 +112,9 @@ public class gameManager : MonoBehaviour
 
     PlayerCheckpointData playerCheckpointData = new PlayerCheckpointData();
     List<EnemyCheckpointData> enemyCheckpointData = new List<EnemyCheckpointData>();
+    List<WeaponCheckpointData> checkpointWeapons = new List<WeaponCheckpointData>();
+    List<PickupCheckpointData> pickupCheckpointData = new List<PickupCheckpointData>();
+    int checkpointSelectedGunIndex = 0;
 
     private void Awake()
     {
@@ -232,12 +249,13 @@ public class gameManager : MonoBehaviour
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
-    public void SetCheckpoint(Transform t)
+    public void SetCheckpoint()
     {
         hasCheckpoint = true;
 
         SavePlayerCheckpointData();
         SaveEnemyCheckpointData();
+        SavePickupCheckpointData();
 
         StartCoroutine(showCheckpointNotification());
     }
@@ -256,6 +274,8 @@ public class gameManager : MonoBehaviour
 
         RestorePlayerCheckpointData();
         RestoreEnemyCheckpointData();
+        RestorePickupCheckpointData();
+        RefreshActiveAreaObjective();
     }
 
     IEnumerator showCheckpointNotification()
@@ -451,9 +471,10 @@ public class gameManager : MonoBehaviour
         playerCheckpointData.position = player.transform.position;
         playerCheckpointData.rotation = player.transform.rotation;
         playerCheckpointData.hp = playerScript.GetHP();
-        playerCheckpointData.ammo = playerScript.AmmoCount;
         playerCheckpointData.medkits = playerScript.MedkitCount;
         playerCheckpointData.devilDogPoints = playerScript.GetDevilDogPoints();
+        checkpointWeapons = playerScript.GetWeaponCheckpointData();
+        checkpointSelectedGunIndex = playerScript.GetSelectedGunIndex();
     }
 
     void SaveEnemyCheckpointData()
@@ -469,7 +490,7 @@ public class gameManager : MonoBehaviour
             EnemyCheckpointData data = new EnemyCheckpointData();
             data.spawnPoint = spawnPoint;
 
-            EnemyAI enemy = spawnPoint.GetCurrentEnemy();
+            EnemyAIwRoam enemy = spawnPoint.GetCurrentEnemy();
 
             if (enemy != null)
             {
@@ -490,6 +511,24 @@ public class gameManager : MonoBehaviour
         }
     }
 
+    void SavePickupCheckpointData()
+    {
+        pickupCheckpointData.Clear();
+
+        CheckpointPickup[] pickups = FindObjectsByType<CheckpointPickup>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        foreach (CheckpointPickup pickup in pickups)
+        {
+            if (pickup == null) continue;
+
+            PickupCheckpointData data = new PickupCheckpointData();
+            data.pickup = pickup;
+            data.isActive = pickup.IsActive();
+
+            pickupCheckpointData.Add(data);
+        }
+    }
+
     void RestorePlayerCheckpointData()
     {
         CharacterController cc = player.GetComponent<CharacterController>();
@@ -503,8 +542,9 @@ public class gameManager : MonoBehaviour
 
         playerScript.RespawnReset();
 
+        playerScript.RestoreWeaponsWithoutReinstantiating(checkpointWeapons, checkpointSelectedGunIndex);
+
         playerScript.SetHP(playerCheckpointData.hp);
-        playerScript.SetAmmo(playerCheckpointData.ammo);
         playerScript.SetMedkits(playerCheckpointData.medkits);
         playerScript.SetDevilDogPoints(playerCheckpointData.devilDogPoints);
     }
@@ -516,7 +556,7 @@ public class gameManager : MonoBehaviour
             if (data.spawnPoint == null)
                 continue;
 
-            EnemyAI enemy = data.spawnPoint.GetCurrentEnemy();
+            EnemyAIwRoam enemy = data.spawnPoint.GetCurrentEnemy();
 
             if (data.isAlive)
             {
@@ -541,6 +581,27 @@ public class gameManager : MonoBehaviour
                     data.spawnPoint.ClearEnemyReference();
                 }
             }
+        }
+    }
+
+    void RestorePickupCheckpointData()
+    {
+        foreach (PickupCheckpointData data in pickupCheckpointData)
+        {
+            if (data.pickup == null) continue;
+
+            data.pickup.RestoreState(data.isActive);
+        }
+    }
+
+    void RefreshActiveAreaObjective()
+    {
+        AreaObjective[] objectives = FindObjectsByType<AreaObjective>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        foreach (AreaObjective objective in objectives)
+        {
+            if (objective != null)
+                objective.RefreshTrackedEnemies();
         }
     }
 

@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 5973215384268540285}
   - component: {fileID: 8034467630646744027}
   - component: {fileID: 8295159180195342082}
+  - component: {fileID: -7991935436267834003}
   m_Layer: 9
   m_Name: Health Pack
   m_TagString: Untagged
@@ -420,3 +421,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7991935436267834003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7508556078005077712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c453df2d83c5d3e4691949a46d6047e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckpointPickup
+  rootObject: {fileID: 0}

@@ -587,6 +587,7 @@ GameObject:
   - component: {fileID: 1787420735135828512}
   - component: {fileID: 7055285053623217601}
   - component: {fileID: 6629115627445528991}
+  - component: {fileID: -2642847822444896400}
   m_Layer: 10
   m_Name: American Pistol (1)
   m_TagString: Untagged
@@ -650,3 +651,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPickups
   gun: {fileID: 11400000, guid: cd254f73eff7fea40a77c985aec7dd87, type: 2}
+--- !u!114 &-2642847822444896400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8378120403437938218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c453df2d83c5d3e4691949a46d6047e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckpointPickup
+  rootObject: {fileID: 0}

@@ -9,6 +9,6 @@ public class ammoPickup : MonoBehaviour
 
         player.PickedUpAmmo();
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

@@ -671,6 +671,55 @@ Transform:
   - {fileID: 2713540983681903732}
   m_Father: {fileID: 7791388029558468125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2757320096998011407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5308145231789613268}
+  - component: {fileID: 6069346689395878634}
+  m_Layer: 11
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5308145231789613268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757320096998011407}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.585, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 513061967526955083}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6069346689395878634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757320096998011407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 86f54469fc3334b469b11ab94077c07d, type: 2}
 --- !u!1 &2844710025515270092
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +784,7 @@ Transform:
   m_Children:
   - {fileID: 1533687815149189920}
   - {fileID: 815139533430962203}
+  - {fileID: 5308145231789613268}
   m_Father: {fileID: 8994491910353994925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3692837438137551225
@@ -1778,7 +1828,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
@@ -2723,6 +2773,7 @@ GameObject:
   - component: {fileID: 5792054026421223540}
   - component: {fileID: 1869593869715654860}
   - component: {fileID: 318728969390558331}
+  - component: {fileID: 132639833687305777}
   m_Layer: 3
   m_Name: Player wFpsArms
   m_TagString: Player
@@ -2781,16 +2832,28 @@ MonoBehaviour:
   grenadeMax: 300
   medkitCount: 0
   medkitHealAmount: 50
+  devilDogMode: {fileID: 0}
   stamina: 100
   staminaDrainRate: 10
   staminaRegenRate: 20
   staminaJumpDrain: 25
   shakeAmount: 0.14
   shakeDuration: 0.14
+  stress: 0
+  maxStress: 100
+  stressRecoveryDelay: 3
+  stressRecoveryRate: 12
+  damageStressAmount: 20
+  suppressionStressAmount: 12
+  explosionStressAmount: 25
+  maxSpreadStressPenalty: 0.15
+  maxMoveAimPenalty: 0.1
+  stressVolume: {fileID: 6069346689395878634}
   weaponGripTarget: {fileID: 1923413059554943347}
   leftHandIKBinder: {fileID: 8769305006064299264}
   rigBuilder: {fileID: 9121955426812216187}
   aud: {fileID: 1869593869715654860}
+  canShoot: 1
   knife: {fileID: 7890672864714921905}
   GetKnifeDamage: {fileID: 8619254073232536756}
   grenadePrefab: {fileID: 0}
@@ -2960,6 +3023,23 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &132639833687305777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263746862360927993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cafbf471f869064418248d3c7fe1c3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DevilDogMode
+  DevilDogDuration: 10
+  currentPoints: 0
+  maxPoints: 100
+  killPoints: 5
+  dogTagPoints: 20
 --- !u!1 &8319991581204790952
 GameObject:
   m_ObjectHideFlags: 0

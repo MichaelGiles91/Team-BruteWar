@@ -64,6 +64,9 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
     Vector3 playerDir;
     Vector3 startingPos;
 
+    SingleEnemySpawner spawnPoint;
+    bool isDead;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -390,14 +393,77 @@ public class EnemyAIwRoam : MonoBehaviour, IDamage
     }
     void Die()
     {
+        isDead = true;
+
         DevilDogMode devilDog = FindFirstObjectByType<DevilDogMode>();
         if (devilDog != null)
         {
             devilDog.AddKillPoints();
         }
+
         OnDied?.Invoke(this);
+
+        if (spawnPoint != null)
+            spawnPoint.ClearEnemyReference();
+
         Destroy(gameObject);
     }
 
+    public void SetSpawnPoint(SingleEnemySpawner point)
+    {
+        spawnPoint = point;
+    }
 
+    public int GetHP()
+    {
+        return HP;
+    }
+
+    public bool IsAlive()
+    {
+        return !isDead;
+    }
+
+    public void SetHP(int value)
+    {
+        HP = value;
+    }
+
+    public void RestoreCheckpointState(Vector3 pos, Quaternion rot, int hp, bool alive)
+    {
+        gameObject.SetActive(true);
+
+        isDead = !alive;
+
+        if (agent != null)
+            agent.enabled = false;
+
+        transform.SetPositionAndRotation(pos, rot);
+        startingPos = pos;
+
+        if (agent != null)
+            agent.enabled = true;
+
+        HP = hp;
+
+        shootTimer = 0f;
+        roamTimer = 0f;
+        reactionTimer = 0f;
+        grenadeTimer = grenadeCooldown;
+
+        currentAmmo = magSize;
+        reloading = false;
+        isReacting = false;
+        playerInTrigger = false;
+        hasLastKnown = false;
+        heldGrenade = null;
+
+        agent.stoppingDistance = stoppingDistOrig;
+        agent.ResetPath();
+
+        model.material.color = colorOrg;
+
+        if (!alive)
+            gameObject.SetActive(false);
+    }
 }
