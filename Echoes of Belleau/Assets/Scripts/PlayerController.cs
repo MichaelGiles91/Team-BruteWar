@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     [Header("---Stress Effects---")]
     [SerializeField] float maxSpreadStressPenalty = 0.15f;
-    [SerializeField] float maxMoveAimPenalty = 0.1f;
+    //[SerializeField] float maxMoveAimPenalty = 0.1f;
     [SerializeField] Volume stressVolume;
 
     float stressSafeTimer;
@@ -74,7 +74,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] LeftHandIKBinder leftHandIKBinder;
     [SerializeField] UnityEngine.Animations.Rigging.RigBuilder rigBuilder;
 
+    [Header("---Audio--")]
     [SerializeField] AudioSource aud;
+    SFXType? currentBreathingLoop = null;
+    [SerializeField] float walkStepInterval = 0.45f;
+    [SerializeField] float runStepInterval = 0.30f;
+    [SerializeField] float footstepResetGrace = 0.12f;
+
+    float footstepTimer = 0f;
+    float footstepGraceTimer = 0f;
 
     int jumpCount;
     int HPOrig;
@@ -85,6 +93,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     bool isSprinting;
     bool wasSprinting;
     RectTransform stamShakeRect;
+
+    
+    bool wasAirborne;
+    float lastYVelocity;
+    
 
     int gunListPos;
     float shootTimer;
@@ -118,8 +131,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     LensDistortion stressLensDistortion;
 
     float moveSlowMult = 1f;
-    bool isSlow = false;
-    public bool IsMoving => controller.velocity.magnitude > 0.1f;
+    
+    public bool IsMoving
+    {
+        get
+        {
+            Vector3 horizontalVel = controller.velocity;
+            horizontalVel.y = 0f;
+            return horizontalVel.magnitude > 0.1f;
+        }
+    }
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -131,6 +152,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     void Start()
     {
         HPOrig = HP;
+        footstepTimer = 0f;
+        footstepGraceTimer = 0f;
         staminaOrig = stamina;
         StamBarOrigPos = gameManager.instance.playerStaminaBar.rectTransform.anchoredPosition;
         speedOrig = speed;
@@ -191,6 +214,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         StamBarOrigPos = stamShakeRect.localPosition;
 
         UpdatePlayerUI();
+
+        if (SFXManager.instance != null)
+        {
+            SFXManager.instance.StopFootstepLoop();
+            SFXManager.instance.StopBreathingLoop();
+        }
+
+        footstepTimer = 0f;
+        currentBreathingLoop = null;
     }
 
     
@@ -199,6 +231,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         movement();
         sprint();
         UpdateStress();
+        UpdateBreathingAudio();
+        UpdateFootstepAudio();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
         grenadeTimer += Time.deltaTime;
         if (Input.GetButtonDown("ThrowGrenade"))
@@ -229,11 +263,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         jump();
         controller.Move(playerVel * Time.deltaTime);
 
+        lastYVelocity = playerVel.y;
         playerVel.y -= gravity * Time.deltaTime;
 
         reload();
 
         updateAnimations();
+
+        HandleLandingSound();
 
         if (Input.GetButton("Fire1") && shootTimer >= shootRate && !isSprinting && canShoot)
             shoot();
@@ -276,6 +313,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             {
                 stamina -= staminaJumpDrain;
                 playerVel.y = jumpSpeed;
+                if (SFXManager.instance != null)
+                {
+                    SFXManager.instance.PlayJump();
+                }
                 jumpCount++;
             }
             else if (stamina <= staminaJumpDrain)
@@ -417,17 +458,30 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
 
         HP -= amount;
+
         AddStress(damageStressAmount);
         UpdatePlayerUI();
 
         StartCoroutine(flashScreen());
 
-        
         if (HP <= 0)
         {
+            if (SFXManager.instance != null)
+            {
+                SFXManager.instance.StopBreathingLoop();
+                SFXManager.instance.StopFootstepLoop();
+                SFXManager.instance.PlayDeath();
+            }
+
+            currentBreathingLoop = null;
+            footstepTimer = 0f;
+
             gameManager.instance.youLose();
         }
-
+        else if (SFXManager.instance != null)
+        {
+            SFXManager.instance.PlayHurt();
+        }
     }
 
     void reload()
@@ -472,10 +526,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         stress = 0f;
         stressSafeTimer = 0f;
         UpdatePlayerUI();
+        footstepTimer = 0f;
+        footstepGraceTimer = 0f;
 
-        // clear any falling momentum state
         playerVel = Vector3.zero;
         jumpCount = 0;
+
+        if (SFXManager.instance != null)
+        {
+            SFXManager.instance.StopBreathingLoop();
+            SFXManager.instance.StopFootstepLoop();
+        }
+
+        currentBreathingLoop = null;
+        footstepTimer = 0f;
     }
 
     void TryShakeStaminaBar()
@@ -666,8 +730,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void selectGun()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
         {
             SaveAmmoToGunStats();
@@ -776,6 +838,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         HP += medkitHealAmount;
         HP = Mathf.Clamp(HP, 0, HPOrig);
 
+        if (SFXManager.instance != null)
+        {
+            SFXManager.instance.PlayMedkit();
+        }
+
         gameManager.instance.updateMedkitAmount(medkitCount);
         UpdatePlayerUI();
     }
@@ -839,13 +906,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void SetMoveSlow(float multiplier)
     {
         moveSlowMult = multiplier;
-        isSlow = true;
+        
     }
 
     public void ResetMoveSlow()
     {
         moveSlowMult = 1f;
-        isSlow = false;
+        
     }
 
     void UpdateStress()
@@ -950,4 +1017,110 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         yield return new WaitForSeconds(.3f);
         currentGunInstance.SetActive(true);
     }
+    void HandleLandingSound()
+    {
+        if (!controller.isGrounded)
+        {
+            wasAirborne = true;
+            return;
+        }
+
+        if (controller.isGrounded && wasAirborne)
+        {
+            if (lastYVelocity < -2f)
+            {
+                if (SFXManager.instance != null)
+                {
+                    SFXManager.instance.PlayLand();
+                }
+            }
+
+            wasAirborne = false;
+        }
+    }
+
+    void SetBreathingLoop(SFXType? newType)
+    {
+        if (currentBreathingLoop == newType)
+            return;
+
+        currentBreathingLoop = newType;
+
+        if (SFXManager.instance == null)
+            return;
+
+        if (newType == null)
+        {
+            SFXManager.instance.StopBreathingLoop();
+            return;
+        }
+
+        SFXManager.instance.PlayBreathingLoop(newType.Value);
+    }
+
+    void UpdateBreathingAudio()
+    {
+        if (sprintDisable || stamina <= 0f)
+        {
+            SetBreathingLoop(SFXType.BreathingOutOfBreathLoop);
+            return;
+        }
+
+        if (isSprinting && HasMoveInput())
+        {
+            SetBreathingLoop(SFXType.BreathingRunLoop);
+            return;
+        }
+
+        SetBreathingLoop(SFXType.BreathingIdleLoop);
+    }
+
+
+
+    void UpdateFootstepAudio()
+    {
+        bool movingInput = HasMoveInput();
+        bool groundedEnough = controller.isGrounded || playerVel.y <= 0.1f;
+        bool running = isSprinting && !sprintDisable && stamina > 0f;
+
+        if (groundedEnough && movingInput)
+        {
+            footstepGraceTimer = footstepResetGrace;
+            footstepTimer += Time.deltaTime;
+        }
+        else
+        {
+            footstepGraceTimer -= Time.deltaTime;
+
+            if (footstepGraceTimer <= 0f)
+            {
+                footstepTimer = 0f;
+                return;
+            }
+        }
+
+        float stepInterval = running ? runStepInterval : walkStepInterval;
+
+        if (footstepTimer >= stepInterval)
+        {
+            footstepTimer -= stepInterval;
+
+            if (SFXManager.instance != null)
+            {
+                if (running)
+                    SFXManager.instance.PlayRunFootstep();
+                else
+                    SFXManager.instance.PlayWalkFootstep();
+            }
+        }
+    }
+
+    bool HasMoveInput()
+    {
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        return horizontal != 0f || vertical != 0f;
+    }
+
 }
