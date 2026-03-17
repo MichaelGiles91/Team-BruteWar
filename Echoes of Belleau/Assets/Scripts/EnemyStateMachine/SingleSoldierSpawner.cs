@@ -37,5 +37,4 @@ public class SingleSoldierSpawner : MonoBehaviour
     {
         currentSoldier = null;
     }
-
 }

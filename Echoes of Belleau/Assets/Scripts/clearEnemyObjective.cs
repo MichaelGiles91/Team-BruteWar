@@ -23,7 +23,7 @@ public class AreaObjective : MonoBehaviour
     bool active;
     bool complete;
 
-    HashSet<EnemyAIwRoam> trackedEnemies = new HashSet<EnemyAIwRoam>();
+    HashSet<SoldierEnemyController> trackedEnemies = new HashSet<SoldierEnemyController>();
 
     void Awake()
     {
@@ -46,10 +46,9 @@ public class AreaObjective : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        EnemyAIwRoam enemy = other.GetComponentInParent<EnemyAIwRoam>();
+        SoldierEnemyController enemy = other.GetComponentInParent<SoldierEnemyController>();
         if (enemy != null && trackedEnemies.Remove(enemy))
         {
-            enemy.OnDied -= HandleEnemyDied;
             UpdateObjectiveUI();
         }
     }
@@ -113,8 +112,9 @@ public class AreaObjective : MonoBehaviour
 
         if ((enemyLayer.value & (1 << col.gameObject.layer)) == 0) return;
 
-        EnemyAIwRoam enemy = col.GetComponentInParent<EnemyAIwRoam>();
+        SoldierEnemyController enemy = col.GetComponentInParent<SoldierEnemyController>();
         if (enemy == null) return;
+        if (!enemy.IsAlive()) return;
 
         if (trackedEnemies.Add(enemy))
         {
@@ -123,7 +123,7 @@ public class AreaObjective : MonoBehaviour
         }
     }
 
-    void HandleEnemyDied(EnemyAIwRoam deadEnemy)
+    void HandleEnemyDied(SoldierEnemyController deadEnemy)
     {
         deadEnemy.OnDied -= HandleEnemyDied;
         trackedEnemies.Remove(deadEnemy);
@@ -146,7 +146,7 @@ public class AreaObjective : MonoBehaviour
 
     public void RefreshTrackedEnemies()
     {
-        foreach (EnemyAIwRoam enemy in trackedEnemies)
+        foreach (SoldierEnemyController enemy in trackedEnemies)
         {
             if (enemy != null)
                 enemy.OnDied -= HandleEnemyDied;
@@ -159,6 +159,56 @@ public class AreaObjective : MonoBehaviour
 
         TrackAllEnemiesInside();
         UpdateObjectiveUI();
+
+        if (trackedEnemies.Count == 0)
+            CompleteObjective();
+    }
+
+    public bool IsActiveObjective()
+    {
+        return active;
+    }
+
+    public bool IsCompleteObjective()
+    {
+        return complete;
+    }
+
+    public void RestoreCheckpointState(bool savedActive, bool savedComplete)
+    {
+        foreach (SoldierEnemyController enemy in trackedEnemies)
+        {
+            if (enemy != null)
+                enemy.OnDied -= HandleEnemyDied;
+        }
+
+        trackedEnemies.Clear();
+
+        active = savedActive;
+        complete = savedComplete;
+
+        if (invisWall != null)
+            invisWall.SetActive(!complete);
+
+        if (!active)
+            return;
+
+        if (complete)
+        {
+            if (gameManager.instance != null)
+                gameManager.instance.SetActiveObjectiveZone(null);
+
+            return;
+        }
+
+        TrackAllEnemiesInside();
+        UpdateObjectiveUI();
+
+        if (gameManager.instance != null)
+        {
+            gameManager.instance.updateObjectiveText(objectiveText, headerText);
+            gameManager.instance.SetActiveObjectiveZone(box);
+        }
 
         if (trackedEnemies.Count == 0)
             CompleteObjective();

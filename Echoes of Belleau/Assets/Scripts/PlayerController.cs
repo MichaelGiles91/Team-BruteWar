@@ -798,21 +798,24 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void HoldGrenade()
     {
-        heldGrenade = Instantiate(grenadePrefab, grenadePos.position, grenadePos.rotation);
-        heldGrenade.transform.SetParent(grenadePos);
-        heldGrenade.transform.localPosition = Vector3.zero; // Ensure the grenade is positioned correctly relative to the shootPos
-        heldGrenade.transform.localRotation = Quaternion.identity; // Ensure the grenade has no local rotation relative to the shootPos
+        if (grenadeCount <= 0)
+            return;
+
+            heldGrenade = Instantiate(grenadePrefab, grenadePos.position, grenadePos.rotation);
+            heldGrenade.transform.SetParent(grenadePos);
+            heldGrenade.transform.localPosition = Vector3.zero; // Ensure the grenade is positioned correctly relative to the shootPos
+            heldGrenade.transform.localRotation = Quaternion.identity; // Ensure the grenade has no local rotation relative to the shootPos
 
 
-        Rigidbody rb = heldGrenade.GetComponent<Rigidbody>();
-        if ((rb != null))
-        {
-            rb.isKinematic = true; // Make the grenade not affected by physics while held
-            rb.useGravity = false; // Disable gravity while held
-        }
+            Rigidbody rb = heldGrenade.GetComponent<Rigidbody>();
+            if ((rb != null))
+            {
+                rb.isKinematic = true; // Make the grenade not affected by physics while held
+                rb.useGravity = false; // Disable gravity while held
+            }
 
-        Collider col = heldGrenade.GetComponent<Collider>();
-        if (col != null) col.enabled = false; // Disable the collider while held to prevent collisions with the enemy
+            Collider col = heldGrenade.GetComponent<Collider>();
+            if (col != null) col.enabled = false; // Disable the collider while held to prevent collisions with the enemy
     }
 
     void UseGrenade()
@@ -905,36 +908,54 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         canShoot = true;
     }
 
+
     public int GetHP()
     {
         return HP;
     }
+
     public void SetHP(int HPPoints)
     {
         HP = HPPoints;
         UpdatePlayerUI();
     }
+
     public void SetAmmo(int AmmoValue)
     {
         ammoCount = AmmoValue;
         gameManager.instance.updateAmmoAmount(ammoCount,ammoMax);
     }
+
     public void SetMedkits(int Medkits)
     {
         medkitCount = Medkits;
         gameManager.instance.updateMedkitAmount(medkitCount);
     }
+
     public float GetDevilDogPoints()
     {
         return devilDogMode.GetCurrentPoints();
     }
+
     public void SetDevilDogPoints(float dogpoints)
     {
         devilDogMode.SetCurrentPoints(dogpoints);
     }
+
     public int GetAmmoMax()
     {
         return ammoMax;
+    }
+
+    public int GetGrenades()
+    {
+        return grenadeCount;
+    }
+
+    public void SetGrenades(int grenades)
+    {
+        grenadeCount = grenades;
+        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
     }
 
     bool CreateGunInstance(gunStats gun, out GameObject instance)
