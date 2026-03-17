@@ -386,6 +386,21 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     {
         TakeDamage(amount);
     }
+
+    public void SetHomePoint(Transform newHomePoint)
+    {
+        homePoint = newHomePoint;
+    }
+
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
+
+    public bool IsAlive()
+    {
+        return !isDead && currentHealth > 0f;
+    }
     public void RestoreCheckpointState(Vector3 pos, Quaternion rot, float health, bool alive)
     {
         gameObject.SetActive(true);
@@ -431,8 +446,5 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
             gameObject.SetActive(false);
         }
     }
-    public void SetHomePoint(Transform newHomePoint)
-    {
-        homePoint = newHomePoint;
-    }
+    
 }
