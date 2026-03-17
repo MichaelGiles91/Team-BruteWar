@@ -39,6 +39,7 @@ public class CreditsSequenceController : MonoBehaviour
     bool creditsFinished;
     bool sequenceStarted;
     bool inputEnabled;
+    bool isSkipping;
     string fullGameTitle;
 
     void Start()
@@ -52,16 +53,15 @@ public class CreditsSequenceController : MonoBehaviour
 
         StartCoroutine(BeginScene());
     }
-
     void Update()
     {
-        if (allowEscapeSkip && inputEnabled && Input.GetKeyDown(KeyCode.Escape))
+        if (allowEscapeSkip && inputEnabled && !isSkipping && Input.GetButtonDown("Cancel"))
         {
             StartCoroutine(SkipToMenu());
             return;
         }
 
-        if (inputEnabled && !creditsFinished)
+        if (inputEnabled && !creditsFinished && !isSkipping)
         {
             ScrollCredits();
         }
@@ -153,12 +153,21 @@ public class CreditsSequenceController : MonoBehaviour
 
     IEnumerator SkipToMenu()
     {
+        if (isSkipping) yield break;
+        isSkipping = true;
         inputEnabled = false;
 
-        StopAllCoroutines();
+        SetTextAlpha(skipText, 0f);
+        SetTextAlpha(thankYouText, 0f);
+        SetTextAlpha(gameTitleText, 0f);
+
+        if (creditsText != null)
+            creditsText.gameObject.SetActive(false);
 
         if (screenFader != null)
             yield return StartCoroutine(screenFader.FadeOut());
+
+        yield return new WaitForSeconds(endBlackHoldTime);
 
         SceneManager.LoadScene(menuSceneName);
     }
