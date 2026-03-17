@@ -19529,12 +19529,11 @@ GameObject:
   - component: {fileID: 2102652076157268769}
   - component: {fileID: 1409609467857651239}
   - component: {fileID: 6780863856029342041}
-  - component: {fileID: 5479570519647920131}
   - component: {fileID: 4056234539586867532}
   - component: {fileID: 3386915798618369247}
   - component: {fileID: 131204587875746784}
   - component: {fileID: 1911066653267976723}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Rocket_For_Rocket_Launchers_01 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19564,7 +19563,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4945600558865581348}
-  m_Mesh: {fileID: -6297193690529035656, guid: 8ccac683d5889e8438106b449c3e2435, type: 3}
+  m_Mesh: {fileID: -6297193690529035656, guid: 976db32c808def94e8035e0ce1b2b28e, type: 3}
 --- !u!23 &6780863856029342041
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19614,28 +19613,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5479570519647920131
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945600558865581348}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6297193690529035656, guid: 8ccac683d5889e8438106b449c3e2435, type: 3}
 --- !u!114 &4056234539586867532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19651,10 +19628,10 @@ MonoBehaviour:
   type: 0
   damageAmount: 10
   damageRate: 0
-  speed: 10
+  speed: 25
   destroyTime: 10
   hitEffect: {fileID: 8467073610846315871}
-  rd: {fileID: 0}
+  rb: {fileID: 3386915798618369247}
   fuseTime: 2.5
   explosionRadius: 4
   explosionMask:
@@ -19671,7 +19648,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4945600558865581348}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.01
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -19716,7 +19693,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: cf6917fc065af13468d7d051a191c5d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19743,7 +19720,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -19786,7 +19763,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -19815,7 +19792,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

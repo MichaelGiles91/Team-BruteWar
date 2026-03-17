@@ -8,16 +8,17 @@ public class note : MonoBehaviour
 
     bool playerInTrigger;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Interact") && playerInTrigger)
         {
-            UI.SetActive(true);
-        }
-        if (Input.GetButtonDown("Cancel"))
-        {
-            UI.SetActive(false);
+            if (gameManager.instance.menuActive == null)
+            {
+                gameManager.instance.statePause();
+
+                gameManager.instance.menuActive = UI;
+                UI.SetActive(true);
+            }
         }
     }
 

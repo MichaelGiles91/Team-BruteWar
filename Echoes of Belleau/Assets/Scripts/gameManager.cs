@@ -48,7 +48,7 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;
 
     [Header("---Game Screens---")]
-    [SerializeField] GameObject menuActive;
+    public GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuWin;
@@ -162,23 +162,28 @@ public class gameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-
             if (menuActive == null)
-
             {
                 MusicManager.instance.PlayMusic(MusicType.Menu, 0, .5f);
+
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
                 objective.SetActive(true);
-
             }
-            else if (menuActive == menuPause)
+            else if (menuActive == menuSettings)
+            {
+                menuActive = menuPause;
+                menuSettings.SetActive(false);
+                menuPause.SetActive(true);
+            }
+            else
             {
                 MusicManager.instance.PlayMusic(MusicType.Calm, 0, .5f);
                 stateUnpause();
             }
         }
+
 
         if (Input.GetButtonDown("Map"))
         {
