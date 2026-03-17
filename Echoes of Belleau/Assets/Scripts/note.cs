@@ -4,20 +4,20 @@ public class note : MonoBehaviour
 {
     [SerializeField] GameObject model;
     [SerializeField] GameObject button;
+    [SerializeField] GameObject UI;
 
     bool playerInTrigger;
-    bool used;
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Interact") && playerInTrigger)
         {
-            model.SetActive(true);
+            UI.SetActive(true);
         }
         if (Input.GetButtonDown("Cancel"))
         {
-            model.SetActive(false);
+            UI.SetActive(false);
         }
     }
 

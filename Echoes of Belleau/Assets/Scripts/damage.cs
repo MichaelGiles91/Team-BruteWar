@@ -13,7 +13,7 @@ public class damage : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
     [SerializeField] ParticleSystem hitEffect;
-    [SerializeField] Rigidbody rd;
+    [SerializeField] Rigidbody rb;
 
     [Header("Explosion")]
     [SerializeField] float fuseTime = 2.5f;
@@ -37,7 +37,7 @@ public class damage : MonoBehaviour
     {
         if (type == damageType.bullet)
         {
-            rd.linearVelocity = transform.forward * speed;
+            rb.linearVelocity = transform.forward * speed;
             Destroy(gameObject, destroyTime);
 
         }
