@@ -981,7 +981,7 @@ MonoBehaviour:
   patrolRadius: 8
   minIdleTime: 1.5
   maxIdleTime: 4
-  target: {fileID: 0}
+  playerTag: Player
   attackRange: 12
   viewDistance: 20
   viewAngle: 60
@@ -1000,7 +1000,7 @@ MonoBehaviour:
   bulletSpeed: 25
   maxHealth: 15
   currentHealth: 15
-  destroyOnDeath: 0
+  destroyOnDeath: 1
 --- !u!95 &6954008999541239874
 Animator:
   serializedVersion: 7
