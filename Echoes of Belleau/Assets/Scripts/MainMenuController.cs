@@ -18,6 +18,16 @@ public class MainMenuController : MonoBehaviour
         StartCoroutine(StartMenu());
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            StartCoroutine(StartGameRoutine());
+            SceneManager.LoadScene("Showcase");
+        }
+    }
+
+
     IEnumerator StartMenu()
     {
 
@@ -27,11 +37,14 @@ public class MainMenuController : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(StartGameRoutine());
+        SceneManager.LoadScene("Intro Scene");
     }
 
     IEnumerator StartGameRoutine()
     {
         yield return StartCoroutine(screenFader.FadeOut());
-        SceneManager.LoadScene("Intro Scene");
+        
     }
+
+
 }
