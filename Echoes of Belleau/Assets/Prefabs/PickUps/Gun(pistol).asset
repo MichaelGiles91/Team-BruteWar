@@ -18,7 +18,7 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: 0585dfa735a5c6e4b8af2b05c0739164, type: 3}
   shootDamage: 1
   shootDist: 185
-  shootRate: 0.1
+  shootRate: 0.4
   magSize: 14
   pickupSize: 14
   ammoCur: 14
