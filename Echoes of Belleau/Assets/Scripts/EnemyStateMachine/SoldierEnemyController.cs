@@ -1,7 +1,6 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
-using System;
-using Random = UnityEngine.Random;
 
 public class SoldierEnemyController : MonoBehaviour, IDamage
 {
@@ -17,7 +16,9 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public float maxIdleTime = 4f;
 
     [Header("Target")]
-    public Transform target;
+    [SerializeField] private string playerTag = "Player";
+    private Transform target;
+    public Transform Target => target;
     public float attackRange = 12f;
 
     [Header("Vision")]
@@ -57,7 +58,6 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public SoldierSeekCoverState SeekCoverState { get; private set; }
     public SoldierMoveToCoverState MoveToCoverState { get; private set; }
     public SoldierShootState ShootState { get; private set; }
-
     public event Action<SoldierEnemyController> OnDied;
 
     private void Awake()
@@ -77,14 +77,33 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     {
         currentHealth = maxHealth;
         isDead = false;
+        FindPlayerTarget();
         stateMachine.Initialize(IdleState);
     }
 
     private void Update()
     {
+        if (IsDead()) return;
+
+        if (target == null)
+        {
+            FindPlayerTarget();
+        }
+
         stateMachine.Update();
     }
+    private void FindPlayerTarget()
+    {
+        if (target != null)
+            return;
 
+        GameObject playerObject = GameObject.FindGameObjectWithTag(playerTag);
+
+        if (playerObject != null)
+        {
+            target = playerObject.transform;
+        }
+    }
     public void MoveTowards(Vector3 targetPosition, float speed)
     {
         if (agent == null) return;
@@ -164,7 +183,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
         for (int i = 0; i < 10; i++)
         {
-            Vector2 randomCircle = Random.insideUnitCircle * patrolRadius;
+            Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * patrolRadius;
             Vector3 randomPoint = new Vector3(
                 center.x + randomCircle.x,
                 center.y,
@@ -349,7 +368,6 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
             gameObject.SetActive(false);
         }
     }
-
     private void OnDestroy()
     {
         if (spawnPoint != null)
@@ -368,21 +386,6 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     {
         TakeDamage(amount);
     }
-    public void SetHomePoint(Transform newHomePoint)
-    {
-        homePoint = newHomePoint;
-    }
-
-    public float GetHealth()
-    {
-        return currentHealth;
-    }
-
-    public bool IsAlive()
-    {
-        return !isDead && currentHealth > 0f;
-    }
-
     public void RestoreCheckpointState(Vector3 pos, Quaternion rot, float health, bool alive)
     {
         gameObject.SetActive(true);
@@ -427,5 +430,9 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
             gameObject.SetActive(false);
         }
+    }
+    public void SetHomePoint(Transform newHomePoint)
+    {
+        homePoint = newHomePoint;
     }
 }
