@@ -14,7 +14,7 @@ public class SoldierSeekCoverState : SoldierState
 
     public override void Update()
     {
-        if (soldier.target == null)
+        if (soldier.Target == null)
         {
             stateMachine.ChangeState(soldier.IdleState);
             return;

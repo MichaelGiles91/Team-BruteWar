@@ -18,7 +18,7 @@ public class SoldierMoveToCoverState : SoldierState
 
     public override void Update()
     {
-        if (soldier.target == null)
+        if (soldier.Target == null)
         {
             ReleaseCover();
             stateMachine.ChangeState(soldier.ReturnToPostState);

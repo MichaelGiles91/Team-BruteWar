@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,7 +16,9 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public float maxIdleTime = 4f;
 
     [Header("Target")]
-    public Transform target;
+    [SerializeField] private string playerTag = "Player";
+    private Transform target;
+    public Transform Target => target;
     public float attackRange = 12f;
 
     [Header("Vision")]
@@ -47,6 +50,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     private SoldierStateMachine stateMachine;
     private NavMeshAgent agent;
     private SingleSoldierSpawner spawnPoint;
+    private bool isDead;
 
     public SoldierIdleState IdleState { get; private set; }
     public SoldierPatrolState PatrolState { get; private set; }
@@ -54,6 +58,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public SoldierSeekCoverState SeekCoverState { get; private set; }
     public SoldierMoveToCoverState MoveToCoverState { get; private set; }
     public SoldierShootState ShootState { get; private set; }
+    public event Action<SoldierEnemyController> OnDied;
 
     private void Awake()
     {
@@ -71,14 +76,34 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     private void Start()
     {
         currentHealth = maxHealth;
+        isDead = false;
+        FindPlayerTarget();
         stateMachine.Initialize(IdleState);
     }
 
     private void Update()
     {
+        if (IsDead()) return;
+
+        if (target == null)
+        {
+            FindPlayerTarget();
+        }
+
         stateMachine.Update();
     }
+    private void FindPlayerTarget()
+    {
+        if (target != null)
+            return;
 
+        GameObject playerObject = GameObject.FindGameObjectWithTag(playerTag);
+
+        if (playerObject != null)
+        {
+            target = playerObject.transform;
+        }
+    }
     public void MoveTowards(Vector3 targetPosition, float speed)
     {
         if (agent == null) return;
@@ -158,7 +183,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
         for (int i = 0; i < 10; i++)
         {
-            Vector2 randomCircle = Random.insideUnitCircle * patrolRadius;
+            Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * patrolRadius;
             Vector3 randomPoint = new Vector3(
                 center.x + randomCircle.x,
                 center.y,
@@ -309,6 +334,10 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     {
         Debug.Log(name + " died.");
 
+        isDead = true;
+
+        OnDied?.Invoke(this);
+
         StopMoving();
 
         if (CurrentCover != null)
@@ -334,11 +363,73 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         {
             Destroy(gameObject, 2f);
         }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+    private void OnDestroy()
+    {
+        if (spawnPoint != null)
+        {
+            spawnPoint.ClearSoldierReference();
+        }
+
+        if (CurrentCover != null)
+        {
+            CurrentCover.isOccupied = false;
+            CurrentCover = null;
+        }
     }
 
     public void takeDamage(int amount)
     {
         TakeDamage(amount);
+    }
+    public void RestoreCheckpointState(Vector3 pos, Quaternion rot, float health, bool alive)
+    {
+        gameObject.SetActive(true);
+        enabled = true;
+
+        transform.SetPositionAndRotation(pos, rot);
+
+        currentHealth = health;
+        isDead = !alive;
+
+        if (agent != null)
+        {
+            agent.enabled = true;
+            agent.isStopped = false;
+            agent.ResetPath();
+        }
+
+        if (CurrentCover != null)
+        {
+            CurrentCover.isOccupied = false;
+            CurrentCover = null;
+        }
+
+        if (target == null && gameManager.instance != null && gameManager.instance.player != null)
+        {
+            target = gameManager.instance.player.transform;
+        }
+
+        if (alive)
+        {
+            stateMachine.Initialize(IdleState);
+        }
+        else
+        {
+            enabled = false;
+
+            if (agent != null)
+            {
+                agent.isStopped = true;
+                agent.enabled = false;
+            }
+
+            gameObject.SetActive(false);
+        }
     }
     public void SetHomePoint(Transform newHomePoint)
     {
