@@ -9,7 +9,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public float stoppingDistance = 0.2f;
 
     [Header("Patrol")]
-    public Transform homePoint;
+    private Transform homePoint;
     public float patrolRadius = 8f;
     public float minIdleTime = 1.5f;
     public float maxIdleTime = 4f;
@@ -340,5 +340,8 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     {
         TakeDamage(amount);
     }
-
+    public void SetHomePoint(Transform newHomePoint)
+    {
+        homePoint = newHomePoint;
+    }
 }

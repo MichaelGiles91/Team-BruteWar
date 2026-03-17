@@ -22,6 +22,7 @@ public class SingleSoldierSpawner : MonoBehaviour
         if (currentSoldier != null)
         {
             currentSoldier.SetSpawnPoint(this);
+            currentSoldier.SetHomePoint(transform);
         }
 
         return currentSoldier;
@@ -36,4 +37,5 @@ public class SingleSoldierSpawner : MonoBehaviour
     {
         currentSoldier = null;
     }
+
 }
