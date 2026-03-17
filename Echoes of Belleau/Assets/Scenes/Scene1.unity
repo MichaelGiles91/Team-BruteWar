@@ -1014,33 +1014,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (13)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.010439631
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.077901445
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.39584392
+      value: 22.278038
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999988
+      value: 0.04352526
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.13824712
+      value: 3.5095549
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1663,33 +1687,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (9)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.024579758
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.03563017
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.017662825
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.33888245
+      value: 22.365013
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04796569
+      value: 0.8029693
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.16801395
+      value: 0.32156658
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2166,33 +2214,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (6)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.009600769
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.22385237
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.65847933
+      value: 21.877037
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999988
+      value: 0.04352526
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.019300673
+      value: 16.24857
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2255,33 +2327,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (12)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.012385184
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.035862945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.8412466
+      value: 21.597984
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999988
+      value: 0.04352526
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.06891869
+      value: 10.934543
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3432,33 +3528,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (8)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.040769164
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.011891003
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6218231
+      value: 21.933006
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999988
+      value: 0.04352526
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.055407584
+      value: 12.381564
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3957,11 +4077,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e93b18aeba68324cb0c6196b3791c1d, type: 3}
---- !u!4 &556073847 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2928234186083093065, guid: 6d2528e9a8a5e6b40b66059c711af731, type: 3}
-  m_PrefabInstance: {fileID: 3732972591488037437}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &562255837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6746075286750442706, guid: 5e6efa62fd16da8428db38f54d38af6f, type: 3}
@@ -4615,6 +4730,14 @@ PrefabInstance:
       value: Objective 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145289415291827468, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145289415291827468, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145289415291827468, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 539.8
       objectReference: {fileID: 0}
@@ -4654,6 +4777,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4411661420526501157, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9502341
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411661420526501157, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_Size.y
+      value: 16.74049
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411661420526501157, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_Size.z
+      value: 33.54803
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117128963317555668, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_Size.x
+      value: 128.544
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117128963317555668, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_Size.z
+      value: 319.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884085130190096014, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884085130190096014, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884085130190096014, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8238057990242655072, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
       propertyPath: nextObjective
       value: 
@@ -4685,6 +4840,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7884085130190096014, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 832335469}
+    - targetCorrespondingSourceObject: {fileID: 7884085130190096014, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1995928889}
     - targetCorrespondingSourceObject: {fileID: 7884085130190096014, guid: 919247ea086d3e741bbedcd01aea45ea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1994375563}
@@ -5336,33 +5494,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (14)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.011766628
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.042302176
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4731548
+      value: 22.159996
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999988
+      value: 0.04352526
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.09326066
+      value: 8.327548
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6442,33 +6624,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (5)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.01196538
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.039918397
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.7285561
+      value: 21.770042
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999988
+      value: 0.04352526
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.006087074
+      value: 18.967564
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6712,33 +6918,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.014219349
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.026110442
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.46464008
+      value: 22.172997
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999988
+      value: 0.04352526
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.118385114
+      value: 30.994541
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7446,33 +7676,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.010832785
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059715156
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.061321296
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.21913047
+      value: 23.217003
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0027459902
+      value: 0.045969225
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.14132626
+      value: 33.45151
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7978,33 +8232,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (7)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0114761
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.027246771
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6549491
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.60611445
+      value: 21.956993
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0032836087
+      value: 0.054969225
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.033474572
+      value: 14.730563
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8367,33 +8645,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.009337178
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6549491
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.240624
+      value: 22.515038
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999993
+      value: 0.043525267
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.059215624
+      value: 24.657566
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8436,33 +8738,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.010196206
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.09478799
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.19805042
+      value: 22.58004
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999988
+      value: 0.04352526
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.088459276
+      value: 27.789524
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10751,33 +11077,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.013365055
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059735402
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.029582666
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.52028483
+      value: 22.088036
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025999988
+      value: 0.04352526
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.031259954
+      value: 21.663548
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11942,33 +12292,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (11)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.017333882
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.059715148
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.019635025
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1804743
+      value: 21.08004
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.009077943
+      value: 0.15196922
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.1558176
+      value: 35.003513
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12745,33 +13119,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353760636}
     m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_Name
       value: barbedWire (10)
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.011926632
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.025004212
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6549491
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1549301
+      value: 21.119041
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.041693475
+      value: 0.69796926
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.15847161
+      value: 1.3435392
       objectReference: {fileID: 0}
     - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12810,6 +13208,104 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
   m_PrefabInstance: {fileID: 1994375562}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1995928888
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 353760636}
+    m_Modifications:
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: fuseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: explosionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352975404672634386, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: onlyDamageWhileMoving
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302582198673991674, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_Name
+      value: barbedWire (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.972
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.04352526
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.206
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7239527
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6898497
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 87.236
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+--- !u!4 &1995928889 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4499992881825837920, guid: 85918e7de1c4ae147bd1faed2af76d2e, type: 3}
+  m_PrefabInstance: {fileID: 1995928888}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1999267163
 PrefabInstance:
@@ -14453,63 +14949,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d67c05d2a86c419a2147df403f7c2, type: 3}
---- !u!1001 &1077557499415913135
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 556073847}
-    m_Modifications:
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -334.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 64.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7808933085218687328, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-      propertyPath: m_Name
-      value: Rocket_Launcher
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
 --- !u!1001 &1455653994577408561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14873,10 +15312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2928234186083093065, guid: 6d2528e9a8a5e6b40b66059c711af731, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 6163887195255256689}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d2528e9a8a5e6b40b66059c711af731, type: 3}
 --- !u!1001 &4244532864021764931
@@ -15079,11 +15515,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a53ce20ded39a3c4a990244192330d79, type: 3}
---- !u!4 &6163887195255256689 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6313840169337159528, guid: e2b4eb43b776b6e41bee96347d9b7c81, type: 3}
-  m_PrefabInstance: {fileID: 1077557499415913135}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6688442765141699287
 PrefabInstance:
   m_ObjectHideFlags: 0

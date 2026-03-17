@@ -665,6 +665,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             gunList[i].ammoMax = Mathf.Min(gunList[i].ammoMax, gunList[i].ammoMaxOrig);
         }
 
+        grenadeCount++;
         ammoMax = gunList[gunListPos].ammoMax;
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
     }
