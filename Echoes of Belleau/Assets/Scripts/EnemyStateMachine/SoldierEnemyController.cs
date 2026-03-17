@@ -9,7 +9,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public float stoppingDistance = 0.2f;
 
     [Header("Patrol")]
-    public Transform homePoint;
+    private Transform homePoint;
     public float patrolRadius = 8f;
     public float minIdleTime = 1.5f;
     public float maxIdleTime = 4f;
@@ -46,6 +46,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
     private SoldierStateMachine stateMachine;
     private NavMeshAgent agent;
+    private SingleSoldierSpawner spawnPoint;
 
     public SoldierIdleState IdleState { get; private set; }
     public SoldierPatrolState PatrolState { get; private set; }
@@ -171,6 +172,10 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         }
 
         return center;
+    }
+    public void SetSpawnPoint(SingleSoldierSpawner spawner)
+    {
+        spawnPoint = spawner;
     }
 
     public Vector3 GetHomePosition()
@@ -312,6 +317,11 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
             CurrentCover = null;
         }
 
+        if (spawnPoint != null)
+        {
+            spawnPoint.ClearSoldierReference();
+        }
+
         enabled = false;
 
         if (agent != null)
@@ -330,5 +340,8 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     {
         TakeDamage(amount);
     }
-
+    public void SetHomePoint(Transform newHomePoint)
+    {
+        homePoint = newHomePoint;
+    }
 }

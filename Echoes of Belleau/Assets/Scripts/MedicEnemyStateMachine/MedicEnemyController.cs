@@ -8,7 +8,7 @@ public class MedicEnemyController : MonoBehaviour, IDamage
     public float stoppingDistance = 0.2f;
 
     [Header("Patrol / Position")]
-    public Transform homePoint;
+    private Transform homePoint;
     public float minIdleTime = 1.5f;
     public float maxIdleTime = 3f;
 
@@ -34,6 +34,7 @@ public class MedicEnemyController : MonoBehaviour, IDamage
 
     private NavMeshAgent agent;
     private MedicStateMachine stateMachine;
+    SingleMedicSpawner spawnPoint;
 
 
     public MedicIdleState IdleState { get; private set; }
@@ -83,6 +84,10 @@ public class MedicEnemyController : MonoBehaviour, IDamage
 
         agent.isStopped = true;
         agent.ResetPath();
+    }
+    public void SetSpawnPoint(SingleMedicSpawner spawner)
+    {
+        spawnPoint = spawner;
     }
 
     public bool HasReachedDestination()
@@ -177,7 +182,10 @@ public class MedicEnemyController : MonoBehaviour, IDamage
             CurrentCover.isOccupied = false;
             CurrentCover = null;
         }
-
+        if (spawnPoint != null)
+        {
+            spawnPoint.ClearSoldierReference();
+        }
         enabled = false;
 
         if (agent != null)
@@ -208,6 +216,10 @@ public class MedicEnemyController : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         TakeDamage(amount);
+    }
+    public void SetHomePoint(Transform newHomePoint)
+    {
+        homePoint = newHomePoint;
     }
 
 }
