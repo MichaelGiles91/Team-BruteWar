@@ -15,7 +15,9 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public float maxIdleTime = 4f;
 
     [Header("Target")]
-    public Transform target;
+    [SerializeField] private string playerTag = "Player";
+    private Transform target;
+    public Transform Target => target;
     public float attackRange = 12f;
 
     [Header("Vision")]
@@ -71,14 +73,33 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     private void Start()
     {
         currentHealth = maxHealth;
+        FindPlayerTarget();
         stateMachine.Initialize(IdleState);
     }
 
     private void Update()
     {
+        if (IsDead()) return;
+
+        if (target == null)
+        {
+            FindPlayerTarget();
+        }
+
         stateMachine.Update();
     }
+    private void FindPlayerTarget()
+    {
+        if (target != null)
+            return;
 
+        GameObject playerObject = GameObject.FindGameObjectWithTag(playerTag);
+
+        if (playerObject != null)
+        {
+            target = playerObject.transform;
+        }
+    }
     public void MoveTowards(Vector3 targetPosition, float speed)
     {
         if (agent == null) return;
