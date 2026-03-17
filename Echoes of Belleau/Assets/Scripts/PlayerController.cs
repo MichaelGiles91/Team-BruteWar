@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour, IDamage, IPickup
@@ -38,6 +39,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public int AmmoCount => ammoCount;
     public int GrenadeCount => grenadeMax;
     public int MedkitCount => medkitCount;
+
+    [Header("--- Low Health Indicator ---")]
+    [SerializeField] float lowHealthThreshold = 25f;
+    [SerializeField] float pulseSpeed = 2.5f;
+    [SerializeField] float minAlpha = 0.2f;
+    [SerializeField] float maxAlpha = 0.7f;
+
+    bool lowHealthActive;
 
     [Header("---Devil Dog Mode")]
     [SerializeField] DevilDogMode devilDogMode;
@@ -226,6 +235,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         UpdateFootstepAudio();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
         grenadeTimer += Time.deltaTime;
+        UpdateLowHealthIndicator();
         if (Input.GetButtonDown("ThrowGrenade"))
         {
             HoldGrenade();
@@ -501,6 +511,35 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gameManager.instance.playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.playerDamageFlash.SetActive(false);
+    }
+
+    void UpdateLowHealthIndicator()
+    {
+        Image indicator = gameManager.instance.lowHealthIndicator;
+
+        if (HP <= lowHealthThreshold)
+        {
+            if (!lowHealthActive)
+            {
+                indicator.gameObject.SetActive(true);
+                lowHealthActive = true;
+            }
+
+            Color c = indicator.color;
+
+            float pulse = Mathf.PingPong(Time.time * pulseSpeed, 1f);
+            c.a = Mathf.Lerp(minAlpha, maxAlpha, pulse);
+
+            indicator.color = c;
+        }
+        else
+        {
+            if (lowHealthActive)
+            {
+                indicator.gameObject.SetActive(false);
+                lowHealthActive = false;
+            }
+        }
     }
 
     public void UpdatePlayerUI()
