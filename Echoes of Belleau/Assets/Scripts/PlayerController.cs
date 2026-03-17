@@ -668,7 +668,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         grenadeCount++;
         ammoMax = gunList[gunListPos].ammoMax;
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
     }
 
     void changeGun()

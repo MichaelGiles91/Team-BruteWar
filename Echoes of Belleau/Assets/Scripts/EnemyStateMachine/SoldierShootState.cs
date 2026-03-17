@@ -19,7 +19,7 @@ public class SoldierShootState : SoldierState
 
     public override void Update()
     {
-        if (soldier.Target == null)
+        if (soldier.target == null)
         {
             ReleaseCover();
             stateMachine.ChangeState(soldier.ReturnToPostState);
@@ -48,7 +48,7 @@ public class SoldierShootState : SoldierState
             return;
         }
 
-        Vector3 lookDirection = soldier.Target.position - soldier.transform.position;
+        Vector3 lookDirection = soldier.target.position - soldier.transform.position;
         lookDirection.y = 0f;
 
         if (lookDirection.sqrMagnitude > 0.01f)
