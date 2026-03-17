@@ -46,6 +46,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
     private SoldierStateMachine stateMachine;
     private NavMeshAgent agent;
+    private SingleSoldierSpawner spawnPoint;
 
     public SoldierIdleState IdleState { get; private set; }
     public SoldierPatrolState PatrolState { get; private set; }
@@ -171,6 +172,10 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         }
 
         return center;
+    }
+    public void SetSpawnPoint(SingleSoldierSpawner spawner)
+    {
+        spawnPoint = spawner;
     }
 
     public Vector3 GetHomePosition()
@@ -310,6 +315,11 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         {
             CurrentCover.isOccupied = false;
             CurrentCover = null;
+        }
+
+        if (spawnPoint != null)
+        {
+            spawnPoint.ClearSoldierReference();
         }
 
         enabled = false;
