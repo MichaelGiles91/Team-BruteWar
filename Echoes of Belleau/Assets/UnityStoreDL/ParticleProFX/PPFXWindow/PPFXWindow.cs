@@ -82,20 +82,25 @@ public class PPFXWindow : EditorWindow {
 	
 	void OnEnable(){
 	#if UNITY_EDITOR
-	    EditorApplication.playmodeStateChanged += StateChange;
-	#endif
+    EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+#endif
 	}
-	 
+	
 	#if UNITY_EDITOR
-	void StateChange(){
-	    if (!EditorApplication.isPlayingOrWillChangePlaymode && !Application.isPlaying)
+	void OnDisable()
+	{
+	    EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+	}
+
+	void OnPlayModeStateChanged(PlayModeStateChange state)
+	{
+	    if (state == PlayModeStateChange.EnteredEditMode)
 	    {
-	   
-	    	pfxPreview = new RenderTexture((int)position.width, pfxPreviewHeight, (int)RenderTextureFormat.ARGB32 );
-	    	pfxPrefabList = new List<Object[]>();
-			pfxPreviewImageList = new List<Texture[]>();
-			pfxAssetCount = new int[]{0,0,0,0};
-			LoadPrefabs();
+	        pfxPreview = new RenderTexture((int)position.width, pfxPreviewHeight, (int)RenderTextureFormat.ARGB32 );
+	        pfxPrefabList = new List<Object[]>();
+	        pfxPreviewImageList = new List<Texture[]>();
+	        pfxAssetCount = new int[]{0,0,0,0};
+	        LoadPrefabs();
 	    }
 	}
 	#endif

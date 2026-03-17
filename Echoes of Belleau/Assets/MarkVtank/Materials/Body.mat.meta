@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9a7da5acd2294364fb06b14a9f30e1ef
+timeCreated: 1500031430
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86645
+  packageName: World War 1 Mark V Tank
+  packageVersion: 1.2
+  assetPath: Assets/MarkVtank/Materials/Body.mat
+  uploadId: 190688

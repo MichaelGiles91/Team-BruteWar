@@ -1,0 +1,2547 @@
+fileFormatVersion: 2
+guid: 31b76ad237916944dabff635f17b69e6
+timeCreated: 1500285177
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: (Horizontal)TurretSpin.L
+    100002: (Horizontal)TurretSpin.R
+    100004: (Vertical)TurretSpin.L
+    100006: (Vertical)TurretSpin.R
+    100008: BackGunHole
+    100010: Body
+    100012: 'Body '
+    100014: Chain.B.L
+    100016: Chain.B.L.001
+    100018: Chain.B.L.002
+    100020: Chain.B.L.003
+    100022: Chain.B.L.004
+    100024: Chain.B.L.005
+    100026: Chain.B.L.006
+    100028: Chain.B.L.007
+    100030: Chain.B.R
+    100032: Chain.B.R.001
+    100034: Chain.B.R.002
+    100036: Chain.B.R.003
+    100038: Chain.B.R.004
+    100040: Chain.B.R.005
+    100042: Chain.B.R.006
+    100044: Chain.B.R.007
+    100046: ChainA.L
+    100048: ChainA.L.001
+    100050: ChainA.L.002
+    100052: ChainA.L.003
+    100054: ChainA.L.004
+    100056: ChainA.L.005
+    100058: ChainA.L.006
+    100060: ChainA.L.007
+    100062: ChainA.L.008
+    100064: ChainA.L.009
+    100066: ChainA.L.010
+    100068: ChainA.L.011
+    100070: ChainA.L.012
+    100072: ChainA.L.013
+    100074: ChainA.L.014
+    100076: ChainA.L.015
+    100078: ChainA.L.016
+    100080: ChainA.R
+    100082: ChainA.R.001
+    100084: ChainA.R.002
+    100086: ChainA.R.003
+    100088: ChainA.R.004
+    100090: ChainA.R.005
+    100092: ChainA.R.006
+    100094: ChainA.R.007
+    100096: ChainA.R.008
+    100098: ChainA.R.009
+    100100: ChainA.R.010
+    100102: ChainA.R.011
+    100104: ChainA.R.012
+    100106: ChainA.R.013
+    100108: ChainA.R.014
+    100110: ChainA.R.015
+    100112: ChainA.R.016
+    100114: Door_L
+    100116: Door_R
+    100118: FrontGunHole
+    100120: GunHole.L
+    100122: GunHole.R
+    100124: PartsA
+    100126: Root
+    100128: Skeleton
+    100130: //RootNode
+    100132: Track.L
+    100134: Track.L.001
+    100136: Track.L.002
+    100138: Track.L.003
+    100140: Track.L.004
+    100142: Track.L.005
+    100144: Track.L.006
+    100146: Track.L.007
+    100148: Track.L.008
+    100150: Track.L.009
+    100152: Track.L.010
+    100154: Track.L.011
+    100156: Track.L.012
+    100158: Track.L.013
+    100160: Track.L.014
+    100162: Track.L.015
+    100164: Track.L.016
+    100166: Track.L.017
+    100168: Track.L.018
+    100170: Track.L.019
+    100172: Track.L.020
+    100174: Track.L.021
+    100176: Track.L.022
+    100178: Track.L.023
+    100180: Track.L.024
+    100182: Track.L.025
+    100184: Track.L.026
+    100186: Track.L.027
+    100188: Track.L.028
+    100190: Track.L.029
+    100192: Track.L.030
+    100194: Track.L.031
+    100196: Track.L.032
+    100198: Track.L.033
+    100200: Track.L.034
+    100202: Track.L.035
+    100204: Track.L.036
+    100206: Track.L.037
+    100208: Track.L.038
+    100210: Track.L.039
+    100212: Track.L.040
+    100214: Track.L.041
+    100216: Track.L.042
+    100218: Track.L.043
+    100220: Track.L.044
+    100222: Track.L.045
+    100224: Track.L.046
+    100226: Track.R
+    100228: Track.R.001
+    100230: Track.R.002
+    100232: Track.R.003
+    100234: Track.R.004
+    100236: Track.R.005
+    100238: Track.R.006
+    100240: Track.R.007
+    100242: Track.R.008
+    100244: Track.R.009
+    100246: Track.R.010
+    100248: Track.R.011
+    100250: Track.R.012
+    100252: Track.R.013
+    100254: Track.R.014
+    100256: Track.R.015
+    100258: Track.R.016
+    100260: Track.R.017
+    100262: Track.R.018
+    100264: Track.R.019
+    100266: Track.R.020
+    100268: Track.R.021
+    100270: Track.R.022
+    100272: Track.R.023
+    100274: Track.R.024
+    100276: Track.R.025
+    100278: Track.R.026
+    100280: Track.R.027
+    100282: Track.R.028
+    100284: Track.R.029
+    100286: Track.R.030
+    100288: Track.R.031
+    100290: Track.R.032
+    100292: Track.R.033
+    100294: Track.R.034
+    100296: Track.R.035
+    100298: Track.R.036
+    100300: Track.R.037
+    100302: Track.R.038
+    100304: Track.R.039
+    100306: Track.R.040
+    100308: Track.R.041
+    100310: Track.R.042
+    100312: Track.R.043
+    100314: Track.R.044
+    100316: Track.R.045
+    100318: Track.R.046
+    100320: Tracks
+    100322: TracksHolder.L
+    100324: TracksHolder.R
+    400000: (Horizontal)TurretSpin.L
+    400002: (Horizontal)TurretSpin.R
+    400004: (Vertical)TurretSpin.L
+    400006: (Vertical)TurretSpin.R
+    400008: BackGunHole
+    400010: Body
+    400012: 'Body '
+    400014: Chain.B.L
+    400016: Chain.B.L.001
+    400018: Chain.B.L.002
+    400020: Chain.B.L.003
+    400022: Chain.B.L.004
+    400024: Chain.B.L.005
+    400026: Chain.B.L.006
+    400028: Chain.B.L.007
+    400030: Chain.B.R
+    400032: Chain.B.R.001
+    400034: Chain.B.R.002
+    400036: Chain.B.R.003
+    400038: Chain.B.R.004
+    400040: Chain.B.R.005
+    400042: Chain.B.R.006
+    400044: Chain.B.R.007
+    400046: ChainA.L
+    400048: ChainA.L.001
+    400050: ChainA.L.002
+    400052: ChainA.L.003
+    400054: ChainA.L.004
+    400056: ChainA.L.005
+    400058: ChainA.L.006
+    400060: ChainA.L.007
+    400062: ChainA.L.008
+    400064: ChainA.L.009
+    400066: ChainA.L.010
+    400068: ChainA.L.011
+    400070: ChainA.L.012
+    400072: ChainA.L.013
+    400074: ChainA.L.014
+    400076: ChainA.L.015
+    400078: ChainA.L.016
+    400080: ChainA.R
+    400082: ChainA.R.001
+    400084: ChainA.R.002
+    400086: ChainA.R.003
+    400088: ChainA.R.004
+    400090: ChainA.R.005
+    400092: ChainA.R.006
+    400094: ChainA.R.007
+    400096: ChainA.R.008
+    400098: ChainA.R.009
+    400100: ChainA.R.010
+    400102: ChainA.R.011
+    400104: ChainA.R.012
+    400106: ChainA.R.013
+    400108: ChainA.R.014
+    400110: ChainA.R.015
+    400112: ChainA.R.016
+    400114: Door_L
+    400116: Door_R
+    400118: FrontGunHole
+    400120: GunHole.L
+    400122: GunHole.R
+    400124: PartsA
+    400126: Root
+    400128: Skeleton
+    400130: //RootNode
+    400132: Track.L
+    400134: Track.L.001
+    400136: Track.L.002
+    400138: Track.L.003
+    400140: Track.L.004
+    400142: Track.L.005
+    400144: Track.L.006
+    400146: Track.L.007
+    400148: Track.L.008
+    400150: Track.L.009
+    400152: Track.L.010
+    400154: Track.L.011
+    400156: Track.L.012
+    400158: Track.L.013
+    400160: Track.L.014
+    400162: Track.L.015
+    400164: Track.L.016
+    400166: Track.L.017
+    400168: Track.L.018
+    400170: Track.L.019
+    400172: Track.L.020
+    400174: Track.L.021
+    400176: Track.L.022
+    400178: Track.L.023
+    400180: Track.L.024
+    400182: Track.L.025
+    400184: Track.L.026
+    400186: Track.L.027
+    400188: Track.L.028
+    400190: Track.L.029
+    400192: Track.L.030
+    400194: Track.L.031
+    400196: Track.L.032
+    400198: Track.L.033
+    400200: Track.L.034
+    400202: Track.L.035
+    400204: Track.L.036
+    400206: Track.L.037
+    400208: Track.L.038
+    400210: Track.L.039
+    400212: Track.L.040
+    400214: Track.L.041
+    400216: Track.L.042
+    400218: Track.L.043
+    400220: Track.L.044
+    400222: Track.L.045
+    400224: Track.L.046
+    400226: Track.R
+    400228: Track.R.001
+    400230: Track.R.002
+    400232: Track.R.003
+    400234: Track.R.004
+    400236: Track.R.005
+    400238: Track.R.006
+    400240: Track.R.007
+    400242: Track.R.008
+    400244: Track.R.009
+    400246: Track.R.010
+    400248: Track.R.011
+    400250: Track.R.012
+    400252: Track.R.013
+    400254: Track.R.014
+    400256: Track.R.015
+    400258: Track.R.016
+    400260: Track.R.017
+    400262: Track.R.018
+    400264: Track.R.019
+    400266: Track.R.020
+    400268: Track.R.021
+    400270: Track.R.022
+    400272: Track.R.023
+    400274: Track.R.024
+    400276: Track.R.025
+    400278: Track.R.026
+    400280: Track.R.027
+    400282: Track.R.028
+    400284: Track.R.029
+    400286: Track.R.030
+    400288: Track.R.031
+    400290: Track.R.032
+    400292: Track.R.033
+    400294: Track.R.034
+    400296: Track.R.035
+    400298: Track.R.036
+    400300: Track.R.037
+    400302: Track.R.038
+    400304: Track.R.039
+    400306: Track.R.040
+    400308: Track.R.041
+    400310: Track.R.042
+    400312: Track.R.043
+    400314: Track.R.044
+    400316: Track.R.045
+    400318: Track.R.046
+    400320: Tracks
+    400322: TracksHolder.L
+    400324: TracksHolder.R
+    4300000: Tracks
+    4300002: Body
+    4300004: PartsA
+    7400000: LeftTracksBackward
+    7400002: LeftTracksForward
+    7400004: RightTracksBackward
+    7400006: RightTracksForward
+    7400008: TracksBackward
+    7400010: TracksForward
+    9500000: //RootNode
+    13700000: Body
+    13700002: PartsA
+    13700004: Tracks
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: LeftTracksBackward
+      takeName: Skeleton|LeftTracksBackward
+      firstFrame: 0
+      lastFrame: 236
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: PartsA
+        weight: 1
+      - path: Skeleton
+        weight: 1
+      - path: Skeleton/Root
+        weight: 1
+      - path: 'Skeleton/Root/Body '
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L/(Vertical)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R/(Vertical)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /BackGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006/Chain.B.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006/Chain.B.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015/ChainA.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015/ChainA.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /Door_L
+        weight: 1
+      - path: Skeleton/Root/Body /Door_R
+        weight: 1
+      - path: Skeleton/Root/Body /FrontGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.L
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.046
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.046
+        weight: 1
+      - path: Tracks
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LeftTracksForward
+      takeName: Skeleton|LeftTracksForward
+      firstFrame: 0
+      lastFrame: 236
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: PartsA
+        weight: 1
+      - path: Skeleton
+        weight: 1
+      - path: Skeleton/Root
+        weight: 1
+      - path: 'Skeleton/Root/Body '
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L/(Vertical)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R/(Vertical)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /BackGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006/Chain.B.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006/Chain.B.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015/ChainA.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015/ChainA.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /Door_L
+        weight: 1
+      - path: Skeleton/Root/Body /Door_R
+        weight: 1
+      - path: Skeleton/Root/Body /FrontGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.L
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.046
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.046
+        weight: 1
+      - path: Tracks
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: RightTracksBackward
+      takeName: Skeleton|RightTracksBackward
+      firstFrame: 0
+      lastFrame: 236
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: PartsA
+        weight: 1
+      - path: Skeleton
+        weight: 1
+      - path: Skeleton/Root
+        weight: 1
+      - path: 'Skeleton/Root/Body '
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L/(Vertical)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R/(Vertical)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /BackGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006/Chain.B.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006/Chain.B.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015/ChainA.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015/ChainA.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /Door_L
+        weight: 1
+      - path: Skeleton/Root/Body /Door_R
+        weight: 1
+      - path: Skeleton/Root/Body /FrontGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.L
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.046
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.046
+        weight: 1
+      - path: Tracks
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: RightTracksForward
+      takeName: Skeleton|RightTracksForward
+      firstFrame: 0
+      lastFrame: 236
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: PartsA
+        weight: 1
+      - path: Skeleton
+        weight: 1
+      - path: Skeleton/Root
+        weight: 1
+      - path: 'Skeleton/Root/Body '
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L/(Vertical)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R/(Vertical)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /BackGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006/Chain.B.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006/Chain.B.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015/ChainA.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015/ChainA.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /Door_L
+        weight: 1
+      - path: Skeleton/Root/Body /Door_R
+        weight: 1
+      - path: Skeleton/Root/Body /FrontGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.L
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.046
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.046
+        weight: 1
+      - path: Tracks
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: TracksBackward
+      takeName: Skeleton|TracksBackward
+      firstFrame: 0
+      lastFrame: 236
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: PartsA
+        weight: 1
+      - path: Skeleton
+        weight: 1
+      - path: Skeleton/Root
+        weight: 1
+      - path: 'Skeleton/Root/Body '
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L/(Vertical)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R/(Vertical)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /BackGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006/Chain.B.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006/Chain.B.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015/ChainA.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015/ChainA.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /Door_L
+        weight: 1
+      - path: Skeleton/Root/Body /Door_R
+        weight: 1
+      - path: Skeleton/Root/Body /FrontGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.L
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.046
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.046
+        weight: 1
+      - path: Tracks
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: TracksForward
+      takeName: Skeleton|TracksForward
+      firstFrame: 0
+      lastFrame: 236
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: PartsA
+        weight: 1
+      - path: Skeleton
+        weight: 1
+      - path: Skeleton/Root
+        weight: 1
+      - path: 'Skeleton/Root/Body '
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.L/(Vertical)TurretSpin.L
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /(Horizontal)TurretSpin.R/(Vertical)TurretSpin.R
+        weight: 1
+      - path: Skeleton/Root/Body /BackGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.L/Chain.B.L.001/Chain.B.L.002/Chain.B.L.003/Chain.B.L.004/Chain.B.L.005/Chain.B.L.006/Chain.B.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /Chain.B.R/Chain.B.R.001/Chain.B.R.002/Chain.B.R.003/Chain.B.R.004/Chain.B.R.005/Chain.B.R.006/Chain.B.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.L/ChainA.L.001/ChainA.L.002/ChainA.L.003/ChainA.L.004/ChainA.L.005/ChainA.L.006/ChainA.L.007/ChainA.L.008/ChainA.L.009/ChainA.L.010/ChainA.L.011/ChainA.L.012/ChainA.L.013/ChainA.L.014/ChainA.L.015/ChainA.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /ChainA.R/ChainA.R.001/ChainA.R.002/ChainA.R.003/ChainA.R.004/ChainA.R.005/ChainA.R.006/ChainA.R.007/ChainA.R.008/ChainA.R.009/ChainA.R.010/ChainA.R.011/ChainA.R.012/ChainA.R.013/ChainA.R.014/ChainA.R.015/ChainA.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /Door_L
+        weight: 1
+      - path: Skeleton/Root/Body /Door_R
+        weight: 1
+      - path: Skeleton/Root/Body /FrontGunHole
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.L
+        weight: 1
+      - path: Skeleton/Root/Body /GunHole.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.L/Track.L.046
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.001
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.002
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.003
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.004
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.005
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.006
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.007
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.008
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.009
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.010
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.011
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.012
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.013
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.014
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.015
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.016
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.017
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.018
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.019
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.020
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.021
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.022
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.023
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.024
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.025
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.026
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.027
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.028
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.029
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.030
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.031
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.032
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.033
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.034
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.035
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.036
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.037
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.038
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.039
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.040
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.041
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.042
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.043
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.044
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.045
+        weight: 1
+      - path: Skeleton/Root/Body /TracksHolder.R/Track.R.046
+        weight: 1
+      - path: Tracks
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86645
+  packageName: World War 1 Mark V Tank
+  packageVersion: 1.2
+  assetPath: Assets/MarkVtank/Animations/Tank.fbx
+  uploadId: 190688

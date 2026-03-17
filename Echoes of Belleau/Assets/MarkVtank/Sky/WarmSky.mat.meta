@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2f95d3f931871be498b8ad91f3c91910
+timeCreated: 1490434197
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86645
+  packageName: World War 1 Mark V Tank
+  packageVersion: 1.2
+  assetPath: Assets/MarkVtank/Sky/WarmSky.mat
+  uploadId: 190688
