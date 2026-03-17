@@ -85,6 +85,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text objectiveHeaderText;
     [SerializeField] TMP_Text objectiveText;
     [SerializeField] float objectiveHideDelay = 3f;
+    [Header("--- Tutorial Popup ---")]
+    [SerializeField] GameObject tutorialPopup;
+    [SerializeField] TMP_Text tutorialHeaderText;
+    [SerializeField] TMP_Text tutorialBodyText;
+
+    HashSet<string> shownTutorials = new HashSet<string>();
 
     Coroutine hideObjectiveRoutine;
 
@@ -120,6 +126,9 @@ public class gameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        if (tutorialPopup != null)
+            tutorialPopup.SetActive(false);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -625,12 +634,10 @@ public class gameManager : MonoBehaviour
 
     public void settingsMenu()
     {
-        //menuActive = null;
         menuSettings.SetActive(true);
         menuActive = menuSettings;
         if (Input.GetButtonDown("Cancel"))
         {
-            //menuActive = null;
             menuSettings.SetActive(false);
             menuActive = menuPause;
         }
@@ -638,8 +645,31 @@ public class gameManager : MonoBehaviour
 
     internal void Back()
     {
-        //menuActive = null;
         menuSettings.SetActive(false);
         menuActive = menuPause;
+    }
+
+    public void ShowTutorial(string tutorialID, string header, string body)
+    {
+        if (shownTutorials.Contains(tutorialID))
+            return;
+
+        if (menuActive != null)
+            return;
+
+        shownTutorials.Add(tutorialID);
+
+        tutorialHeaderText.text = header;
+        tutorialBodyText.text = body;
+
+        statePause();
+
+        menuActive = tutorialPopup;
+        menuActive.SetActive(true);
+    }
+
+    public bool HasShownTutorial(string tutorialID)
+    {
+        return shownTutorials.Contains(tutorialID);
     }
 }
