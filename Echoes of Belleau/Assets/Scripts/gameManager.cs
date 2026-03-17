@@ -15,6 +15,7 @@ public class PlayerCheckpointData
     public Quaternion rotation;
     public int hp;
     public int medkits;
+    public int grenades;
     public float devilDogPoints;
 }
 
@@ -36,11 +37,26 @@ public class PickupCheckpointData
 [System.Serializable]
 public class EnemyCheckpointData
 {
-    public SingleEnemySpawner spawnPoint;
+    public SingleSoldierSpawner spawnPoint;
     public Vector3 position;
     public Quaternion rotation;
-    public int hp;
+    public float health;
     public bool isAlive;
+}
+
+[System.Serializable]
+public class AreaObjectiveCheckpointData
+{
+    public AreaObjective objective;
+    public bool wasActive;
+    public bool wasComplete;
+}
+
+[System.Serializable]
+public class ObjectiveMarkerCheckpointData
+{
+    public ObjMarker marker;
+    public bool wasActive;
 }
 
 public class gameManager : MonoBehaviour
@@ -121,6 +137,8 @@ public class gameManager : MonoBehaviour
     List<EnemyCheckpointData> enemyCheckpointData = new List<EnemyCheckpointData>();
     List<WeaponCheckpointData> checkpointWeapons = new List<WeaponCheckpointData>();
     List<PickupCheckpointData> pickupCheckpointData = new List<PickupCheckpointData>();
+    List<AreaObjectiveCheckpointData> objectiveCheckpointData = new List<AreaObjectiveCheckpointData>();
+    List<ObjectiveMarkerCheckpointData> markerCheckpointData = new List<ObjectiveMarkerCheckpointData>();
     int checkpointSelectedGunIndex = 0;
 
     private void Awake()
@@ -271,6 +289,8 @@ public class gameManager : MonoBehaviour
         SavePlayerCheckpointData();
         SaveEnemyCheckpointData();
         SavePickupCheckpointData();
+        SaveObjectiveCheckpointData();
+        SaveObjectiveMarkerCheckpointData();
 
         StartCoroutine(showCheckpointNotification());
     }
@@ -290,7 +310,8 @@ public class gameManager : MonoBehaviour
         RestorePlayerCheckpointData();
         RestoreEnemyCheckpointData();
         RestorePickupCheckpointData();
-        RefreshActiveAreaObjective();
+        RestoreObjectiveCheckpointData();
+        RestoreObjectiveMarkerCheckpointData();
     }
 
     IEnumerator showCheckpointNotification()
@@ -487,6 +508,7 @@ public class gameManager : MonoBehaviour
         playerCheckpointData.rotation = player.transform.rotation;
         playerCheckpointData.hp = playerScript.GetHP();
         playerCheckpointData.medkits = playerScript.MedkitCount;
+        playerCheckpointData.grenades = playerScript.GetGrenades();
         playerCheckpointData.devilDogPoints = playerScript.GetDevilDogPoints();
         checkpointWeapons = playerScript.GetWeaponCheckpointData();
         checkpointSelectedGunIndex = playerScript.GetSelectedGunIndex();
@@ -496,29 +518,29 @@ public class gameManager : MonoBehaviour
     {
         enemyCheckpointData.Clear();
 
-        SingleEnemySpawner[] spawnPoints = FindObjectsByType<SingleEnemySpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        SingleSoldierSpawner[] spawnPoints = FindObjectsByType<SingleSoldierSpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-        foreach (SingleEnemySpawner spawnPoint in spawnPoints)
+        foreach (SingleSoldierSpawner spawnPoint in spawnPoints)
         {
             if (spawnPoint == null) continue;
 
             EnemyCheckpointData data = new EnemyCheckpointData();
             data.spawnPoint = spawnPoint;
 
-            EnemyAIwRoam enemy = spawnPoint.GetCurrentEnemy();
+            SoldierEnemyController soldier = spawnPoint.GetCurrentSoldier();
 
-            if (enemy != null)
+            if (soldier != null)
             {
-                data.position = enemy.transform.position;
-                data.rotation = enemy.transform.rotation;
-                data.hp = enemy.GetHP();
-                data.isAlive = enemy.IsAlive();
+                data.position = soldier.transform.position;
+                data.rotation = soldier.transform.rotation;
+                data.health = soldier.GetHealth();
+                data.isAlive = soldier.IsAlive();
             }
             else
             {
                 data.position = spawnPoint.transform.position;
                 data.rotation = spawnPoint.transform.rotation;
-                data.hp = 0;
+                data.health = 0f;
                 data.isAlive = false;
             }
 
@@ -561,6 +583,7 @@ public class gameManager : MonoBehaviour
 
         playerScript.SetHP(playerCheckpointData.hp);
         playerScript.SetMedkits(playerCheckpointData.medkits);
+        playerScript.SetGrenades(playerCheckpointData.grenades);
         playerScript.SetDevilDogPoints(playerCheckpointData.devilDogPoints);
     }
 
@@ -571,29 +594,29 @@ public class gameManager : MonoBehaviour
             if (data.spawnPoint == null)
                 continue;
 
-            EnemyAIwRoam enemy = data.spawnPoint.GetCurrentEnemy();
+            SoldierEnemyController soldier = data.spawnPoint.GetCurrentSoldier();
 
             if (data.isAlive)
             {
-                if (enemy == null)
-                    enemy = data.spawnPoint.SpawnEnemy();
+                if (soldier == null)
+                    soldier = data.spawnPoint.SpawnSoldier();
 
-                if (enemy != null)
+                if (soldier != null)
                 {
-                    enemy.RestoreCheckpointState(
+                    soldier.RestoreCheckpointState(
                         data.position,
                         data.rotation,
-                        data.hp,
+                        data.health,
                         true
                     );
                 }
             }
             else
             {
-                if (enemy != null)
+                if (soldier != null)
                 {
-                    Destroy(enemy.gameObject);
-                    data.spawnPoint.ClearEnemyReference();
+                    Destroy(soldier.gameObject);
+                    data.spawnPoint.ClearSoldierReference();
                 }
             }
         }
@@ -609,15 +632,71 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    void RefreshActiveAreaObjective()
+    void SaveObjectiveCheckpointData()
     {
+        objectiveCheckpointData.Clear();
+
         AreaObjective[] objectives = FindObjectsByType<AreaObjective>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         foreach (AreaObjective objective in objectives)
         {
-            if (objective != null)
-                objective.RefreshTrackedEnemies();
+            if (objective == null) continue;
+
+            AreaObjectiveCheckpointData data = new AreaObjectiveCheckpointData();
+            data.objective = objective;
+            data.wasActive = objective.IsActiveObjective();
+            data.wasComplete = objective.IsCompleteObjective();
+
+            objectiveCheckpointData.Add(data);
         }
+    }
+
+    void RestoreObjectiveCheckpointData()
+    {
+        foreach (AreaObjectiveCheckpointData data in objectiveCheckpointData)
+        {
+            if (data.objective == null) continue;
+
+            data.objective.RestoreCheckpointState(data.wasActive, data.wasComplete);
+        }
+    }
+
+    void SaveObjectiveMarkerCheckpointData()
+    {
+        markerCheckpointData.Clear();
+
+        for (int i = 0; i < objMarkers.Count; i++)
+        {
+            if (objMarkers[i] == null) continue;
+
+            ObjectiveMarkerCheckpointData data = new ObjectiveMarkerCheckpointData();
+            data.marker = objMarkers[i];
+            data.wasActive = objMarkers[i].isActive;
+
+            markerCheckpointData.Add(data);
+        }
+    }
+
+    void RestoreObjectiveMarkerCheckpointData()
+    {
+        int restoredActiveIndex = -1;
+
+        foreach (ObjectiveMarkerCheckpointData data in markerCheckpointData)
+        {
+            if (data.marker == null) continue;
+
+            data.marker.SetActive(data.wasActive);
+
+            if (data.wasActive)
+                restoredActiveIndex = objMarkers.IndexOf(data.marker);
+        }
+
+        if (restoredActiveIndex >= 0)
+            currentObjectiveIndex = restoredActiveIndex;
+        else
+            currentObjectiveIndex = 0;
+
+        RefreshMapObjective();
     }
 
     public void LoadSceneWithFade(string sceneName)

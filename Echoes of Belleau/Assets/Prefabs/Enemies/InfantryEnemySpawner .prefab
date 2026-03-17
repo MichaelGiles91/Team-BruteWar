@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1968bf9b0339f046b9bc4954eac7c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleSoldierSpawner
-  soldierPrefab: {fileID: 0}
+  soldierPrefab: {fileID: 1770789439013535220, guid: 799afe618ba25a343a438d742ea049d6, type: 3}

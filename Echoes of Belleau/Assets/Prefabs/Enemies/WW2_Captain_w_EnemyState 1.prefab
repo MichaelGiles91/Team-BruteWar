@@ -5517,8 +5517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c49cb224271594c81a3f45f4a0e9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageableEnemy
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 20
+  currentHealth: 20
 --- !u!114 &7936882480589182108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5534,7 +5534,6 @@ MonoBehaviour:
   patrolSpeed: 2
   combatMoveSpeed: 3.5
   stoppingDistance: 0.2
-  homePoint: {fileID: 0}
   patrolRadius: 8
   minIdleTime: 1.5
   maxIdleTime: 4
@@ -5555,9 +5554,9 @@ MonoBehaviour:
   firePoint: {fileID: 6545050555566789194}
   bulletPrefab: {fileID: 6358852641723730384, guid: ecdb4da60df48b04eacf35b263dce792, type: 3}
   bulletSpeed: 25
-  maxHealth: 100
-  currentHealth: 100
-  destroyOnDeath: 1
+  maxHealth: 20
+  currentHealth: 20
+  destroyOnDeath: 0
 --- !u!95 &8320247927910668552
 Animator:
   serializedVersion: 7
