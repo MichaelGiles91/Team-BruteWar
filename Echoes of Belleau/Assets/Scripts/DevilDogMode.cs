@@ -70,6 +70,14 @@ public class DevilDogMode : MonoBehaviour
         if (DogActive)
         { return; }
 
+        if (!gameManager.instance.HasShownTutorial("DevilDog"))
+        {
+            gameManager.instance.ShowTutorial(
+                "DevilDog", 
+                "Devil Dog Mode", 
+                "Devil Dog Mode is represented by the meter on the right side of the screen. Killing enemies and picking up fallen ally dog tags increases the meter. Once the meter is completely filled, press Q to gain short period of invulnerability and no ammo consumption. Press Esc to continue."
+                );
+        }
 
         currentPoints += amount;
         currentPoints = Mathf.Clamp(currentPoints, 0f, maxPoints);

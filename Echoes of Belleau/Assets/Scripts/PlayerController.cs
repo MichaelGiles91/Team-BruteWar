@@ -614,6 +614,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         medkitCount += amount;
         gameManager.instance.updateMedkitAmount(medkitCount);
+        if (!gameManager.instance.HasShownTutorial("MedKitPickup"))
+        {
+            gameManager.instance.ShowTutorial("MedKitPickup", "Medkits", "You will find Medkits scattered around the level. If you have one available, press H to use the Medkit and heal half your total health. Press Esc to continue.");
+        }
     }
 
     public void getGunStats(gunStats gun)
@@ -647,6 +651,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         for (int i = 0; i < gunList.Count; i++)
         {
             if (gunList[i] == null) continue;
+
+            if (!gameManager.instance.HasShownTutorial("AmmoPickup"))
+            {
+                gameManager.instance.ShowTutorial(
+                    "AmmoPickup"
+                    ,"Ammo"
+                    ,"You will find Ammo Crates scattered around the level. When you walk up to these crates, it will automatically add one magazine worth of ammo to your currently equiped weapon's reserves and one grenade. Press Esc to continue."
+                    );
+            }
 
             gunList[i].ammoMax += gunList[i].pickupSize;
             gunList[i].ammoMax = Mathf.Min(gunList[i].ammoMax, gunList[i].ammoMaxOrig);
@@ -1068,6 +1081,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void AddStress(float amount)
     {
         stress += amount;
+
+        if (!gameManager.instance.HasShownTutorial("StressSystem"))
+        {
+            gameManager.instance.ShowTutorial("StressSystem", "Stress System", "Taking damage increases stress. The higher your stress, the more blurry your vision gets and the more your accuracy is reduced. Press Esc to continue.");
+        }
+
         stress = Mathf.Clamp(stress, 0f, maxStress);
         stressSafeTimer = stressRecoveryDelay;
     }

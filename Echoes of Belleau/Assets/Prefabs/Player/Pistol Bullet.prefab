@@ -48,18 +48,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   type: 0
-  rd: {fileID: 1043577880710073630}
   damageAmount: 3
   damageRate: 1
   speed: 150
   destroyTime: 3
   hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
+  rb: {fileID: 1043577880710073630}
   fuseTime: 2.5
   explosionRadius: 4
   explosionMask:
     serializedVersion: 2
     m_Bits: 4294967295
   explosionEffect: {fileID: 0}
+  onlyDamageWhileMoving: 0
+  slowMult: 0.5
 --- !u!96 &2917113606003614327
 TrailRenderer:
   serializedVersion: 4
