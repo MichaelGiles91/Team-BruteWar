@@ -1688,7 +1688,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7816108384183498176, guid: 9cff2658824f1e94b966c8809fdfe6f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 79.582306
+      value: 60.7
       objectReference: {fileID: 0}
     - target: {fileID: 7816108384183498176, guid: 9cff2658824f1e94b966c8809fdfe6f6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2560,68 +2560,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6846026376306589792, guid: 6e69cd36777afed4ea10f82958ae0dfd, type: 3}
   m_PrefabInstance: {fileID: 143727179}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &359699105
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1242869274}
-    m_Modifications:
-    - target: {fileID: 3022408590242103655, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_Name
-      value: MedicEnemySpawner (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.439484
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.000030394174
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 88.14276
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
---- !u!4 &359699106 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-  m_PrefabInstance: {fileID: 359699105}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &360160468 stripped
 Transform:
@@ -5920,7 +5858,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 422786056167914565, guid: 736f6a0ac00455e4cbccaaebaccfd466, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 71.63492
+      value: 57.2
       objectReference: {fileID: 0}
     - target: {fileID: 422786056167914565, guid: 736f6a0ac00455e4cbccaaebaccfd466, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7880,14 +7818,12 @@ Transform:
   - {fileID: 782679758}
   - {fileID: 340867262}
   - {fileID: 712283342}
-  - {fileID: 1399983424}
   - {fileID: 415519028}
   - {fileID: 1619771933}
   - {fileID: 513604705}
   - {fileID: 266896039}
   - {fileID: 1685293191}
   - {fileID: 244194540}
-  - {fileID: 359699106}
   - {fileID: 1514546889}
   - {fileID: 1501983295}
   - {fileID: 1407779214}
@@ -9021,72 +8957,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6389800393157528084, guid: be5ddce7644ff094db0b61aa24d9814a, type: 3}
   m_PrefabInstance: {fileID: 1394268402}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1399983423
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1242869274}
-    m_Modifications:
-    - target: {fileID: 269498156310292812, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: soldierPrefab
-      value: 
-      objectReference: {fileID: 1290650843045297672, guid: afd8bb228fd2cfb40af91148f2549733, type: 3}
-    - target: {fileID: 3022408590242103655, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_Name
-      value: MedicEnemySpawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -149.15143
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.000011126875
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 88.00165
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
---- !u!4 &1399983424 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8174535513348213289, guid: 74e263a97ab3191478dcf440b11698d0, type: 3}
-  m_PrefabInstance: {fileID: 1399983423}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1403987912 stripped
 Transform:
@@ -15451,6 +15321,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5504092729805549947, guid: b35f1613dc604634480a4019d51ff9f3, type: 3}
+      propertyPath: enemyPrefabBase
+      value: 
+      objectReference: {fileID: 1234985417220284030, guid: 12f347cd681a82d4e9a55d61990e7ac9, type: 3}
+    - target: {fileID: 5504092729805549947, guid: b35f1613dc604634480a4019d51ff9f3, type: 3}
+      propertyPath: enemyPrefabBoss
+      value: 
+      objectReference: {fileID: 8532865070141830019, guid: b2841677eeca3ce4fad13ff92fe710d6, type: 3}
+    - target: {fileID: 5504092729805549947, guid: b35f1613dc604634480a4019d51ff9f3, type: 3}
+      propertyPath: enemyPrefabMedium
+      value: 
+      objectReference: {fileID: 4346935493750321177, guid: 16a3039b9ad52d245b220028ebc0fb23, type: 3}
     - target: {fileID: 7353185358933726583, guid: b35f1613dc604634480a4019d51ff9f3, type: 3}
       propertyPath: m_Name
       value: Defense Zone

@@ -10,6 +10,12 @@ public class MainMenuController : MonoBehaviour
 
     private void Awake()
     {
+        if (Cursor.visible == false)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
         instance = this;
     }
     void Start()

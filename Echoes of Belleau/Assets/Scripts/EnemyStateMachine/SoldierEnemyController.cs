@@ -336,6 +336,12 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
         isDead = true;
 
+        DevilDogMode devilDog = FindFirstObjectByType<DevilDogMode>();
+        if (devilDog != null)
+        {
+            devilDog.AddKillPoints();
+        }
+
         OnDied?.Invoke(this);
 
         StopMoving();
