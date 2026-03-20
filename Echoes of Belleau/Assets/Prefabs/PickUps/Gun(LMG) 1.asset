@@ -27,5 +27,5 @@ MonoBehaviour:
   hitEffect: {fileID: 8567743453655228817, guid: 212ef1a41838ce044a9ac54994866708, type: 3}
   muzzleFlash: {fileID: 19800006, guid: f47cb9d88f4bc6c4bb7441e962c2c1a5, type: 3}
   shootSound:
-  - {fileID: 8300000, guid: 0638fc7e7cec1ba458894dff1928f9f8, type: 3}
+  - {fileID: 8300000, guid: 2f10985c21eb1844285d0f112be9af08, type: 3}
   shootSoundVol: 0.451
