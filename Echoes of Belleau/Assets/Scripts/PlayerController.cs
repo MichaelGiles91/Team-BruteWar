@@ -832,6 +832,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void UseGrenade()
     {
+        SFXManager.instance.PlayGrenadeThrow();
+
         currentGunInstance.SetActive(false);
         
         grenadeThrowTimer = 0;
@@ -1193,6 +1195,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         {
             StartCoroutine(MeleeDelay());
             knife.SetActive(true);
+            SFXManager.instance.PlayKnifeSwing();
             animator.SetTrigger("Melee");
             GetKnifeDamage.DoKnifeHit();
             StartCoroutine(gunHide());
