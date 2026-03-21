@@ -148,16 +148,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5087e807026604b9d06e8ffe548223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::damage
-  type: 0
-  rd: {fileID: 0}
+  type: 2
   damageAmount: 0
   damageRate: 0
   speed: 0
   destroyTime: 0
   hitEffect: {fileID: 0}
+  rb: {fileID: 0}
   fuseTime: 2.5
   explosionRadius: 4
   explosionMask:
     serializedVersion: 2
     m_Bits: 4294967295
   explosionEffect: {fileID: 0}
+  onlyDamageWhileMoving: 0
+  slowMult: 0.5

@@ -740,7 +740,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             col.enabled = false;
         }
 
-        int fpsLayer = LayerMask.NameToLayer("FPSArms");
+        int fpsLayer = LayerMask.NameToLayer("Fps Arms");
         if (fpsLayer >= 0)
             SetLayerRecursively(currentGunInstance, fpsLayer);
 
@@ -1009,8 +1009,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         AlignWeaponToGrip(instance.transform, rightHandGrip, weaponGripTarget);
         instance.transform.SetParent(weaponGripTarget, true);
-        instance.SetActive(false);
 
+        int fpsLayer = LayerMask.NameToLayer("Fps Arms");
+        if (fpsLayer == -1)
+        {
+            SetLayerRecursively(instance, fpsLayer);
+        }
+
+        foreach (Collider col in instance.GetComponentsInChildren<Collider>(true))
+        {
+            col.enabled = false;
+        }
+
+        instance.SetActive(false);
         return true;
     }
 
