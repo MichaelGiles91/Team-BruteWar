@@ -34,4 +34,14 @@ public class ScreenFader : MonoBehaviour
             yield return null;
         }
     }
+
+    public void PlayFadeOut()
+    {
+        StartCoroutine(FadeOut());
+    }
+
+    public void PlayFadeIn()
+    {
+        StartCoroutine(FadeIn());
+    }
 }
