@@ -29,3 +29,10 @@ MonoBehaviour:
   shootSound:
   - {fileID: 8300000, guid: 57b29ac8c3dfa9447bc2f82110b08d21, type: 3}
   shootSoundVol: 0.507
+  reloadSound:
+  - {fileID: 8300000, guid: ccb234c805ba4564390414d7ad1e0f8f, type: 3}
+  reloadSoundVol: 0.618
+  reloadTime: 2
+  singleUseWeapon: 0
+  uniquePickup: 1
+  sourceAsset: {fileID: 11400000}

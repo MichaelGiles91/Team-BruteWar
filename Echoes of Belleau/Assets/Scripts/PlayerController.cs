@@ -106,7 +106,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     
     bool wasAirborne;
     float lastYVelocity;
-    
+
+    bool removeCurrentGunAfterShot = false;
+    bool isReloading;
+
 
     int gunListPos;
     float shootTimer;
@@ -448,6 +451,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         damage bulletDmg = newBullet.GetComponent<damage>();
         if (bulletDmg != null)
             bulletDmg.SetHitEffect(gunList[gunListPos].hitEffect);
+
+        CheckSingleUseWeaponAfterShot();
     }
 
     public void takeDamage(int amount)
@@ -487,12 +492,29 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void reload()
     {
+        if (isReloading) return;
         if (!Input.GetButtonDown("Reload")) return;
 
         int magSize = ammoCountOrig;
         if (ammoCount >= magSize) return;
         if (ammoMax <= 0) return;
 
+        StartCoroutine(ReloadWait(gunList[gunListPos].reloadTime));
+    }
+
+    IEnumerator ReloadWait(float reloadTime)
+    {
+        isReloading = true;
+
+        if (gunList[gunListPos].reloadSound != null && gunList[gunListPos].reloadSound.Length > 0)
+        {
+            AudioClip clip = gunList[gunListPos].reloadSound[Random.Range(0, gunList[gunListPos].reloadSound.Length)];
+            aud.PlayOneShot(clip, gunList[gunListPos].reloadSoundVol);
+        }
+
+        yield return new WaitForSeconds(reloadTime);
+
+        int magSize = ammoCountOrig;
         int need = magSize - ammoCount;
         int load = Mathf.Min(need, ammoMax);
 
@@ -502,8 +524,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         SaveAmmoToGunStats();
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
 
-        //add feedback for trying to reload with no reserve ammo -Austin
-        //add feedback that changes the counter number color for low ammo -Austin
+        isReloading = false;
     }
 
     IEnumerator flashScreen()
@@ -620,21 +641,31 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
     }
 
-    public void getGunStats(gunStats gun)
+    public bool getGunStats(gunStats gun)
     {
+        if (gun == null) return false;
+
+        if (gun.uniquePickup && HasGunOfType(gun))
+        {
+            return false;
+        }
+
         gunStats newGunStats = Instantiate(gun);
+        newGunStats.sourceAsset = gun;
+
         gunList.Add(newGunStats);
 
         if (!CreateGunInstance(newGunStats, out GameObject instance))
         {
             gunList.RemoveAt(gunList.Count - 1);
-            return;
+            return false;
         }
 
         gunInstances.Add(instance);
 
         gunListPos = gunList.Count - 1;
         changeGun();
+        return true;
     }
 
     void SaveAmmoToGunStats()
@@ -661,8 +692,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
                     );
             }
 
-            gunList[i].ammoMax += gunList[i].pickupSize;
-            gunList[i].ammoMax = Mathf.Min(gunList[i].ammoMax, gunList[i].ammoMaxOrig);
+            if (!gunList[i].singleUseWeapon)
+            {
+                gunList[i].ammoMax += gunList[i].pickupSize;
+                gunList[i].ammoMax = Mathf.Min(gunList[i].ammoMax, gunList[i].ammoMaxOrig);
+            }
         }
 
         grenadeCount++;
@@ -1298,6 +1332,86 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         float vertical = Input.GetAxisRaw("Vertical");
 
         return horizontal != 0f || vertical != 0f;
+    }
+
+
+
+    bool HasGunOfType(gunStats gunAsset)
+    {
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            if (gunList[i] == null) continue;
+
+            if (gunList[i].sourceAsset == gunAsset)
+                return true;
+        }
+
+        return false;
+    }
+
+    void RemoveCurrentGun()
+    {
+        if (gunList.Count == 0 || gunInstances.Count == 0) return;
+        if (gunListPos < 0 || gunListPos >= gunList.Count || gunListPos >= gunInstances.Count) return;
+
+        int removedIndex = gunListPos;
+        GameObject oldGunInstance = gunInstances[removedIndex];
+
+        gunList.RemoveAt(removedIndex);
+        gunInstances.RemoveAt(removedIndex);
+
+        if (gunList.Count == 0)
+        {
+            currentGunInstance = null;
+            activeMuzzle = null;
+            activeMuzzleFlash = null;
+            muzzleLight = null;
+            ammoCount = 0;
+            ammoMax = 0;
+
+            gameManager.instance.updateAmmoAmount(0, 0);
+            gameManager.instance.UpdateWeaponIcon(null);
+
+            if (leftHandIKBinder != null)
+                leftHandIKBinder.BindToWeapon(null);
+
+            if (oldGunInstance != null)
+                Destroy(oldGunInstance);
+
+            return;
+        }
+
+        gunListPos = Mathf.Clamp(removedIndex - 1, 0, gunList.Count - 1);
+        changeGun();
+
+        if (oldGunInstance != null)
+            Destroy(oldGunInstance);
+    }
+
+    void CheckSingleUseWeaponAfterShot()
+    {
+        if (gunList.Count == 0) return;
+        if (gunListPos < 0 || gunListPos >= gunList.Count) return;
+
+        gunStats currentGun = gunList[gunListPos];
+        if (currentGun == null) return;
+
+        if (currentGun.singleUseWeapon && ammoCount <= 0)
+        {
+            removeCurrentGunAfterShot = true;
+            StartCoroutine(RemoveCurrentGunNextFrame());
+        }
+    }
+
+    IEnumerator RemoveCurrentGunNextFrame()
+    {
+        yield return null;
+
+        if (!removeCurrentGunAfterShot)
+            yield break;
+
+        removeCurrentGunAfterShot = false;
+        RemoveCurrentGun();
     }
 
 }

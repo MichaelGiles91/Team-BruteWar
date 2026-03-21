@@ -7,14 +7,15 @@ public class GunPickups : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        IPickup pik = other.GetComponent<IPickup>();
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (player == null) return;
 
-        if( pik != null )
+        gun.ammoCur = gun.magSize;
+
+        bool pickedUp = player.getGunStats(gun);
+        if (pickedUp)
         {
-            gun.ammoCur = gun.magSize;
-            pik.getGunStats(gun);
             gameObject.SetActive(false);
-
         }
     }
 }

@@ -23,5 +23,11 @@ public class gunStats : ScriptableObject
     public ParticleSystem muzzleFlash;
     public AudioClip[] shootSound;
     [Range(0, 1)] public float shootSoundVol;
+    public AudioClip[] reloadSound;
+    [Range(0, 1)] public float reloadSoundVol;
+    public float reloadTime;
 
+    public bool singleUseWeapon = false;
+    public bool uniquePickup = false;
+    public gunStats sourceAsset;
 }
