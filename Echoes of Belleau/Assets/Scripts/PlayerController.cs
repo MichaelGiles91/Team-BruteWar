@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -110,6 +111,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     int gunListPos;
     float shootTimer;
+    float grenadeThrowTimer;
     GameObject currentGunInstance;
     Transform activeMuzzle;
     public bool canShoot = true;
@@ -121,10 +123,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     [Header("Grenade")]
     [SerializeField] GameObject grenadePrefab;
-    [SerializeField] float grenadeCooldown = 6f;
-    [SerializeField] float grenadeThrowForce = 12f;
-    [SerializeField] float grenadeUpForce = 4f;
+    [SerializeField] float grenadeCooldown;
+    [SerializeField] float grenadeThrowForce;
+    [SerializeField] float grenadeUpForce;
     [SerializeField] Transform grenadePos;
+    [SerializeField] float grenadeThrowRate;
     float grenadeTimer;
     GameObject heldGrenade;
 
@@ -235,11 +238,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         UpdateFootstepAudio();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
         grenadeTimer += Time.deltaTime;
+        grenadeThrowTimer += Time.deltaTime;
         UpdateLowHealthIndicator();
-        if (Input.GetButtonDown("ThrowGrenade"))
+        if (Input.GetButtonDown("ThrowGrenade") && grenadeThrowTimer >= grenadeThrowRate)
         {
-            HoldGrenade();
-            UseGrenade();
+            if (grenadeCount <= 0)
+                return;
+            animator.SetTrigger("grenade");
+            StartCoroutine(grenadeThrowDelay());
         }
         if (Input.GetButtonDown("UseMedkit"))
         {
@@ -800,9 +806,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void HoldGrenade()
     {
-        if (grenadeCount <= 0)
-            return;
-
             heldGrenade = Instantiate(grenadePrefab, grenadePos.position, grenadePos.rotation);
             heldGrenade.transform.SetParent(grenadePos);
             heldGrenade.transform.localPosition = Vector3.zero; // Ensure the grenade is positioned correctly relative to the shootPos
@@ -820,10 +823,18 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             if (col != null) col.enabled = false; // Disable the collider while held to prevent collisions with the enemy
     }
 
+    IEnumerator grenadeThrowDelay()
+    {
+        HoldGrenade();
+        yield return new WaitForSeconds(0.5f);
+        UseGrenade();
+    }
+
     void UseGrenade()
     {
-        if (grenadeCount <= 0)
-            return;
+        currentGunInstance.SetActive(false);
+        
+        grenadeThrowTimer = 0;
 
         grenadeCount--;
 
@@ -846,8 +857,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
-            Vector3 aimpoint = Camera.main.transform.position + Camera.main.transform.forward;
-            Vector3 throwDir = (aimpoint - grenadePos.position).normalized;
+            Vector3 aimPoint;
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                aimPoint = hit.point;
+            }
+            else
+            {
+                aimPoint = ray.origin + ray.direction * 100f;
+            }
+
+            Vector3 throwDir = (aimPoint - grenadePos.position).normalized;
 
             damage dmg = heldGrenade.GetComponent<damage>();
             if (dmg != null)
@@ -862,6 +885,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
         UpdatePlayerUI();
+
+        currentGunInstance.SetActive(true);
     }
 
     void UseMedkit()

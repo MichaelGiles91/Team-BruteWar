@@ -955,13 +955,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3698701863140888229}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0.5}
+  m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8994491910353994925}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 7002578684610383690}
+  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
 --- !u!1 &3704917886290922144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,6 +1646,7 @@ Transform:
   - {fileID: 6235608828881851993}
   - {fileID: 3604481635376844055}
   - {fileID: 8122186003367029040}
+  - {fileID: 2083285800941978596}
   m_Father: {fileID: 6128725114231203598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5635009317500348223
@@ -2797,7 +2798,6 @@ Transform:
   - {fileID: 2843125082751274313}
   - {fileID: 513061967526955083}
   - {fileID: 1267339380890165752}
-  - {fileID: 2083285800941978596}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6097986526888204363
@@ -2832,6 +2832,10 @@ MonoBehaviour:
   grenadeMax: 3
   medkitCount: 0
   medkitHealAmount: 50
+  lowHealthThreshold: 25
+  pulseSpeed: 2.5
+  minAlpha: 0.2
+  maxAlpha: 0.7
   devilDogMode: {fileID: 0}
   stamina: 100
   staminaDrainRate: 10
@@ -2863,6 +2867,7 @@ MonoBehaviour:
   grenadeThrowForce: 6
   grenadeUpForce: 2
   grenadePos: {fileID: 2083285800941978596}
+  grenadeThrowRate: 0
   animator: {fileID: 8199963273603075290}
 --- !u!114 &7378915965934929096
 MonoBehaviour:

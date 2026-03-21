@@ -14910,14 +14910,70 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2083285800941978596, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083285800941978596, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083285800941978596, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083285800941978596, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083285800941978596, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083285800941978596, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083285800941978596, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083285800941978596, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097986526888204363, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: grenadeUpForce
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097986526888204363, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: grenadeCooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097986526888204363, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: grenadeThrowRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097986526888204363, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: grenadeThrowForce
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7378915965934929096, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
       propertyPath: interactPrompt
       value: 
       objectReference: {fileID: 2069700389}
+    - target: {fileID: 8199963273603075290, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8263746862360927993, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
       propertyPath: m_Name
       value: Player wFpsArms
       objectReference: {fileID: 0}
+    - target: {fileID: 8619254073232536756, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 19847910, guid: 2feb59cce5cec914da1d53434700a447, type: 3}
     - target: {fileID: 8994491910353994925, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
       propertyPath: m_LocalPosition.x
       value: 164.05
@@ -15647,8 +15703,8 @@ SceneRoots:
   - {fileID: 2069700388}
   - {fileID: 1698150590066121558}
   - {fileID: 3732972591488037437}
-  - {fileID: 2695143836439125440}
   - {fileID: 4244532864021764931}
+  - {fileID: 2695143836439125440}
   - {fileID: 206148183}
   - {fileID: 714209084}
   - {fileID: 1973822241}
