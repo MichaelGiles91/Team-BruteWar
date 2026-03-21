@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3362155374426013962}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3841858374444473058}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LeftHandIK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 426526977846202944}
   - component: {fileID: 4553958137602612259}
   - component: {fileID: 457599664460418081}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: SM_Trigger_Hook_For_Rocket_Launchers_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 1546612302424827008}
   - component: {fileID: 3454151111114462976}
   - component: {fileID: 5385926120070977241}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 860574606279164938}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: RightHandGrip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6286036760776992110}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LeftElbowHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 3238432739238172460}
   - component: {fileID: 2117859324150503298}
   - component: {fileID: 4116887162555977520}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Rocket_Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

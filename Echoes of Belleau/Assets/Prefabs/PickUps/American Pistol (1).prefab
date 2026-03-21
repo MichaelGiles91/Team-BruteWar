@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1791344169147584895}
   - component: {fileID: 95600337720209910}
   - component: {fileID: 5984618340167850011}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Filler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 7127364165593635188}
   - component: {fileID: 31544297669921862}
   - component: {fileID: 635523728563451937}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1161988326843260463}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5637772018276235392}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LeftElbowHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8095167657148621532}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: RightHandGrip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 7699570870557172174}
   - component: {fileID: 4311162886754435362}
   - component: {fileID: 7587897860187697936}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7829569382776667477}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LeftHandIK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 5491790199421439795}
   - component: {fileID: 5669183613729992614}
   - component: {fileID: 4326590453695329981}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 209433482977861505}
   - component: {fileID: 800278588547340878}
   - component: {fileID: 2155168349648678361}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 7055285053623217601}
   - component: {fileID: 6629115627445528991}
   - component: {fileID: -2642847822444896400}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: American Pistol (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

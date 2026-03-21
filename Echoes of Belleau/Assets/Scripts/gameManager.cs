@@ -106,6 +106,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text tutorialHeaderText;
     [SerializeField] TMP_Text tutorialBodyText;
 
+    [SerializeField] GameObject lockedText;
+
     HashSet<string> shownTutorials = new HashSet<string>();
 
     Coroutine hideObjectiveRoutine;
@@ -750,5 +752,17 @@ public class gameManager : MonoBehaviour
     public bool HasShownTutorial(string tutorialID)
     {
         return shownTutorials.Contains(tutorialID);
+    }
+
+    public IEnumerator HideLockedAfterDelay()
+    {
+        lockedText.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        lockedText.SetActive(false);
+    }
+
+    public void ShowLockedText()
+    {
+        StartCoroutine(HideLockedAfterDelay());
     }
 }
