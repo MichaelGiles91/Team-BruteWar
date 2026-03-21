@@ -6,6 +6,7 @@ public class MainMenuController : MonoBehaviour
 {
     public static MainMenuController instance;
     [SerializeField] ScreenFader screenFader;
+    [SerializeField] bool DEBUG_QUICKLOAD_KEYS = true;
 
 
     private void Awake()
@@ -26,11 +27,27 @@ public class MainMenuController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F10))
+        if (DEBUG_QUICKLOAD_KEYS)
         {
-            StartCoroutine(StartGameRoutine());
-            SceneManager.LoadScene("Showcase");
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                StartCoroutine(StartGameRoutine());
+                SceneManager.LoadScene("Scene1");
+            }
+
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                StartCoroutine(StartGameRoutine());
+                SceneManager.LoadScene("Level 2");
+            }
+
+            if (Input.GetKeyDown(KeyCode.F7))
+            {
+                StartCoroutine(StartGameRoutine());
+                SceneManager.LoadScene("Showcase");
+            }
         }
+        
     }
 
 
