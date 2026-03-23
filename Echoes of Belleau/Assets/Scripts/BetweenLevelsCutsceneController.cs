@@ -33,6 +33,8 @@ public class BetweenLevelsCutsceneController : MonoBehaviour
 
     private void Start()
     {
+        MusicManager.instance.PlayMusic(MusicType.Cutscene, 1, .75f);
+
         if (screenFader != null && screenFader.fadeImage != null)
         {
             Color c = screenFader.fadeImage.color;

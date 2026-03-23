@@ -21,6 +21,7 @@ public class StreetCutsceneTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
+        MusicManager.instance.PlayMusic(MusicType.Boss, 0, .5f);
         hasTriggered = true;
 
         if (cutsceneManager != null)

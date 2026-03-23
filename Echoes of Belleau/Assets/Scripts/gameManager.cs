@@ -178,6 +178,12 @@ public class gameManager : MonoBehaviour
 
     bool hasCheckpoint;
 
+    string sceneName;
+
+    bool playerInCombat;
+    float combatTimer;
+    [SerializeField] float combatExitDelay = 6f;
+
     PlayerCheckpointData playerCheckpointData = new PlayerCheckpointData();
     List<EnemyCheckpointData> enemyCheckpointData = new List<EnemyCheckpointData>();
     List<WeaponCheckpointData> checkpointWeapons = new List<WeaponCheckpointData>();
@@ -200,10 +206,21 @@ public class gameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        string sceneName = SceneManager.GetActiveScene().name;
 
         timeScaleOrig = Time.timeScale;
 
-        MusicManager.instance.PlayMusic(MusicType.Calm, 0);
+        if (sceneName == "Scene1")
+        {
+            MusicManager.instance.SetLevelMusic(MusicType.Calm, 0, MusicType.Combat, 0);
+            MusicManager.instance.PlayBaseMusic();
+        }
+
+        if (sceneName == "Level 2")
+        {
+            MusicManager.instance.SetLevelMusic(MusicType.Calm, 1, MusicType.Combat, 1);
+            MusicManager.instance.PlayBaseMusic();
+        }
 
 
         player = GameObject.FindWithTag("Player");
@@ -235,11 +252,14 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isPaused)
+            UpdateCombatState();
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
             {
-                MusicManager.instance.PlayMusic(MusicType.Menu, 0, .5f);
+                MusicManager.instance.PlayMusic(MusicType.Menu, 1, .5f);
 
                 statePause();
                 menuActive = menuPause;
@@ -254,7 +274,6 @@ public class gameManager : MonoBehaviour
             }
             else
             {
-                MusicManager.instance.PlayMusic(MusicType.Calm, 0, .5f);
                 stateUnpause();
             }
         }
@@ -280,7 +299,7 @@ public class gameManager : MonoBehaviour
                 stateUnpause();
             }
         }
-    
+
     }
     public void statePause()
     {
@@ -302,6 +321,7 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(false); // Deactivate the active menu
         objective.SetActive(false);
         menuActive = null; // Set the active menu to null
+        SyncMusicToCombatState();
 
     }
 
@@ -947,5 +967,43 @@ public class gameManager : MonoBehaviour
             PlayerPrefs.DeleteKey("Tutorial_" + tutorialID);
             PlayerPrefs.Save();
         }
+    }
+
+    void UpdateCombatState()
+    {
+        if (combatTimer > 0)
+        {
+            combatTimer -= Time.deltaTime;
+
+            if (!playerInCombat)
+            {
+                playerInCombat = true;
+                MusicManager.instance.PlayBaseCombatMusic();
+            }
+        }
+        else
+        {
+            if (playerInCombat)
+            {
+                playerInCombat = false;
+                MusicManager.instance.PlayBaseMusic();
+            }
+        }
+    }
+
+    void SyncMusicToCombatState()
+    {
+        if (playerInCombat)
+            MusicManager.instance.PlayBaseCombatMusic();
+        else
+            MusicManager.instance.PlayBaseMusic();
+    }
+
+    public void TriggerCombat(float duration = -1f)
+    {
+        if (duration <= 0)
+            duration = combatExitDelay;
+
+        combatTimer = Mathf.Max(combatTimer, duration);
     }
 }

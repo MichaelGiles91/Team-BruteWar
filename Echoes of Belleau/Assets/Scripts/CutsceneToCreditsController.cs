@@ -19,6 +19,7 @@ public class CutsceneToCreditsController : MonoBehaviour
     void Start()
     {
         StartCoroutine(PlaySequence());
+        MusicManager.instance.PlayMusic(MusicType.Cutscene, 2, .75f);
     }
 
     void Update()

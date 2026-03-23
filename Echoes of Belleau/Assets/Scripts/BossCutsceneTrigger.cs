@@ -21,6 +21,7 @@ public class BossCutsceneTrigger : MonoBehaviour
         if (!other.CompareTag("Rocket"))
             return;
 
+        MusicManager.instance.PlayMusic(MusicType.Boss, 1, .5f);
         hasTriggered = true;
 
         if (cutsceneManager != null)

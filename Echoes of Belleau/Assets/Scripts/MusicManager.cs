@@ -34,6 +34,12 @@ public class MusicManager : MonoBehaviour
     [SerializeField] float defaultFadeDuration = 2f;
     [SerializeField] float fadeBeforeEnd = 2f;
 
+    MusicType baseMusicType;
+    int baseTrackIndex;
+
+    MusicType baseCombatMusicType;
+    int baseCombatTrackIndex;
+
     AudioSource activeSource;
     AudioSource inactiveSource;
 
@@ -64,6 +70,25 @@ public class MusicManager : MonoBehaviour
     void Update()
     {
         CheckForTrackEnding();
+    }
+
+    public void SetLevelMusic(MusicType calmType, int calmIndex, MusicType combatType, int combatIndex)
+    {
+        baseMusicType = calmType;
+        baseTrackIndex = calmIndex;
+
+        baseCombatMusicType = combatType;
+        baseCombatTrackIndex = combatIndex;
+    }
+
+    public void PlayBaseMusic()
+    {
+        PlayMusic(baseMusicType, baseTrackIndex);
+    }
+
+    public void PlayBaseCombatMusic()
+    {
+        PlayMusic(baseCombatMusicType, baseCombatTrackIndex);
     }
 
     void ConfigureSource(AudioSource source)

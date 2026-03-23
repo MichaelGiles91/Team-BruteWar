@@ -280,6 +280,8 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         {
             rb.linearVelocity = shotDirection * bulletSpeed;
         }
+
+        gameManager.instance.TriggerCombat();
     }
 
     private void OnDrawGizmosSelected()

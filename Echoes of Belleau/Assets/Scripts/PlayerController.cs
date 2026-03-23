@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     bool wasSprinting;
     RectTransform stamShakeRect;
 
-    
+
     bool wasAirborne;
     float lastYVelocity;
 
@@ -388,6 +388,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         if (ammoCount <= 0 && (devilDogMode == null || !devilDogMode.isActive)) { return; }
 
+        gameManager.instance.TriggerCombat();
+
         shootTimer = 0f;
         if (devilDogMode == null || !devilDogMode.isActive)
         {
@@ -395,7 +397,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             SaveAmmoToGunStats();
             gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
         }
-        animator.SetTrigger("Fire");
 
         if (activeMuzzleFlash != null)
         {
@@ -469,6 +470,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         UpdatePlayerUI();
 
         StartCoroutine(flashScreen());
+
+        gameManager.instance.TriggerCombat(8f);
 
         if (HP <= 0)
         {
