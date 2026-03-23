@@ -13,50 +13,87 @@ public class IntroController : MonoBehaviour
     public string gameplayScene;
 
     bool isSkipping = false;
+    bool isLoadingScene = false;
+
     IEnumerator Start()
     {
         yield return null;
 
         MusicManager.instance.PlayMusic(MusicType.Cutscene, 0, .75f);
 
-        // Fade into cutscene
+        // Start by fading into the timeline cutscene
         yield return StartCoroutine(fader.FadeIn());
 
-        cutscene.Play();
-        yield return new WaitForSeconds((float)cutscene.duration);
+        if (!isSkipping && cutscene != null)
+            cutscene.Play();
 
-        // Fade to black
+        if (cutscene != null)
+            yield return new WaitForSeconds((float)cutscene.duration);
+
+        if (isSkipping || isLoadingScene)
+            yield break;
+
+        // Fade to black before video
         yield return StartCoroutine(fader.FadeOut());
 
+        if (isSkipping || isLoadingScene)
+            yield break;
+
         // Show video layer
-        introVideoImage.SetActive(true);
+        if (introVideoImage != null)
+            introVideoImage.SetActive(true);
 
         // Prepare video first
-        introVideo.Prepare();
-        yield return new WaitUntil(() => introVideo.isPrepared);
+        if (introVideo != null)
+        {
+            introVideo.Prepare();
+            yield return new WaitUntil(() => introVideo.isPrepared);
+        }
+
+        if (isSkipping || isLoadingScene)
+            yield break;
 
         // Play video
-        introVideo.Play();
+        if (introVideo != null)
+            introVideo.Play();
 
-        // Wait one frame so the first video frame can land on the texture
+        // Wait one frame so first frame lands
         yield return null;
+
+        if (isSkipping || isLoadingScene)
+            yield break;
 
         // Reveal the video
         yield return StartCoroutine(fader.FadeIn());
 
-        // Wait until it finishes
-        while (introVideo.isPlaying)
+        if (isSkipping || isLoadingScene)
+            yield break;
+
+        // Wait until video finishes
+        while (introVideo != null && introVideo.isPlaying)
+        {
+            if (isSkipping || isLoadingScene)
+                yield break;
+
             yield return null;
+        }
+
+        if (isSkipping || isLoadingScene)
+            yield break;
 
         // Fade out before gameplay
         yield return StartCoroutine(fader.FadeOut());
 
+        if (isLoadingScene)
+            yield break;
+
+        isLoadingScene = true;
         SceneManager.LoadScene(gameplayScene);
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !isSkipping)
+        if (Input.GetButtonDown("Cancel") && !isSkipping && !isLoadingScene)
         {
             StartCoroutine(SkipCutscene());
         }
@@ -65,14 +102,30 @@ public class IntroController : MonoBehaviour
     IEnumerator SkipCutscene()
     {
         isSkipping = true;
+        isLoadingScene = true;
 
-        // Stop timeline immediately
+        // Instantly force black so no camera snap or video/frame flash is visible
+        if (fader != null && fader.fadeImage != null)
+        {
+            Color c = fader.fadeImage.color;
+            c.a = 1f;
+            fader.fadeImage.color = c;
+        }
+
+        // Stop timeline
         if (cutscene != null)
             cutscene.Stop();
 
-        // Fade out quickly
-        if (fader != null)
-            yield return StartCoroutine(fader.FadeOut());
+        // Stop video if it is already active
+        if (introVideo != null)
+            introVideo.Stop();
+
+        // Optional: hide video layer
+        if (introVideoImage != null)
+            introVideoImage.SetActive(false);
+
+        // Wait one real frame so black is definitely shown before scene load
+        yield return null;
 
         SceneManager.LoadScene(gameplayScene);
     }

@@ -59,6 +59,42 @@ public class ObjectiveMarkerCheckpointData
     public bool wasActive;
 }
 
+[System.Serializable]
+public class StreetCutsceneCheckpointData
+{
+    public StreetCutsceneManager cutsceneManager;
+    public StreetCutsceneTrigger trigger;
+    public bool cutscenePlayed;
+    public bool triggerUsed;
+    public Vector3 tankPosition;
+    public Quaternion tankRotation;
+    public bool houseStreetActive;
+    public bool houseCornerActive;
+    public bool rubbleActive;
+    public bool destroyedHouseStreetActive;
+    public bool destroyedHouseCornerActive;
+}
+
+[System.Serializable]
+public class BossCheckpointData
+{
+    public BossCutsceneManager cutsceneManager;
+    public BossCutsceneTrigger trigger;
+    public Transform tank;
+    public Vector3 tankPosition;
+    public Quaternion tankRotation;
+    public bool cutscenePlayed;
+    public bool triggerUsed;
+}
+
+[System.Serializable]
+public class SearchObjectiveCheckpointData
+{
+    public SearchObjective objective;
+    public bool wasActive;
+    public bool wasComplete;
+}
+
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
@@ -105,10 +141,17 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject tutorialPopup;
     [SerializeField] TMP_Text tutorialHeaderText;
     [SerializeField] TMP_Text tutorialBodyText;
+    [Header("--- Street Cutscene References ---")]
+    [SerializeField] StreetCutsceneManager streetCutsceneManager;
+    [SerializeField] StreetCutsceneTrigger streetCutsceneTrigger;
+    [SerializeField] Transform streetTank;
+
+    [Header("--- Boss Checkpoint References ---")]
+    [SerializeField] BossCutsceneManager bossCutsceneManager;
+    [SerializeField] BossCutsceneTrigger bossCutsceneTrigger;
+    [SerializeField] Transform bossTank;
 
     [SerializeField] GameObject lockedText;
-
-    HashSet<string> shownTutorials = new HashSet<string>();
 
     Coroutine hideObjectiveRoutine;
 
@@ -141,6 +184,9 @@ public class gameManager : MonoBehaviour
     List<PickupCheckpointData> pickupCheckpointData = new List<PickupCheckpointData>();
     List<AreaObjectiveCheckpointData> objectiveCheckpointData = new List<AreaObjectiveCheckpointData>();
     List<ObjectiveMarkerCheckpointData> markerCheckpointData = new List<ObjectiveMarkerCheckpointData>();
+    List<SearchObjectiveCheckpointData> searchObjectiveCheckpointData = new List<SearchObjectiveCheckpointData>();
+    StreetCutsceneCheckpointData streetCutsceneCheckpointData = new StreetCutsceneCheckpointData();
+    BossCheckpointData bossCheckpointData = new BossCheckpointData();
     int checkpointSelectedGunIndex = 0;
 
     private void Awake()
@@ -294,6 +340,10 @@ public class gameManager : MonoBehaviour
         SaveObjectiveCheckpointData();
         SaveObjectiveMarkerCheckpointData();
 
+        SaveSearchObjectiveCheckpointData();
+        SaveStreetCutsceneCheckpointData();
+        SaveBossCheckpointData();
+
         StartCoroutine(showCheckpointNotification());
     }
     public void Respawn()
@@ -314,6 +364,10 @@ public class gameManager : MonoBehaviour
         RestorePickupCheckpointData();
         RestoreObjectiveCheckpointData();
         RestoreObjectiveMarkerCheckpointData();
+
+        RestoreSearchObjectiveCheckpointData();
+        RestoreStreetCutsceneCheckpointData();
+        RestoreBossCheckpointData();
     }
 
     IEnumerator showCheckpointNotification()
@@ -701,6 +755,125 @@ public class gameManager : MonoBehaviour
         RefreshMapObjective();
     }
 
+    void SaveSearchObjectiveCheckpointData()
+    {
+        searchObjectiveCheckpointData.Clear();
+
+        SearchObjective[] objectives = FindObjectsByType<SearchObjective>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        foreach (SearchObjective objective in objectives)
+        {
+            if (objective == null) continue;
+
+            SearchObjectiveCheckpointData data = new SearchObjectiveCheckpointData();
+            data.objective = objective;
+            data.wasActive = objective.IsActiveObjective();
+            data.wasComplete = objective.IsCompleteObjective();
+
+            searchObjectiveCheckpointData.Add(data);
+        }
+    }
+
+    void RestoreSearchObjectiveCheckpointData()
+    {
+        foreach (SearchObjectiveCheckpointData data in searchObjectiveCheckpointData)
+        {
+            if (data.objective == null) continue;
+
+            data.objective.RestoreCheckpointState(data.wasActive, data.wasComplete);
+        }
+    }
+
+    void SaveStreetCutsceneCheckpointData()
+    {
+        if (streetCutsceneManager == null)
+            return;
+
+        streetCutsceneCheckpointData.cutsceneManager = streetCutsceneManager;
+        streetCutsceneCheckpointData.cutscenePlayed = streetCutsceneManager.HasPlayed();
+
+        if (streetCutsceneTrigger != null)
+        {
+            streetCutsceneCheckpointData.trigger = streetCutsceneTrigger;
+            streetCutsceneCheckpointData.triggerUsed = streetCutsceneTrigger.HasTriggered();
+        }
+
+        if (streetTank != null)
+        {
+            streetCutsceneCheckpointData.tankPosition = streetTank.position;
+            streetCutsceneCheckpointData.tankRotation = streetTank.rotation;
+        }
+
+        streetCutsceneCheckpointData.houseStreetActive = streetCutsceneManager.HouseStreetActive();
+        streetCutsceneCheckpointData.houseCornerActive = streetCutsceneManager.HouseCornerActive();
+        streetCutsceneCheckpointData.rubbleActive = streetCutsceneManager.RubbleActive();
+        streetCutsceneCheckpointData.destroyedHouseStreetActive = streetCutsceneManager.DestroyedHouseStreetActive();
+        streetCutsceneCheckpointData.destroyedHouseCornerActive = streetCutsceneManager.DestroyedHouseCornerActive();
+    }
+    void RestoreStreetCutsceneCheckpointData()
+    {
+        if (streetCutsceneCheckpointData.cutsceneManager != null)
+            streetCutsceneCheckpointData.cutsceneManager.SetPlayed(streetCutsceneCheckpointData.cutscenePlayed);
+
+        if (streetCutsceneCheckpointData.trigger != null)
+            streetCutsceneCheckpointData.trigger.SetTriggered(streetCutsceneCheckpointData.triggerUsed);
+
+        if (streetTank != null)
+        {
+            streetTank.position = streetCutsceneCheckpointData.tankPosition;
+            streetTank.rotation = streetCutsceneCheckpointData.tankRotation;
+        }
+
+        if (streetCutsceneCheckpointData.cutsceneManager != null)
+        {
+            streetCutsceneCheckpointData.cutsceneManager.RestoreWorldState(
+                streetCutsceneCheckpointData.houseStreetActive,
+                streetCutsceneCheckpointData.houseCornerActive,
+                streetCutsceneCheckpointData.rubbleActive,
+                streetCutsceneCheckpointData.destroyedHouseStreetActive,
+                streetCutsceneCheckpointData.destroyedHouseCornerActive
+            );
+        }
+    }
+
+    void SaveBossCheckpointData()
+    {
+        if (bossCutsceneManager != null)
+        {
+            bossCheckpointData.cutsceneManager = bossCutsceneManager;
+            bossCheckpointData.cutscenePlayed = bossCutsceneManager.HasPlayed();
+        }
+
+        if (bossCutsceneTrigger != null)
+        {
+            bossCheckpointData.trigger = bossCutsceneTrigger;
+            bossCheckpointData.triggerUsed = bossCutsceneTrigger.HasTriggered();
+        }
+
+        if (bossTank != null)
+        {
+            bossCheckpointData.tank = bossTank;
+            bossCheckpointData.tankPosition = bossTank.position;
+            bossCheckpointData.tankRotation = bossTank.rotation;
+        }
+    }
+
+    void RestoreBossCheckpointData()
+    {
+        if (bossCheckpointData.cutsceneManager != null)
+            bossCheckpointData.cutsceneManager.SetHasPlayed(bossCheckpointData.cutscenePlayed);
+
+        if (bossCheckpointData.trigger != null)
+            bossCheckpointData.trigger.SetTriggered(bossCheckpointData.triggerUsed);
+
+        if (bossCheckpointData.tank != null)
+        {
+            bossCheckpointData.tank.position = bossCheckpointData.tankPosition;
+            bossCheckpointData.tank.rotation = bossCheckpointData.tankRotation;
+        }
+    }
+
+
     public void LoadSceneWithFade(string sceneName)
     {
         StartCoroutine(FadeAndLoad(sceneName));
@@ -732,13 +905,14 @@ public class gameManager : MonoBehaviour
 
     public void ShowTutorial(string tutorialID, string header, string body)
     {
-        if (shownTutorials.Contains(tutorialID))
+        if (PlayerPrefs.GetInt("Tutorial_" + tutorialID, 0) == 1)
             return;
 
         if (menuActive != null)
             return;
 
-        shownTutorials.Add(tutorialID);
+        PlayerPrefs.SetInt("Tutorial_" + tutorialID, 1);
+        PlayerPrefs.Save();
 
         tutorialHeaderText.text = header;
         tutorialBodyText.text = body;
@@ -751,7 +925,7 @@ public class gameManager : MonoBehaviour
 
     public bool HasShownTutorial(string tutorialID)
     {
-        return shownTutorials.Contains(tutorialID);
+        return PlayerPrefs.GetInt("Tutorial_" + tutorialID, 0) == 1;
     }
 
     public IEnumerator HideLockedAfterDelay()
@@ -764,5 +938,14 @@ public class gameManager : MonoBehaviour
     public void ShowLockedText()
     {
         StartCoroutine(HideLockedAfterDelay());
+    }
+
+    public void ResetTutorial(string tutorialID)
+    {
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            PlayerPrefs.DeleteKey("Tutorial_" + tutorialID);
+            PlayerPrefs.Save();
+        }
     }
 }

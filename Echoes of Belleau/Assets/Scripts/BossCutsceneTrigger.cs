@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class StreetCutsceneTrigger : MonoBehaviour
+public class BossCutsceneTrigger : MonoBehaviour
 {
-    [SerializeField] StreetCutsceneManager cutsceneManager;
+    [SerializeField] BossCutsceneManager cutsceneManager;
     [SerializeField] bool disableTriggerAfterUse = true;
 
     bool hasTriggered;
@@ -18,7 +18,7 @@ public class StreetCutsceneTrigger : MonoBehaviour
         if (hasTriggered)
             return;
 
-        if (!other.CompareTag("Player"))
+        if (!other.CompareTag("Rocket"))
             return;
 
         hasTriggered = true;
@@ -39,10 +39,8 @@ public class StreetCutsceneTrigger : MonoBehaviour
     {
         hasTriggered = value;
 
-        if (triggerCol == null)
-            triggerCol = GetComponent<Collider>();
-
-        if (triggerCol != null)
-            triggerCol.enabled = !value;
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+            col.enabled = !value;
     }
 }

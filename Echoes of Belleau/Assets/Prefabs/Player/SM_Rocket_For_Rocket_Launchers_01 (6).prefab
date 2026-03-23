@@ -19535,7 +19535,7 @@ GameObject:
   - component: {fileID: 1911066653267976723}
   m_Layer: 6
   m_Name: SM_Rocket_For_Rocket_Launchers_01 (6)
-  m_TagString: Untagged
+  m_TagString: Rocket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19626,7 +19626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::damage
   type: 0
-  damageAmount: 10
+  damageAmount: 100
   damageRate: 0
   speed: 25
   destroyTime: 10
@@ -19648,7 +19648,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4945600558865581348}
   serializedVersion: 5
-  m_Mass: 0.01
+  m_Mass: 0.001
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
