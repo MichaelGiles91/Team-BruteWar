@@ -160,6 +160,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     List<GameObject> gunInstances = new List<GameObject>();
 
+    bool canReload;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -240,6 +242,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         grenadeTimer += Time.deltaTime;
         grenadeThrowTimer += Time.deltaTime;
         UpdateLowHealthIndicator();
+        UpdateEmptyAmmoClipIndicator();
         if (Input.GetButtonDown("ThrowGrenade") && grenadeThrowTimer >= grenadeThrowRate)
         {
             if (grenadeCount <= 0)
@@ -493,11 +496,21 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void reload()
     {
-        if (!Input.GetButtonDown("Reload")) return;
+        if (ammoCount < ammoCountOrig)
+        {
+            canReload = true;
+        }
+        else
+        {
+            canReload = false;
+        }
+        if (!Input.GetButtonDown("Reload") || !canReload) return;
+        StartCoroutine(reloadShootDelay());
 
         int magSize = ammoCountOrig;
         if (ammoCount >= magSize) return;
         if (ammoMax <= 0) return;
+        animator.SetTrigger("reload");
 
         int need = magSize - ammoCount;
         int load = Mathf.Min(need, ammoMax);
@@ -507,6 +520,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         SaveAmmoToGunStats();
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
+        SFXManager.instance.PlayReload();
 
         //add feedback for trying to reload with no reserve ammo -Austin
         //add feedback that changes the counter number color for low ammo -Austin
@@ -545,6 +559,23 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
                 indicator.gameObject.SetActive(false);
                 lowHealthActive = false;
             }
+        }
+    }
+
+    void UpdateEmptyAmmoClipIndicator()
+    {
+        GameObject reloadPopup = gameManager.instance.emptyAmmoClipIndicator;
+
+        if (AmmoCount <= 0)
+        {
+            reloadPopup.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (Input.GetButtonDown("Reload"))
+            {
+                reloadPopup.gameObject.SetActive(false);
+            }  
         }
     }
 
@@ -934,6 +965,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         canShoot = false;
         yield return new WaitForSeconds(0.6f);
+        canShoot = true;
+    }
+    IEnumerator reloadShootDelay()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(2.8f);
         canShoot = true;
     }
 

@@ -20,6 +20,7 @@ public enum SFXType
     Knife,
     GrenadeThrow,
     GrenadeExplode,
+    Reload,
 }
 
 [System.Serializable]
@@ -242,6 +243,11 @@ public class SFXManager : MonoBehaviour
     public void PlayGrenadeExplosion()
     {
         PlayOneShot(SFXType.GrenadeExplode);
+    }
+
+    public void PlayReload()
+    {
+        PlayOneShot(SFXType.Reload);
     }
 
     public void PlayMedkit()
