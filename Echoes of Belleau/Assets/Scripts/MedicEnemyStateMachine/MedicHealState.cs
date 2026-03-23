@@ -17,8 +17,29 @@ public class MedicHealState : MedicState
 
     public override void Update()
     {
+        if (medic.ShouldRetreatToCover())
+        {
+            medic.CurrentPatient = null;
+            stateMachine.ChangeState(medic.SeekCoverState);
+            return;
+        }
+
         if (medic.CurrentPatient == null)
         {
+            stateMachine.ChangeState(medic.SeekCoverState);
+            return;
+        }
+
+        if (medic.CurrentPatient.IsDead())
+        {
+            medic.CurrentPatient = null;
+            stateMachine.ChangeState(medic.SeekCoverState);
+            return;
+        }
+
+        if (!medic.CurrentPatient.NeedsHealing())
+        {
+            medic.CurrentPatient = null;
             stateMachine.ChangeState(medic.SeekCoverState);
             return;
         }
@@ -28,8 +49,8 @@ public class MedicHealState : MedicState
         if (healTimer <= 0f)
         {
             medic.HealCurrentPatient();
+            medic.CurrentPatient = null;
             stateMachine.ChangeState(medic.SeekCoverState);
         }
     }
 }
-

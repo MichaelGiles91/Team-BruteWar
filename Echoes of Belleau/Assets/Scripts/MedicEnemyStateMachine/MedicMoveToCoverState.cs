@@ -20,6 +20,7 @@ public class MedicMoveToCoverState : MedicState
     {
         if (medic.IsAtCover() || medic.HasReachedDestination())
         {
+            medic.ClearRecentDamage();
             stateMachine.ChangeState(medic.WaitState);
         }
     }

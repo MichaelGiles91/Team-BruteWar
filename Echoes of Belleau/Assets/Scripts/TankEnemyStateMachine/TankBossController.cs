@@ -4,15 +4,13 @@ using UnityEngine.AI;
 /// <summary>
 /// Controls the boss tank behavior, weapons, health and phase transitions.
 /// Uses a simple state machine with patrol, chase (boss fight) and dead states.
-/// Implements IDamage so external systems can apply damage.
+/// Implements IDamage so generic weapons can hit it, but can be configured
+/// to only take damage from rockets.
 /// </summary>
 public class TankBossController : MonoBehaviour, IDamage
 {
     #region Types
 
-    /// <summary>
-    /// High level phases the boss can be in. These affect available behaviour and state machine initialization.
-    /// </summary>
     public enum TankPhase
     {
         Phase1Patrol,
@@ -46,6 +44,10 @@ public class TankBossController : MonoBehaviour, IDamage
     public float machineGunFireRate = 0.15f;
     public float machineGunBulletSpeed = 35f;
 
+    [Header("Machine Gun Ammo")]
+    public int machineGunMagazineSize = 30;
+    public float machineGunReloadTime = 3f;
+
     [Header("Weapon - Cannon")]
     public Transform cannonFirePoint;
     public GameObject cannonBulletPrefab;
@@ -57,16 +59,20 @@ public class TankBossController : MonoBehaviour, IDamage
     public float currentHealth = 500f;
     public bool destroyOnDeath = false;
 
+    [Header("Damage Rules")]
+    public bool onlyTakeRocketDamage = true;
+
     #endregion
 
     #region Private State
 
-    // Core state machine that drives behaviour.
     private TankStateMachine stateMachine;
-    // NavMeshAgent used for movement and pathfinding.
     private NavMeshAgent agent;
 
-    // Public read-only references to each state so external callers (states) can request transitions.
+    private int currentMachineGunAmmo;
+    private bool isReloadingMachineGun;
+    private float reloadTimer;
+
     public TankPatrolState PatrolState { get; private set; }
     public TankChaseState ChaseState { get; private set; }
     public TankDeadState DeadState { get; private set; }
@@ -77,8 +83,15 @@ public class TankBossController : MonoBehaviour, IDamage
 
     private void Awake()
     {
-        // Cache references and create the state machine + state instances.
         agent = GetComponent<NavMeshAgent>();
+
+        if (agent == null)
+        {
+            Debug.LogError("TankBossController requires a NavMeshAgent on " + gameObject.name);
+            enabled = false;
+            return;
+        }
+
         stateMachine = new TankStateMachine();
 
         PatrolState = new TankPatrolState(this, stateMachine);
@@ -88,8 +101,13 @@ public class TankBossController : MonoBehaviour, IDamage
 
     private void Start()
     {
-        // Initialize health and start with the appropriate state depending on configured phase.
         currentHealth = maxHealth;
+        currentMachineGunAmmo = machineGunMagazineSize;
+        isReloadingMachineGun = false;
+        reloadTimer = 0f;
+
+        if (stateMachine == null)
+            return;
 
         if (currentPhase == TankPhase.Phase1Patrol)
         {
@@ -103,32 +121,37 @@ public class TankBossController : MonoBehaviour, IDamage
 
     private void Update()
     {
-        // Do nothing when dead.
         if (currentPhase == TankPhase.Dead)
             return;
 
-        // Drive current state update logic.
+        UpdateMachineGunReload();
         stateMachine.Update();
     }
 
     private void OnDrawGizmosSelected()
     {
-        // Visualize detection range in the editor for tuning.
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (currentPhase != TankPhase.Phase1Patrol)
+            return;
+
+        if (!other.CompareTag("Player"))
+            return;
+
+        SetPhase2();
     }
 
     #endregion
 
     #region Phase Management
 
-    /// <summary>
-    /// Moves the boss into phase 2 (boss fight) and changes the state to chase.
-    /// Safe to call multiple times; will early-out if already dead.
-    /// </summary>
     public void SetPhase2()
     {
-        if (currentPhase == TankPhase.Dead)
+        if (currentPhase != TankPhase.Phase1Patrol)
             return;
 
         currentPhase = TankPhase.Phase2BossFight;
@@ -137,13 +160,8 @@ public class TankBossController : MonoBehaviour, IDamage
 
     #endregion
 
-    #region Movement (NavMeshAgent)
+    #region Movement
 
-    /// <summary>
-    /// Command the NavMeshAgent to move towards a world position at the provided speed.
-    /// </summary>
-    /// <param name="targetPosition">Destination in world space.</param>
-    /// <param name="speed">Desired movement speed.</param>
     public void MoveTowards(Vector3 targetPosition, float speed)
     {
         if (agent == null) return;
@@ -154,9 +172,6 @@ public class TankBossController : MonoBehaviour, IDamage
         agent.SetDestination(targetPosition);
     }
 
-    /// <summary>
-    /// Stops the NavMeshAgent immediately and clears the current path.
-    /// </summary>
     public void StopMoving()
     {
         if (agent == null) return;
@@ -165,10 +180,6 @@ public class TankBossController : MonoBehaviour, IDamage
         agent.ResetPath();
     }
 
-    /// <summary>
-    /// Returns true when the agent has reached its destination (within stopping distance).
-    /// Handles pathPending and null agent cases.
-    /// </summary>
     public bool HasReachedDestination()
     {
         if (agent == null) return false;
@@ -181,10 +192,6 @@ public class TankBossController : MonoBehaviour, IDamage
 
     #region Patrol Helpers
 
-    /// <summary>
-    /// Returns the current patrol point transform or null if no patrol route is configured.
-    /// Ensures the patrol index is within bounds.
-    /// </summary>
     public Transform GetCurrentPatrolPoint()
     {
         if (patrolPoints == null || patrolPoints.Length == 0)
@@ -196,9 +203,6 @@ public class TankBossController : MonoBehaviour, IDamage
         return patrolPoints[currentPatrolIndex];
     }
 
-    /// <summary>
-    /// Advance to the next patrol point, wrapping to the first point when the end is reached.
-    /// </summary>
     public void AdvancePatrolPoint()
     {
         if (patrolPoints == null || patrolPoints.Length == 0)
@@ -216,10 +220,6 @@ public class TankBossController : MonoBehaviour, IDamage
 
     #region Targeting Helpers
 
-    /// <summary>
-    /// Returns true if the configured target is within the provided range.
-    /// Uses world-space distance check.
-    /// </summary>
     public bool IsTargetInRange(float range)
     {
         if (target == null) return false;
@@ -227,10 +227,6 @@ public class TankBossController : MonoBehaviour, IDamage
         return Vector3.Distance(transform.position, target.position) <= range;
     }
 
-    /// <summary>
-    /// Rotate the tank to face the configured target horizontally (y ignored).
-    /// Useful to orient weapons before firing.
-    /// </summary>
     public void FaceTarget()
     {
         if (target == null) return;
@@ -248,16 +244,20 @@ public class TankBossController : MonoBehaviour, IDamage
 
     #region Weapons
 
-    /// <summary>
-    /// Fire the machine gun by spawning a bullet prefab and setting its velocity.
-    /// Requires a non-null fire point and bullet prefab.
-    /// </summary>
     public void FireMachineGun()
     {
+        if (isReloadingMachineGun)
+            return;
+
+        if (currentMachineGunAmmo <= 0)
+        {
+            StartReloadMachineGun();
+            return;
+        }
+
         if (target == null || machineGunBulletPrefab == null || machineGunFirePoint == null)
             return;
 
-        // Aim slightly above target's origin for better hit placement.
         Vector3 aimPoint = target.position + Vector3.up * 1.2f;
         Vector3 shotDirection = (aimPoint - machineGunFirePoint.position).normalized;
 
@@ -273,14 +273,12 @@ public class TankBossController : MonoBehaviour, IDamage
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            // Use linearVelocity to match existing project usage.
             rb.linearVelocity = shotDirection * machineGunBulletSpeed;
         }
+
+        currentMachineGunAmmo--;
     }
 
-    /// <summary>
-    /// Fire the cannon by spawning a shell prefab and setting its velocity.
-    /// </summary>
     public void FireCannon()
     {
         if (target == null || cannonBulletPrefab == null || cannonFirePoint == null)
@@ -305,21 +303,58 @@ public class TankBossController : MonoBehaviour, IDamage
         }
     }
 
+    public void StartReloadMachineGun()
+    {
+        if (isReloadingMachineGun)
+            return;
+
+        isReloadingMachineGun = true;
+        reloadTimer = machineGunReloadTime;
+        Debug.Log(name + " is reloading machine gun...");
+    }
+
+    public void UpdateMachineGunReload()
+    {
+        if (!isReloadingMachineGun)
+            return;
+
+        reloadTimer -= Time.deltaTime;
+
+        if (reloadTimer <= 0f)
+        {
+            isReloadingMachineGun = false;
+            currentMachineGunAmmo = machineGunMagazineSize;
+            Debug.Log(name + " finished reloading machine gun.");
+        }
+    }
+
+    public bool IsReloadingMachineGun()
+    {
+        return isReloadingMachineGun;
+    }
+
     #endregion
 
     #region Health & Damage
 
     /// <summary>
-    /// Forwarding method for IDamage compatibility. Calls the float-based TakeDamage.
-    /// Keep the original name if other systems expect it.
+    /// Generic damage entry from IDamage.
+    /// If onlyTakeRocketDamage is enabled, normal damage is ignored.
     /// </summary>
     public void takeDamage(int amount)
     {
+        if (onlyTakeRocketDamage)
+        {
+            Debug.Log(name + " ignored non-rocket damage.");
+            return;
+        }
+
         TakeDamage(amount);
     }
 
     /// <summary>
-    /// Applies damage to the boss. When health reaches zero the boss transitions to the Dead phase and dead state.
+    /// Generic damage application.
+    /// Used only when onlyTakeRocketDamage is false.
     /// </summary>
     public void TakeDamage(float amount)
     {
@@ -337,9 +372,23 @@ public class TankBossController : MonoBehaviour, IDamage
     }
 
     /// <summary>
-    /// Handle death transition: set phase and change to Dead state.
-    /// Additional death effects / destruction can be added here.
+    /// Rocket-only damage entry. Call this from your rocket launcher/projectile.
     /// </summary>
+    public void ApplyRocketDamage(float amount)
+    {
+        if (currentPhase == TankPhase.Dead) return;
+
+        currentHealth -= amount;
+        currentHealth = Mathf.Max(currentHealth, 0f);
+
+        Debug.Log(name + " tank took ROCKET damage. Current Health: " + currentHealth);
+
+        if (currentHealth <= 0f)
+        {
+            Die();
+        }
+    }
+
     private void Die()
     {
         currentPhase = TankPhase.Dead;

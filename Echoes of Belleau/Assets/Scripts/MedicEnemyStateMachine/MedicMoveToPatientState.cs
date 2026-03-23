@@ -13,18 +13,37 @@ public class MedicMoveToPatientState : MedicState
         {
             medic.MoveTowards(medic.CurrentPatient.transform.position, medic.moveSpeed);
         }
+        else
+        {
+            stateMachine.ChangeState(medic.SeekCoverState);
+        }
     }
 
     public override void Update()
     {
+        if (medic.ShouldRetreatToCover())
+        {
+            medic.CurrentPatient = null;
+            stateMachine.ChangeState(medic.SeekCoverState);
+            return;
+        }
+
         if (medic.CurrentPatient == null)
         {
             stateMachine.ChangeState(medic.SeekCoverState);
             return;
         }
 
+        if (medic.CurrentPatient.IsDead())
+        {
+            medic.CurrentPatient = null;
+            stateMachine.ChangeState(medic.SeekCoverState);
+            return;
+        }
+
         if (!medic.CurrentPatient.NeedsHealing())
         {
+            medic.CurrentPatient = null;
             stateMachine.ChangeState(medic.SeekCoverState);
             return;
         }
@@ -35,4 +54,3 @@ public class MedicMoveToPatientState : MedicState
         }
     }
 }
-
