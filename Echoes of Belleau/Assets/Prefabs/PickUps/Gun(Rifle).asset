@@ -33,6 +33,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ccb234c805ba4564390414d7ad1e0f8f, type: 3}
   reloadSoundVol: 0.618
   reloadTime: 2
+  sprayAmount: 0.012
+  verticalRecoil: 0.8
+  horizontalRecoil: 0.2
+  recoilResetSpeed: 10
+  crosshairKick: 8
   singleUseWeapon: 0
   uniquePickup: 1
   sourceAsset: {fileID: 11400000}

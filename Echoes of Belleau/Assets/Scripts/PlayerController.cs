@@ -61,6 +61,21 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] float shakeAmount;
     [SerializeField] float shakeDuration;
 
+    
+
+    [Header("--- Recoil ---")]    
+    [SerializeField] float maxRecoilPitch = 20f;
+    [SerializeField] float maxRecoilYaw = 6f;
+    [SerializeField] float crosshairReturnSpeed = 10f;
+
+    float recoilPitch;
+    float recoilYaw;
+    float targetRecoilPitch;
+    float targetRecoilYaw;
+
+    float currentCrosshairSpread;
+    float targetCrosshairSpread;
+
     [Header("---Stress Stats---")]
     [SerializeField] float stress;
     [SerializeField] float maxStress = 100f;
@@ -106,8 +121,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     
     bool wasAirborne;
     float lastYVelocity;
-
-    bool removeCurrentGunAfterShot = false;
     bool isReloading;
 
 
@@ -142,6 +155,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     DepthOfField stressDepthOfField;
     LensDistortion stressLensDistortion;
 
+    public float CurrentRecoilPitch => recoilPitch;
+    public float CurrentRecoilYaw => recoilYaw;
+
     float moveSlowMult = 1f;
     
     public bool IsMoving
@@ -159,6 +175,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     Vector3 StamBarOrigPos;
 
     List<GameObject> gunInstances = new List<GameObject>();
+    List<bool> gunAvailable = new List<bool>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -184,6 +201,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             if (CreateGunInstance(gunList[i], out GameObject instance))
             {
                 gunInstances.Add(instance);
+                gunAvailable.Add(true);
+
+                if (gunList[i] != null && gunList[i].sourceAsset == null)
+                    gunList[i].sourceAsset = gunList[i];
             }
             else
             {
@@ -236,6 +257,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         UpdateStress();
         UpdateBreathingAudio();
         UpdateFootstepAudio();
+        ApplyRecoil();
+        UpdateCrosshair();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
         grenadeTimer += Time.deltaTime;
         UpdateLowHealthIndicator();
@@ -440,10 +463,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         Vector3 aimDir = (targetPoint - activeMuzzle.position).normalized;
 
         float currentStressPenalty = maxSpreadStressPenalty * StressPercent;
+        float weaponSpray = gunList[gunListPos].sprayAmount;
+        float totalSpray = weaponSpray + currentStressPenalty;
 
-        aimDir.x += Random.Range(-currentStressPenalty, currentStressPenalty);
-        aimDir.y += Random.Range(-currentStressPenalty, currentStressPenalty);
-        aimDir.z += Random.Range(-currentStressPenalty, currentStressPenalty);
+        aimDir.x += Random.Range(-totalSpray, totalSpray);
+        aimDir.y += Random.Range(-totalSpray, totalSpray);
+        aimDir.z += Random.Range(-totalSpray * 0.35f, totalSpray * 0.35f);
         aimDir.Normalize();
 
         GameObject newBullet = Instantiate(bulletToFire, activeMuzzle.position, Quaternion.LookRotation(aimDir));
@@ -452,6 +477,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         if (bulletDmg != null)
             bulletDmg.SetHitEffect(gunList[gunListPos].hitEffect);
 
+        AddRecoil();
         CheckSingleUseWeaponAfterShot();
     }
 
@@ -645,13 +671,29 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         if (gun == null) return false;
 
-        if (gun.uniquePickup && HasGunOfType(gun))
+        int existingIndex = FindGunIndexBySourceAsset(gun);
+
+        if (gun.uniquePickup && existingIndex != -1)
         {
-            return false;
+            if (gunAvailable[existingIndex])
+            {
+                return false;
+            }
+
+            gunStats existingGun = gunList[existingIndex];
+
+            gunAvailable[existingIndex] = true;
+            existingGun.ammoCur = existingGun.magSize;
+            existingGun.ammoMax = existingGun.ammoMaxOrig;
+
+            gunListPos = existingIndex;
+            changeGun();
+            return true;
         }
 
         gunStats newGunStats = Instantiate(gun);
         newGunStats.sourceAsset = gun;
+        newGunStats.ammoCur = newGunStats.magSize;
 
         gunList.Add(newGunStats);
 
@@ -662,6 +704,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
 
         gunInstances.Add(instance);
+        gunAvailable.Add(true);
 
         gunListPos = gunList.Count - 1;
         changeGun();
@@ -707,17 +750,39 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void changeGun()
     {
-        if (gunList.Count == 0 || gunInstances.Count == 0)
+        if (gunList.Count == 0 || gunInstances.Count == 0 || gunAvailable.Count == 0)
         {
-            Debug.LogError("No guns available to equip.");
             currentGunInstance = null;
             return;
         }
 
-        if (gunListPos < 0 || gunListPos >= gunList.Count || gunListPos >= gunInstances.Count)
+        if (gunListPos < 0 || gunListPos >= gunList.Count || gunListPos >= gunInstances.Count || gunListPos >= gunAvailable.Count)
         {
-            Debug.LogError($"Gun index out of range. gunListPos={gunListPos}, gunList.Count={gunList.Count}, gunInstances.Count={gunInstances.Count}");
             return;
+        }
+
+        if (!gunAvailable[gunListPos])
+        {
+            int fallbackIndex = FindNextAvailableGunIndex(gunListPos, 1);
+            if (fallbackIndex == -1)
+            {
+                currentGunInstance = null;
+                activeMuzzle = null;
+                activeMuzzleFlash = null;
+                muzzleLight = null;
+                ammoCount = 0;
+                ammoMax = 0;
+
+                gameManager.instance.updateAmmoAmount(0, 0);
+                gameManager.instance.UpdateWeaponIcon(null);
+
+                if (leftHandIKBinder != null)
+                    leftHandIKBinder.BindToWeapon(null);
+
+                return;
+            }
+
+            gunListPos = fallbackIndex;
         }
 
         shootDamage = gunList[gunListPos].shootDamage;
@@ -726,6 +791,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         ammoCount = gunList[gunListPos].ammoCur;
         ammoMax = gunList[gunListPos].ammoMax;
         ammoCountOrig = gunList[gunListPos].magSize;
+
+        recoilPitch = 0f;
+        recoilYaw = 0f;
+        targetRecoilPitch = 0f;
+        targetRecoilYaw = 0f;
+        currentCrosshairSpread = 0f;
+        targetCrosshairSpread = 0f;
+
+        if (gameManager.instance != null)
+            gameManager.instance.SetCrosshairSpread(0f);
 
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
 
@@ -800,17 +875,27 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void selectGun()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll > 0f)
         {
-            SaveAmmoToGunStats();
-            gunListPos++;
-            changeGun();
+            int nextIndex = FindNextAvailableGunIndex(gunListPos, 1);
+            if (nextIndex != -1 && nextIndex != gunListPos)
+            {
+                SaveAmmoToGunStats();
+                gunListPos = nextIndex;
+                changeGun();
+            }
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+        else if (scroll < 0f)
         {
-            SaveAmmoToGunStats();
-            gunListPos--;
-            changeGun();
+            int nextIndex = FindNextAvailableGunIndex(gunListPos, -1);
+            if (nextIndex != -1 && nextIndex != gunListPos)
+            {
+                SaveAmmoToGunStats();
+                gunListPos = nextIndex;
+                changeGun();
+            }
         }
     }
 
@@ -1011,7 +1096,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         instance.transform.SetParent(weaponGripTarget, true);
 
         int fpsLayer = LayerMask.NameToLayer("Fps Arms");
-        if (fpsLayer == -1)
+        if (fpsLayer != -1)
         {
             SetLayerRecursively(instance, fpsLayer);
         }
@@ -1041,6 +1126,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         List<gunStats> restoredGunList = new List<gunStats>();
         List<GameObject> restoredInstances = new List<GameObject>();
+        List<bool> restoredAvailability = new List<bool>();
 
         for (int i = 0; i < savedWeapons.Count; i++)
         {
@@ -1060,11 +1146,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
                 restoredGunList.Add(existingGun);
                 restoredInstances.Add(existingInstance);
+                restoredAvailability.Add(existingGun.ammoCur > 0 || !existingGun.singleUseWeapon);
             }
         }
 
         gunList = restoredGunList;
         gunInstances = restoredInstances;
+        gunAvailable = restoredAvailability;
 
         if (gunList.Count == 0 || gunInstances.Count == 0)
         {
@@ -1297,8 +1385,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         SetBreathingLoop(SFXType.BreathingIdleLoop);
     }
 
-
-
     void UpdateFootstepAudio()
     {
         bool movingInput = HasMoveInput();
@@ -1345,34 +1431,41 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         return horizontal != 0f || vertical != 0f;
     }
 
-
-
-    bool HasGunOfType(gunStats gunAsset)
+    void CheckSingleUseWeaponAfterShot()
     {
-        for (int i = 0; i < gunList.Count; i++)
+        if (gunList.Count == 0) return;
+        if (gunListPos < 0 || gunListPos >= gunList.Count) return;
+
+        gunStats currentGun = gunList[gunListPos];
+        if (currentGun == null) return;
+
+        if (currentGun.singleUseWeapon && ammoCount <= 0)
         {
-            if (gunList[i] == null) continue;
-
-            if (gunList[i].sourceAsset == gunAsset)
-                return true;
+            DeactivateCurrentGun();
         }
-
-        return false;
     }
 
-    void RemoveCurrentGun()
+    void DeactivateCurrentGun()
     {
-        if (gunList.Count == 0 || gunInstances.Count == 0) return;
-        if (gunListPos < 0 || gunListPos >= gunList.Count || gunListPos >= gunInstances.Count) return;
+        if (gunList.Count == 0 || gunInstances.Count == 0 || gunAvailable.Count == 0) return;
+        if (gunListPos < 0 || gunListPos >= gunList.Count || gunListPos >= gunInstances.Count || gunListPos >= gunAvailable.Count) return;
 
-        int removedIndex = gunListPos;
-        GameObject oldGunInstance = gunInstances[removedIndex];
+        gunStats oldGunStats = gunList[gunListPos];
 
-        gunList.RemoveAt(removedIndex);
-        gunInstances.RemoveAt(removedIndex);
+        gunAvailable[gunListPos] = false;
+        oldGunStats.ammoCur = 0;
+        oldGunStats.ammoMax = 0;
 
-        if (gunList.Count == 0)
+        int nextGunIndex = FindNextAvailableGunIndex(gunListPos, 1);
+
+        if (nextGunIndex == -1)
         {
+            foreach (var gun in gunInstances)
+            {
+                if (gun != null)
+                    gun.SetActive(false);
+            }
+
             currentGunInstance = null;
             activeMuzzle = null;
             activeMuzzleFlash = null;
@@ -1386,43 +1479,85 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             if (leftHandIKBinder != null)
                 leftHandIKBinder.BindToWeapon(null);
 
-            if (oldGunInstance != null)
-                Destroy(oldGunInstance);
-
             return;
         }
 
-        gunListPos = Mathf.Clamp(removedIndex - 1, 0, gunList.Count - 1);
+        gunListPos = nextGunIndex;
         changeGun();
-
-        if (oldGunInstance != null)
-            Destroy(oldGunInstance);
     }
 
-    void CheckSingleUseWeaponAfterShot()
+    int FindGunIndexBySourceAsset(gunStats gunAsset)
     {
-        if (gunList.Count == 0) return;
-        if (gunListPos < 0 || gunListPos >= gunList.Count) return;
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            if (gunList[i] == null) continue;
+
+            if (gunList[i].sourceAsset == gunAsset)
+                return i;
+        }
+
+        return -1;
+    }
+
+    int FindNextAvailableGunIndex(int startIndex, int direction)
+    {
+        if (gunAvailable.Count == 0) return -1;
+
+        int index = startIndex;
+
+        for (int i = 0; i < gunAvailable.Count; i++)
+        {
+            index += direction;
+
+            if (index >= gunAvailable.Count)
+                index = 0;
+            else if (index < 0)
+                index = gunAvailable.Count - 1;
+
+            if (gunAvailable[index])
+                return index;
+        }
+
+        return -1;
+    }
+
+    void AddRecoil()
+    {
+        if (gunList.Count == 0 || gunListPos < 0 || gunListPos >= gunList.Count) return;
 
         gunStats currentGun = gunList[gunListPos];
-        if (currentGun == null) return;
 
-        if (currentGun.singleUseWeapon && ammoCount <= 0)
-        {
-            removeCurrentGunAfterShot = true;
-            StartCoroutine(RemoveCurrentGunNextFrame());
-        }
+        targetRecoilPitch += currentGun.verticalRecoil;
+        targetRecoilYaw += Random.Range(-currentGun.horizontalRecoil, currentGun.horizontalRecoil);
+
+        targetRecoilPitch = Mathf.Clamp(targetRecoilPitch, 0f, maxRecoilPitch);
+        targetRecoilYaw = Mathf.Clamp(targetRecoilYaw, -maxRecoilYaw, maxRecoilYaw);
+
+        targetCrosshairSpread += currentGun.crosshairKick;
     }
 
-    IEnumerator RemoveCurrentGunNextFrame()
+    void ApplyRecoil()
     {
-        yield return null;
+        if (gunList.Count == 0 || gunListPos < 0 || gunListPos >= gunList.Count) return;
 
-        if (!removeCurrentGunAfterShot)
-            yield break;
+        gunStats currentGun = gunList[gunListPos];
 
-        removeCurrentGunAfterShot = false;
-        RemoveCurrentGun();
+        recoilPitch = Mathf.Lerp(recoilPitch, targetRecoilPitch, Time.deltaTime * 18f);
+        recoilYaw = Mathf.Lerp(recoilYaw, targetRecoilYaw, Time.deltaTime * 18f);
+
+        targetRecoilPitch = Mathf.Lerp(targetRecoilPitch, 0f, Time.deltaTime * currentGun.recoilResetSpeed);
+        targetRecoilYaw = Mathf.Lerp(targetRecoilYaw, 0f, Time.deltaTime * currentGun.recoilResetSpeed);
     }
 
+    void UpdateCrosshair()
+    {
+        if (gunList.Count == 0 || gunListPos < 0 || gunListPos >= gunList.Count)
+            return;
+
+        targetCrosshairSpread = Mathf.Lerp(targetCrosshairSpread, 0f, Time.deltaTime * crosshairReturnSpeed);
+        currentCrosshairSpread = Mathf.Lerp(currentCrosshairSpread, targetCrosshairSpread, Time.deltaTime * 20f);
+
+        if (gameManager.instance != null)
+            gameManager.instance.SetCrosshairSpread(currentCrosshairSpread);
+    }
 }

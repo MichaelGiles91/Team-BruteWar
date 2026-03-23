@@ -10,8 +10,6 @@ public class GunPickups : MonoBehaviour
         PlayerController player = other.GetComponent<PlayerController>();
         if (player == null) return;
 
-        gun.ammoCur = gun.magSize;
-
         bool pickedUp = player.getGunStats(gun);
         if (pickedUp)
         {

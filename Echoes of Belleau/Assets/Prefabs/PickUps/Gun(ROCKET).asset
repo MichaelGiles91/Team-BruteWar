@@ -20,10 +20,10 @@ MonoBehaviour:
   shootDist: 503
   shootRate: 3
   magSize: 1
-  pickupSize: 1
+  pickupSize: 0
   ammoCur: 1
-  ammoMax: 1
-  ammoMaxOrig: 3
+  ammoMax: 0
+  ammoMaxOrig: 0
   hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
   muzzleFlash: {fileID: 19800006, guid: c89c4e943ffb38e40a45040dfb3bd9d0, type: 3}
   shootSound:
@@ -32,6 +32,11 @@ MonoBehaviour:
   reloadSound: []
   reloadSoundVol: 0
   reloadTime: 0
+  sprayAmount: 0.003
+  verticalRecoil: 3.5
+  horizontalRecoil: 0.15
+  recoilResetSpeed: 5
+  crosshairKick: 24
   singleUseWeapon: 1
   uniquePickup: 1
   sourceAsset: {fileID: 11400000}

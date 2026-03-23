@@ -83,6 +83,13 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject mapStuff;
     public ScreenFader fader;
 
+    [Header("---Crosshair---")]
+    [SerializeField] RectTransform crosshairTop;
+    [SerializeField] RectTransform crosshairBottom;
+    [SerializeField] RectTransform crosshairLeft;
+    [SerializeField] RectTransform crosshairRight;
+    [SerializeField] float baseCrosshairGap = 12f;
+
     [Header("---Weapon/Ammo---")]
     public PlayerController ammoAmount;
     [SerializeField] TMP_Text ammoAmountText;
@@ -765,4 +772,22 @@ public class gameManager : MonoBehaviour
     {
         StartCoroutine(HideLockedAfterDelay());
     }
+
+    public void SetCrosshairSpread(float extraSpread)
+    {
+        float gap = baseCrosshairGap + extraSpread;
+
+        if (crosshairTop != null)
+            crosshairTop.anchoredPosition = new Vector2(0f, gap);
+
+        if (crosshairBottom != null)
+            crosshairBottom.anchoredPosition = new Vector2(0f, -gap);
+
+        if (crosshairLeft != null)
+            crosshairLeft.anchoredPosition = new Vector2(-gap, 0f);
+
+        if (crosshairRight != null)
+            crosshairRight.anchoredPosition = new Vector2(gap, 0f);
+    }
+
 }
