@@ -21,7 +21,7 @@ public class MedicEnemyController : MonoBehaviour, IDamage
     public float healAmount = 25f;
     public float healDuration = 2f;
     public float waitBetweenPatients = 2f;
-    public float allySearchRadius = 20f;
+    public float allySearchRadius = 20f; 
 
     [Header("Health")]
     public float maxHealth = 100f;
