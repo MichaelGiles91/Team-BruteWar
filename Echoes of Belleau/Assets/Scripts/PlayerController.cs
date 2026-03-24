@@ -60,9 +60,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [Header("---Stamina Bar Shake---")]
     [SerializeField] float shakeAmount;
     [SerializeField] float shakeDuration;
-
     
-
     [Header("--- Recoil ---")]    
     [SerializeField] float maxRecoilPitch = 20f;
     [SerializeField] float maxRecoilYaw = 6f;
@@ -90,6 +88,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] float maxSpreadStressPenalty = 0.15f;
     //[SerializeField] float maxMoveAimPenalty = 0.1f;
     [SerializeField] Volume stressVolume;
+
+    [Header("--- Suppression / Cover ---")]
+    [SerializeField] LayerMask coverMask;
+    [SerializeField] Transform suppressionCheckPoint;
+    [SerializeField] float coverCheckHeightOffset = 1.2f;
+    [SerializeField] float coverStressRecoveryBonus = 18f;
+    [SerializeField] float suppressionGraceTime = 1.5f;
+    [SerializeField] float coverRayLength = 6f;
+
+    bool isUnderCover;
+    float suppressionTimer;
 
     float stressSafeTimer;
     public float StressPercent => stress / maxStress;
@@ -191,7 +200,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
         grenadeCountOrig = grenadeCount;
         grenadeTimer = grenadeCooldown;
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
         medkitCountOrig = medkitCount;
         gameManager.instance.updateMedkitAmount(medkitCount);
         gameManager.instance.UpdateWeaponIcon(null);
@@ -285,7 +294,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
 
         moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDir * (speed * moveSlowMult) * Time.deltaTime);
+        controller.Move((speed * moveSlowMult) * Time.deltaTime * moveDir);
 
         jump();
         controller.Move(playerVel * Time.deltaTime);
@@ -409,7 +418,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
-        if (ammoCount <= 0 && (devilDogMode == null || !devilDogMode.isActive)) { return; }
+        if (ammoCount <= 0 && (devilDogMode == null || !devilDogMode.isActive)) 
+        {
+            if (gunList[gunListPos].emptyShotSound != null && gunList[gunListPos].emptyShotSound.Length > 0)
+            {
+                AudioClip clip = gunList[gunListPos].emptyShotSound[Random.Range(0, gunList[gunListPos].emptyShotSound.Length)];
+                aud.PlayOneShot(clip, gunList[gunListPos].emptyShotSoundVol);
+            }
+            return; 
+        }
 
         gameManager.instance.TriggerCombat();
 
@@ -657,7 +674,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void getGrenade(int amount)
     {
         grenadeCount += amount;
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
     }
 
     public void getMedkit(int amount)
@@ -748,7 +765,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         grenadeCount++;
         ammoMax = gunList[gunListPos].ammoMax;
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
     }
 
     void changeGun()
@@ -804,6 +821,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         if (gameManager.instance != null)
             gameManager.instance.SetCrosshairSpread(0f);
+
+        if (gunList[gunListPos].equipSound != null && gunList[gunListPos].equipSound.Length > 0)
+        {
+            AudioClip clip = gunList[gunListPos].equipSound[Random.Range(0, gunList[gunListPos].equipSound.Length)];
+            aud.PlayOneShot(clip, gunList[gunListPos].equipSoundVol);
+        }
+
 
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
 
@@ -982,7 +1006,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
         heldGrenade = null;
 
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
         UpdatePlayerUI();
     }
 
@@ -1079,7 +1103,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void SetGrenades(int grenades)
     {
         grenadeCount = grenades;
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
     }
 
     bool CreateGunInstance(gunStats gun, out GameObject instance)
@@ -1224,13 +1248,27 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void UpdateStress()
     {
+        if (suppressionTimer > 0f)
+        {
+            suppressionTimer -= Time.deltaTime;
+        }
+        else
+        {
+            isUnderCover = false;
+        }
+
         if (stressSafeTimer > 0f)
         {
             stressSafeTimer -= Time.deltaTime;
         }
         else if (stress > 0f)
         {
-            stress -= stressRecoveryRate * Time.deltaTime;
+            float recoveryRate = stressRecoveryRate;
+
+            if (isUnderCover)
+                recoveryRate += coverStressRecoveryBonus;
+
+            stress -= recoveryRate * Time.deltaTime;
             stress = Mathf.Clamp(stress, 0f, maxStress);
         }
 
@@ -1562,5 +1600,46 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         if (gameManager.instance != null)
             gameManager.instance.SetCrosshairSpread(currentCrosshairSpread);
+    }
+
+    public void TryApplySuppression(Vector3 threatPosition)
+    {
+        suppressionTimer = suppressionGraceTime;
+
+        bool covered = IsThreatBlockedByCover(threatPosition);
+
+        if (covered)
+        {
+            isUnderCover = true;
+            return;
+        }
+
+        isUnderCover = false;
+        AddSuppressionStress();
+    }
+
+    bool IsThreatBlockedByCover(Vector3 threatPosition)
+    {
+        Vector3 checkOrigin;
+
+        if (suppressionCheckPoint != null)
+            checkOrigin = suppressionCheckPoint.position;
+        else
+            checkOrigin = transform.position + Vector3.up * coverCheckHeightOffset;
+
+        Vector3 dirToThreat = threatPosition - checkOrigin;
+        float dist = dirToThreat.magnitude;
+
+        if (dist <= 0.01f)
+            return false;
+
+        dirToThreat.Normalize();
+
+        if (Physics.Raycast(checkOrigin, dirToThreat, out RaycastHit hit, Mathf.Min(dist, coverRayLength), coverMask, QueryTriggerInteraction.Ignore))
+        {
+            return true;
+        }
+
+        return false;
     }
 }
