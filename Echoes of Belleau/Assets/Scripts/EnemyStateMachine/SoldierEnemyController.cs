@@ -73,8 +73,6 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public SoldierShootState ShootState { get; private set; }
     public event Action<SoldierEnemyController> OnDied;
 
-    public event Action<SoldierEnemyController> OnDied;
-
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -381,6 +379,16 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public bool NeedsHealing()
     {
         return currentHealth < maxHealth && currentHealth > 0f;
+    }
+
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
+
+    public bool IsAlive()
+    {
+        return !isDead && currentHealth > 0f;
     }
 
     public bool IsDead()
