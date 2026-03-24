@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -136,7 +135,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     int gunListPos;
     float shootTimer;
-    float grenadeThrowTimer;
     GameObject currentGunInstance;
     Transform activeMuzzle;
     public bool canShoot = true;
@@ -148,11 +146,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     [Header("Grenade")]
     [SerializeField] GameObject grenadePrefab;
-    [SerializeField] float grenadeCooldown;
-    [SerializeField] float grenadeThrowForce;
-    [SerializeField] float grenadeUpForce;
+    [SerializeField] float grenadeCooldown = 6f;
+    [SerializeField] float grenadeThrowForce = 12f;
+    [SerializeField] float grenadeUpForce = 4f;
     [SerializeField] Transform grenadePos;
-    [SerializeField] float grenadeThrowRate;
     float grenadeTimer;
     GameObject heldGrenade;
 
@@ -189,8 +186,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     List<GameObject> gunInstances = new List<GameObject>();
     List<bool> gunAvailable = new List<bool>();
 
-    bool canReload;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -205,7 +200,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
         grenadeCountOrig = grenadeCount;
         grenadeTimer = grenadeCooldown;
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
         medkitCountOrig = medkitCount;
         gameManager.instance.updateMedkitAmount(medkitCount);
         gameManager.instance.UpdateWeaponIcon(null);
@@ -275,15 +270,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         UpdateCrosshair();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
         grenadeTimer += Time.deltaTime;
-        grenadeThrowTimer += Time.deltaTime;
         UpdateLowHealthIndicator();
-        UpdateEmptyAmmoClipIndicator();
-        if (Input.GetButtonDown("ThrowGrenade") && grenadeThrowTimer >= grenadeThrowRate)
+        if (Input.GetButtonDown("ThrowGrenade"))
         {
-            if (grenadeCount <= 0)
-                return;
-            animator.SetTrigger("grenade");
-            StartCoroutine(grenadeThrowDelay());
+            HoldGrenade();
+            UseGrenade();
         }
         if (Input.GetButtonDown("UseMedkit"))
         {
@@ -547,22 +538,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void reload()
     {
-        if (ammoCount < ammoCountOrig)
-        {
-            canReload = true;
-        }
-        else
-        {
-            canReload = false;
-        }
-        if (!Input.GetButtonDown("Reload") || !canReload) return;
-        StartCoroutine(reloadShootDelay());
         if (isReloading) return;
+        if (!Input.GetButtonDown("Reload")) return;
 
         int magSize = ammoCountOrig;
         if (ammoCount >= magSize) return;
         if (ammoMax <= 0) return;
-        animator.SetTrigger("reload");
 
         StartCoroutine(ReloadWait(gunList[gunListPos].reloadTime));
     }
@@ -588,7 +569,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         SaveAmmoToGunStats();
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
-        SFXManager.instance.PlayReload();
 
         isReloading = false;
     }
@@ -626,23 +606,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
                 indicator.gameObject.SetActive(false);
                 lowHealthActive = false;
             }
-        }
-    }
-
-    void UpdateEmptyAmmoClipIndicator()
-    {
-        GameObject reloadPopup = gameManager.instance.emptyAmmoClipIndicator;
-
-        if (AmmoCount <= 0)
-        {
-            reloadPopup.gameObject.SetActive(true);
-        }
-        else
-        {
-            if (Input.GetButtonDown("Reload"))
-            {
-                reloadPopup.gameObject.SetActive(false);
-            }  
         }
     }
 
@@ -711,7 +674,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void getGrenade(int amount)
     {
         grenadeCount += amount;
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
     }
 
     public void getMedkit(int amount)
@@ -802,7 +765,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         grenadeCount++;
         ammoMax = gunList[gunListPos].ammoMax;
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
     }
 
     void changeGun()
@@ -983,6 +946,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void HoldGrenade()
     {
+        if (grenadeCount <= 0)
+            return;
+
             heldGrenade = Instantiate(grenadePrefab, grenadePos.position, grenadePos.rotation);
             heldGrenade.transform.SetParent(grenadePos);
             heldGrenade.transform.localPosition = Vector3.zero; // Ensure the grenade is positioned correctly relative to the shootPos
@@ -1000,20 +966,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             if (col != null) col.enabled = false; // Disable the collider while held to prevent collisions with the enemy
     }
 
-    IEnumerator grenadeThrowDelay()
-    {
-        HoldGrenade();
-        yield return new WaitForSeconds(0.5f);
-        UseGrenade();
-    }
-
     void UseGrenade()
     {
-        SFXManager.instance.PlayGrenadeThrow();
-
-        currentGunInstance.SetActive(false);
-        
-        grenadeThrowTimer = 0;
+        if (grenadeCount <= 0)
+            return;
 
         grenadeCount--;
 
@@ -1036,20 +992,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
-            Vector3 aimPoint;
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100f))
-            {
-                aimPoint = hit.point;
-            }
-            else
-            {
-                aimPoint = ray.origin + ray.direction * 100f;
-            }
-
-            Vector3 throwDir = (aimPoint - grenadePos.position).normalized;
+            Vector3 aimpoint = Camera.main.transform.position + Camera.main.transform.forward;
+            Vector3 throwDir = (aimpoint - grenadePos.position).normalized;
 
             damage dmg = heldGrenade.GetComponent<damage>();
             if (dmg != null)
@@ -1062,10 +1006,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
         heldGrenade = null;
 
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
         UpdatePlayerUI();
-
-        currentGunInstance.SetActive(true);
     }
 
     void UseMedkit()
@@ -1111,12 +1053,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         canShoot = false;
         yield return new WaitForSeconds(0.6f);
-        canShoot = true;
-    }
-    IEnumerator reloadShootDelay()
-    {
-        canShoot = false;
-        yield return new WaitForSeconds(2.8f);
         canShoot = true;
     }
 
@@ -1167,7 +1103,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void SetGrenades(int grenades)
     {
         grenadeCount = grenades;
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
     }
 
     bool CreateGunInstance(gunStats gun, out GameObject instance)
@@ -1406,7 +1342,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         {
             StartCoroutine(MeleeDelay());
             knife.SetActive(true);
-            SFXManager.instance.PlayKnifeSwing();
             animator.SetTrigger("Melee");
             GetKnifeDamage.DoKnifeHit();
             StartCoroutine(gunHide());

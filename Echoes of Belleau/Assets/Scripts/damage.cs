@@ -98,8 +98,6 @@ public class damage : MonoBehaviour
 
     void Explode()
     {
-        SFXManager.instance.PlayGrenadeExplosion();
-
         if (explosionEffect != null)
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
 
