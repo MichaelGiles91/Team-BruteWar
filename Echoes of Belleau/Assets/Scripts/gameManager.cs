@@ -222,7 +222,6 @@ public class gameManager : MonoBehaviour
             MusicManager.instance.PlayBaseMusic();
         }
 
-
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         ammoAmount = player.GetComponent<PlayerController>();
@@ -252,8 +251,19 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (!isPaused)
             UpdateCombatState();
+
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            ResetTutorial("Keybinds");
+            ResetTutorial("MedKitPickup");
+            ResetTutorial("AmmoPickup");
+            ResetTutorial("StressSystem");
+            ResetTutorial("DevilDog");
+            Debug.Log("Tutorials reset");
+        }
 
         if (Input.GetButtonDown("Cancel"))
         {
@@ -962,11 +972,8 @@ public class gameManager : MonoBehaviour
 
     public void ResetTutorial(string tutorialID)
     {
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
             PlayerPrefs.DeleteKey("Tutorial_" + tutorialID);
             PlayerPrefs.Save();
-        }
     }
 
     void UpdateCombatState()
