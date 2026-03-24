@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class healthPickup : MonoBehaviour
+public class grenadePickup : MonoBehaviour
 {
     [SerializeField] int amount = 0;
 
@@ -10,7 +10,7 @@ public class healthPickup : MonoBehaviour
 
         if (pik != null)
         {
-            pik.getMedkit(amount);
+            pik.getGrenade(amount);
             gameObject.SetActive(false);
         }
     }

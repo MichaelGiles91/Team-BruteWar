@@ -7,7 +7,7 @@ public enum SFXType
     Jump,
     Land,
     Hurt,
-    Death,
+    Death,  
     Medkit,
     
     FootstepWalk,
@@ -15,7 +15,12 @@ public enum SFXType
 
     BreathingIdleLoop,
     BreathingRunLoop,
-    BreathingOutOfBreathLoop
+    BreathingOutOfBreathLoop,
+
+    Knife,
+    GrenadeThrow,
+    GrenadeExplode,
+    Reload,
 }
 
 [System.Serializable]
@@ -223,6 +228,26 @@ public class SFXManager : MonoBehaviour
     public void PlayDeath()
     {
         PlayOneShot(SFXType.Death);
+    }
+
+    public void PlayKnifeSwing()
+    {
+        PlayOneShot(SFXType.Knife);
+    }
+
+    public void PlayGrenadeThrow()
+    {
+        PlayOneShot(SFXType.GrenadeThrow);
+    }
+
+    public void PlayGrenadeExplosion()
+    {
+        PlayOneShot(SFXType.GrenadeExplode);
+    }
+
+    public void PlayReload()
+    {
+        PlayOneShot(SFXType.Reload);
     }
 
     public void PlayMedkit()
