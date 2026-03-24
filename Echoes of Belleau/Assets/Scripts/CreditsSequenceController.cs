@@ -44,6 +44,7 @@ public class CreditsSequenceController : MonoBehaviour
 
     void Start()
     {
+        MusicManager.instance.PlayMusic(MusicType.Cutscene, 3, .75f);
         fullGameTitle = gameTitleText.text;
         gameTitleText.text = "";
 

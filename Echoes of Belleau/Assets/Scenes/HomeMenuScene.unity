@@ -2397,6 +2397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuMusicStarter
   screenFader: {fileID: 8983914210196432212}
+  DEBUG_QUICKLOAD_KEYS: 1
 --- !u!1 &2134413806
 GameObject:
   m_ObjectHideFlags: 0

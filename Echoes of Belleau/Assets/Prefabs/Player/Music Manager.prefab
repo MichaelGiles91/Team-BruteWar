@@ -49,21 +49,32 @@ MonoBehaviour:
   sourceA: {fileID: 8414659267344822306}
   sourceB: {fileID: 4721620820747661370}
   musicGroups:
-  - type: 3
-    clips:
-    - {fileID: 8300000, guid: eb2d730611f908a4f98fb35bf7de184e, type: 3}
-    loop: 1
   - type: 0
     clips:
-    - {fileID: 8300000, guid: f77fb6cf9f3033448b87e0f7a01d8a31, type: 3}
+    - {fileID: 8300000, guid: 19c5c4b23e7ae4d418c1de1559174777, type: 3}
+    - {fileID: 8300000, guid: dbc99c803fb7e744bbfb222178c751a5, type: 3}
     loop: 1
   - type: 1
     clips:
-    - {fileID: 8300000, guid: 0e3faf9e8fddebc468cb64beccdc6db3, type: 3}
-    loop: 0
+    - {fileID: 8300000, guid: a766122adf583714e90c698a2cf94e02, type: 3}
+    - {fileID: 8300000, guid: 55918b0e06e5d1040a53f9b85d6b842c, type: 3}
+    - {fileID: 8300000, guid: f5598fc1b8549dc41be938318da81da1, type: 3}
+    - {fileID: 8300000, guid: ca40484a7c1643e4bbde37bfd444b5b1, type: 3}
+    loop: 1
   - type: 2
     clips:
     - {fileID: 8300000, guid: 3155c98302bf4b24cafae1550f8c996b, type: 3}
+    - {fileID: 8300000, guid: 5c8a42c8149331942b95cbbd00b642b4, type: 3}
+    loop: 1
+  - type: 3
+    clips:
+    - {fileID: 8300000, guid: 54275301261b480439e780f9f2113d9e, type: 3}
+    - {fileID: 8300000, guid: 9f9b5f33e91abf94186a47622f315898, type: 3}
+    loop: 1
+  - type: 4
+    clips:
+    - {fileID: 8300000, guid: 9919fcf5b8dea67489c901914990f2c3, type: 3}
+    - {fileID: 8300000, guid: f5598fc1b8549dc41be938318da81da1, type: 3}
     loop: 1
   defaultFadeDuration: 2
   fadeBeforeEnd: 2

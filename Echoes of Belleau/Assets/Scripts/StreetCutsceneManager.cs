@@ -22,27 +22,28 @@ public class StreetCutsceneManager : MonoBehaviour
     [Header("--- Scripts To Enable At End ---")]
     [SerializeField] MonoBehaviour[] scriptsToEnableAtEnd;
 
-    [Header("--- Rubble to Enable At End---")]
-    [SerializeField] GameObject rubble;
+    [Header("--- Stuff to Disable At End ---")]
+    [SerializeField] GameObject houseStreet;
+    [SerializeField] GameObject houseCorner;
 
-    bool isPlaying;
+    [Header("--- Stuff to Enable At End ---")]
+    [SerializeField] GameObject rubble;
+    [SerializeField] GameObject destroyedHouseStreet;
+    [SerializeField] GameObject destroyedHouseCorner;
+
+    [Header("--- Tank End State ---")]
+    [SerializeField] Transform tankRoot;
+    [SerializeField] Transform tankEndPoint;
+
+    bool hasPlayed;
 
     void Awake()
     {
         if (director == null)
             director = GetComponent<PlayableDirector>();
 
-        Debug.Log("Awake called on StreetCutsceneManager");
-
-        if (gameplayCamera != null)
-            Debug.Log("Gameplay camera assigned: " + gameplayCamera.name);
-        else
-            Debug.LogWarning("Gameplay camera is NOT assigned");
-
-        if (cutsceneCamera != null)
-            Debug.Log("Cutscene camera assigned: " + cutsceneCamera.name);
-        else
-            Debug.LogWarning("Cutscene camera is NOT assigned");
+        if (director != null)
+            director.playOnAwake = false;
 
         if (cutsceneCamera != null)
             cutsceneCamera.gameObject.SetActive(false);
@@ -65,75 +66,57 @@ public class StreetCutsceneManager : MonoBehaviour
 
     public void PlayCutscene()
     {
-        Debug.Log("PlayCutscene called");
-
-        if (isPlaying)
-        {
-            Debug.LogWarning("Cutscene already playing");
+        if (hasPlayed || director == null)
             return;
-        }
 
-        if (director == null)
-        {
-            Debug.LogWarning("PlayableDirector is null");
-            return;
-        }
-
-        isPlaying = true;
+        hasPlayed = true;
         BeginCutsceneState();
         director.Play();
     }
 
     void BeginCutsceneState()
     {
-        Debug.Log("BeginCutsceneState called");
-
         SetScriptsEnabled(playerScriptsToDisable, false);
         SetScriptsEnabled(scriptsToDisableAtStart, false);
         SetUIEnabled(false);
 
         if (gameplayCamera != null)
-        {
-            Debug.Log("Turning OFF gameplay camera object: " + gameplayCamera.name);
             gameplayCamera.gameObject.SetActive(false);
-        }
 
         if (cutsceneCamera != null)
-        {
-            Debug.Log("Turning ON cutscene camera object: " + cutsceneCamera.name);
             cutsceneCamera.gameObject.SetActive(true);
-        }
     }
 
     void EndCutsceneState()
     {
-        Debug.Log("EndCutsceneState called");
-
         if (cutsceneCamera != null)
-        {
-            Debug.Log("Turning OFF cutscene camera object: " + cutsceneCamera.name);
             cutsceneCamera.gameObject.SetActive(false);
-        }
 
         if (gameplayCamera != null)
-        {
-            Debug.Log("Turning ON gameplay camera object: " + gameplayCamera.name);
             gameplayCamera.gameObject.SetActive(true);
+
+        if (tankRoot != null && tankEndPoint != null)
+        {
+            tankRoot.position = tankEndPoint.position;
+            tankRoot.rotation = tankEndPoint.rotation;
         }
 
-        rubble.SetActive(true);
+        if (houseCorner != null) houseCorner.SetActive(false);
+        if (houseStreet != null) houseStreet.SetActive(false);
+        if (destroyedHouseCorner != null) destroyedHouseCorner.SetActive(true);
+        if (destroyedHouseStreet != null) destroyedHouseStreet.SetActive(true);
+        if (rubble != null) rubble.SetActive(true);
+
         SetScriptsEnabled(playerScriptsToDisable, true);
         SetScriptsEnabled(scriptsToEnableAtEnd, true);
         SetUIEnabled(true);
-
-        isPlaying = false;
     }
 
     void OnTimelineStopped(PlayableDirector stoppedDirector)
     {
-        Debug.Log("Timeline stopped");
+        if (stoppedDirector != director)
+            return;
 
-        if (stoppedDirector != director) return;
         EndCutsceneState();
     }
 
@@ -158,4 +141,29 @@ public class StreetCutsceneManager : MonoBehaviour
                 obj.SetActive(value);
         }
     }
+
+    public bool HasPlayed()
+    {
+        return hasPlayed;
+    }
+
+    public void SetPlayed(bool value)
+    {
+        hasPlayed = value;
+    }
+
+    public void RestoreWorldState(bool houseStreetOn, bool houseCornerOn, bool rubbleOn, bool destroyedStreetOn, bool destroyedCornerOn)
+    {
+        if (houseStreet != null) houseStreet.SetActive(houseStreetOn);
+        if (houseCorner != null) houseCorner.SetActive(houseCornerOn);
+        if (rubble != null) rubble.SetActive(rubbleOn);
+        if (destroyedHouseStreet != null) destroyedHouseStreet.SetActive(destroyedStreetOn);
+        if (destroyedHouseCorner != null) destroyedHouseCorner.SetActive(destroyedCornerOn);
+    }
+
+    public bool HouseStreetActive() => houseStreet != null && houseStreet.activeSelf;
+    public bool HouseCornerActive() => houseCorner != null && houseCorner.activeSelf;
+    public bool RubbleActive() => rubble != null && rubble.activeSelf;
+    public bool DestroyedHouseStreetActive() => destroyedHouseStreet != null && destroyedHouseStreet.activeSelf;
+    public bool DestroyedHouseCornerActive() => destroyedHouseCorner != null && destroyedHouseCorner.activeSelf;
 }

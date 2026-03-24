@@ -2518,7 +2518,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2566,8 +2566,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480625865}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.725, y: 0.895, z: -2.923}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.7250004, y: 0.895, z: -2.923}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25500,6 +25500,8 @@ PlayableDirector:
     value: {fileID: 1660146070}
   - key: {fileID: -5586718928384205677, guid: a44865a213548a84daaa3c2e2290da17, type: 2}
     value: {fileID: 1667691390}
+  - key: {fileID: -2151851738283601122, guid: a44865a213548a84daaa3c2e2290da17, type: 2}
+    value: {fileID: 480625866}
   m_ExposedReferences:
     m_References:
     - 4f413e6e51c8c064dbd415af9ffdb42e: {fileID: 269726001}
@@ -34156,7 +34158,12 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'clavicle_r'\n\tTransform 'ring_02_l'\n\tTransform
+    'middle_01_r'\n\tTransform 'thumb_01_r'\n\tTransform 'ring_01_r'\n\tTransform
+    'root'\n\tTransform 'spine_04'\n\tTransform 'thumb_02_r'\n\tTransform 'upperarm_l'\n\tTransform
+    'pinky_metacarpal_l'\n\tand more ..."
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
