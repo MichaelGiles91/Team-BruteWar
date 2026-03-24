@@ -4041,6 +4041,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6389800393157528084, guid: be5ddce7644ff094db0b61aa24d9814a, type: 3}
   m_PrefabInstance: {fileID: 520185109}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &533493793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4589826784619600385, guid: 7000e5dab14b1f846ad54fdcbcc3ef47, type: 3}
+  m_PrefabInstance: {fileID: 8048160492480027976}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 499227d8ca52c564d98e8eb0d5dea38e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankBossController
+--- !u!4 &533493794 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9220590324393573415, guid: 7000e5dab14b1f846ad54fdcbcc3ef47, type: 3}
+  m_PrefabInstance: {fileID: 8048160492480027976}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &534711779
 GameObject:
   m_ObjectHideFlags: 0
@@ -8330,6 +8346,73 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 422786056167914565, guid: 736f6a0ac00455e4cbccaaebaccfd466, type: 3}
   m_PrefabInstance: {fileID: 1292722166}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1295873905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1295873906}
+  - component: {fileID: 1295873908}
+  - component: {fileID: 1295873907}
+  m_Layer: 0
+  m_Name: PhaseTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1295873906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295873905}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 533493794}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1295873907
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295873905}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1295873908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295873905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4a5bd53b2a8574384ebf920eeb852b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankBossPhaseTrigger
+  tankBoss: {fileID: 533493793}
 --- !u!4 &1315102258 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6389800393157528084, guid: be5ddce7644ff094db0b61aa24d9814a, type: 3}

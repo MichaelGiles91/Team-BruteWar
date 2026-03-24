@@ -21,7 +21,7 @@ public class MedicEnemyController : MonoBehaviour, IDamage
     public float healAmount = 25f;
     public float healDuration = 2f;
     public float waitBetweenPatients = 2f;
-    public float allySearchRadius = 20f;
+    public float allySearchRadius = 20f; 
 
     [Header("Health")]
     public float maxHealth = 100f;
@@ -32,10 +32,14 @@ public class MedicEnemyController : MonoBehaviour, IDamage
     public LayerMask allyLayer;
     public SoldierEnemyController CurrentPatient { get; set; }
 
+    [Header("Damage Response")]
+    public bool tookRecentDamage;
+    public float damageCoverCooldown = 3f;
+    private float damageCoverTimer;
+
     private NavMeshAgent agent;
     private MedicStateMachine stateMachine;
-    SingleMedicSpawner spawnPoint;
-
+    private SingleMedicSpawner spawnPoint;
 
     public MedicIdleState IdleState { get; private set; }
     public MedicSeekCoverState SeekCoverState { get; private set; }
@@ -65,6 +69,18 @@ public class MedicEnemyController : MonoBehaviour, IDamage
 
     private void Update()
     {
+        if (IsDead()) return;
+
+        if (damageCoverTimer > 0f)
+        {
+            damageCoverTimer -= Time.deltaTime;
+
+            if (damageCoverTimer <= 0f)
+            {
+                tookRecentDamage = false;
+            }
+        }
+
         stateMachine.Update();
     }
 
@@ -85,6 +101,7 @@ public class MedicEnemyController : MonoBehaviour, IDamage
         agent.isStopped = true;
         agent.ResetPath();
     }
+
     public void SetSpawnPoint(SingleMedicSpawner spawner)
     {
         spawnPoint = spawner;
@@ -121,6 +138,7 @@ public class MedicEnemyController : MonoBehaviour, IDamage
 
         foreach (CoverPoint cover in allCover)
         {
+            if (cover == null) continue;
             if (cover.isOccupied) continue;
 
             float distance = Vector3.Distance(transform.position, cover.transform.position);
@@ -159,7 +177,6 @@ public class MedicEnemyController : MonoBehaviour, IDamage
         }
     }
 
-
     public void HealCurrentPatient()
     {
         if (CurrentPatient == null) return;
@@ -167,10 +184,34 @@ public class MedicEnemyController : MonoBehaviour, IDamage
         CurrentPatient.Heal(healAmount);
         Debug.Log(name + " healed " + CurrentPatient.name + " for " + healAmount);
     }
+
     public bool IsDead()
     {
         return currentHealth <= 0f;
     }
+
+    public void TakeDamage(float amount)
+    {
+        if (IsDead()) return;
+
+        currentHealth -= amount;
+        currentHealth = Mathf.Max(currentHealth, 0f);
+
+        RegisterDamage();
+
+        Debug.Log(name + " Medic took damage. Current Health: " + currentHealth);
+
+        if (currentHealth <= 0f)
+        {
+            Die();
+        }
+    }
+
+    public void takeDamage(int amount)
+    {
+        TakeDamage(amount);
+    }
+
     private void Die()
     {
         Debug.Log(name + " Medic died.");
@@ -182,10 +223,13 @@ public class MedicEnemyController : MonoBehaviour, IDamage
             CurrentCover.isOccupied = false;
             CurrentCover = null;
         }
+
         if (spawnPoint != null)
         {
+            // Change this if your spawner method is named differently
             spawnPoint.ClearSoldierReference();
         }
+
         enabled = false;
 
         if (agent != null)
@@ -199,28 +243,26 @@ public class MedicEnemyController : MonoBehaviour, IDamage
             Destroy(gameObject, 2f);
         }
     }
-    public void TakeDamage(float amount)
-    {
-        if (IsDead()) return;
 
-        currentHealth -= amount;
-        currentHealth = Mathf.Max(currentHealth, 0f);
-
-        Debug.Log(name + " Medic took damage. Current Health: " + currentHealth);
-
-        if (currentHealth <= 0f)
-        {
-            Die();
-        }
-    }
-    public void takeDamage(int amount)
-    {
-        TakeDamage(amount);
-    }
     public void SetHomePoint(Transform newHomePoint)
     {
         homePoint = newHomePoint;
     }
 
-}
+    public void RegisterDamage()
+    {
+        tookRecentDamage = true;
+        damageCoverTimer = damageCoverCooldown;
+    }
 
+    public void ClearRecentDamage()
+    {
+        tookRecentDamage = false;
+        damageCoverTimer = 0f;
+    }
+
+    public bool ShouldRetreatToCover()
+    {
+        return tookRecentDamage && !IsAtCover();
+    }
+}
