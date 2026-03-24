@@ -47,6 +47,10 @@ public class SoldierShootState : SoldierState
             stateMachine.ChangeState(soldier.SeekCoverState);
             return;
         }
+        if (soldier.IsHitStaggered())
+        {
+            return;
+        }
 
         Vector3 lookDirection = soldier.Target.position - soldier.transform.position;
         lookDirection.y = 0f;
@@ -63,6 +67,10 @@ public class SoldierShootState : SoldierState
             soldier.FireAtTarget();
             fireTimer = soldier.fireRate;
         }
+        if (soldier.IsHitStaggered())
+{
+    return;
+}
     }
 
     public override void Exit()
@@ -77,4 +85,5 @@ public class SoldierShootState : SoldierState
             soldier.CurrentCover = null;
         }
     }
+
 }

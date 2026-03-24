@@ -1317,21 +1317,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MedicEnemyController
   moveSpeed: 3
   stoppingDistance: 0.2
-  homePoint: {fileID: 0}
   minIdleTime: 1.5
   maxIdleTime: 3
-  coverSearchRadius: 10
+  coverSearchRadius: 25
   healRange: 2.5
   healAmount: 25
   healDuration: 2
   waitBetweenPatients: 2
-  allySearchRadius: 20
-  maxHealth: 100
-  currentHealth: 100
+  allySearchRadius: 40
+  maxHealth: 10
+  currentHealth: 10
   destroyOnDeath: 1
   allyLayer:
     serializedVersion: 2
     m_Bits: 128
+  tookRecentDamage: 0
+  damageCoverCooldown: 3
 --- !u!95 &7213188108555573396
 Animator:
   serializedVersion: 7

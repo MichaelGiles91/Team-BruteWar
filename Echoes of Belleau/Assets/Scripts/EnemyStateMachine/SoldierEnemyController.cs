@@ -38,9 +38,15 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     public float lostTargetReturnDelay = 3f;
 
     [Header("Weapon")]
-    public Transform firePoint;
+    public Transform firePoint; // normal shoot position when not in cover
     public GameObject bulletPrefab;
     public float bulletSpeed = 25f;
+
+    [Header("Hit Reaction")]
+    public AudioSource audioSource;
+    public AudioClip hitSound;
+    public float hitStutterTime = 0.25f;
+    public float alertDurationAfterHit = 3f;
 
     [Header("Health")]
     public float maxHealth = 100f;
@@ -52,12 +58,20 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     private SingleSoldierSpawner spawnPoint;
     private bool isDead;
 
+    private float hitStutterTimer = 0f;
+    private float alertTimer = 0f;
+    private Vector3 lastKnownTargetPosition;
+
+    public bool IsStuttering => hitStutterTimer > 0f;
+    public bool IsAlerted => alertTimer > 0f;
+
     public SoldierIdleState IdleState { get; private set; }
     public SoldierPatrolState PatrolState { get; private set; }
     public SoldierFallbackState ReturnToPostState { get; private set; }
     public SoldierSeekCoverState SeekCoverState { get; private set; }
     public SoldierMoveToCoverState MoveToCoverState { get; private set; }
     public SoldierShootState ShootState { get; private set; }
+
     public event Action<SoldierEnemyController> OnDied;
 
     private void Awake()
@@ -90,8 +104,21 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
             FindPlayerTarget();
         }
 
+        if (hitStutterTimer > 0f)
+        {
+            hitStutterTimer -= Time.deltaTime;
+            StopMoving();
+            return;
+        }
+
+        if (alertTimer > 0f)
+        {
+            alertTimer -= Time.deltaTime;
+        }
+
         stateMachine.Update();
     }
+
     private void FindPlayerTarget()
     {
         if (target != null)
@@ -102,8 +129,10 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         if (playerObject != null)
         {
             target = playerObject.transform;
+            lastKnownTargetPosition = target.position;
         }
     }
+
     public void MoveTowards(Vector3 targetPosition, float speed)
     {
         if (agent == null) return;
@@ -130,12 +159,21 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         return agent.remainingDistance <= agent.stoppingDistance;
     }
 
+    public Transform GetCurrentFireOrigin()
+    {
+        if (CurrentCover != null && CurrentCover.firePosition != null)
+            return CurrentCover.firePosition;
+
+        return firePoint != null ? firePoint : transform;
+    }
+
     public bool CanSeeTarget()
     {
         if (target == null)
             return false;
 
-        Transform originTransform = eyePoint != null ? eyePoint : transform;
+        Transform fireOrigin = GetCurrentFireOrigin();
+        Transform originTransform = fireOrigin != null ? fireOrigin : (eyePoint != null ? eyePoint : transform);
         Vector3 origin = originTransform.position;
 
         Vector3 targetPosition = target.position;
@@ -143,7 +181,9 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         float distanceToTarget = directionToTarget.magnitude;
 
         if (distanceToTarget > viewDistance)
-            return false;
+        {
+            return IsAlerted;
+        }
 
         Vector3 flatDirectionToTarget = directionToTarget;
         flatDirectionToTarget.y = 0f;
@@ -151,17 +191,48 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         Vector3 forward = transform.forward;
         forward.y = 0f;
 
-        if (flatDirectionToTarget.sqrMagnitude < 0.001f)
-            return true;
+        if (flatDirectionToTarget.sqrMagnitude >= 0.001f)
+        {
+            float angleToTarget = Vector3.Angle(forward, flatDirectionToTarget.normalized);
 
-        float angleToTarget = Vector3.Angle(forward, flatDirectionToTarget.normalized);
-
-        if (angleToTarget > viewAngle * 0.5f)
-            return false;
+            if (angleToTarget > viewAngle * 0.5f)
+            {
+                return IsAlerted;
+            }
+        }
 
         Vector3 rayDirection = directionToTarget.normalized;
 
         if (Physics.Raycast(origin, rayDirection, out RaycastHit hit, viewDistance, visionBlockers | targetLayer))
+        {
+            bool seesTarget = ((1 << hit.collider.gameObject.layer) & targetLayer) != 0;
+
+            if (seesTarget)
+            {
+                lastKnownTargetPosition = target.position;
+                return true;
+            }
+        }
+
+        return IsAlerted;
+    }
+
+    public bool HasActualLineOfSightToTarget()
+    {
+        if (target == null)
+            return false;
+
+        Transform fireOrigin = GetCurrentFireOrigin();
+        Transform originTransform = fireOrigin != null ? fireOrigin : (eyePoint != null ? eyePoint : transform);
+        Vector3 origin = originTransform.position;
+
+        Vector3 directionToTarget = target.position - origin;
+        float distanceToTarget = directionToTarget.magnitude;
+
+        if (distanceToTarget > viewDistance)
+            return false;
+
+        if (Physics.Raycast(origin, directionToTarget.normalized, out RaycastHit hit, viewDistance, visionBlockers | targetLayer))
         {
             return ((1 << hit.collider.gameObject.layer) & targetLayer) != 0;
         }
@@ -198,6 +269,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
         return center;
     }
+
     public void SetSpawnPoint(SingleSoldierSpawner spawner)
     {
         spawnPoint = spawner;
@@ -211,6 +283,11 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         }
 
         return transform.position;
+    }
+
+    public Vector3 GetLastKnownTargetPosition()
+    {
+        return lastKnownTargetPosition;
     }
 
     public bool IsAtCover()
@@ -231,6 +308,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
         foreach (CoverPoint cover in allCover)
         {
+            if (cover == null) continue;
             if (cover.isOccupied) continue;
 
             float distanceToSoldier = Vector3.Distance(transform.position, cover.transform.position);
@@ -254,16 +332,27 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
     public void FireAtTarget()
     {
-        if (target == null || bulletPrefab == null || firePoint == null)
+        if (target == null || bulletPrefab == null)
             return;
 
-        Debug.Log(name + " fires at " + target.name);
+        Transform fireOrigin = GetCurrentFireOrigin();
+        if (fireOrigin == null)
+            return;
 
-        Vector3 aimPoint = target.position;
-        Vector3 shotDirection = (aimPoint - firePoint.position).normalized;
+        Vector3 aimPoint = target.position + Vector3.up * 1.2f;
+        Vector3 shotDirection = (aimPoint - fireOrigin.position).normalized;
 
         if (shotDirection.sqrMagnitude <= 0.001f)
             return;
+
+        if (Physics.Raycast(fireOrigin.position, shotDirection, out RaycastHit hit, viewDistance, visionBlockers | targetLayer))
+        {
+            bool hitTarget = ((1 << hit.collider.gameObject.layer) & targetLayer) != 0;
+            if (!hitTarget)
+            {
+                return;
+            }
+        }
 
         Vector3 lookDirection = target.position - transform.position;
         lookDirection.y = 0f;
@@ -273,26 +362,17 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
             transform.rotation = Quaternion.LookRotation(lookDirection);
         }
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(shotDirection));
+        GameObject bullet = Instantiate(
+            bulletPrefab,
+            fireOrigin.position,
+            Quaternion.LookRotation(shotDirection)
+        );
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.linearVelocity = shotDirection * bulletSpeed;
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, coverSearchRadius);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-
-        Vector3 center = homePoint != null ? homePoint.position : transform.position;
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(center, patrolRadius);
     }
 
     public bool NeedsHealing()
@@ -302,7 +382,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
     public bool IsDead()
     {
-        return currentHealth <= 0f;
+        return currentHealth <= 0f || isDead;
     }
 
     public void TakeDamage(float amount)
@@ -312,7 +392,41 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
 
-        Debug.Log(name + " took damage. Current Health: " + currentHealth);
+        // Play hit sound
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
+
+        hitStutterTimer = hitStutterTime;
+        if (!IsAtCover())
+        {
+            FindBestCover();
+
+            if (CurrentCover != null)
+            {
+                stateMachine.ChangeState(SeekCoverState);
+            }
+        }
+
+        if (target != null)
+        {
+            lastKnownTargetPosition = target.position;
+            alertTimer = alertDurationAfterHit;
+
+            Vector3 lookDirection = target.position - transform.position;
+            lookDirection.y = 0f;
+
+            if (lookDirection.sqrMagnitude > 0.01f)
+            {
+                transform.rotation = Quaternion.LookRotation(lookDirection);
+            }
+
+            if (agent != null && !IsAtCover())
+            {
+                MoveTowards(lastKnownTargetPosition, combatMoveSpeed);
+            }
+        }
 
         if (currentHealth <= 0f)
         {
@@ -332,7 +446,6 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
     private void Die()
     {
-        Debug.Log(name + " died.");
 
         isDead = true;
 
@@ -368,6 +481,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
             gameObject.SetActive(false);
         }
     }
+
     private void OnDestroy()
     {
         if (spawnPoint != null)
@@ -386,6 +500,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
     {
         TakeDamage(amount);
     }
+
     public void RestoreCheckpointState(Vector3 pos, Quaternion rot, float health, bool alive)
     {
         gameObject.SetActive(true);
@@ -395,6 +510,8 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
         currentHealth = health;
         isDead = !alive;
+        hitStutterTimer = 0f;
+        alertTimer = 0f;
 
         if (agent != null)
         {
@@ -412,6 +529,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
         if (target == null && gameManager.instance != null && gameManager.instance.player != null)
         {
             target = gameManager.instance.player.transform;
+            lastKnownTargetPosition = target.position;
         }
 
         if (alive)
@@ -431,8 +549,32 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
             gameObject.SetActive(false);
         }
     }
+
     public void SetHomePoint(Transform newHomePoint)
     {
         homePoint = newHomePoint;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, coverSearchRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        Vector3 center = homePoint != null ? homePoint.position : transform.position;
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(center, patrolRadius);
+
+        if (CurrentCover != null && CurrentCover.firePosition != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(CurrentCover.firePosition.position, 0.15f);
+        }
+    }
+    public bool IsHitStaggered()
+    {
+        return hitStutterTimer > 0f;
     }
 }

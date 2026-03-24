@@ -1055,12 +1055,11 @@ MonoBehaviour:
   patrolSpeed: 2
   combatMoveSpeed: 3.5
   stoppingDistance: 0.2
-  homePoint: {fileID: 0}
   patrolRadius: 8
   minIdleTime: 1.5
   maxIdleTime: 4
-  target: {fileID: 0}
-  attackRange: 12
+  playerTag: Player
+  attackRange: 20
   viewDistance: 20
   viewAngle: 60.8
   eyePoint: {fileID: 1173241698467443843}
@@ -1070,14 +1069,18 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
-  coverSearchRadius: 12
+  coverSearchRadius: 25
   fireRate: 0.75
-  lostTargetReturnDelay: 3
+  lostTargetReturnDelay: 2
   firePoint: {fileID: 5185270639702559124}
   bulletPrefab: {fileID: 6358852641723730384, guid: ecdb4da60df48b04eacf35b263dce792, type: 3}
   bulletSpeed: 25
-  maxHealth: 100
-  currentHealth: 100
+  audioSource: {fileID: 0}
+  hitSound: {fileID: 0}
+  hitStutterTime: 0.25
+  alertDurationAfterHit: 3
+  maxHealth: 10
+  currentHealth: 10
   destroyOnDeath: 1
 --- !u!95 &8161799163263790924
 Animator:

@@ -2489,10 +2489,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca002da428252441b92f28d83c8a65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.Shapes.ProBuilderShape
+  m_Shape:
+    rid: 3620628560787800064
   m_ShapeRotation: {x: 0, y: 0, z: 0, w: 1}
   m_UnmodifiedMeshVersion: 1851
   m_Size: {x: 1.33, y: 0, z: 1.25}
   m_LocalCenter: {x: 0, y: 0, z: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3620628560787800064
+      type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &892542415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12010,7 +12018,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 1542750932}
-  m_VersionIndex: 61179
+  m_VersionIndex: 61185
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -18080,12 +18088,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: bd055b5e39ec4b642a0f67e9f7871ebf, type: 2}
     - target: {fileID: 5866666021909216657, guid: cb93de557fbd16a47a32e80559ecd137, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:Hips'\n\tTransform
-        'mixamorig:Neck'\n\tTransform 'mixamorig:Spine'\n\tTransform 'mixamorig:Head'\n\tTransform
-        'mixamorig:Hips'\n\tTransform 'mixamorig:Neck'\n\tTransform 'mixamorig:Spine'\n\tTransform
-        'mixamorig:Head'\n\tTransform 'mixamorig:Hips'\n\tand more ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: cb93de557fbd16a47a32e80559ecd137, type: 3}
       propertyPath: m_ApplyRootMotion

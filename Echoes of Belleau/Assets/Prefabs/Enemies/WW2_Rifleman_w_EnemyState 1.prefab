@@ -976,14 +976,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoldierEnemyController
   patrolSpeed: 2
-  combatMoveSpeed: 3.5
+  combatMoveSpeed: 4
   stoppingDistance: 0.2
-  homePoint: {fileID: 0}
   patrolRadius: 8
   minIdleTime: 1.5
   maxIdleTime: 4
-  target: {fileID: 0}
-  attackRange: 12
+  playerTag: Player
+  attackRange: 20
   viewDistance: 20
   viewAngle: 60
   eyePoint: {fileID: 4944762593757848933}
@@ -993,14 +992,18 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
-  coverSearchRadius: 12
+  coverSearchRadius: 25
   fireRate: 0.75
-  lostTargetReturnDelay: 3
+  lostTargetReturnDelay: 2
   firePoint: {fileID: 8804837584987508505}
   bulletPrefab: {fileID: 6358852641723730384, guid: ecdb4da60df48b04eacf35b263dce792, type: 3}
   bulletSpeed: 25
-  maxHealth: 100
-  currentHealth: 100
+  audioSource: {fileID: 0}
+  hitSound: {fileID: 0}
+  hitStutterTime: 0.25
+  alertDurationAfterHit: 3
+  maxHealth: 15
+  currentHealth: 15
   destroyOnDeath: 1
 --- !u!95 &6954008999541239874
 Animator:
