@@ -422,7 +422,7 @@ public class gameManager : MonoBehaviour
         ammoMaxText.text = maxAmmo.ToString();
     }
 
-    public void updateGrenadeAmount(int currentGrenade)
+    public void updateGrenadeAmount(int currentGrenade, int maxGrenade)
     {
         grenadeAmountText.text = currentGrenade.ToString();
     }
