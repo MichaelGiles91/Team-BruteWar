@@ -29,6 +29,10 @@ public class gunStats : ScriptableObject
     public AudioClip[] reloadSound;
     [Range(0, 1)] public float reloadSoundVol;
     public float reloadTime;
+    public AudioClip[] emptyShotSound;
+    [Range(0, 1)] public float emptyShotSoundVol;
+    public AudioClip[] equipSound;
+    [Range(0, 1)] public float equipSoundVol;
 
     [Header("--- Recoil / Spread ---")]
     public float sprayAmount = 0.02f;

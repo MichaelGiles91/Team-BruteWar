@@ -30,9 +30,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 11e0124787e757649af69e2850fb1b44, type: 3}
   shootSoundVol: 0.405
   reloadSound:
-  - {fileID: 8300000, guid: ca597b3b797d74d4db1e59e979b8c652, type: 3}
+  - {fileID: 8300000, guid: c541f4328913b834580bbc050dbf1d9b, type: 3}
+  - {fileID: 8300000, guid: 408f167b9c2d34a4584d6de3c1f5a77a, type: 3}
   reloadSoundVol: 0.604
   reloadTime: 2
+  emptyShotSound: []
+  emptyShotSoundVol: 0
+  equipSound: []
+  equipSoundVol: 0
   sprayAmount: 0.025
   verticalRecoil: 0.45
   horizontalRecoil: 0.35
