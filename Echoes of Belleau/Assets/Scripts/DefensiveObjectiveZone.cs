@@ -25,8 +25,6 @@ public class DefenseObjectiveZone : MonoBehaviour
         box.isTrigger = true;
 
         defense = GetComponentInParent<DefenseManager>();
-        if (defense == null)
-            Debug.LogError("No DefenseManager found in parent.");
     }
 
     void OnTriggerEnter(Collider other)

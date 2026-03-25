@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Controls the boss tank behavior, weapons, health and phase transitions.
@@ -393,6 +394,7 @@ public class TankBossController : MonoBehaviour, IDamage
     {
         currentPhase = TankPhase.Dead;
         stateMachine.ChangeState(DeadState);
+        gameManager.instance.LoadSceneWithFade("Outro Scene (placeholder)");
     }
 
     #endregion
