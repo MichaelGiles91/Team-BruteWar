@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VectorGraphics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class wave
@@ -32,7 +34,7 @@ public class DefenseManager : MonoBehaviour
     bool defenseComplete;
     int currentWave;
 
-    HashSet<EnemyAI> trackedEnemies = new HashSet<EnemyAI>();
+    HashSet<SoldierEnemyController> trackedEnemies = new HashSet<SoldierEnemyController>();
 
     public System.Action OnDefenseStateChanged;
 
@@ -40,6 +42,8 @@ public class DefenseManager : MonoBehaviour
     public bool FinalWaveSpawned => finalWaveSpawned;
 
     public int AliveEnemyCount => trackedEnemies.Count;
+
+    string sceneName;
 
     public static DefenseManager instance;
 
@@ -50,7 +54,7 @@ public class DefenseManager : MonoBehaviour
 
     void Start()
     {
-        
+      sceneName = SceneManager.GetActiveScene().name;
     }
 
     void OnTriggerEnter(Collider other)
@@ -126,7 +130,6 @@ public class DefenseManager : MonoBehaviour
     {
         if (prefab == null || spawnPoints.Length == 0)
         {
-            Debug.LogWarning("[DefenseManager] Missing prefab or spawn points.");
             return;
         }
 
@@ -141,19 +144,23 @@ public class DefenseManager : MonoBehaviour
         GameObject go = Instantiate(prefab, spawnPOS, point.rotation);
 
 
-        EnemyAI enemy = go.GetComponentInParent<EnemyAI>();
+        SoldierEnemyController enemy = go.GetComponentInParent<SoldierEnemyController>();
         if (enemy == null)
-            enemy = go.GetComponent<EnemyAI>();
+            enemy = go.GetComponent<SoldierEnemyController>();
 
-        if (enemy != null && trackedEnemies.Add(enemy))
+        if (enemy != null)
         {
-            enemy.OnDied += HandleEnemyDied;
-        } 
+            enemy.SetHomePoint(point);
+            if (trackedEnemies.Add(enemy))
+            {
+                enemy.OnDied += HandleEnemyDied;
+            }
+        }
 
-        OnDefenseStateChanged?.Invoke();
+            OnDefenseStateChanged?.Invoke();
     }
 
-    void HandleEnemyDied(EnemyAI deadEnemy)
+    void HandleEnemyDied(SoldierEnemyController deadEnemy)
     {
         if (deadEnemy == null) return;
 
@@ -168,8 +175,15 @@ public class DefenseManager : MonoBehaviour
         defenseActive = false;
         defenseComplete = true;
 
-        if (gameManager.instance != null)
+        if (gameManager.instance != null && sceneName == "Scene1")
+        {
             gameManager.instance.LoadSceneWithFade("Between Levels Cutscene");
+        }
+        else if(gameManager.instance != null && sceneName == "Level 2")
+        {
+            return;
+        }
+           
     }
 
     void OnDestroy()
