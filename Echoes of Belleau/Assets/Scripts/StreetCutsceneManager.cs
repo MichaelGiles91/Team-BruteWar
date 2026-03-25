@@ -31,9 +31,6 @@ public class StreetCutsceneManager : MonoBehaviour
     [SerializeField] GameObject destroyedHouseStreet;
     [SerializeField] GameObject destroyedHouseCorner;
 
-    [Header("--- Tank End State ---")]
-    [SerializeField] Transform tankRoot;
-    [SerializeField] Transform tankEndPoint;
 
     bool hasPlayed;
 
@@ -94,12 +91,6 @@ public class StreetCutsceneManager : MonoBehaviour
 
         if (gameplayCamera != null)
             gameplayCamera.gameObject.SetActive(true);
-
-        if (tankRoot != null && tankEndPoint != null)
-        {
-            tankRoot.position = tankEndPoint.position;
-            tankRoot.rotation = tankEndPoint.rotation;
-        }
 
         if (houseCorner != null) houseCorner.SetActive(false);
         if (houseStreet != null) houseStreet.SetActive(false);
