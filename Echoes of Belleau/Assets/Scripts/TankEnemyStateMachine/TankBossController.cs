@@ -345,7 +345,7 @@ public class TankBossController : MonoBehaviour, IDamage
     {
         if (onlyTakeRocketDamage)
         {
-            Debug.Log(name + " ignored non-rocket damage.");
+
             return;
         }
 
@@ -363,7 +363,6 @@ public class TankBossController : MonoBehaviour, IDamage
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
 
-        Debug.Log(name + " tank took damage. Current Health: " + currentHealth);
 
         if (currentHealth <= 0f)
         {

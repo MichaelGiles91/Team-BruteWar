@@ -16,8 +16,6 @@ public class DefenseSpawningState : DefenseState
         currentEntryIndex = 0;
         spawnedFromCurrentEntry = 0;
         spawnTimer = 0f;
-
-        Debug.Log("Spawning " + manager.CurrentWave.waveName);
     }
 
     public override void Update()
