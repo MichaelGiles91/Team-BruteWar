@@ -109,9 +109,9 @@ public class TankBossController : MonoBehaviour, IDamage
         if (stateMachine == null)
             return;
 
-        if (currentPhase == TankPhase.Phase1Patrol)
+        if (currentPhase == TankPhase.Dead)
         {
-            stateMachine.Initialize(PatrolState);
+            stateMachine.Initialize(DeadState);
         }
         else
         {
@@ -134,16 +134,16 @@ public class TankBossController : MonoBehaviour, IDamage
         Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (currentPhase != TankPhase.Phase1Patrol)
-            return;
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (currentPhase != TankPhase.Phase1Patrol)
+    //        return;
 
-        if (!other.CompareTag("Player"))
-            return;
+    //    if (!other.CompareTag("Player"))
+    //        return;
 
-        SetPhase2();
-    }
+    //    SetPhase2();
+    //}
 
     #endregion
 
@@ -378,10 +378,13 @@ public class TankBossController : MonoBehaviour, IDamage
     {
         if (currentPhase == TankPhase.Dead) return;
 
+        if (currentPhase == TankPhase.Phase1Patrol)
+        {
+            SetPhase2();
+        }
+
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
-
-        Debug.Log(name + " tank took ROCKET damage. Current Health: " + currentHealth);
 
         if (currentHealth <= 0f)
         {

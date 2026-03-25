@@ -52,8 +52,20 @@ public class DefenseSpawningState : DefenseState
         GameObject spawnedEnemy = Object.Instantiate(
             entry.enemyPrefab,
             entry.spawnPoint.position,
-            entry.spawnPoint.rotation
-        );
+            entry.spawnPoint.rotation);
+
+        // Set home point automatically
+        SoldierEnemyController soldier = spawnedEnemy.GetComponent<SoldierEnemyController>();
+        if (soldier != null)
+        {
+            soldier.SetHomePoint(entry.spawnPoint);
+        }
+
+        MedicEnemyController medic = spawnedEnemy.GetComponent<MedicEnemyController>();
+        if (medic != null)
+        {
+            medic.SetHomePoint(entry.spawnPoint);
+        }
 
         manager.RegisterSpawnedEnemy(spawnedEnemy);
         spawnedFromCurrentEntry++;

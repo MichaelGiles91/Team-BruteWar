@@ -1,8 +1,5 @@
 using UnityEngine;
 
-// Chase behaviour for the Tank boss.
-// Pursues the target, orients toward it and fires both machine gun and cannon
-// at their configured rates while the target is within detection range.
 public class TankChaseState : TankState
 {
     private float machineGunTimer;
@@ -24,29 +21,51 @@ public class TankChaseState : TankState
         if (tank.target == null)
             return;
 
-        tank.MoveTowards(tank.target.position, tank.chaseSpeed);
+        // Always face the player in both phases
         tank.FaceTarget();
 
-        if (tank.IsTargetInRange(tank.detectionRange))
+        // PHASE 1:
+        // Track the player and use machine gun only.
+        // Do NOT chase.
+        if (tank.currentPhase == TankBossController.TankPhase.Phase1Patrol)
         {
-            cannonTimer -= Time.deltaTime;
+            tank.StopMoving();
 
-            if (!tank.IsReloadingMachineGun())
+            if (tank.IsTargetInRange(tank.detectionRange))
             {
-                machineGunTimer -= Time.deltaTime;
-
-                if (machineGunTimer <= 0f)
+                if (!tank.IsReloadingMachineGun())
                 {
-                    tank.FireMachineGun();
-                    machineGunTimer = tank.machineGunFireRate;
+                    machineGunTimer -= Time.deltaTime;
+
+                    if (machineGunTimer <= 0f)
+                    {
+                        tank.FireMachineGun();
+                        machineGunTimer = tank.machineGunFireRate;
+                    }
                 }
             }
 
-            if (cannonTimer <= 0f)
+            return;
+        }
+
+        // PHASE 2:
+        // Chase the player and use cannon only.
+        if (tank.currentPhase == TankBossController.TankPhase.Phase2BossFight)
+        {
+            tank.MoveTowards(tank.target.position, tank.chaseSpeed);
+
+            if (tank.IsTargetInRange(tank.detectionRange))
             {
-                tank.FireCannon();
-                cannonTimer = tank.cannonFireRate;
+                cannonTimer -= Time.deltaTime;
+
+                if (cannonTimer <= 0f)
+                {
+                    tank.FireCannon();
+                    cannonTimer = tank.cannonFireRate;
+                }
             }
+
+            return;
         }
     }
 
