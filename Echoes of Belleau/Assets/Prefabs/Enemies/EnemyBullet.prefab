@@ -52,7 +52,7 @@ MonoBehaviour:
   damageRate: 1
   speed: 50
   destroyTime: 5
-  hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
+  hitEffect: {fileID: 0}
   rb: {fileID: 5120107308887036419}
   fuseTime: 2.5
   explosionRadius: 4
@@ -61,7 +61,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   explosionEffect: {fileID: 0}
   onlyDamageWhileMoving: 0
-  slowMult: 0.5
+  slowMult: 1
 --- !u!96 &2841956943283092524
 TrailRenderer:
   serializedVersion: 4
