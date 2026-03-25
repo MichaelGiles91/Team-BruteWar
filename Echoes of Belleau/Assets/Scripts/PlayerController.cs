@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] int medkitCount;
     [SerializeField] int medkitHealAmount = 25;
     int medkitCountOrig;
+    [SerializeField] float emptyShotCooldown = 3f;
+    float emptyShotTimer;
 
     public int AmmoCount => ammoCount;
     public int GrenadeCount => grenadeMax;
@@ -270,6 +272,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         UpdateCrosshair();
         gameManager.instance.updateCompass(transform.eulerAngles.y);
         grenadeTimer += Time.deltaTime;
+        emptyShotTimer += Time.deltaTime;
         UpdateLowHealthIndicator();
         if (Input.GetButtonDown("ThrowGrenade"))
         {
@@ -418,14 +421,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
-        if (ammoCount <= 0 && (devilDogMode == null || !devilDogMode.isActive)) 
+        if (ammoCount <= 0 && (devilDogMode == null || !devilDogMode.isActive))
         {
-            if (gunList[gunListPos].emptyShotSound != null && gunList[gunListPos].emptyShotSound.Length > 0)
+            if (emptyShotTimer >= emptyShotCooldown)
             {
-                AudioClip clip = gunList[gunListPos].emptyShotSound[Random.Range(0, gunList[gunListPos].emptyShotSound.Length)];
-                aud.PlayOneShot(clip, gunList[gunListPos].emptyShotSoundVol);
+                emptyShotTimer = 0f;
+
+                if (gunList[gunListPos].emptyShotSound != null && gunList[gunListPos].emptyShotSound.Length > 0)
+                {
+                    AudioClip clip = gunList[gunListPos].emptyShotSound[Random.Range(0, gunList[gunListPos].emptyShotSound.Length)];
+                    aud.PlayOneShot(clip, gunList[gunListPos].emptyShotSoundVol);
+                }
             }
-            return; 
+
+            return;
         }
 
         gameManager.instance.TriggerCombat();
@@ -544,13 +553,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         int magSize = ammoCountOrig;
         if (ammoCount >= magSize) return;
         if (ammoMax <= 0) return;
-
+        
         StartCoroutine(ReloadWait(gunList[gunListPos].reloadTime));
     }
 
     IEnumerator ReloadWait(float reloadTime)
     {
         isReloading = true;
+        canShoot = false;
 
         if (gunList[gunListPos].reloadSound != null && gunList[gunListPos].reloadSound.Length > 0)
         {
@@ -571,6 +581,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
 
         isReloading = false;
+        canShoot = true;
     }
 
     IEnumerator flashScreen()
