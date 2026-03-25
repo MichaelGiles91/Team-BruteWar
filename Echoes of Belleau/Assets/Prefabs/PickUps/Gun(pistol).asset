@@ -27,17 +27,30 @@ MonoBehaviour:
   hitEffect: {fileID: 970440554703164915, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
   muzzleFlash: {fileID: 19800006, guid: f47cb9d88f4bc6c4bb7441e962c2c1a5, type: 3}
   shootSound:
-  - {fileID: 8300000, guid: 11e0124787e757649af69e2850fb1b44, type: 3}
+  - {fileID: 8300000, guid: 2ce6b6029ea23ba4eb95466f99e90262, type: 3}
+  - {fileID: 8300000, guid: 372576c5ee5644140a751525246652c5, type: 3}
+  - {fileID: 8300000, guid: fef86648088c32a409816e499398defd, type: 3}
+  - {fileID: 8300000, guid: 838a4dca24e46834086e48f75fcb842f, type: 3}
+  - {fileID: 8300000, guid: cc418afd4dcbec145a54746986e4335e, type: 3}
   shootSoundVol: 0.405
   reloadSound:
   - {fileID: 8300000, guid: c541f4328913b834580bbc050dbf1d9b, type: 3}
   - {fileID: 8300000, guid: 408f167b9c2d34a4584d6de3c1f5a77a, type: 3}
   reloadSoundVol: 0.604
-  reloadTime: 2
-  emptyShotSound: []
-  emptyShotSoundVol: 0
-  equipSound: []
-  equipSoundVol: 0
+  reloadTime: 2.5
+  emptyShotSound:
+  - {fileID: 8300000, guid: cf36d1e411b6fd64dbe7f1afa26d1d61, type: 3}
+  - {fileID: 8300000, guid: 793052e5d75cef44fa3f733fb255b50d, type: 3}
+  - {fileID: 8300000, guid: 2ac6edb1406cfb94489d6b0a9d5aa472, type: 3}
+  emptyShotSoundVol: 0.5
+  equipSound:
+  - {fileID: 8300000, guid: 01d437659278476459174bb20f9a2c45, type: 3}
+  - {fileID: 8300000, guid: 387a2312d3e8c8946bfc3adab99fd959, type: 3}
+  - {fileID: 8300000, guid: a4c6093668e08c242a01ed3d9ac90d7d, type: 3}
+  - {fileID: 8300000, guid: 55332f61eebb402489bf7a55edf41dea, type: 3}
+  - {fileID: 8300000, guid: 903f159a45699b341893372368f1020e, type: 3}
+  - {fileID: 8300000, guid: 150ccb3a515bc474c83270ad4a2633d2, type: 3}
+  equipSoundVol: 0.54
   sprayAmount: 0.025
   verticalRecoil: 0.45
   horizontalRecoil: 0.35
