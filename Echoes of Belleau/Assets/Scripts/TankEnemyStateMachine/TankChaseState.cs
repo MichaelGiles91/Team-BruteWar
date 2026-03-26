@@ -24,13 +24,14 @@ public class TankChaseState : TankState
         if (tank.target == null)
             return;
 
+        if (tank.currentPhase != TankBossController.TankPhase.Phase2BossFight)
+            return;
+
         tank.MoveTowards(tank.target.position, tank.chaseSpeed);
         tank.FaceTarget();
 
         if (tank.IsTargetInRange(tank.detectionRange))
         {
-            cannonTimer -= Time.deltaTime;
-
             if (!tank.IsReloadingMachineGun())
             {
                 machineGunTimer -= Time.deltaTime;
@@ -41,6 +42,8 @@ public class TankChaseState : TankState
                     machineGunTimer = tank.machineGunFireRate;
                 }
             }
+
+            cannonTimer -= Time.deltaTime;
 
             if (cannonTimer <= 0f)
             {

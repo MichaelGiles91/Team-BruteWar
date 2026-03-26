@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Controls the boss tank behavior, weapons, health and phase transitions.
@@ -36,6 +36,7 @@ public class TankBossController : MonoBehaviour, IDamage
     public int currentPatrolIndex = 0;
 
     [Header("Target")]
+    public string playerTag = "Player";
     public Transform target;
     public float detectionRange = 30f;
 
@@ -88,7 +89,6 @@ public class TankBossController : MonoBehaviour, IDamage
 
         if (agent == null)
         {
-            Debug.LogError("TankBossController requires a NavMeshAgent on " + gameObject.name);
             enabled = false;
             return;
         }
@@ -107,16 +107,25 @@ public class TankBossController : MonoBehaviour, IDamage
         isReloadingMachineGun = false;
         reloadTimer = 0f;
 
+        FindPlayerTarget();
+
         if (stateMachine == null)
+        {   
+            enabled = false;
             return;
+        }
 
         if (currentPhase == TankPhase.Phase1Patrol)
         {
             stateMachine.Initialize(PatrolState);
         }
-        else
+        else if (currentPhase == TankPhase.Phase2BossFight)
         {
             stateMachine.Initialize(ChaseState);
+        }
+        else
+        {
+            stateMachine.Initialize(DeadState);
         }
     }
 
@@ -124,6 +133,17 @@ public class TankBossController : MonoBehaviour, IDamage
     {
         if (currentPhase == TankPhase.Dead)
             return;
+
+        if (target == null)
+        {
+            FindPlayerTarget();
+        }
+
+        if (stateMachine == null)
+        {
+            enabled = false;
+            return;
+        }
 
         UpdateMachineGunReload();
         stateMachine.Update();
@@ -135,16 +155,6 @@ public class TankBossController : MonoBehaviour, IDamage
         Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (currentPhase != TankPhase.Phase1Patrol)
-            return;
-
-        if (!other.CompareTag("Player"))
-            return;
-
-        SetPhase2();
-    }
 
     #endregion
 
@@ -248,17 +258,27 @@ public class TankBossController : MonoBehaviour, IDamage
     public void FireMachineGun()
     {
         if (isReloadingMachineGun)
+        {
             return;
-
+        }
         if (currentMachineGunAmmo <= 0)
         {
             StartReloadMachineGun();
             return;
         }
 
-        if (target == null || machineGunBulletPrefab == null || machineGunFirePoint == null)
+        if (target == null )
+        {
             return;
-
+        }
+        if (machineGunBulletPrefab == null)
+        {
+            return;
+        }
+        if (machineGunFirePoint == null)
+        {
+            return;
+        }
         Vector3 aimPoint = target.position + Vector3.up * 1.2f;
         Vector3 shotDirection = (aimPoint - machineGunFirePoint.position).normalized;
 
@@ -311,7 +331,6 @@ public class TankBossController : MonoBehaviour, IDamage
 
         isReloadingMachineGun = true;
         reloadTimer = machineGunReloadTime;
-        Debug.Log(name + " is reloading machine gun...");
     }
 
     public void UpdateMachineGunReload()
@@ -325,7 +344,6 @@ public class TankBossController : MonoBehaviour, IDamage
         {
             isReloadingMachineGun = false;
             currentMachineGunAmmo = machineGunMagazineSize;
-            Debug.Log(name + " finished reloading machine gun.");
         }
     }
 
@@ -346,7 +364,6 @@ public class TankBossController : MonoBehaviour, IDamage
     {
         if (onlyTakeRocketDamage)
         {
-            Debug.Log(name + " ignored non-rocket damage.");
             return;
         }
 
@@ -364,8 +381,6 @@ public class TankBossController : MonoBehaviour, IDamage
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
 
-        Debug.Log(name + " tank took damage. Current Health: " + currentHealth);
-
         if (currentHealth <= 0f)
         {
             Die();
@@ -373,16 +388,20 @@ public class TankBossController : MonoBehaviour, IDamage
     }
 
     /// <summary>
-    /// Rocket-only damage entry. Call this from your rocket launcher/projectile.
+    /// Rocket-only damage entry.
     /// </summary>
     public void ApplyRocketDamage(float amount)
     {
         if (currentPhase == TankPhase.Dead) return;
 
+        if (currentPhase == TankPhase.Phase1Patrol)
+        {
+            SetPhase2();
+        }
+
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
 
-        Debug.Log(name + " tank took ROCKET damage. Current Health: " + currentHealth);
 
         if (currentHealth <= 0f)
         {
@@ -394,7 +413,21 @@ public class TankBossController : MonoBehaviour, IDamage
     {
         currentPhase = TankPhase.Dead;
         stateMachine.ChangeState(DeadState);
-        gameManager.instance.LoadSceneWithFade("Outro Scene (placeholder)");
+        //if (gameManager.instance != null)
+        //{
+        //    gameManager.instance.LoadSceneWithFade("Outro Scene (placeholder)");
+        //}
+    }
+    private void FindPlayerTarget()
+    {
+        if (target != null)
+            return;
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            target = playerObject.transform;
+        }
     }
 
     #endregion
