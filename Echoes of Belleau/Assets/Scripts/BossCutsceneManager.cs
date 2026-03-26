@@ -21,9 +21,9 @@ public class BossCutsceneManager : MonoBehaviour
     [Header("--- Teleport ---")]
     [SerializeField] Transform bossArenaSpawnPoint;
 
-    [Header("--- Tank End Position ---")]
-    [SerializeField] Transform tankEndPoint;
-    [SerializeField] Transform tank;
+    //[Header("--- Tank End Position ---")]
+    //[SerializeField] Transform tankEndPoint;
+    //[SerializeField] Transform tank;
 
     [Header("--- Fade ---")]
     [SerializeField] ScreenFader fader;
@@ -34,6 +34,9 @@ public class BossCutsceneManager : MonoBehaviour
 
     [Header("--- Scripts To Enable At End ---")]
     [SerializeField] MonoBehaviour[] scriptsToEnableAtEnd;
+
+    [Header("--- Stuff to Enable At End ---")]
+    [SerializeField] GameObject gas;
 
     bool hasPlayed;
     bool isPlaying;
@@ -83,6 +86,8 @@ public class BossCutsceneManager : MonoBehaviour
                 script.enabled = false;
         }
 
+        if (gas != null) gas.SetActive(true);
+
         if (gameplayCamera != null)
             gameplayCamera.gameObject.SetActive(false);
 
@@ -110,11 +115,11 @@ public class BossCutsceneManager : MonoBehaviour
         if (fader != null)
             yield return StartCoroutine(fader.FadeOut());
 
-        if (tank != null && tankEndPoint != null)
-        {
-            tank.position = tankEndPoint.position;
-            tank.rotation = tankEndPoint.rotation;
-        }
+        //if (tank != null && tankEndPoint != null)
+        //{
+        //    tank.position = tankEndPoint.position;
+        //    tank.rotation = tankEndPoint.rotation;
+        //}
 
         TeleportPlayer();
 

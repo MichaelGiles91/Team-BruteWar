@@ -263,16 +263,6 @@ public class gameManager : MonoBehaviour
         if (!isPaused)
             UpdateCombatState();
 
-        if (Input.GetKeyDown(KeyCode.F9))
-        {
-            ResetTutorial("Keybinds");
-            ResetTutorial("MedKitPickup");
-            ResetTutorial("AmmoPickup");
-            ResetTutorial("StressSystem");
-            ResetTutorial("DevilDog");
-            Debug.Log("Tutorials reset");
-        }
-
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)

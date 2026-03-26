@@ -15896,15 +15896,15 @@ PrefabInstance:
     - target: {fileID: 5504092729805549947, guid: b35f1613dc604634480a4019d51ff9f3, type: 3}
       propertyPath: enemyPrefabBase
       value: 
-      objectReference: {fileID: 1234985417220284030, guid: 12f347cd681a82d4e9a55d61990e7ac9, type: 3}
+      objectReference: {fileID: 1770789439013535220, guid: 799afe618ba25a343a438d742ea049d6, type: 3}
     - target: {fileID: 5504092729805549947, guid: b35f1613dc604634480a4019d51ff9f3, type: 3}
       propertyPath: enemyPrefabBoss
       value: 
-      objectReference: {fileID: 8532865070141830019, guid: b2841677eeca3ce4fad13ff92fe710d6, type: 3}
+      objectReference: {fileID: 6278585017477512601, guid: 440290420b629d54284ca8a4a854fd66, type: 3}
     - target: {fileID: 5504092729805549947, guid: b35f1613dc604634480a4019d51ff9f3, type: 3}
       propertyPath: enemyPrefabMedium
       value: 
-      objectReference: {fileID: 4346935493750321177, guid: 16a3039b9ad52d245b220028ebc0fb23, type: 3}
+      objectReference: {fileID: 958671011603898193, guid: 420200afd7914f442bf8118d2740fda8, type: 3}
     - target: {fileID: 7353185358933726583, guid: b35f1613dc604634480a4019d51ff9f3, type: 3}
       propertyPath: m_Name
       value: Defense Zone
@@ -16224,6 +16224,10 @@ PrefabInstance:
       propertyPath: crosshairBottom
       value: 
       objectReference: {fileID: 7936738975092738298}
+    - target: {fileID: 4968571958712105313, guid: eb75c3843b90695418699be5f8843015, type: 3}
+      propertyPath: emptyAmmoClipIndicator
+      value: 
+      objectReference: {fileID: 7936738975092738300}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16247,6 +16251,11 @@ RectTransform:
 --- !u!224 &7936738975092738299 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3562364683551292743, guid: eb75c3843b90695418699be5f8843015, type: 3}
+  m_PrefabInstance: {fileID: 7936738975092738295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7936738975092738300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5933993062852791068, guid: eb75c3843b90695418699be5f8843015, type: 3}
   m_PrefabInstance: {fileID: 7936738975092738295}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8295179523351415796
