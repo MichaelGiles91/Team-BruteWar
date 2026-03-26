@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     int ammoCountOrig;
 
     [SerializeField] int grenadeCount;
-    [SerializeField] int grenadeMax;
     int grenadeCountOrig;
 
     [SerializeField] int medkitCount;
@@ -38,7 +37,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     int medkitCountOrig;
 
     public int AmmoCount => ammoCount;
-    public int GrenadeCount => grenadeMax;
     public int MedkitCount => medkitCount;
 
     [Header("--- Low Health Indicator ---")]
@@ -205,7 +203,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
         grenadeCountOrig = grenadeCount;
         grenadeTimer = grenadeCooldown;
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
         medkitCountOrig = medkitCount;
         gameManager.instance.updateMedkitAmount(medkitCount);
         gameManager.instance.UpdateWeaponIcon(null);
@@ -711,7 +709,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void getGrenade(int amount)
     {
         grenadeCount += amount;
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
     }
 
     public void getMedkit(int amount)
@@ -802,7 +800,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         grenadeCount++;
         ammoMax = gunList[gunListPos].ammoMax;
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
     }
 
     void changeGun()
@@ -1062,7 +1060,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         }
         heldGrenade = null;
 
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
         UpdatePlayerUI();
 
         currentGunInstance.SetActive(true);
@@ -1167,7 +1165,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void SetGrenades(int grenades)
     {
         grenadeCount = grenades;
-        gameManager.instance.updateGrenadeAmount(grenadeCount, grenadeMax);
+        gameManager.instance.updateGrenadeAmount(grenadeCount);
     }
 
     bool CreateGunInstance(gunStats gun, out GameObject instance)
