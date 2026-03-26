@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-//using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Controls the boss tank behavior, weapons, health and phase transitions.
@@ -22,6 +22,8 @@ public class TankBossController : MonoBehaviour, IDamage
     #endregion
 
     #region Inspector Fields
+
+    public static TankBossController instance;
 
     [Header("Phase")]
     public TankPhase currentPhase = TankPhase.Phase1Patrol;
@@ -85,6 +87,8 @@ public class TankBossController : MonoBehaviour, IDamage
 
     private void Awake()
     {
+        instance = this;
+
         agent = GetComponent<NavMeshAgent>();
 
         if (agent == null)
@@ -413,10 +417,10 @@ public class TankBossController : MonoBehaviour, IDamage
     {
         currentPhase = TankPhase.Dead;
         stateMachine.ChangeState(DeadState);
-        //if (gameManager.instance != null)
-        //{
-        //    gameManager.instance.LoadSceneWithFade("Outro Scene (placeholder)");
-        //}
+        if (gameManager.instance != null)
+        {
+            gameManager.instance.LoadSceneWithFade("Outro Scene (placeholder)");
+        }
     }
     private void FindPlayerTarget()
     {

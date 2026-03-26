@@ -1061,7 +1061,7 @@ MonoBehaviour:
   playerTag: Player
   attackRange: 20
   viewDistance: 20
-  viewAngle: 60.8
+  viewAngle: 90
   eyePoint: {fileID: 1173241698467443843}
   visionBlockers:
     serializedVersion: 2
