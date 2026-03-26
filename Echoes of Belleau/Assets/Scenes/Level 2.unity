@@ -60840,9 +60840,17 @@ PrefabInstance:
       value: UI 2 w_ resize
       objectReference: {fileID: 0}
     - target: {fileID: 4968571958712105313, guid: eb75c3843b90695418699be5f8843015, type: 3}
+      propertyPath: bossTank
+      value: 
+      objectReference: {fileID: 970040}
+    - target: {fileID: 4968571958712105313, guid: eb75c3843b90695418699be5f8843015, type: 3}
       propertyPath: mapStuff
       value: 
       objectReference: {fileID: 1441051688}
+    - target: {fileID: 4968571958712105313, guid: eb75c3843b90695418699be5f8843015, type: 3}
+      propertyPath: streetTank
+      value: 
+      objectReference: {fileID: 970040}
     - target: {fileID: 4968571958712105313, guid: eb75c3843b90695418699be5f8843015, type: 3}
       propertyPath: crosshairTop
       value: 
@@ -60859,6 +60867,22 @@ PrefabInstance:
       propertyPath: crosshairBottom
       value: 
       objectReference: {fileID: 1403380595}
+    - target: {fileID: 4968571958712105313, guid: eb75c3843b90695418699be5f8843015, type: 3}
+      propertyPath: bossCutsceneManager
+      value: 
+      objectReference: {fileID: 1290583735}
+    - target: {fileID: 4968571958712105313, guid: eb75c3843b90695418699be5f8843015, type: 3}
+      propertyPath: bossCutsceneTrigger
+      value: 
+      objectReference: {fileID: 730260304}
+    - target: {fileID: 4968571958712105313, guid: eb75c3843b90695418699be5f8843015, type: 3}
+      propertyPath: streetCutsceneManager
+      value: 
+      objectReference: {fileID: 1949599449}
+    - target: {fileID: 4968571958712105313, guid: eb75c3843b90695418699be5f8843015, type: 3}
+      propertyPath: streetCutsceneTrigger
+      value: 
+      objectReference: {fileID: 1224835911}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
