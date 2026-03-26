@@ -112,6 +112,7 @@ public class gameManager : MonoBehaviour
     public Image playerHPBar;
     public GameObject playerDamageFlash;
     public Image lowHealthIndicator;
+    public GameObject emptyAmmoClipIndicator;
     public Image playerStaminaBar;
     public Image devilDogBarFill;
     [SerializeField] GameObject map;
