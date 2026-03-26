@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BruteWarSplash scene.unity
     guid: d7419a9aaab2fb248af656abd1e621e0
   - enabled: 1
@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 4680a1a453144fe4080ba7d43040ac2d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Showcase.unity
     guid: f985132176a2e7d43a5be9996e893733
   m_configObjects:

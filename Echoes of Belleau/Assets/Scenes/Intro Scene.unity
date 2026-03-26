@@ -1584,74 +1584,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3f6291f69f061479fb9a06a20122b7, type: 3}
---- !u!1 &565035490
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 565035492}
-  - component: {fileID: 565035491}
-  m_Layer: 0
-  m_Name: Intro Title Video
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!328 &565035491
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565035490}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: f9041bfafe76555499d5a400cdfd8708, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 1667691393}
-  m_TargetTexture: {fileID: 8400000, guid: fdb6a7f85bc608743a00aa96d4e516ca, type: 2}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 2
-  m_AspectRatio: 5
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
-  m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
---- !u!4 &565035492
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565035490}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75793, y: 2.06824, z: -4.22914}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &604649155 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b78c832ecb0cbbd4a9015dfddddc3ad6, type: 3}
@@ -2236,8 +2168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IntroController
   cutscene: {fileID: 821243463}
-  introVideo: {fileID: 565035491}
-  introVideoImage: {fileID: 904536385}
   fader: {fileID: 1545336310}
   gameplayScene: Scene1
 --- !u!1 &836860822
@@ -2489,18 +2419,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca002da428252441b92f28d83c8a65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.Shapes.ProBuilderShape
-  m_Shape:
-    rid: 3620628560787800064
   m_ShapeRotation: {x: 0, y: 0, z: 0, w: 1}
   m_UnmodifiedMeshVersion: 1851
   m_Size: {x: 1.33, y: 0, z: 1.25}
   m_LocalCenter: {x: 0, y: 0, z: 0}
-  references:
-    version: 2
-    RefIds:
-    - rid: 3620628560787800064
-      type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &892542415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15589,7 +15511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Esc To Skip...
+  m_text: Press P To Skip...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19164,7 +19086,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 565035492}
   - {fileID: 1545336314}
   - {fileID: 1667691394}
   - {fileID: 7057516004932664435}

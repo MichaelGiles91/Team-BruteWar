@@ -75,7 +75,7 @@ public class DevilDogMode : MonoBehaviour
             gameManager.instance.ShowTutorial(
                 "DevilDog", 
                 "Devil Dog Mode", 
-                "Devil Dog Mode is represented by the meter on the right side of the screen. Killing enemies and picking up fallen ally dog tags increases the meter. Once the meter is completely filled, press Q to gain short period of invulnerability and no ammo consumption. Press Esc to continue."
+                "Devil Dog Mode is represented by the meter on the right side of the screen. Killing enemies and picking up fallen ally dog tags increases the meter. Once the meter is completely filled, press Q to gain short period of invulnerability and no ammo consumption. Press P to continue."
                 );
         }
 

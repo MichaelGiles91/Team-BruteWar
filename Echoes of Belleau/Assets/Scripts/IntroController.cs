@@ -2,13 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
-using UnityEngine.Video;
 
 public class IntroController : MonoBehaviour
 {
     public PlayableDirector cutscene;
-    public VideoPlayer introVideo;
-    public GameObject introVideoImage;
     public ScreenFader fader;
     public string gameplayScene;
 
@@ -21,7 +18,7 @@ public class IntroController : MonoBehaviour
 
         MusicManager.instance.PlayMusic(MusicType.Cutscene, 0, .75f);
 
-        // Start by fading into the timeline cutscene
+        // Fade in to cutscene
         yield return StartCoroutine(fader.FadeIn());
 
         if (!isSkipping && cutscene != null)
@@ -29,54 +26,6 @@ public class IntroController : MonoBehaviour
 
         if (cutscene != null)
             yield return new WaitForSeconds((float)cutscene.duration);
-
-        if (isSkipping || isLoadingScene)
-            yield break;
-
-        // Fade to black before video
-        yield return StartCoroutine(fader.FadeOut());
-
-        if (isSkipping || isLoadingScene)
-            yield break;
-
-        // Show video layer
-        if (introVideoImage != null)
-            introVideoImage.SetActive(true);
-
-        // Prepare video first
-        if (introVideo != null)
-        {
-            introVideo.Prepare();
-            yield return new WaitUntil(() => introVideo.isPrepared);
-        }
-
-        if (isSkipping || isLoadingScene)
-            yield break;
-
-        // Play video
-        if (introVideo != null)
-            introVideo.Play();
-
-        // Wait one frame so first frame lands
-        yield return null;
-
-        if (isSkipping || isLoadingScene)
-            yield break;
-
-        // Reveal the video
-        yield return StartCoroutine(fader.FadeIn());
-
-        if (isSkipping || isLoadingScene)
-            yield break;
-
-        // Wait until video finishes
-        while (introVideo != null && introVideo.isPlaying)
-        {
-            if (isSkipping || isLoadingScene)
-                yield break;
-
-            yield return null;
-        }
 
         if (isSkipping || isLoadingScene)
             yield break;
@@ -104,7 +53,7 @@ public class IntroController : MonoBehaviour
         isSkipping = true;
         isLoadingScene = true;
 
-        // Instantly force black so no camera snap or video/frame flash is visible
+        // Force instant black to avoid visual pop
         if (fader != null && fader.fadeImage != null)
         {
             Color c = fader.fadeImage.color;
@@ -116,15 +65,6 @@ public class IntroController : MonoBehaviour
         if (cutscene != null)
             cutscene.Stop();
 
-        // Stop video if it is already active
-        if (introVideo != null)
-            introVideo.Stop();
-
-        // Optional: hide video layer
-        if (introVideoImage != null)
-            introVideoImage.SetActive(false);
-
-        // Wait one real frame so black is definitely shown before scene load
         yield return null;
 
         SceneManager.LoadScene(gameplayScene);

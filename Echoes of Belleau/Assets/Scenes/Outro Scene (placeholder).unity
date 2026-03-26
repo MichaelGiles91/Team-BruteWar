@@ -26357,7 +26357,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Esc to Skip...
+  m_text: Press P to Skip...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -34158,12 +34158,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'clavicle_r'\n\tTransform 'ring_02_l'\n\tTransform
-    'middle_01_r'\n\tTransform 'thumb_01_r'\n\tTransform 'ring_01_r'\n\tTransform
-    'root'\n\tTransform 'spine_04'\n\tTransform 'thumb_02_r'\n\tTransform 'upperarm_l'\n\tTransform
-    'pinky_metacarpal_l'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0

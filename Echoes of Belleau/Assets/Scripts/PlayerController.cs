@@ -728,7 +728,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         gameManager.instance.updateMedkitAmount(medkitCount);
         if (!gameManager.instance.HasShownTutorial("MedKitPickup"))
         {
-            gameManager.instance.ShowTutorial("MedKitPickup", "Medkits", "You will find Medkits scattered around the level. If you have one available, press H to use the Medkit and heal half your total health. Press Esc to continue.");
+            gameManager.instance.ShowTutorial("MedKitPickup", "Medkits", "You will find Medkits scattered around the level. If you have one available, press H to use the Medkit and heal half your total health. Press P to continue.");
         }
     }
 
@@ -796,7 +796,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
                 gameManager.instance.ShowTutorial(
                     "AmmoPickup"
                     ,"Ammo"
-                    ,"You will find Ammo Crates scattered around the level. When you walk up to these crates, it will automatically add one magazine worth of ammo to your currently equiped weapon's reserves and one grenade. Press Esc to continue."
+                    ,"You will find Ammo Crates scattered around the level. When you walk up to these crates, it will automatically add one magazine worth of ammo to your currently equiped weapon's reserves and one grenade. Press P to continue."
                     );
             }
 
@@ -1353,7 +1353,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         if (!gameManager.instance.HasShownTutorial("StressSystem"))
         {
-            gameManager.instance.ShowTutorial("StressSystem", "Stress System", "Taking damage increases stress. The higher your stress, the more blurry your vision gets and the more your accuracy is reduced. Press Esc to continue.");
+            gameManager.instance.ShowTutorial("StressSystem", "Stress System", "Taking damage increases stress. The higher your stress, the more blurry your vision gets and the more your accuracy is reduced. Press P to continue.");
         }
 
         stress = Mathf.Clamp(stress, 0f, maxStress);
