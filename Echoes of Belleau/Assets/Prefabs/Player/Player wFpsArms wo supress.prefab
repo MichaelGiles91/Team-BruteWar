@@ -803,6 +803,7 @@ MonoBehaviour:
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
+  player: {fileID: 0}
 --- !u!1 &3149001361705719404
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,11 +957,11 @@ Transform:
   m_GameObject: {fileID: 3698701863140888229}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8994491910353994925}
+  m_Father: {fileID: 8122186003367029040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3704917886290922144
 GameObject:
@@ -2797,7 +2798,6 @@ Transform:
   - {fileID: 2843125082751274313}
   - {fileID: 513061967526955083}
   - {fileID: 1267339380890165752}
-  - {fileID: 2083285800941978596}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6097986526888204363
@@ -2829,9 +2829,13 @@ MonoBehaviour:
   ammoCount: 35
   ammoMax: 0
   grenadeCount: 1
-  grenadeMax: 3
   medkitCount: 0
   medkitHealAmount: 50
+  emptyShotCooldown: 3
+  lowHealthThreshold: 25
+  pulseSpeed: 2.5
+  minAlpha: 0.2
+  maxAlpha: 0.7
   devilDogMode: {fileID: 0}
   stamina: 100
   staminaDrainRate: 10
@@ -2839,6 +2843,9 @@ MonoBehaviour:
   staminaJumpDrain: 25
   shakeAmount: 0.14
   shakeDuration: 0.14
+  maxRecoilPitch: 20
+  maxRecoilYaw: 6
+  crosshairReturnSpeed: 10
   stress: 0
   maxStress: 100
   stressRecoveryDelay: 3
@@ -2848,6 +2855,14 @@ MonoBehaviour:
   explosionStressAmount: 25
   maxSpreadStressPenalty: 0.15
   stressVolume: {fileID: 6069346689395878634}
+  coverMask:
+    serializedVersion: 2
+    m_Bits: 0
+  suppressionCheckPoint: {fileID: 0}
+  coverCheckHeightOffset: 1.2
+  coverStressRecoveryBonus: 18
+  suppressionGraceTime: 1.5
+  coverRayLength: 6
   weaponGripTarget: {fileID: 1923413059554943347}
   leftHandIKBinder: {fileID: 8769305006064299264}
   rigBuilder: {fileID: 9121955426812216187}
@@ -2863,6 +2878,7 @@ MonoBehaviour:
   grenadeThrowForce: 6
   grenadeUpForce: 2
   grenadePos: {fileID: 2083285800941978596}
+  grenadeThrowRate: 0
   animator: {fileID: 8199963273603075290}
 --- !u!114 &7378915965934929096
 MonoBehaviour:
@@ -3186,6 +3202,7 @@ Transform:
   m_Children:
   - {fileID: 1923413059554943347}
   - {fileID: 5548870311003443911}
+  - {fileID: 2083285800941978596}
   m_Father: {fileID: 7002578684610383690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8548930794190522434

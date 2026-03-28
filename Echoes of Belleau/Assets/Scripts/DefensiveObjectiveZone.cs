@@ -13,6 +13,9 @@ public class DefenseObjectiveZone : MonoBehaviour
     [TextArea][SerializeField] string nextObjectiveText;
     [SerializeField] float nextObjectiveDelay = 1f;
 
+    [Header("Invis Wall")]
+    [SerializeField] GameObject invisWall;
+
     DefenseManager defense;
     BoxCollider box;
 
@@ -76,6 +79,7 @@ public class DefenseObjectiveZone : MonoBehaviour
             gameManager.instance.updateObjEnemyCounter(0);
         }
 
+        invisWall.SetActive(false);
         StartCoroutine(ShowNextObjectiveAfterDelay());
     }
 

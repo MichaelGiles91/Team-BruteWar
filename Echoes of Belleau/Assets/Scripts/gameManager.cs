@@ -263,6 +263,15 @@ public class gameManager : MonoBehaviour
         if (!isPaused)
             UpdateCombatState();
 
+        if (Input.GetButtonDown("Debug Tut"))
+        {
+            ResetTutorial("MedKitPickup");
+            ResetTutorial("AmmoPickup");
+            ResetTutorial("StressSystem");
+            ResetTutorial("DevilDog");
+            ResetTutorial("Keybinds");
+        }
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
@@ -313,6 +322,8 @@ public class gameManager : MonoBehaviour
     {
         isPaused = true;
         playerScript.canShoot = false;
+        playerScript.canJump = false;
+        playerScript.canMelee = false;
 
         Time.timeScale = 0; // Set the time scale to 0 to pause the game
         Cursor.visible = true; // Make the cursor visible when the game is paused
@@ -323,6 +334,8 @@ public class gameManager : MonoBehaviour
     {
         isPaused = false;
         playerScript.canShoot = true;
+        playerScript.canJump = true;
+        playerScript.canMelee = true;
         Time.timeScale = timeScaleOrig; // Reset the time scale to its original value to unpause the game
         Cursor.visible = false; // Hide the cursor when the game is unpaused
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor when the game is unpaused

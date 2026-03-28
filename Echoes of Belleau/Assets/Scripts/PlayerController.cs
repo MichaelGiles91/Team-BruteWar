@@ -132,6 +132,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     bool wasAirborne;
     float lastYVelocity;
     bool isReloading;
+    public bool canJump;
 
 
     int gunListPos;
@@ -144,7 +145,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     public GameObject knife;
     [SerializeField] KnifeDamage GetKnifeDamage;
-    bool canMelee = true;
+    public bool canMelee = true;
 
     [Header("Grenade")]
     [SerializeField] GameObject grenadePrefab;
@@ -209,6 +210,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         medkitCountOrig = medkitCount;
         gameManager.instance.updateMedkitAmount(medkitCount);
         gameManager.instance.UpdateWeaponIcon(null);
+        canJump = true;
 
         for (int i = 0; i < gunList.Count; i++)
         {
@@ -355,7 +357,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     {
         if (Input.GetButtonDown("Jump"))
         {
-            if (jumpCount < jumpMax && stamina > staminaJumpDrain)
+            if (jumpCount < jumpMax && stamina > staminaJumpDrain && canJump)
             {
                 stamina -= staminaJumpDrain;
                 playerVel.y = jumpSpeed;
@@ -596,6 +598,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         SaveAmmoToGunStats();
         gameManager.instance.updateAmmoAmount(ammoCount, ammoMax);
         SFXManager.instance.PlayReload();
+        gameManager.instance.emptyAmmoClipIndicator.SetActive(false);
 
         isReloading = false;
         canShoot = true;
@@ -639,19 +642,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void UpdateEmptyAmmoClipIndicator()
     {
-        GameObject reloadPopup = gameManager.instance.emptyAmmoClipIndicator;
-
         if (AmmoCount <= 0)
         {
-            reloadPopup.gameObject.SetActive(true);
+            gameManager.instance.emptyAmmoClipIndicator.SetActive(true);
         }
-        else
-        {
-            if (Input.GetButtonDown("Reload"))
-            {
-                reloadPopup.gameObject.SetActive(false);
-            }  
-        }
+        
     }
 
     public void UpdatePlayerUI()
