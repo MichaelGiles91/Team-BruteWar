@@ -6,7 +6,7 @@ public class MainMenuController : MonoBehaviour
 {
     public static MainMenuController instance;
     [SerializeField] ScreenFader screenFader;
-    [SerializeField] bool DEBUG_QUICKLOAD_KEYS = true;
+    [SerializeField] bool DEBUG_QUICKLOAD_KEYS = false;
 
 
     private void Awake()
