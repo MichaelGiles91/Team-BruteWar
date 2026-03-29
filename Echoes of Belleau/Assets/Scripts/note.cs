@@ -14,6 +14,12 @@ public class note : MonoBehaviour
     bool playerInTrigger;
     bool used;
 
+    private void Start()
+    {
+        used = false;
+        button.SetActive(false);
+    }
+
     void Update()
     {
         if (Input.GetButtonDown("Interact") && playerInTrigger && !used)
@@ -42,6 +48,10 @@ public class note : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (used)
+        {
+            return;
+        }
         if (other.CompareTag("Player"))
         {
             playerInTrigger = true;
