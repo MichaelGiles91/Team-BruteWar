@@ -491,7 +491,7 @@ public class SoldierEnemyController : MonoBehaviour, IDamage
 
         if (destroyOnDeath)
         {
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 0f);
         }
         else
         {
