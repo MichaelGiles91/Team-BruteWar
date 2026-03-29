@@ -5558,8 +5558,8 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   hitStutterTime: 0.25
   alertDurationAfterHit: 3
-  maxHealth: 20
-  currentHealth: 20
+  maxHealth: 10
+  currentHealth: 10
   destroyOnDeath: 1
 --- !u!95 &8320247927910668552
 Animator:

@@ -22,32 +22,31 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     [Header("---Combat Stats---")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
+    [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
-    [SerializeField] float shootRate;
     [SerializeField] int ammoCount;
     [SerializeField] int ammoMax;
-    int ammoCountOrig;
-
-    [SerializeField] int grenadeCount;
-    int grenadeCountOrig;
-
+    
     [SerializeField] int medkitCount;
     [SerializeField] int medkitHealAmount = 25;
-    int medkitCountOrig;
     [SerializeField] float emptyShotCooldown = 3f;
-    float emptyShotTimer;
-
-    public int AmmoCount => ammoCount;
-    public int MedkitCount => medkitCount;
+    [SerializeField] KnifeDamage GetKnifeDamage;
+    
+    [Header("Grenade")]
+    [SerializeField] GameObject grenadePrefab;
+    [SerializeField] float grenadeCooldown;
+    [SerializeField] float grenadeThrowForce;
+    [SerializeField] float grenadeUpForce;
+    [SerializeField] Transform grenadePos;
+    [SerializeField] float grenadeThrowRate;
+    [SerializeField] int grenadeCount;
 
     [Header("--- Low Health Indicator ---")]
     [SerializeField] float lowHealthThreshold = 25f;
     [SerializeField] float pulseSpeed = 2.5f;
     [SerializeField] float minAlpha = 0.2f;
     [SerializeField] float maxAlpha = 0.7f;
-
-    bool lowHealthActive;
 
     [Header("---Devil Dog Mode")]
     [SerializeField] DevilDogMode devilDogMode;
@@ -67,14 +66,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] float maxRecoilYaw = 6f;
     [SerializeField] float crosshairReturnSpeed = 10f;
 
-    float recoilPitch;
-    float recoilYaw;
-    float targetRecoilPitch;
-    float targetRecoilYaw;
-
-    float currentCrosshairSpread;
-    float targetCrosshairSpread;
-
     [Header("---Stress Stats---")]
     [SerializeField] float stress;
     [SerializeField] float maxStress = 100f;
@@ -87,7 +78,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     [Header("---Stress Effects---")]
     [SerializeField] float maxSpreadStressPenalty = 0.15f;
-    //[SerializeField] float maxMoveAimPenalty = 0.1f;
     [SerializeField] Volume stressVolume;
 
     [Header("--- Suppression / Cover ---")]
@@ -97,12 +87,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] float coverStressRecoveryBonus = 18f;
     [SerializeField] float suppressionGraceTime = 1.5f;
     [SerializeField] float coverRayLength = 6f;
-
-    bool isUnderCover;
-    float suppressionTimer;
-
-    float stressSafeTimer;
-    public float StressPercent => stress / maxStress;
 
     [SerializeField] Transform weaponGripTarget;
     [SerializeField] LeftHandIKBinder leftHandIKBinder;
@@ -115,64 +99,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] float runStepInterval = 0.30f;
     [SerializeField] float footstepResetGrace = 0.12f;
 
-    float footstepTimer = 0f;
-    float footstepGraceTimer = 0f;
+    //INTS
+    int grenadeCountOrig, ammoCountOrig, medkitCountOrig, jumpCount, HPOrig, gunListPos, speedOrig;
+    //FLOATS
+    float moveSlowMult = 1f, footstepTimer = 0f, footstepGraceTimer = 0f, suppressionTimer, stressSafeTimer, lastYVelocity, shootTimer, grenadeThrowTimer, grenadeTimer, staminaOrig, emptyShotTimer, recoilPitch, recoilYaw, targetRecoilPitch, targetRecoilYaw, currentCrosshairSpread, targetCrosshairSpread;
+    //BOOLS
+    bool sprintDisable = false, isShaking = false, isSprinting, wasSprinting, wasAirborne, isReloading, canReload, isUnderCover, lowHealthActive;
+    public bool canShoot = true, canMelee = true, canJump;
 
-    int jumpCount;
-    int HPOrig;
-    float staminaOrig;
-    int speedOrig;
-    bool sprintDisable = false;
-    bool isShaking = false;
-    bool isSprinting;
-    bool wasSprinting;
-    RectTransform stamShakeRect;
-
-
-    bool wasAirborne;
-    float lastYVelocity;
-    bool isReloading;
-    public bool canJump;
-
-
-    int gunListPos;
-    float shootTimer;
-    float grenadeThrowTimer;
-    GameObject currentGunInstance;
-    Transform activeMuzzle;
-    public bool canShoot = true;
-    Coroutine sprintShootDelayRoutine;
-
-    public GameObject knife;
-    [SerializeField] KnifeDamage GetKnifeDamage;
-    public bool canMelee = true;
-
-    [Header("Grenade")]
-    [SerializeField] GameObject grenadePrefab;
-    [SerializeField] float grenadeCooldown;
-    [SerializeField] float grenadeThrowForce;
-    [SerializeField] float grenadeUpForce;
-    [SerializeField] Transform grenadePos;
-    [SerializeField] float grenadeThrowRate;
-    float grenadeTimer;
-    GameObject heldGrenade;
-
-    public Animator animator;
-    ParticleSystem activeMuzzleFlash;
-    Light muzzleLight;
-    Coroutine muzzleLightRoutine;
-
-    Vignette stressVignette;
-    ChromaticAberration stressChromatic;
-    FilmGrain stressFilmGrain;
-    DepthOfField stressDepthOfField;
-    LensDistortion stressLensDistortion;
-
+    public int AmmoCount => ammoCount;
+    public int MedkitCount => medkitCount;
     public float CurrentRecoilPitch => recoilPitch;
     public float CurrentRecoilYaw => recoilYaw;
-
-    float moveSlowMult = 1f;
-    
+    public float StressPercent => stress / maxStress;
     public bool IsMoving
     {
         get
@@ -187,12 +126,28 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     Vector3 playerVel;
     Vector3 StamBarOrigPos;
 
+    RectTransform stamShakeRect;
+   
+    Transform activeMuzzle;
+    
+    Coroutine sprintShootDelayRoutine, muzzleLightRoutine;
+
+    GameObject currentGunInstance, heldGrenade;
+    public GameObject knife;
+    
+    public Animator animator;
+    ParticleSystem activeMuzzleFlash;
+    Light muzzleLight;
+    
+    Vignette stressVignette;
+    ChromaticAberration stressChromatic;
+    FilmGrain stressFilmGrain;
+    DepthOfField stressDepthOfField;
+    LensDistortion stressLensDistortion;
+
     List<GameObject> gunInstances = new List<GameObject>();
     List<bool> gunAvailable = new List<bool>();
 
-    bool canReload;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HPOrig = HP;
@@ -236,7 +191,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             changeGun();
         }
 
-        //stamina bar setup
         stress = 0f;
         stressSafeTimer = 0f;
         if (stressVolume != null && stressVolume.profile != null)
@@ -265,7 +219,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         currentBreathingLoop = null;
     }
 
-    
     void Update()
     {
         movement();
