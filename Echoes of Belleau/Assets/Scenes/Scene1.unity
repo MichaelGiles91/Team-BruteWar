@@ -15489,7 +15489,7 @@ PrefabInstance:
     - target: {fileID: 8619254073232536756, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
       propertyPath: hitEffect
       value: 
-      objectReference: {fileID: 19847910, guid: 2feb59cce5cec914da1d53434700a447, type: 3}
+      objectReference: {fileID: 19867200, guid: 40b764a28ca8799469e96730a086128f, type: 3}
     - target: {fileID: 8994491910353994925, guid: 4f44e8e2cc02169469e62b002188ee31, type: 3}
       propertyPath: m_LocalPosition.x
       value: 164.05
