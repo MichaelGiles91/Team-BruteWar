@@ -263,15 +263,6 @@ public class gameManager : MonoBehaviour
         if (!isPaused)
             UpdateCombatState();
 
-        if (Input.GetButtonDown("Debug Tut"))
-        {
-            ResetTutorial("MedKitPickup");
-            ResetTutorial("AmmoPickup");
-            ResetTutorial("StressSystem");
-            ResetTutorial("DevilDog");
-            ResetTutorial("Keybinds");
-        }
-
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
